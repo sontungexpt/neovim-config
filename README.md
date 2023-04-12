@@ -1,2 +1,2 @@
-# neovim-config
-the stilux's neovim config
+# Neovim Config
+The config of neovim wrote in vim script

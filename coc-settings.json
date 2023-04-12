@@ -1,0 +1,41 @@
+{
+	"coc.preferences.formatOnSaveFiletypes": [
+		"css",
+		"markdown",
+		"typescript",
+		"javascript",
+		"javascriptreact",
+		"typescriptreact",
+		"json",
+		"html",
+		"lua",
+		"dart",
+		"c",
+		"cpp",
+		"csharp",
+		"python",
+		"rust",
+		"vue",
+		"scss",
+		"less",
+		"yaml",
+		"toml",
+		"bash",
+		"sh",
+		"vim",
+		"elixir",
+		"erlang",
+		"php"
+	],
+	"coc.preferences.extensionUpdateCheck": "daily",
+	"coc.preferences.formatOnType": true,
+	"coc.preferences.formatOnSave": true,
+	"coc.preferences.enableLinkedEditing": true,
+	"colors.enable": true,
+	"codeLens.enable": true,
+	"emmet.includeLanguages": {
+		"vue-html": "html",
+		"javascript": "javascriptreact"
+	},
+	"clangd.path": "~/.config/coc/extensions/coc-clangd-data/install/15.0.6/clangd_15.0.6/bin/clangd"
+}
