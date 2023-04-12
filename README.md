@@ -1,2 +1,2 @@
-# neovim-config
-the stilux's neovim config
+# Neovim Config
+The neovim config use packer plugins manager
