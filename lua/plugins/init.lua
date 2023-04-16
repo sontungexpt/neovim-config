@@ -99,7 +99,10 @@ local default_plugins = {
   {
     "nvim-treesitter/nvim-treesitter",
     dependencies = {
-      'p00f/nvim-ts-rainbow',
+      --'p00f/nvim-ts-rainbow',
+
+      -- The new plugins
+      'HiPhish/nvim-ts-rainbow2',
     },
     init = function()
       require("core.utils").lazy_load "nvim-treesitter"
