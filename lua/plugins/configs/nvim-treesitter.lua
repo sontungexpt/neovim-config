@@ -60,7 +60,6 @@ local options = {
     enable = true,
     disable = {
       "html",
-      "javascript"
     },
     query = 'rainbow-parens',
     strategy = require('ts-rainbow').strategy.global,

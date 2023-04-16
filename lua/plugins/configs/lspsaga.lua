@@ -42,7 +42,7 @@ local options = {
     },
   },
   lightbulb = {
-    enable = true,
+    enable = false,
     enable_in_insert = true,
     sign = true,
     sign_priority = 40,
