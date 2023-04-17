@@ -1,21 +1,3 @@
--- Map to a Lua function:
--- vim.keymap.set('n', 'lhs', function() print("real lua function") end)
-
--- Map to multiple modes:
--- vim.keymap.set({'n', 'v'}, '<leader>lr', vim.lsp.buf.references, { buffer=true })
-
--- Buffer-local mapping:
--- vim.keymap.set('n', '<leader>w', "<cmd>w<cr>", { silent = true, buffer = 5 })
-
--- Expr mapping:
--- vim.keymap.set('i', '<Tab>', function()
--- return vim.fn.pumvisible() == 1 and "<C-n>" or "<Tab>"
--- end, { expr = true })
-
--- <Plug> mapping:
--- vim.keymap.set('n', '[%', '<Plug>(MatchitNormalMultiBackward)')
-
------------Mappings----------
 -- n, v, i, t = mode names
 -- default opts = 1
 -- opts = 1 for noremap and silent
@@ -23,32 +5,9 @@
 -- opts = 3 for noremap and not silent
 -- opts = 4 for not noremap and not silent
 -- opts = 5 for expr and noremap and silent
-local autocmd = vim.api.nvim_create_autocmd
-local map = function(mode, key, map_to, opts)
-  local keymap = vim.keymap.set
-  local opts1 = { noremap = true, silent = true }
-  opts = opts or 1
-  if type(opts) == "table" then
-    opts = vim.tbl_deep_extend("force", opts1, opts)
-    keymap(mode, key, map_to, opts)
-    return
-  end
 
-  if opts == 1 then
-    opts = opts1
-  elseif opts == 2 then
-    opts = { noremap = false, silent = true }
-  elseif opts == 3 then
-    opts = { noremap = true, silent = false }
-  elseif opts == 4 then
-    opts = { noremap = false, silent = false }
-  elseif opts == 5 then
-    opts = { expr = true, replace_keycodes = true, noremap = true, silent = true }
-  else
-    opts = opts1
-  end
-  keymap(mode, key, map_to, opts)
-end
+local autocmd = vim.api.nvim_create_autocmd
+local map = require("core.utils").map
 
 --Back to normal mode
 map({ "i", "c" }, "jj", "<esc>", 2)

@@ -72,4 +72,36 @@ M.is_blank_line = function()
 end
 
 
+-- default opts = 1
+-- opts = 1 for noremap and silent
+-- opts = 2 for not noremap and silent
+-- opts = 3 for noremap and not silent
+-- opts = 4 for not noremap and not silent
+-- opts = 5 for expr and noremap and silent
+M.map = function(mode, key, map_to, opts)
+  local keymap = vim.keymap.set
+  local opts1 = { noremap = true, silent = true }
+  opts = opts or 1
+  if type(opts) == "table" then
+    opts = vim.tbl_deep_extend("force", opts1, opts)
+    keymap(mode, key, map_to, opts)
+    return
+  end
+
+  if opts == 1 then
+    opts = opts1
+  elseif opts == 2 then
+    opts = { noremap = false, silent = true }
+  elseif opts == 3 then
+    opts = { noremap = true, silent = false }
+  elseif opts == 4 then
+    opts = { noremap = false, silent = false }
+  elseif opts == 5 then
+    opts = { expr = true, replace_keycodes = true, noremap = true, silent = true }
+  else
+    opts = opts1
+  end
+  keymap(mode, key, map_to, opts)
+end
+
 return M
