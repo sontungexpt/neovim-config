@@ -39,9 +39,17 @@ local options = {
     mappings = {
       i = {
         ["<esc>"] = require("telescope.actions").close,
+        ["<C-q>"] = require("telescope.actions").close,
+        ["<A-q>"] = require("telescope.actions").close,
         ["<C-j>"] = require("telescope.actions").move_selection_next,
         ["<C-k>"] = require("telescope.actions").move_selection_previous,
-      }
+      },
+      n = {
+        ["q"] = require("telescope.actions").close,
+        ["<esc>"] = require("telescope.actions").close,
+        ["<C-q>"] = require("telescope.actions").close,
+        ["<A-q>"] = require("telescope.actions").close,
+      },
     },
     file_ignore_patterns = {
       "^.git/",

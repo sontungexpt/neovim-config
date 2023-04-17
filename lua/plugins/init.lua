@@ -52,6 +52,7 @@ local default_plugins = {
       'nvim-telescope/telescope-fzy-native.nvim',
       'nvim-telescope/telescope-project.nvim',
       'nvim-telescope/telescope-media-files.nvim',
+      -- 'dharmx/telescope-media.nvim',
       -- 'BurntSushi/ripgrep',
       -- 'sharkdp/fd'
     },
@@ -59,7 +60,11 @@ local default_plugins = {
       return require "plugins.configs.telescope"
     end,
     config = function(_, opts)
-      local telescope = require "telescope"
+      local status_ok, telescope = pcall(require, "telescope")
+      if not status_ok then
+        return
+      end
+
       -- load telescope extensions
       for _, ext in ipairs(opts.extensions_list) do
         telescope.load_extension(ext)
@@ -69,14 +74,30 @@ local default_plugins = {
     end,
   },
 
-  {
-    'Fymyte/tree-sitter-rasi',
-    dependencies = {
-      'nvim-treesitter/nvim-treesitter',
-      'Fymyte/rasi.vim',
-    },
-    ft = { 'rasi' },
-  },
+  -- {
+  --   'Fymyte/rasi.vim',
+  --   dependencies = {
+  --     -- 'Fymyte/tree-sitter-rasi',
+  --     'nvim-treesitter/nvim-treesitter',
+  --   },
+  --   build = ':TSInstall rasi',
+  --   init = function()
+  --     -- load gitsigns only when a git file is opened
+  --     vim.api.nvim_create_autocmd({ "BufRead" }, {
+  --       group = vim.api.nvim_create_augroup("TreesiterrasiLazyLoad", { clear = true }),
+  --       callback = function()
+  --         local ext = vim.fn.expand "%:e"
+  --         if ext == "rasi" then
+  --           vim.api.nvim_del_augroup_by_name "TreesiterrasiLazyLoad"
+  --           vim.schedule(function()
+  --             -- require("lazy").load { plugins = { "tree-sitter-rasi" } }
+  --             require("lazy").load { plugins = { "rasi.vim" } }
+  --           end)
+  --         end
+  --       end,
+  --     })
+  --   end,
+  -- },
 
   {
     'windwp/nvim-ts-autotag',
@@ -189,6 +210,12 @@ local default_plugins = {
       end
       comment.setup(opts)
     end
+  },
+
+  {
+    "nvim-telescope/telescope.nvim",
+    'dharmx/telescope-media.nvim',
+    event = "TodoTelescope",
   },
 
   {

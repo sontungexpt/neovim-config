@@ -8,21 +8,17 @@ local autocmd = vim.api.nvim_create_autocmd
 local map = require("core.utils").map
 
 --NvimTree
-map("n", "<C-b>", ":NvimTreeToggle<cr>")
-map("i", "<C-b>", "<esc>:NvimTreeToggle<cr>")
-map("v", "<C-b>", "<esc>:NvimTreeToggle<cr>")
-map("c", "<C-b>", "<esc>:NvimTreeToggle<cr>")
+map({ "n", "i", "v", "c" }, "<C-b>", "<esc>:NvimTreeToggle<cr>")
 
 -- Toggle Term
-map("n", "<C-t>", "<Cmd>exe v:count1 . 'ToggleTerm'<CR>")
-map("n", "<C-t>", "<ESC><Cmd>exe v:count1 . 'ToggleTerm'<CR>")
-map("v", "<C-t>", "<ESC><Cmd>exe v:count1 . 'ToggleTerm'<CR>")
+-- map({ "n", "i", "v" }, "<C-t>", "<ESC><Cmd>exe v:count1 . 'ToggleTerm'<CR>")
+
+-- kill terminal buffer
 map("t", "<C-q>", "<C-\\><C-n>:q!<cr>")
+map("t", "<A-q>", "<C-\\><C-n>:q!<cr>")
 
 --Telescope
-map("n", "<C-p>", ":Telescope find_files<cr>")
-map("i", "<C-p>", "<esc>:Telescope find_files<cr>")
-map("v", "<C-p>", "<esc>:Telescope find_files<cr>")
+map({ "n", "i", "v" }, "<C-p>", "<esc>:Telescope find_files<cr>")
 map("n", "<leader>fm", "<esc>:Telescope media_files<cr>")
 map("n", "<leader>fg", "<esc>:Telescope live_grep<cr>")
 map("n", "<leader>fb", "<esc>:Telescope buffers<cr>")
@@ -32,9 +28,8 @@ map("n", "<leader>fc", "<esc>:Telescope neoclip<cr>")
 
 -- Todo-comments
 map("n", "<Leader>ft", ":TodoTelescope<cr>")
-map("n", "]t", ":lua require('todo-comments').jump_next()<cr>")
-map("n", "[t", ":lua require('todo-comments').jump_prev()<cr>")
-
+-- map("n", "]t", ":lua require('todo-comments').jump_next()<cr>")
+-- map("n", "[t", ":lua require('todo-comments').jump_prev()<cr>")
 map("n", "[t", function()
   local status_ok, todo_comments = pcall(require, "todo-comments")
   if status_ok then
@@ -45,14 +40,26 @@ end, { desc = "Previous todo comment" })
 map("n", "]t", function()
   local status_ok, todo_comments = pcall(require, "todo-comments")
   if status_ok then
+    todo_comments.jump_next()
+  end
+end, { desc = "Next error/warning todo comment" })
+
+map("n", "[T", function()
+  local status_ok, todo_comments = pcall(require, "todo-comments")
+  if status_ok then
+    todo_comments.jump_prev({ keywords = { "ERROR", "WARNING" } })
+  end
+end, { desc = "Previous todo comment" })
+
+map("n", "]T", function()
+  local status_ok, todo_comments = pcall(require, "todo-comments")
+  if status_ok then
     todo_comments.jump_next({ keywords = { "ERROR", "WARNING" } })
   end
 end, { desc = "Next error/warning todo comment" })
 
 --ccc (Color-picker)
-map("n", "<A-c>", ":CccPick<cr>")
-map("i", "<A-c>", "<esc>:CccPick<cr>")
-map("v", "<A-c>", "<esc>:CccPick<cr>")
+map({ "n", "i", "v" }, "<A-c>", "<esc>:CccPick<cr>")
 
 -- Bufferline
 map("n", "<Leader>1", "<Cmd>BufferLineGoToBuffer 1<CR>")
@@ -141,4 +148,3 @@ autocmd('LspAttach', {
     -- map("n", "<Leader>co", "<cmd>Lspsaga outgoing_calls<CR>")
   end
 })
-

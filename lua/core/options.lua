@@ -12,7 +12,6 @@ cmd("filetype plugin indent on")
 cmd("syntax enable")
 cmd("syntax on")
 
-
 -- disable netrw for nvimtree
 g.loaded_netrw = 1
 g.loaded_netrwPlugin = 1

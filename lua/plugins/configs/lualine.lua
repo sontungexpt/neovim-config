@@ -1,5 +1,3 @@
--- vim.cmd [[set statusline+=%{get(b:,'gitsigns_status','')}]]
--- j
 local colors = {
   bg = "#202328",
   fg = "#bbc2cf",
@@ -81,7 +79,6 @@ local mode_custom = {
       S = colors.orange,
       [""] = colors.orange,
       ic = colors.yellow,
-      v = colors.violet,
       Rv = colors.violet,
       cv = colors.red,
       ce = colors.red,
@@ -102,7 +99,6 @@ local custom_icons = {
     return " Neovim"
   end,
   separator = { left = "", right = "" },
-  separator = { left = "", right = "" },
 }
 
 local modes = {
@@ -226,9 +222,9 @@ lualine.setup({
         path = 4,
         symbols = {
           modified = "●",
-          readonly = "",
+          readonly = " ",
           unnamed = "",
-          newfile = "[New]",
+          newfile = " [New]",
         },
       },
     },
