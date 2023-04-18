@@ -295,8 +295,16 @@ local default_plugins = {
       'nvim-tree/nvim-web-devicons',
     },
     lazy = false,
-    config = function()
-      require("plugins.configs.bufferline")
+    opts = function()
+      return require("plugins.configs.bufferline").opts
+    end,
+    config = function(_, opts)
+      local status_ok, bufferline = pcall(require, "bufferline")
+      if not status_ok then
+        return
+      end
+
+      bufferline.setup(opts)
     end,
   },
 

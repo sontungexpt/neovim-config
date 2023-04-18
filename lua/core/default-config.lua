@@ -1,28 +1,28 @@
 local M = {}
 
-M.options = {}
-
 M.ui = {
-  dashboard = {
-    load_on_startup = false,
-    header = {
-      "           ▄ ▄                   ",
-      "       ▄   ▄▄▄     ▄ ▄▄▄ ▄ ▄     ",
-      "       █ ▄ █▄█ ▄▄▄ █ █▄█ █ █     ",
-      "    ▄▄ █▄█▄▄▄█ █▄█▄█▄▄█▄▄█ █     ",
-      "  ▄ █▄▄█ ▄ ▄▄ ▄█ ▄▄▄▄▄▄▄▄▄▄▄▄▄▄  ",
-      "  █▄▄▄▄ ▄▄▄ █ ▄ ▄▄▄ ▄ ▄▄▄ ▄ ▄ █ ▄",
-      "▄ █ █▄█ █▄█ █ █ █▄█ █ █▄█ ▄▄▄ █ █",
-      "█▄█ ▄ █▄▄█▄▄█ █ ▄▄█ █ ▄ █ █▄█▄█ █",
-      "    █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█ █▄█▄▄▄█    ",
-    },
-    buttons = {
-      { "  Find File",    "Spc f f", "Telescope find_files" },
-      { "  Recent Files", "Spc f o", "Telescope oldfiles" },
-      { "  Find Word",    "Spc f w", "Telescope live_grep" },
-      { "  Bookmarks",    "Spc b m", "Telescope marks" },
-      { "  Themes",       "Spc t h", "Telescope themes" },
-      { "  Mappings",     "Spc c h", "NvCheatsheet" },
+  colors = {
+    bg = "#202328",
+    fg = "#bbc2cf",
+    yellow = "#ECBE7B",
+    cyan = "#008080",
+    darkblue = "#081633",
+    black = "#000000",
+    white = "#ffffff",
+    green = "#98be65",
+    orange = "#FF8800",
+    violet = "#a9a1e1",
+    magenta = "#c678dd",
+    blue = "#51afef",
+    red = "#ec5f67",
+    gray = "#66615c",
+    pink = "#eb7fdc",
+  },
+  lualine = {
+    options = {
+      float_separator = { left = "", right = "" },
+      section_separators = { "", "" },
+      component_separators = { "", "" },
     },
   },
 }

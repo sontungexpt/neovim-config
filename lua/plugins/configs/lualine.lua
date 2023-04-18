@@ -1,26 +1,10 @@
-local colors = {
-  bg = "#202328",
-  fg = "#bbc2cf",
-  yellow = "#ECBE7B",
-  cyan = "#008080",
-  darkblue = "#081633",
-  green = "#98be65",
-  orange = "#FF8800",
-  violet = "#a9a1e1",
-  magenta = "#c678dd",
-  blue = "#51afef",
-  red = "#ec5f67",
-  gray = "#66615c"
-}
-
 local status_ok, lualine = pcall(require, "lualine")
 if not status_ok then
   return
 end
-
-local hide_in_width = function()
-  return vim.fn.winwidth(0) > 80
-end
+local colors = require("core.default-config").ui.colors
+local section_separators = require("core.default-config").ui.lualine.options.section_separators
+local component_separators = require("core.default-config").ui.lualine.options.component_separators
 
 local diagnostics = {
   "diagnostics",
@@ -45,8 +29,7 @@ local diagnostics = {
 local branch = {
   "branch",
   icon = " ",
-  color = { fg = "#eb7fdc" },
-  -- separator = { left = "", right = "" },
+  color = { fg = colors.pink },
   padding = { left = 2, right = 1 },
 }
 
@@ -54,7 +37,6 @@ local diff = {
   "diff",
   colored = false,
   symbols = { added = " ", modified = " ", removed = " " },
-  -- separator = { left = "", right = "" },
 }
 
 local location = {
@@ -62,49 +44,9 @@ local location = {
   padding = 1,
 }
 
-local mode_custom = {
-  function()
-    return " Neovim"
-  end,
-  color = function()
-    local mode_color = {
-      n = colors.blue,
-      i = colors.green,
-      v = colors.magenta,
-      [""] = colors.blue,
-      V = colors.blue,
-      c = colors.magenta,
-      Vo = colors.red,
-      s = colors.orange,
-      S = colors.orange,
-      [""] = colors.orange,
-      ic = colors.yellow,
-      Rv = colors.violet,
-      cv = colors.red,
-      ce = colors.red,
-      r = colors.cyan,
-      rm = colors.cyan,
-      ["r?"] = colors.cyan,
-      ["!"] = colors.red,
-      t = colors.red,
-    }
-    return { bg = mode_color[vim.fn.mode()], gui = "bold" }
-  end,
-  -- separator = { left = "", right = "" },
-  separator = { left = "", right = "" },
-}
-
-local custom_icons = {
-  function()
-    return " Neovim"
-  end,
-  separator = { left = "", right = "" },
-}
-
 local modes = {
   "mode",
-  -- separator = { left = "", right = "" },
-  separator = { left = "", right = "" },
+  separator = section_separators,
 }
 
 local indent = function()
@@ -124,7 +66,9 @@ local lsp_progess = function()
   local buf_ft = vim.bo.filetype
   local buf_client_names = {}
   local copilot_active = true
+
   local null_ls = require("null-ls")
+
   local alternative_methods = {
     null_ls.methods.DIAGNOSTICS,
     null_ls.methods.DIAGNOSTICS_ON_OPEN,
@@ -169,8 +113,8 @@ local lsp_progess = function()
   end
 
   -- formatters
-  -- local supported_formatters = formatters_list_registered(buf_ft)
-  -- vim.list_extend(buf_client_names, supported_formatters)
+  local supported_formatters = formatters_list_registered(buf_ft)
+  vim.list_extend(buf_client_names, supported_formatters)
 
   -- linters
   local supported_linters = list_registered(buf_ft)
@@ -181,6 +125,8 @@ local lsp_progess = function()
 
   if copilot_active then
     language_servers = language_servers .. "%#SLCopilot#" .. "    "
+    vim.cmd("hi SLCopilot guifg=colors.white")
+    -- vim.cmd("hi SLCopilot guibg=#000000")
   end
 
   return language_servers
@@ -191,16 +137,13 @@ lualine.setup({
     globalstatus = true,
     icons_enabled = true,
     theme = "tokyonight",
-    component_separators = { left = "", right = "" },
-    section_separators = { left = "", right = "" },
-    -- disabled_filetypes = { "alpha", 'packer', 'NvimTree', 'toggleterm' },
+    component_separators = component_separators,
+    section_separators = section_separators,
     disabled_filetypes = { "lazy", "floaterm", "NvimTree", "packer", "mason", "toggleterm" },
     always_divide_middle = true,
   },
   sections = {
     lualine_a = {
-      -- mode_custom,
-      -- custom_icons,
       modes,
     },
     lualine_b = {
@@ -214,8 +157,7 @@ lualine.setup({
       {
         "filename",
         padding = 1,
-        -- separator = { left = "", right = "" },
-        separator = { left = "", right = "" },
+        separator = section_separators,
         color = { bg = "#272640", fg = colors.fg, gui = "bold" },
         file_status = true,
         newfile_status = false,
@@ -229,13 +171,9 @@ lualine.setup({
       },
     },
     lualine_c = {
-      {
-        "branch",
-        color = { fg = colors.magenta, },
-      },
+      branch,
       {
         "diff",
-        -- color = { bg = "#272640", fg = colors.fg, gui = "bold" },
       }
     },
     lualine_x = {
@@ -248,36 +186,23 @@ lualine.setup({
         function()
           return "Indent"
         end,
-        -- separator = { left = "", right = "" },
-        separator = { left = "", right = "" },
-        color = { bg = colors.blue, fg = "#000000" },
+        separator = section_separators,
+        color = { bg = colors.blue, fg = colors.black },
       },
       indent,
       {
         'encoding',
-        separator = { left = "", right = "" },
+        separator = section_separators,
         padding = 1,
-        color = { bg = colors.yellow, fg = "#000000" },
+        color = { bg = colors.yellow, fg = colors.black },
       },
-      -- {
-      --   function()
-      --     local current_line = vim.fn.line(".")
-      --     local total_lines = vim.fn.line("$")
-      --     local chars = { "_", "▁", "▂", "▃", "▄", "▅", "▆", "▇", "█" }
-      --     local progress_percent = current_line / total_lines
-      --     local index = math.ceil(progress_percent * #chars)
-      --     return chars[index]
-      --   end,
-      --   color = { fg = colors.yellow },
-      -- },
       location,
       {
         function()
           return ""
         end,
-        -- separator = { left = "", right = "" },
-        separator = { left = "", right = "" },
-        color = { bg = colors.orange, fg = "#000000" },
+        separator = section_separators,
+        color = { bg = colors.orange, fg = colors.black },
       },
     },
     lualine_y = {},
