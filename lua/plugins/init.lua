@@ -74,31 +74,6 @@ local default_plugins = {
     end,
   },
 
-  -- {
-  --   'Fymyte/rasi.vim',
-  --   dependencies = {
-  --     -- 'Fymyte/tree-sitter-rasi',
-  --     'nvim-treesitter/nvim-treesitter',
-  --   },
-  --   build = ':TSInstall rasi',
-  --   init = function()
-  --     -- load gitsigns only when a git file is opened
-  --     vim.api.nvim_create_autocmd({ "BufRead" }, {
-  --       group = vim.api.nvim_create_augroup("TreesiterrasiLazyLoad", { clear = true }),
-  --       callback = function()
-  --         local ext = vim.fn.expand "%:e"
-  --         if ext == "rasi" then
-  --           vim.api.nvim_del_augroup_by_name "TreesiterrasiLazyLoad"
-  --           vim.schedule(function()
-  --             -- require("lazy").load { plugins = { "tree-sitter-rasi" } }
-  --             require("lazy").load { plugins = { "rasi.vim" } }
-  --           end)
-  --         end
-  --       end,
-  --     })
-  --   end,
-  -- },
-
   {
     'windwp/nvim-ts-autotag',
     dependencies = {

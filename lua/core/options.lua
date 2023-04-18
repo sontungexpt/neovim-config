@@ -106,3 +106,11 @@ cmd([[
     autocmd BufRead,BufNewFile *.json set filetype=jsonc
   augroup END
 ]])
+
+--Enable syntax for .rasi files
+cmd([[
+  augroup EnableSyntax
+    autocmd!
+    autocmd BufRead,BufNewFile *.rasi set filetype=rasi
+  augroup END
+]])
