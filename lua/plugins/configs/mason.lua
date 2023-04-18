@@ -12,7 +12,6 @@ local options = {
     -- c++
     "clangd",
     "clang-format",
-    "codelldb",
     "cmake-language-server",
     "cmakelang",
 
@@ -35,6 +34,12 @@ local options = {
     "emmet-ls",
     "json-lsp",
     "tailwindcss-language-server",
+
+
+    -- debuggers
+    "debugpy",
+    "codelldb",
+    -- "bash-debug-adapter",
 
   }, -- not an option from mason.nvim
   PATH = "skip",

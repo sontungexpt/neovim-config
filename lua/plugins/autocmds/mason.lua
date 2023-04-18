@@ -1,4 +1,15 @@
 local M = {}
+
+M.print_installed_packages = function()
+  local installed_packages = M.get_installed_packages()
+  print("Installed mason packages: " .. table.concat(installed_packages, ", "))
+end
+
+M.print_ensured_packages = function()
+  local ensured_packages = require('plugins.configs.mason').ensure_installed
+  print("Ensured mason packages: " .. table.concat(ensured_packages, ", "))
+end
+
 M.get_installed_packages = function()
   local installed_packages = {}
   local package_path = vim.fn.stdpath('data') .. '/mason/packages/'
@@ -10,70 +21,109 @@ M.get_installed_packages = function()
   return installed_packages
 end
 
-M.ensure_packages = function()
+M.had_changed = function()
   local packages = require('plugins.configs.mason').ensure_installed
   local installed_packages = M.get_installed_packages()
-  if #installed_packages < #packages then
+  if #installed_packages ~= #packages then
+    return true
+  end
+  for _, package in ipairs(packages) do
+    local isInstalled = false
     for _, installed_package in ipairs(installed_packages) do
-      for i, package in ipairs(packages) do
-        if package == installed_package then
-          table.remove(packages, i)
-        end
+      if package == installed_package then
+        isInstalled = true
       end
     end
-    if #packages > 0 then
-      vim.cmd("MasonInstall " .. table.concat(packages, " "))
+    if not isInstalled then
+      return true
     end
   end
+  return false
 end
 
-M.clean_ensured_packages = function()
-  local packages = require('plugins.configs.mason').ensure_installed
+
+M.get_packages_to_remove = function()
+  local ensured_packages = require('plugins.configs.mason').ensure_installed
   local installed_packages = M.get_installed_packages()
-  if #installed_packages > #packages then
-    for _, package in ipairs(packages) do
-      for i, installed_package in ipairs(installed_packages) do
-        if package == installed_package then
-          table.remove(installed_packages, i)
-        end
+  local packages_to_remove = {}
+
+  for _, installed_package in ipairs(installed_packages) do
+    local isEnsured = false
+    for _, package in ipairs(ensured_packages) do
+      if package == installed_package then
+        isEnsured = true
       end
     end
-    if #installed_packages > 0 then
-      vim.cmd("MasonUninstall " .. table.concat(installed_packages, " "))
+    if not isEnsured then
+      table.insert(packages_to_remove, installed_package)
     end
   end
+
+  return packages_to_remove
+end
+
+M.get_packages_to_install = function()
+  local ensured_packages = require('plugins.configs.mason').ensure_installed
+  local installed_packages = M.get_installed_packages()
+  local packages_to_install = {}
+
+  for _, package in ipairs(ensured_packages) do
+    local isInstalled = false
+    for _, installed_package in ipairs(installed_packages) do
+      if package == installed_package then
+        isInstalled = true
+      end
+    end
+    if not isInstalled then
+      table.insert(packages_to_install, package)
+    end
+  end
+
+  return packages_to_install
+end
+
+M.sync_packages = function()
+  local packages_to_install = M.get_packages_to_install()
+  local packages_to_remove = M.get_packages_to_remove()
+
+  vim.schedule(function()
+    if #packages_to_remove > 0 then
+      vim.cmd("MasonUninstall " .. table.concat(packages_to_remove, " "))
+    end
+  end)
+  vim.schedule(function()
+    if #packages_to_install > 0 then
+      vim.cmd("MasonInstall " .. table.concat(packages_to_install, " "))
+    end
+  end)
 end
 
 -- Custom cmd to ensure install all mason binaries listed
 M.create_user_commands = function()
-  -- The command that will be used to install all ensure packages
-  vim.api.nvim_create_user_command("MasonEnsurePackages", function()
-    M.ensure_packages()
-  end, {})
-
-  -- The command that will be used to sync the ensure packages with the installed packages
-  vim.api.nvim_create_user_command("MasonSyncEnsurePackages", function()
-    M.clean_ensured_packages()
+  vim.api.nvim_create_user_command("MasonSyncPackages", function()
+    M.sync_packages()
   end, {})
 
   vim.api.nvim_create_user_command("MasonInstallAll", function()
     vim.cmd("MasonInstall " .. table.concat(require('plugins.configs.mason').ensure_installed, " "))
   end, {})
-end
 
+  vim.api.nvim_create_user_command("MasonShowInstalledPackages", function()
+    M.print_installed_packages()
+  end, {})
+
+  vim.api.nvim_create_user_command("MasonShowEnsuredPackages", function()
+    M.print_ensured_packages()
+  end, {})
+end
 
 -------------------- Auto commands --------------------
 M.create_autocmds = function()
-  -- Mason
   vim.api.nvim_create_autocmd({ 'VimEnter' }, {
     group = vim.api.nvim_create_augroup('MasonCommands', {}),
     callback = function()
-      local mason_installed_packages = require('plugins.autocmds.mason').get_installed_packages()
-      local ensure_packages = require('plugins.configs.mason').ensure_installed
-      if #mason_installed_packages ~= #ensure_packages then
-        vim.cmd("MasonSyncEnsurePackages")
-        vim.cmd("bd")
-        vim.cmd("MasonEnsurePackages")
+      if M.had_changed() then
+        M.sync_packages()
       end
     end
   })

@@ -417,9 +417,17 @@ local default_plugins = {
       -- },
     },
     build = ":MasonUpdate",
-    cmd = { "Mason", "MasonEnsurePackages", "MasonSyncEnsurePackages", "MasonInstall", "MasonInstallAll",
+    cmd = {
+      "Mason",
+      "MasonSyncPackages",
+      "MasonShowInstalledPackages",
+      "MasonShowEnsuredPackages",
+      "MasonInstall",
+      "MasonInstallAll",
       "MasonUninstall",
-      "MasonUninstallAll", "MasonLog" },
+      "MasonUninstallAll",
+      "MasonLog",
+    },
     opts = function()
       return require "plugins.configs.mason"
     end,
@@ -556,13 +564,35 @@ local default_plugins = {
     end
   },
 
+  {
+    "mfussenegger/nvim-dap",
+    -- event = "DebugAttach",
+    dependencies = {
+      {
+        "rcarriga/nvim-dap-ui",
+        -- keys = {
+        --   { "<leader>du", function() require("dapui").toggle({}) end, desc = "Dap UI" }
+        -- },
+        config = function()
+          require("plugins.configs.dap.nvim-dap-ui")
+        end,
+      },
+      {
+        "theHamsta/nvim-dap-virtual-text",
+        config = function()
+          require("plugins.configs.dap.nvim-dap-virtual-text")
+        end,
+      },
+    },
+    config = function()
+      require("plugins.configs.dap.nvim-dap")
+    end,
+  }
+
+
 }
 
 local config = require("core.utils").load_config()
-
-if #config.plugins > 0 then
-  table.insert(default_plugins, { import = config.plugins })
-end
 
 require("plugins.autocmds")
 require("lazy").setup(default_plugins, config.lazy_nvim)

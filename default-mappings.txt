@@ -105,13 +105,13 @@ R	Uppercase OR opens the input mode, but instead of entering text, you can repla
 
 ~	The tilda (~) command is very useful when you need to change the box of one character in your document. Follow it with a number to invert as many characters.
 
-t[caractere]	Type t [character] to select up to, but not including, the next [character] on a specific line.
+t[charactere]	Type t [character] to select up to, but not including, the next [character] on a specific line.
 
-f[caractere]	Press f [character] to select up to and including the next [character] in a line.
+f[charactere]	Press f [character] to select up to and including the next [character] in a line.
 
-i[caractere]	Do you want to select everything between parentheses or another unique character? Type i [character] to select everything between two consecutive [characters].
+i[charactere]	Do you want to select everything between parentheses or another unique character? Type i [character] to select everything between two consecutive [characters].
 
-a[caractere]	This command is identical to the previous one, but includes the [character] at both ends of the text. Commands I came most commonly used to search in a document
+a[charactere]	This command is identical to the previous one, but includes the [character] at both ends of the text. Commands I came most commonly used to search in a document
 
 ----------Search and Replacement----------
 /	The slash command is the most commonly used command to search large text files in Vim. Just type / and proceed with the text you want Vim to look for you and look at the bottom corner of the console.
