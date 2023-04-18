@@ -37,7 +37,7 @@ local options = {
 
 
     -- debuggers
-    "debugpy",
+    -- "debugpy",
     "codelldb",
     -- "bash-debug-adapter",
 

@@ -564,30 +564,30 @@ local default_plugins = {
     end
   },
 
-  {
-    "mfussenegger/nvim-dap",
-    -- event = "DebugAttach",
-    dependencies = {
-      {
-        "rcarriga/nvim-dap-ui",
-        -- keys = {
-        --   { "<leader>du", function() require("dapui").toggle({}) end, desc = "Dap UI" }
-        -- },
-        config = function()
-          require("plugins.configs.dap.nvim-dap-ui")
-        end,
-      },
-      {
-        "theHamsta/nvim-dap-virtual-text",
-        config = function()
-          require("plugins.configs.dap.nvim-dap-virtual-text")
-        end,
-      },
-    },
-    config = function()
-      require("plugins.configs.dap.nvim-dap")
-    end,
-  }
+  -- {
+  --   "mfussenegger/nvim-dap",
+  --   -- event = "DebugAttach",
+  --   dependencies = {
+  --     {
+  --       "rcarriga/nvim-dap-ui",
+  --       -- keys = {
+  --       --   { "<leader>du", function() require("dapui").toggle({}) end, desc = "Dap UI" }
+  --       -- },
+  --       config = function()
+  --         require("plugins.configs.dap.nvim-dap-ui")
+  --       end,
+  --     },
+  --     {
+  --       "theHamsta/nvim-dap-virtual-text",
+  --       config = function()
+  --         require("plugins.configs.dap.nvim-dap-virtual-text")
+  --       end,
+  --     },
+  --   },
+  --   config = function()
+  --     require("plugins.configs.dap.nvim-dap")
+  --   end,
+  -- }
 
 
 }
