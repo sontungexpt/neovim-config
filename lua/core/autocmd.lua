@@ -12,6 +12,19 @@ autocmd("FileType", {
   end,
 })
 
+-- Support for command nvimconfig
+autocmd("VimEnter", {
+  pattern = { "*.lua", "*.vim" },
+  callback = function()
+    local current_path = vim.fn.expand("%:p")
+    local config_path = vim.fn.stdpath "config"
+    if current_path == config_path .. "/init.lua" or
+        current_path == config_path .. "/init.vim" then
+      vim.cmd("cd " .. "%:p:h")
+    end
+  end,
+})
+
 -- Reload config on-save
 -- autocmd("BufWritePost", {
 --   pattern = vim.tbl_map(

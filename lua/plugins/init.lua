@@ -15,11 +15,9 @@ local default_plugins = {
     end,
     config = function(_, opts)
       local status_ok, nvim_tree = pcall(require, "nvim-tree")
-
       if not status_ok then
         return
       end
-
       nvim_tree.setup(opts)
     end,
   },
@@ -33,11 +31,9 @@ local default_plugins = {
     end,
     config = function(_, opts)
       local status_ok, copilot = pcall(require, "copilot")
-
       if not status_ok then
         return
       end
-
       copilot.setup(opts)
     end,
   },
@@ -466,7 +462,12 @@ local default_plugins = {
       return require("plugins.configs.lspsaga")
     end,
     config = function(_, opts)
-      require("lspsaga").setup(opts)
+      local status_ok, lspsaga = pcall(require, "lspsaga")
+      if not status_ok then
+        return
+      end
+
+      lspsaga.setup(opts)
     end,
   },
 
@@ -544,7 +545,14 @@ local default_plugins = {
 
   {
     "folke/which-key.nvim",
-    keys = { "<leader>", "g", "[", "]", '"', "'", "`" },
+    keys = {
+      "<leader>",
+      "g",
+      "[", "]",
+      '"',
+      "'",
+      "`",
+    },
     opts = function()
       return require "plugins.configs.whichkey"
     end,
