@@ -11,7 +11,7 @@ local default_plugins = {
     version = 'nightly', -- optional, updated every week. (see issue #1193)
     cmd = { "NvimTreeToggle", "NvimTreeFocus", "NvimTreeOpen" },
     opts = function()
-      return require("plugins.configs.nvim-tree")
+      return require("plugins.configs.nvim-tree").options
     end,
     config = function(_, opts)
       local status_ok, nvim_tree = pcall(require, "nvim-tree")

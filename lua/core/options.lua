@@ -16,6 +16,9 @@ cmd("syntax on")
 g.loaded_netrw = 1
 g.loaded_netrwPlugin = 1
 
+-- fold
+options.foldenable = false
+
 -- Ruler
 options.ruler = true
 

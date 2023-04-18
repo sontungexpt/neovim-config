@@ -1,4 +1,54 @@
-local options = {
+local M = {}
+M.on_attach = function(bufnr)
+  local api = require('nvim-tree.api')
+  local map = vim.keymap.set
+  local del = vim.keymap.del
+
+  local function opts(desc)
+    return { desc = 'nvim-tree: ' .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+  end
+  map('n', 'O', '', { buffer = bufnr })
+  del('n', 'O', { buffer = bufnr })
+  map('n', '<2-RightMouse>', '', { buffer = bufnr })
+  del('n', '<2-RightMouse>', { buffer = bufnr })
+
+  map('n', '<CR>', api.node.open.edit, opts('Open'))
+  map('n', 'o', api.node.open.edit, opts('Open'))
+  map('n', 'cd', api.tree.change_root_to_node, opts('CD'))
+  map('n', 'v', api.node.open.vertical, opts('Open: Vertical Split'))
+  map('n', 's', api.node.open.horizontal, opts('Open: Horizontal Split'))
+  map('n', '<Tab>', api.node.open.tab, opts('Open: New Tab'))
+  map('n', 'P', api.node.navigate.parent, opts('Parent Directory'))
+  map('n', '<BS>', api.node.navigate.parent_close, opts('Close Directory'))
+  map('n', '<Tab>', api.node.open.preview, opts('Open Preview'))
+  map('n', 'K', api.node.navigate.sibling.first, opts('First Sibling'))
+  map('n', 'J', api.node.navigate.sibling.last, opts('Last Sibling'))
+  map('n', 'C', api.tree.toggle_git_clean_filter, opts('Toggle Git Clean'))
+  map('n', 'I', api.tree.toggle_gitignore_filter, opts('Toggle Git Ignore'))
+  map('n', 'R', api.tree.reload, opts('Refresh'))
+  map('n', 'a', api.fs.create, opts('Create'))
+  map('n', 'D', api.fs.remove, opts('Delete'))
+  map('n', 'dd', api.fs.trash, opts('Trash'))
+  map('n', 'r', api.fs.rename, opts('Rename'))
+  map('n', '<C-r>', api.fs.rename_sub, opts('Rename: Omit Filename'))
+  map('n', 'x', api.fs.cut, opts('Cut'))
+  map('n', 'yy', api.fs.copy.node, opts('Copy'))
+  map('n', 'yn', api.fs.copy.filename, opts('Copy Name'))
+  map('n', 'yt', api.fs.copy.relative_path, opts('Copy Relative Path'))
+  map('n', 'yp', api.fs.copy.absolute_path, opts('Copy Absolute Path'))
+  map('n', 'p', api.fs.paste, opts('Paste'))
+  map('n', '-', api.tree.change_root_to_parent, opts('Up'))
+  map('n', 'O', api.node.run.system, opts('Run System'))
+  map('n', 'f', api.live_filter.start, opts('Filter'))
+  map('n', 'F', api.live_filter.clear, opts('Clean Filter'))
+  map('n', 'q', api.tree.close, opts('Close'))
+  map('n', 'W', api.tree.collapse_all, opts('Collapse'))
+  map('n', '<C-f>', api.tree.search_node, opts('Search'))
+  map('n', '<C-k>', api.node.show_info_popup, opts('Info'))
+  map('n', '?', api.tree.toggle_help, opts('Help'))
+  map('n', ' ', api.marks.toggle, opts('Toggle Bookmark'))
+end
+M.options = {
   auto_reload_on_write = true,
   disable_netrw = true,
   hijack_netrw = true,
@@ -10,8 +60,7 @@ local options = {
   sync_root_with_cwd = true,
   reload_on_bufenter = false,
   respect_buf_cwd = false,
-  on_attach = "disable",
-  remove_keymaps = false,
+  on_attach = M.on_attach,
   select_prompts = false,
   view = {
     centralize_selection = false,
@@ -24,78 +73,12 @@ local options = {
     number = false,
     relativenumber = false,
     signcolumn = "yes",
-    mappings = {
-      custom_only = false,
-      list = {
-        { key = { "<CR>", "o", "<2-LeftMouse>" }, action = "edit" },
-        { key = "<C-e>",                          action = "edit_in_place" },
-        { key = "O",                              action = "edit_no_picker" },
-        { key = { "cd" },                         action = "cd" },
-        { key = "vs",                             action = "vsplit" },
-        { key = "s",                              action = "split" },
-        { key = "<C-t>",                          action = "tabnew" },
-        { key = "<",                              action = "prev_sibling" },
-        { key = ">",                              action = "next_sibling" },
-        { key = "P",                              action = "parent_node" },
-        { key = "<BS>",                           action = "close_node" },
-        { key = "<Tab>",                          action = "preview" },
-        { key = "K",                              action = "first_sibling" },
-        { key = "J",                              action = "last_sibling" },
-        { key = "C",                              action = "toggle_git_clean" },
-        { key = "I",                              action = "toggle_git_ignored" },
-        { key = "H",                              action = "toggle_dotfiles" },
-        { key = "B",                              action = "toggle_no_buffer" },
-        { key = "U",                              action = "toggle_custom" },
-        { key = "R",                              action = "refresh" },
-        { key = "a",                              action = "create" },
-        { key = "D",                              action = "remove" },
-        { key = "dd",                             action = "trash" },
-        { key = "r",                              action = "rename" },
-        { key = "<C-r>",                          action = "full_rename" },
-        { key = "e",                              action = "rename_basename" },
-        { key = "x",                              action = "cut" },
-        { key = "yy",                             action = "copy" },
-        { key = "p",                              action = "paste" },
-        { key = "yn",                             action = "copy_name" },
-        { key = "yt",                             action = "copy_path" },
-        { key = "yp",                             action = "copy_absolute_path" },
-        { key = "[e",                             action = "prev_diag_item" },
-        { key = "[c",                             action = "prev_git_item" },
-        { key = "-",                              action = "dir_up" },
-        { key = "S",                              action = "system_open" },
-        { key = "f",                              action = "live_filter" },
-        { key = "F",                              action = "clear_live_filter" },
-        { key = "q",                              action = "close" },
-        { key = "W",                              action = "collapse_all" },
-        { key = "E",                              action = "expand_all" },
-        { key = "<C-f>",                          action = "search_node" },
-        { key = ".",                              action = "run_file_command" },
-        { key = "<C-k>",                          action = "toggle_file_info" },
-        { key = "g?",                             action = "toggle_help" },
-        { key = "m",                              action = "toggle_mark" },
-        { key = "bmv",                            action = "bulk_move" },
-      },
-    },
-    float = {
-      enable = false,
-      quit_on_focus_loss = true,
-      open_win_config = {
-        relative = "editor",
-        border = "single",
-        -- border = "rounded",
-        width = 30,
-        height = 30,
-        row = 1,
-        col = 1,
-      },
-    },
   },
   renderer = {
     add_trailing = false,
     group_empty = false,
     highlight_git = false,
     full_name = false,
-    --highlight_opened_files = "none",
     highlight_opened_files = "none",
     highlight_modified = "none",
     root_folder_label = ":~:s?$?/..?",
@@ -193,15 +176,6 @@ local options = {
       "*.pdf",
       "*.ppt",
       "*.exe",
-      "Data/$RECYCLE.BIN",
-      "Data/Program",
-      "Data/System Volume Information",
-      "Data/EngBreaking",
-      "Data/Game",
-      "Data/found.000",
-      "Data/IELTS - Links",
-      "Data/Shmily",
-      "Data/Ảnh cá nhân",
     },
     exclude = { ".config", ".prettierrc.js", ".gitignore", ".eslintrc.js" },
   },
@@ -299,4 +273,4 @@ local options = {
   },
 }
 
-return options
+return M

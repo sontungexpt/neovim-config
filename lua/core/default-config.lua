@@ -1,8 +1,6 @@
 local M = {}
 
-M.options = {
-
-}
+M.options = {}
 
 M.ui = {
   dashboard = {
