@@ -14,7 +14,6 @@ local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 null_ls.setup({
   debug = true,
   sources = {
-
     --git sign
     code_actions.gitsigns,
 
@@ -33,7 +32,13 @@ null_ls.setup({
       end,
     }),
 
-    -- formatting.prettierd.with({ extra_args = { "--style", "{IndentWidth: 2}" } }),
+    -- eslint
+    diagnostics.eslint_d.with({
+      condition = function(utils)
+        -- change file extension if you use something else
+        return utils.root_has_file(".eslintrc.js")
+      end,
+    }),
 
     --dart
     -- formatting.dart_format.with({ extra_args = { "--style", "{IndentWidth: 2}" } }),
@@ -68,13 +73,6 @@ null_ls.setup({
 
     --Code Spell Checker
     diagnostics.codespell,
-
-    diagnostics.eslint_d.with({
-      condition = function(utils)
-        -- change file extension if you use something else
-        return utils.root_has_file(".eslintrc.js")
-      end,
-    }),
   },
   -- Configure format on save
   on_attach = function(client, bufnr)

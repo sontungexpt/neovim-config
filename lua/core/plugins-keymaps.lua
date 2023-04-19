@@ -10,16 +10,12 @@ local map = require("core.utils").map
 --NvimTree
 map({ "n", "i", "v", "c" }, "<C-b>", "<esc>:NvimTreeToggle<cr>")
 
--- Toggle Term
--- map({ "n", "i", "v" }, "<C-t>", "<ESC><Cmd>exe v:count1 . 'ToggleTerm'<CR>")
-
 -- kill terminal buffer
 map("t", "<C-q>", "<C-\\><C-n>:q!<cr>")
 map("t", "<A-q>", "<C-\\><C-n>:q!<cr>")
 
 --Telescope
---map({ "n", "i", "v" }, "<C-p>", "<esc>:Telescope find_files<cr>")
-
+map({ "n", "i", "v" }, "<C-p>", "<esc>:Telescope find_files<cr>")
 map("n", "<leader>fm", "<esc>:Telescope media_files<cr>")
 map("n", "<leader>fg", "<esc>:Telescope live_grep<cr>")
 map("n", "<leader>fb", "<esc>:Telescope buffers<cr>")
@@ -29,13 +25,13 @@ map("n", "<leader>fc", "<esc>:Telescope neoclip<cr>")
 
 -- Todo-comments
 map("n", "<Leader>ft", ":TodoTelescope<cr>")
--- map("n", "]t", ":lua require('todo-comments').jump_next()<cr>")
--- map("n", "[t", ":lua require('todo-comments').jump_prev()<cr>")
 
 map("n", "[t", function()
   local status_ok, todo_comments = pcall(require, "todo-comments")
   if status_ok then
     todo_comments.jump_prev()
+  else
+    print("Todo-comments not found")
   end
 end, { desc = "Previous todo comment" })
 
@@ -43,6 +39,8 @@ map("n", "]t", function()
   local status_ok, todo_comments = pcall(require, "todo-comments")
   if status_ok then
     todo_comments.jump_next()
+  else
+    print("Todo-comments not found")
   end
 end, { desc = "Next todo comment" })
 
@@ -50,6 +48,8 @@ map("n", "[T", function()
   local status_ok, todo_comments = pcall(require, "todo-comments")
   if status_ok then
     todo_comments.jump_prev({ keywords = { "ERROR", "WARNING" } })
+  else
+    print("Todo-comments not found")
   end
 end, { desc = "Previous error/ warning comment" })
 
@@ -57,6 +57,8 @@ map("n", "]T", function()
   local status_ok, todo_comments = pcall(require, "todo-comments")
   if status_ok then
     todo_comments.jump_next({ keywords = { "ERROR", "WARNING" } })
+  else
+    print("Todo-comments not found")
   end
 end, { desc = "Next error/ warning comment" })
 
@@ -107,13 +109,13 @@ autocmd('LspAttach', {
     map("n", "gt", "<cmd>Lspsaga peek_type_definition<CR>")
 
     -- Go to type definition
-    -- keymap("n", "gt", "<cmd>Lspsaga goto_type_definition<CR>")
+    -- map("n", "gt", "<cmd>Lspsaga goto_type_definition<CR>")
     -- To disable it just use ":Lspsaga hover_doc ++quiet"
     map("n", "K", "<cmd>Lspsaga hover_doc<CR>")
     -- If you want to keep the hover window in the top right hand corner,
     -- you can pass the ++keep argument
     -- Note that if you use hover with ++keep, pressing this key again will
-    -- keymap("n", "K", "<cmd>Lspsaga hover_doc ++keep<CR>")
+    -- map("n", "K", "<cmd>Lspsaga hover_doc ++keep<CR>")
 
     -- Show line diagnostics
     map("n", "gl", "<cmd>Lspsaga show_line_diagnostics ++unfocus<CR>")
@@ -130,16 +132,25 @@ autocmd('LspAttach', {
     map("n", "<leader>sc", "<cmd>Lspsaga show_cursor_diagnostics<CR>")
 
     -- Diagnostic jump
-    -- You can use <C-o> to jump back to your previous location
     map("n", "[d", "<cmd>Lspsaga diagnostic_jump_prev<CR>")
     map("n", "]d", "<cmd>Lspsaga diagnostic_jump_next<CR>")
 
     -- Diagnostic jump with filters such as only jumping to an error
     map("n", "[e", function()
-      require("lspsaga.diagnostic"):goto_prev({ severity = vim.diagnostic.severity.ERROR })
+      local status_ok, lspsaga_diagnostic = pcall(require, "lspsaga.diagnostic")
+      if status_ok then
+        lspsaga_diagnostic:goto_prev({ severity = vim.diagnostic.severity.ERROR })
+      else
+        print("Lspsaga.diagnostic not found")
+      end
     end)
     map("n", "]e", function()
-      require("lspsaga.diagnostic"):goto_next({ severity = vim.diagnostic.severity.ERROR })
+      local status_ok, lspsaga_diagnostic = pcall(require, "lspsaga.diagnostic")
+      if status_ok then
+        lspsaga_diagnostic:goto_next({ severity = vim.diagnostic.severity.ERROR })
+      else
+        print("Lspsaga.diagnostic not found")
+      end
     end)
 
     ---- Toggle outline

@@ -3,7 +3,7 @@ local cmd = vim.cmd
 local g = vim.g
 
 --leader key
--- .mapleader = " "
+-- g.mapleader = " "
 
 cmd("filetype plugin on")
 cmd("filetype plugin indent on")

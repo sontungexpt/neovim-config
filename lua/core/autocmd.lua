@@ -22,18 +22,6 @@ autocmd("VimEnter", {
   end,
 })
 
--- Reload config on-save
--- autocmd("BufWritePost", {
---   pattern = vim.tbl_map(
---     vim.fs.normalize,
---     vim.fn.glob(vim.fn.stdpath "config" .. "/lua/**/*.lua", true, true, true)
---   ),
---   group = vim.api.nvim_create_augroup("ReloadConfig", {}),
---   callback = function(opts)
---     require("core.utils").source_config_file(vim.fn.stdpath "config" .. "/lua/")
---   end,
--- })
-
 --Remove whitespace on save
 autocmd('BufWritePre', {
   pattern = '',

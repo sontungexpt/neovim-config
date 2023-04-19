@@ -18,9 +18,6 @@ map("v", "i", "<esc>i", 2)
 --Save file as the traditional way
 map({ "n", "i", "v", "c" }, "<C-s>", "<esc>:w<cr>", 2)
 
---ctrl z to undo and move to normal mode
--- map({ "n", "i", "v" }, "<C-z>", "<esc>u")
-
 --ctrl a to selected all text in file
 map({ "n", "i", "v" }, "<C-a>", "<esc>ggVG", 1)
 

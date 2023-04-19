@@ -38,7 +38,7 @@ local options = {
 
     -- debuggers
     -- "debugpy",
-    "codelldb",
+    -- "codelldb",
     -- "bash-debug-adapter",
 
   }, -- not an option from mason.nvim
