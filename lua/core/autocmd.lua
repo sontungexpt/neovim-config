@@ -1,8 +1,5 @@
-local config = require("core.utils").load_config()
 local autocmd = vim.api.nvim_create_autocmd
 local cmd = vim.cmd
-local g = vim.g
-
 
 -- Don't list quickfix buffers
 autocmd("FileType", {

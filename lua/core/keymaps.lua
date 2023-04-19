@@ -6,7 +6,7 @@
 -- opts = 4 for not noremap and not silent
 -- opts = 5 for expr and noremap and silent
 
-local autocmd = vim.api.nvim_create_autocmd
+-- local autocmd = vim.api.nvim_create_autocmd
 local map = require("core.utils").map
 
 --Back to normal mode
