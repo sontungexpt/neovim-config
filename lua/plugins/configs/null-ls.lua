@@ -69,12 +69,10 @@ null_ls.setup({
     --Code Spell Checker
     diagnostics.codespell,
 
-    --code_actions.cspell,
-
     diagnostics.eslint_d.with({
-      -- js/ts linter
       condition = function(utils)
-        return utils.root_has_file(".eslintrc.js") -- change file extension if you use something else
+        -- change file extension if you use something else
+        return utils.root_has_file(".eslintrc.js")
       end,
     }),
   },

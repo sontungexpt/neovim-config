@@ -103,14 +103,10 @@ M.opts = {
     },
     tab_close = {
       fg = { attribute = 'fg', highlight = 'LspDiagnosticsDefaultError' },
-      -- fg = { attribute = "fg", highlight = "TabLine" },
       bg = { attribute = "bg", highlight = "Normal" },
-      -- bg = { attribute = "bg", highlight = "Tabline" },
     },
     tab_selected = {
-      -- fg = { attribute = "fg", highlight = "TabLine" },
       fg = { attribute = "fg", highlight = "Normal" },
-      -- bg = { attribute = "bg", highlight = "TabLine" },
       bg = { attribute = "bg", highlight = "Normal" },
     },
     duplicate_selected = {
@@ -151,9 +147,7 @@ M.opts = {
     },
     separator_selected = {
       fg = { attribute = "fg", highlight = "TabLine" },
-      -- fg = { attribute = "fg", highlight = "Normal" },
       bg = { attribute = "bg", highlight = "TabLine" },
-      -- bg = { attribute = "bg", highlight = "Normal" },
     },
     separator_visible = {
       fg = { attribute = "fg", highlight = "TabLine" },
@@ -161,7 +155,6 @@ M.opts = {
     },
     indicator_selected = {
       fg = { attribute = "fg", highlight = "LspDiagnosticsDefaultHint" },
-      -- bg = { attribute = "bg", highlight = "TabLine" },
       bg = { attribute = "bg", highlight = "Normal" },
     },
     numbers = {
@@ -290,10 +283,7 @@ M.opts = {
       bold = true,
       italic = true,
     },
-    error_diagnostic = {
-      fg = M.colors.red,
-      bg = { attribute = "bg", highlight = "TabLine" },
-    },
+    error_diagnostic = { fg = M.colors.red, bg = { attribute = "bg", highlight = "TabLine" }, },
     error_diagnostic_visible = {
       fg = M.colors.red,
       bg = { attribute = "bg", highlight = "TabLine" },

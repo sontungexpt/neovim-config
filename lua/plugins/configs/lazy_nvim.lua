@@ -32,9 +32,7 @@ return {
     -- If you want to use a specific browser, you can define it here
     browser = nil, ---@type string?
     custom_keys = {
-      -- you can define custom key maps here.
       -- To disable one of the defaults, set it to false
-
       -- open lazygit log
       ["<localleader>l"] = function(plugin)
         require("lazy.util").float_term({ "lazygit", "log" }, {

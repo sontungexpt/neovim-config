@@ -240,9 +240,6 @@ local default_plugins = {
 
   {
     'yamatsum/nvim-cursorline',
-    -- init = function()
-    --   require("core.utils").lazy_load "nvim-cursorline"
-    -- end,
     lazy = false,
     opts = function()
       return require("plugins.configs.nvim-cursorline")
@@ -299,7 +296,6 @@ local default_plugins = {
       if not status_ok then
         return
       end
-
       bufferline.setup(opts)
     end,
   },
@@ -326,12 +322,9 @@ local default_plugins = {
     end,
     config = function()
       local status_ok, nvim_surround = pcall(require, "nvim-surround")
-
-
       if not status_ok then
         return
       end
-
       nvim_surround.setup {}
     end
   },
@@ -394,7 +387,6 @@ local default_plugins = {
   {
     "williamboman/mason.nvim",
     dependencies = {
-      "mason-org/mason-registry",
       -- {
       --   "williamboman/mason-lspconfig.nvim",
       --   init = function()
@@ -536,7 +528,6 @@ local default_plugins = {
   {
     "iamcco/markdown-preview.nvim",
     ft = "markdown",
-    -- cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
     build = function() vim.fn["mkdp#util#install"]() end,
     config = function()
       require("plugins.configs.markdown-preview")
@@ -548,7 +539,8 @@ local default_plugins = {
     keys = {
       "<leader>",
       "g",
-      "[", "]",
+      "[",
+      "]",
       '"',
       "'",
       "`",
@@ -596,7 +588,6 @@ local default_plugins = {
   --     require("plugins.configs.dap.nvim-dap")
   --   end,
   -- }
-
 
 }
 

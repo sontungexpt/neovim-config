@@ -6,9 +6,10 @@ end
 
 local merge_tb = vim.tbl_deep_extend
 
+local colors = require("core.default-config").ui.colors
+
 wilder.setup {
   modes = { ':', '/', '?' },
-  -- next_key = "<Tab>",
   next_key = "<Tab>",
   previous_key = "<S-Tab>",
   accept_key = "<M-Tab>",
@@ -51,7 +52,7 @@ local general_style = {
       {
         { a = 1 },
         { a = 1 },
-        { foreground = '#f4468f' },
+        { foreground = colors.pink },
       }
     ),
   },

@@ -4,15 +4,14 @@ if not status_ok then
   return
 end
 
-gitsigns.setup {
-  signs                        = {
-    add          = { text = '+' },
-    change       = { text = '│' },
-    delete       = { text = '_' },
-    topdelete    = { text = '‾' },
-    changedelete = { text = '~' },
-    untracked    = { text = '┆' },
-  },
+gitsigns.setup { signs       = {
+  add          = { text = '+' },
+  change       = { text = '│' },
+  delete       = { text = '_' },
+  topdelete    = { text = '‾' },
+  changedelete = { text = '~' },
+  untracked    = { text = '┆' },
+},
   signcolumn                   = true,  -- Toggle with `:Gitsigns toggle_signs`
   numhl                        = false, -- Toggle with `:Gitsigns toggle_numhl`
   linehl                       = false, -- Toggle with `:Gitsigns toggle_linehl`

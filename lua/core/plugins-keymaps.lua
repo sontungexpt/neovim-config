@@ -18,7 +18,8 @@ map("t", "<C-q>", "<C-\\><C-n>:q!<cr>")
 map("t", "<A-q>", "<C-\\><C-n>:q!<cr>")
 
 --Telescope
-map({ "n", "i", "v" }, "<C-p>", "<esc>:Telescope find_files<cr>")
+--map({ "n", "i", "v" }, "<C-p>", "<esc>:Telescope find_files<cr>")
+
 map("n", "<leader>fm", "<esc>:Telescope media_files<cr>")
 map("n", "<leader>fg", "<esc>:Telescope live_grep<cr>")
 map("n", "<leader>fb", "<esc>:Telescope buffers<cr>")
@@ -30,6 +31,7 @@ map("n", "<leader>fc", "<esc>:Telescope neoclip<cr>")
 map("n", "<Leader>ft", ":TodoTelescope<cr>")
 -- map("n", "]t", ":lua require('todo-comments').jump_next()<cr>")
 -- map("n", "[t", ":lua require('todo-comments').jump_prev()<cr>")
+
 map("n", "[t", function()
   local status_ok, todo_comments = pcall(require, "todo-comments")
   if status_ok then
@@ -42,21 +44,21 @@ map("n", "]t", function()
   if status_ok then
     todo_comments.jump_next()
   end
-end, { desc = "Next error/warning todo comment" })
+end, { desc = "Next todo comment" })
 
 map("n", "[T", function()
   local status_ok, todo_comments = pcall(require, "todo-comments")
   if status_ok then
     todo_comments.jump_prev({ keywords = { "ERROR", "WARNING" } })
   end
-end, { desc = "Previous todo comment" })
+end, { desc = "Previous error/ warning comment" })
 
 map("n", "]T", function()
   local status_ok, todo_comments = pcall(require, "todo-comments")
   if status_ok then
     todo_comments.jump_next({ keywords = { "ERROR", "WARNING" } })
   end
-end, { desc = "Next error/warning todo comment" })
+end, { desc = "Next error/ warning comment" })
 
 --ccc (Color-picker)
 map({ "n", "i", "v" }, "<A-c>", "<esc>:CccPick<cr>")
@@ -85,7 +87,7 @@ autocmd('LspAttach', {
     -- keymap({ "n", "t" }, "<A-d>", "<cmd>Lspsaga term_toggle<CR>")
 
     -- LSP finder
-    map("n", "gh", "<cmd>Lspsaga lsp_finder<CR>")
+    map("n", "gf", "<cmd>Lspsaga lsp_finder<CR>")
 
     -- Code action
     map({ "n", "v" }, "<leader>sa", "<cmd>Lspsaga code_action<CR>")
