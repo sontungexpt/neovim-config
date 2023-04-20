@@ -4,12 +4,9 @@ if not status_ok then
   return
 end
 
-local formatting = null_ls.builtins.formatting   -- to setup formatters
-local diagnostics = null_ls.builtins.diagnostics -- to setup linters
+local formatting = null_ls.builtins.formatting
+local diagnostics = null_ls.builtins.diagnostics
 local code_actions = null_ls.builtins.code_actions
-
--- to setup format on save
-local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
 null_ls.setup({
   debug = true,
@@ -76,6 +73,8 @@ null_ls.setup({
   },
   -- Configure format on save
   on_attach = function(client, bufnr)
+    local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+
     if client.supports_method("textDocument/formatting") then
       vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
       vim.api.nvim_create_autocmd("BufWritePre", {

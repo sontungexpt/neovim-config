@@ -17,6 +17,8 @@ wilder.setup {
   enable_cmdline_enter = 1,
 }
 
+wilder.set_option('use_python_remote_plugin', 0)
+
 wilder.set_option('pipeline', {
   wilder.branch(
     wilder.cmdline_pipeline({
@@ -40,9 +42,6 @@ local general_style = {
   reverse = 0,
   left = { ' ', wilder.popupmenu_devicons() },
   highlighter = {
-    -- requires `luarocks install pcre2`
-    wilder.lua_pcre2_highlighter(),
-    -- requires fzy-lua-native vim plugin found
     wilder.lua_fzy_highlighter(),
   },
   highlights = {
