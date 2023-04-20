@@ -1,6 +1,6 @@
 local M = {}
 
-M.is_mason_install = function()
+M.is_mason_installed = function()
   local mason_path = vim.fn.stdpath('data') .. '/mason'
   return vim.fn.isdirectory(mason_path) == 1
 end
@@ -28,82 +28,60 @@ M.get_installed_packages = function()
   return installed_packages
 end
 
+M.compare_same_table = function(table1, table2) -- O(n)
+  if #table1 ~= #table2 then
+    return false
+  end
+
+  local t1_counts = {}
+
+  for _, v1 in ipairs(table1) do
+    t1_counts[v1] = (t1_counts[v1] or 0) + 1
+  end
+
+  for _, v2 in ipairs(table2) do
+    local count = t1_counts[v2] or 0
+    if count == 0 then
+      return false
+    end
+    t1_counts[v2] = count - 1
+  end
+  return true
+end
+
+M.get_not_exists_in_table2 = function(table1, table2)
+  if #table2 == 0 then
+    return table1
+  end
+
+  local not_exists = {}
+  local t2_counts = {}
+
+  for _, v2 in ipairs(table2) do
+    t2_counts[v2] = (t2_counts[v2] or 0) + 1
+  end
+
+  for _, v1 in ipairs(table1) do
+    local count = t2_counts[v1] or 0
+    if count == 0 then
+      table.insert(not_exists, v1)
+    end
+  end
+
+  return not_exists
+end
+
 M.had_changed = function()
-  local packages = require('plugins.configs.mason').ensure_installed
-  local installed_packages = M.get_installed_packages()
-  if #installed_packages ~= #packages then
-    return true
-  end
-  for _, package in ipairs(packages) do
-    local isInstalled = false
-    for _, installed_package in ipairs(installed_packages) do
-      if package == installed_package then
-        isInstalled = true
-      end
-    end
-    if not isInstalled then
-      return true
-    end
-  end
-  return false
-end
-
-
-M.get_packages_to_remove = function()
   local ensured_packages = require('plugins.configs.mason').ensure_installed
   local installed_packages = M.get_installed_packages()
-  local packages_to_remove = {}
-
-  if #ensured_packages == 0 then
-    return installed_packages
-  end
-
-  for _, installed_package in ipairs(installed_packages) do
-    local isEnsured = false
-    for _, package in ipairs(ensured_packages) do
-      if package == installed_package then
-        isEnsured = true
-      end
-    end
-    if not isEnsured then
-      table.insert(packages_to_remove, installed_package)
-    end
-  end
-
-  return packages_to_remove
-end
-
-M.get_packages_to_install = function()
-  local ensured_packages = require('plugins.configs.mason').ensure_installed
-  local installed_packages = M.get_installed_packages()
-  local packages_to_install = {}
-
-  if #installed_packages == 0 then
-    return ensured_packages
-  end
-
-  for _, package in ipairs(ensured_packages) do
-    local isInstalled = false
-    for _, installed_package in ipairs(installed_packages) do
-      if package == installed_package then
-        isInstalled = true
-      end
-    end
-    if not isInstalled then
-      table.insert(packages_to_install, package)
-    end
-  end
-
-  return packages_to_install
+  return not M.compare_same_table(ensured_packages, installed_packages)
 end
 
 M.sync_packages = function()
-  if not M.is_mason_install() then
-    return
-  end
-
-  local packages_to_install = M.get_packages_to_install()
-  local packages_to_remove = M.get_packages_to_remove()
+  local ensured_packages = require('plugins.configs.mason').ensure_installed
+  local installed_packages = M.get_installed_packages()
+  local packages_to_remove = M.get_not_exists_in_table2(installed_packages, ensured_packages)
+  local packages_to_install = M.get_not_exists_in_table2(ensured_packages, installed_packages)
 
   vim.schedule(function()
     if #packages_to_remove > 0 then
@@ -119,13 +97,9 @@ end
 
 -- Custom cmd to ensure install all mason binaries listed
 M.create_user_commands = function()
-  if not M.is_mason_install() then
+  if not M.is_mason_installed() then
     return
   end
-
-  vim.api.nvim_create_user_command("MasonSyncPackages", function()
-    M.sync_packages()
-  end, {})
 
   vim.api.nvim_create_user_command("MasonInstallAll", function()
     vim.cmd("MasonInstall " .. table.concat(require('plugins.configs.mason').ensure_installed, " "))
@@ -142,7 +116,7 @@ end
 
 -------------------- Auto commands --------------------
 M.create_autocmds = function()
-  if not M.is_mason_install() then
+  if not M.is_mason_installed() then
     return
   end
   vim.api.nvim_create_autocmd({ 'VimEnter' }, {

@@ -35,22 +35,17 @@ local options = {
     "json-lsp",
     "tailwindcss-language-server",
 
-
-    -- debuggers
+    -- debugger adapters
     -- "debugpy",
     -- "codelldb",
     -- "bash-debug-adapter",
 
-  }, -- not an option from mason.nvim
+  },
   PATH = "skip",
   ui = {
-    -- Whether to automatically check for new versions when opening the :Mason window.
     check_outdated_packages_on_open = true,
     -- Accepts same border values as |nvim_open_win()|.
     border = "single",
-    -- - Width and height of the UI window.
-    -- - Integer greater than 1 for fixed width.
-    -- - Float in the range of 0-1 for a percentage of screen width.
     width = 0.8,
     height = 0.9,
     icons = {

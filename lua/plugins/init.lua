@@ -407,7 +407,6 @@ local default_plugins = {
     build = ":MasonUpdate",
     cmd = {
       "Mason",
-      "MasonSyncPackages",
       "MasonShowInstalledPackages",
       "MasonShowEnsuredPackages",
       "MasonInstall",
