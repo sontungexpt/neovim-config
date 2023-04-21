@@ -30,7 +30,7 @@ local options = {
     "css-lsp",
     "html-lsp",
     "typescript-language-server",
-    "deno",
+    -- "deno",
     "emmet-ls",
     "json-lsp",
     "tailwindcss-language-server",

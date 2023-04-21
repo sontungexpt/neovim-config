@@ -14,7 +14,7 @@ local lsp_servers = {
 
   -- dev
   "cssls",
-  "denols",
+  -- "denols",
   "eslint",
   "html",
   "jsonls",

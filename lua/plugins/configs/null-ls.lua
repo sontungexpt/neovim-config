@@ -17,22 +17,20 @@ null_ls.setup({
     --blade
     formatting.blade_formatter.with({ extra_args = { "--style", "{IndentWidth: 2}" } }),
 
-    --deno
-    formatting.deno_fmt.with({ extra_args = { "--style", "{IndentWidth: 2}" } }),
+    -- deno
+    -- formatting.deno_fmt.with({ extra_args = { "--style", "{IndentWidth: 2}" } }),
 
-    --prettier
+    -- prettier
     formatting.prettierd.with({
       extra_args = { "--style", "{IndentWidth: 2}" },
       condition = function(utils)
-        -- change file extension if you use something else
-        return utils.root_has_file(".pretterc.js")
+        return utils.root_has_file(".prettierrc.js")
       end,
     }),
 
     -- eslint
     diagnostics.eslint_d.with({
       condition = function(utils)
-        -- change file extension if you use something else
         return utils.root_has_file(".eslintrc.js")
       end,
     }),
