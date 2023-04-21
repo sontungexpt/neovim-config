@@ -22,7 +22,7 @@ null_ls.setup({
 
     -- prettier
     formatting.prettierd.with({
-      extra_args = { "--style", "{IndentWidth: 2}" },
+      extra_args = { "--style", "{IndentWidth: 2}", "--single-quote", "--jsx-single-quote" },
       condition = function(utils)
         return utils.root_has_file(".prettierrc.js")
       end,
