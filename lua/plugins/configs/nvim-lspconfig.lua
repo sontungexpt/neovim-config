@@ -70,21 +70,15 @@ lspSymbol("Warn", "")
 
 vim.diagnostic.config {
   virtual_text = {
-    prefix = "",
+    prefix = "●",
   },
   signs = true,
   underline = true,
   severity_sort = true,
   update_in_insert = false,
-  -- float = {
-  --   border = 'single',
-  --   source = 'always',
-  --   focusable = true,
-  --   style = "minimal",
-  --   header = "",
-  --   prefix = "",
-  --   width = 65,
-  -- },
+  float = {
+    source = 'always',
+  },
 }
 
 vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
@@ -107,10 +101,8 @@ vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
     virtual_text = {
       spacing = 5,
       severity_limit = 'Warning',
+      prefix = "●",
     },
-    -- signs = function(namespace, bufnr)
-    --   return vim.b[bufnr].show_signs == true
-    -- end,
     update_in_insert = true,
   }
 )

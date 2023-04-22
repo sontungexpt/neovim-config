@@ -19,13 +19,13 @@ local options = {
     "pyright",
     "autopep8",
     "flake8",
-    "blade-formatter",
+    -- "blade-formatter",
 
     -- others
     "codespell",
 
     -- web-developments
-    "prettierd",
+    "prettier",
     "eslint-lsp",
     "css-lsp",
     "html-lsp",

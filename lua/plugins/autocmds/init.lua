@@ -21,3 +21,9 @@ local highlight_colors_status_ok, highlight_colors = pcall(require, 'plugins.aut
 if highlight_colors_status_ok then
   highlight_colors.create_autocmds()
 end
+
+-- lspconfig
+local lspconfig_status_ok, lspconfig = pcall(require, 'plugins.autocmds.lspconfig')
+if lspconfig_status_ok then
+  lspconfig.create_autocmds()
+end
