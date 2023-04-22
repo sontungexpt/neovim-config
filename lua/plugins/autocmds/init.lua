@@ -27,3 +27,9 @@ local lspconfig_status_ok, lspconfig = pcall(require, 'plugins.autocmds.lspconfi
 if lspconfig_status_ok then
   lspconfig.create_autocmds()
 end
+
+-- copilot
+local copilot_status_ok, copilot = pcall(require, 'plugins.autocmds.copilot')
+if copilot_status_ok then
+  copilot.create_autocmds()
+end
