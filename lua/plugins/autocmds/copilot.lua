@@ -18,13 +18,10 @@ M.has_copilot_auth = function()
 end
 
 M.create_autocmds = function()
-  vim.api.nvim_create_autocmd(
-    {
-      'VimEnter',
-    },
+  vim.api.nvim_create_autocmd({ 'VimEnter' },
     {
       group = vim.api.nvim_create_augroup('CopilotEnable', {}),
-      pattern = '*',
+      pattern = '',
       callback = function()
         if not M.has_copilot() then
           return

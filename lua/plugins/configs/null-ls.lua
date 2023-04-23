@@ -41,6 +41,7 @@ null_ls.setup({
 
     -- cpp, cmake
     formatting.clang_format.with({ extra_args = { "--style", "{IndentWidth: 2}" } }),
+    diagnostics.clang_check,
 
     --Code Spell Checker
     diagnostics.codespell,
