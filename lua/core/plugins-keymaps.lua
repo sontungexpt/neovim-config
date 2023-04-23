@@ -110,12 +110,13 @@ autocmd('LspAttach', {
 
     -- Go to type definition
     -- map("n", "gt", "<cmd>Lspsaga goto_type_definition<CR>")
-    -- To disable it just use ":Lspsaga hover_doc ++quiet"
+
     map("n", "K", "<cmd>Lspsaga hover_doc<CR>")
+    -- To disable it just use ":Lspsaga hover_doc ++quiet"
     -- If you want to keep the hover window in the top right hand corner,
     -- you can pass the ++keep argument
     -- Note that if you use hover with ++keep, pressing this key again will
-    -- map("n", "K", "<cmd>Lspsaga hover_doc ++keep<CR>")
+    map("n", "<leader>sk", "<cmd>Lspsaga hover_doc ++keep<CR>")
 
     -- Show line diagnostics
     map("n", "gl", "<cmd>Lspsaga show_line_diagnostics ++unfocus<CR>")
