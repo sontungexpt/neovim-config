@@ -1,3 +1,4 @@
+-- auto check auth when vim starts
 local M = {}
 
 -- check if has command Copilot
@@ -28,11 +29,11 @@ M.create_autocmds = function()
         if not M.has_copilot() then
           return
         end
-        vim.schedule(function()
-          if not M.has_copilot_auth() then
+        if not M.has_copilot_auth() then
+          vim.schedule(function()
             vim.cmd("Copilot auth")
-          end
-        end)
+          end)
+        end
       end
     }
   )

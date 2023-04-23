@@ -25,6 +25,7 @@ local default_plugins = {
   {
     "zbirenbaum/copilot.lua",
     cmd = "Copilot",
+    build = ":Copilot auth",
     event = "InsertEnter",
     opts = function()
       return require("plugins.configs.copilot")
@@ -116,14 +117,20 @@ local default_plugins = {
 
   {
     'brenoprata10/nvim-highlight-colors',
-    init = function()
-      require("core.utils").lazy_load "nvim-highlight-colors"
-    end,
+    cmd = {
+      "HighlightColorsOn",
+      "HighlightColorsOff",
+      "HighlightColorsToggle",
+    },
     opts = function()
-      return require("plugins.configs.hightlight-colors")
+      return require("plugins.configs.highlight-colors")
     end,
     config = function(_, opts)
-      require("nvim-highlight-colors").setup(opts)
+      local status_ok, highlight_colors = pcall(require, "nvim-highlight-colors")
+      if not status_ok then
+        return
+      end
+      highlight_colors.setup(opts)
     end
   },
 
@@ -386,24 +393,6 @@ local default_plugins = {
   --Lsp + cmp
   {
     "williamboman/mason.nvim",
-    dependencies = {
-      -- {
-      --   "williamboman/mason-lspconfig.nvim",
-      --   init = function()
-      --     require("core.utils").lazy_load "mason-lspconfig.nvim"
-      --   end,
-      --   opts = function()
-      --     return require "plugins.configs.mason-lspconfig"
-      --   end,
-      --   config = function(_, opts)
-      --     local status_ok, mason_lspconfig = pcall(require, "mason-lspconfig")
-      --     if not status_ok then
-      --       return
-      --     end
-      --     mason_lspconfig.setup(opts)
-      --   end,
-      -- },
-    },
     build = ":MasonUpdate",
     cmd = {
       "Mason",
@@ -515,9 +504,6 @@ local default_plugins = {
 
   {
     'jose-elias-alvarez/null-ls.nvim',
-    -- init = function()
-    --   require("core.utils").lazy_load "null-ls"
-    -- end,
     event = "BufWritePre",
     config = function()
       require("plugins.configs.null-ls")
@@ -592,5 +578,9 @@ local default_plugins = {
 
 local config = require("core.utils").load_config()
 
-require("plugins.autocmds")
 require("lazy").setup(default_plugins, config.lazy_nvim)
+
+-- Because some auto commands need to sure that a command of plugin is exists
+-- So we need to load all plugins first
+-- Then we can create auto commands
+require("plugins.autocmds")
