@@ -1,4 +1,6 @@
 local options = {
+  -- auto sync the installed packages with ensure_installed when open nvim
+  auto_sync = true,
   ensure_installed = {
     -- lua
     "lua-language-server",

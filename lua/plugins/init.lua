@@ -1,7 +1,4 @@
 -- All plugins have lazy=true by default,to load a plugin on startup just lazy=false
-local cmd = vim.cmd
-local g = vim.g
-
 local default_plugins = {
   {
     "nvim-tree/nvim-tree.lua",
@@ -103,7 +100,12 @@ local default_plugins = {
     init = function()
       require("core.utils").lazy_load "nvim-treesitter"
     end,
-    cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
+    cmd = {
+      "TSInstall",
+      "TSBufEnable",
+      "TSBufDisable",
+      "TSModuleInfo"
+    },
     build = ":TSUpdate",
     opts = function()
       return require("plugins.configs.nvim-treesitter")
@@ -122,8 +124,6 @@ local default_plugins = {
     'brenoprata10/nvim-highlight-colors',
     cmd = {
       "HighlightColorsOn",
-      "HighlightColorsOff",
-      "HighlightColorsToggle",
     },
     opts = function()
       return require("plugins.configs.highlight-colors")
@@ -151,8 +151,8 @@ local default_plugins = {
       end
       tokyonight.setup(opts)
 
-      cmd [[colorscheme tokyonight]]
-      cmd [[let g:lightline = {'colorscheme': 'tokyonight'}]]
+      vim.cmd [[colorscheme tokyonight]]
+      vim.cmd [[let g:lightline = {'colorscheme': 'tokyonight'}]]
     end,
   },
 
@@ -178,9 +178,13 @@ local default_plugins = {
 
   {
     'numToStr/Comment.nvim',
-    init = function()
-      require("core.utils").lazy_load "Comment.nvim"
-    end,
+    keys = {
+      "gc",
+      "gb",
+    },
+    event = {
+      "ModeChanged"
+    },
     opts = function()
       return require("plugins.configs.comment")
     end,
@@ -319,9 +323,11 @@ local default_plugins = {
   {
     "kylechui/nvim-surround",
     version = "*",
-    init = function()
-      require("core.utils").lazy_load "nvim-surround"
-    end,
+    keys = {
+      "ys",
+      "ds",
+      "cs",
+    },
     opts = function()
       return require("plugins.configs.nvim-surround")
     end,
@@ -521,12 +527,10 @@ local default_plugins = {
     "folke/which-key.nvim",
     keys = {
       "<leader>",
-      "g",
       "[",
       "]",
       '"',
       "'",
-      "`",
     },
     opts = function()
       return require "plugins.configs.whichkey"
@@ -538,10 +542,16 @@ local default_plugins = {
 
   {
     'kevinhwang91/nvim-ufo',
+    keys = {
+      "zc",
+      "zo",
+      "za",
+      "zA",
+      "zr",
+      "zm",
+      "zR",
+    },
     dependencies = 'kevinhwang91/promise-async',
-    init = function()
-      require("core.utils").lazy_load "nvim-ufo"
-    end,
     config = function()
       require('plugins.configs.nvim-ufo')
     end

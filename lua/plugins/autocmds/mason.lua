@@ -119,12 +119,18 @@ M.create_autocmds = function()
   if not M.is_mason_installed() then
     return
   end
+  local enabled = require('plugins.configs.mason').auto_sync
+  if not enabled then
+    return
+  end
   vim.api.nvim_create_autocmd({ 'VimEnter' }, {
     group = vim.api.nvim_create_augroup('MasonCommands', {}),
     callback = function()
-      if M.had_changed() then
-        M.sync_packages()
-      end
+      vim.schedule(function()
+        if M.had_changed() then
+          M.sync_packages()
+        end
+      end)
     end
   })
 end

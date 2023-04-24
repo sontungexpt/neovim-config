@@ -12,10 +12,7 @@ M.create_autocmds = function()
     return
   end
   local autocmd = vim.api.nvim_create_autocmd
-  autocmd(
-    {
-      'BufWritePost',
-    },
+  autocmd({ 'BufWritePost', },
     {
       group = vim.api.nvim_create_augroup('Lspconfig', {}),
       pattern = {
