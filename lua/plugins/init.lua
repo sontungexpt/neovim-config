@@ -41,7 +41,10 @@ local default_plugins = {
 
   {
     "nvim-telescope/telescope.nvim",
-    cmd = "Telescope",
+    cmd = {
+      "Telescope",
+      "TodoTelescope",
+    },
     dependencies = {
       'nvim-lua/plenary.nvim',
       'nvim-lua/popup.nvim',
@@ -190,11 +193,6 @@ local default_plugins = {
     end
   },
 
-  {
-    "nvim-telescope/telescope.nvim",
-    'dharmx/telescope-media.nvim',
-    event = "TodoTelescope",
-  },
 
   {
     "folke/todo-comments.nvim",

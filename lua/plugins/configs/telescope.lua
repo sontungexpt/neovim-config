@@ -1,10 +1,10 @@
 local options = {
   extensions_list = {
-    "media",
     "media_files",
     "zoxide",
     "project",
     "fzy_native",
+    -- "media",
     -- "neoclip",
   },
   defaults = {
