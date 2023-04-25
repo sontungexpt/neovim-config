@@ -1,9 +1,11 @@
+-- n, v, i, t = mode names
 -- default opts = 1
 -- opts = 1 for noremap and silent
 -- opts = 2 for not noremap and silent
 -- opts = 3 for noremap and not silent
 -- opts = 4 for not noremap and not silent
 -- opts = 5 for expr and noremap and silent
+--
 local autocmd = vim.api.nvim_create_autocmd
 local map = require("core.utils").map
 
@@ -66,16 +68,10 @@ end, { desc = "Next error/ warning comment" })
 map({ "n", "i", "v" }, "<A-c>", "<esc>:CccPick<cr>")
 
 -- Bufferline
-map("n", "<Leader>1", "<Cmd>BufferLineGoToBuffer 1<CR>")
-map("n", "<Leader>2", "<Cmd>BufferLineGoToBuffer 2<CR>")
-map("n", "<Leader>3", "<Cmd>BufferLineGoToBuffer 3<CR>")
-map("n", "<Leader>4", "<Cmd>BufferLineGoToBuffer 4<CR>")
-map("n", "<Leader>5", "<Cmd>BufferLineGoToBuffer 5<CR>")
-map("n", "<Leader>6", "<Cmd>BufferLineGoToBuffer 6<CR>")
-map("n", "<Leader>7", "<Cmd>BufferLineGoToBuffer 7<CR>")
-map("n", "<Leader>8", "<Cmd>BufferLineGoToBuffer 8<CR>")
-map("n", "<Leader>9", "<Cmd>BufferLineGoToBuffer 9<CR>")
-map("n", "<Leader>$", "<Cmd>BufferLineGoToBuffer -1<CR>")
+autocmd("VimEnter", {
+  pattern = "",
+  command = "nnoremap <silent><Space> <Cmd>exe 'BufferLineGoToBuffer ' . v:count1<CR>",
+})
 
 -- Markdown
 map("n", "<Leader>p", "<Cmd>MarkdownPreviewToggle<CR>")
