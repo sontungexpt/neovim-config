@@ -8,13 +8,9 @@ M.create_autocmds = function()
   if not M.has_highlight_colors() then
     return
   end
-  vim.api.nvim_create_autocmd({ 'VimEnter' }, {
-    group = vim.api.nvim_create_augroup('HighlightColorsCommands', {}),
-    callback = function()
-      vim.schedule(function()
-        vim.cmd("HighlightColorsOn")
-      end)
-    end
-  })
+  local create_autocmd = require('core.utils').create_autocmd
+  create_autocmd('VimEnter', '', 'HighlightColorsAutoGroup', function()
+    vim.cmd("HighlightColorsOn")
+  end, false)
 end
 return M
