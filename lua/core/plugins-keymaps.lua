@@ -78,7 +78,7 @@ map("n", "<Leader>9", "<Cmd>BufferLineGoToBuffer 9<CR>")
 map("n", "<Leader>$", "<Cmd>BufferLineGoToBuffer -1<CR>")
 
 -- Markdown
-map("n", "<Leader-p>", "<Cmd>MarkdownPreviewToggle<CR>")
+map("n", "<Leader>p", "<Cmd>MarkdownPreviewToggle<CR>")
 
 -- LSP-saga
 -- Only create keymap for lsp-saga if lsp is attached
