@@ -123,12 +123,18 @@ M.create_autocmds = function()
   if not enabled then
     return
   end
-  local create_autocmd = require('core.utils').create_autocmd
-  create_autocmd('VimEnter', '', 'MasonAutoGroup', function()
-    if M.had_changed() then
-      M.sync_packages()
+
+  vim.api.nvim_create_autocmd('VimEnter', {
+    group = vim.api.nvim_create_augroup('MasonAutoGroup', {}),
+    pattern = '',
+    callback = function()
+      vim.schedule(function()
+        if M.had_changed() then
+          M.sync_packages()
+        end
+      end)
     end
-  end)
+  })
 end
 
 return M

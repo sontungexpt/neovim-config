@@ -8,10 +8,10 @@ M.create_autocmds = function()
   if not M.lsp_exists() then
     return
   end
-  local create_autocmd = require('core.utils').create_autocmd
-  create_autocmd(
-    'BufWritePost',
-    {
+
+  vim.api.nvim_create_autocmd('BufWritePost', {
+    group = vim.api.nvim_create_augroup('LspconfigAutoGroup', {}),
+    pattern = {
       ".prettierrc",
       ".prettierrc.json",
       ".prettierrc.yml",
@@ -23,11 +23,8 @@ M.create_autocmds = function()
       "prettier.config.js",
       "prettier.config.cjs",
     },
-    'LspconfigAutoGroup',
-    function()
-      vim.cmd('LspRestart')
-    end,
-    false
-  )
+    command = 'LspRestart',
+  })
 end
+
 return M

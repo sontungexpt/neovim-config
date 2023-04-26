@@ -33,26 +33,6 @@ M.lazy_load = function(plugin)
   })
 end
 
-M.create_autocmd = function(events, patterns, group, callback, is_schedule)
-  if type(callback) ~= "function" then
-    error "Callback must be a function!"
-  end
-  is_schedule = is_schedule or true
-  vim.api.nvim_create_autocmd(events, {
-    group = vim.api.nvim_create_augroup(group, {}),
-    pattern = patterns,
-    callback = function()
-      if not is_schedule then
-        callback()
-        return
-      end
-      vim.schedule(function()
-        callback()
-      end)
-    end
-  })
-end
-
 -- default opts = 1
 -- opts = 1 for noremap and silent
 -- opts = 2 for not noremap and silent
