@@ -18,7 +18,6 @@ end
 
 -- highlight_colors
 local highlight_colors_status_ok, highlight_colors = pcall(require, 'plugins.autocmds.highlight-colors')
-
 if highlight_colors_status_ok then
   highlight_colors.create_autocmds()
 end

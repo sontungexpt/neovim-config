@@ -1,5 +1,4 @@
 local autocmd = vim.api.nvim_create_autocmd
-local cmd = vim.cmd
 
 -- Don't list quickfix buffers
 autocmd("FileType", {
@@ -29,4 +28,7 @@ autocmd('BufWritePre', {
 })
 
 -- Move to relative line number when in visual mode
-cmd([[ autocmd ModeChanged * if mode() == 'v' | set relativenumber | else | set norelativenumber | endif ]])
+autocmd('ModeChanged', {
+  pattern = '',
+  command = "if mode() == 'v' | set relativenumber | else | set norelativenumber | endif"
+})
