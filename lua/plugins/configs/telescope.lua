@@ -79,17 +79,10 @@ local options = {
   },
   extensions = {
     media_files = {
-      media_files = {
-        filetypes = { "png", "webp", "jpg", "jpeg", "webm", "pdf", "mp4" },
-        find_cmd = "rg", -- find command (defaults to `fd`)
-      },
+      filetypes = { "png", "webp", "jpg", "jpeg", "webm", "pdf", "mp4" },
+      find_cmd = "rg", -- find command (defaults to `fd`)
     },
-    media = {
-      backend = "ueberzug", -- "ueberzug"|"viu"|"chafa"|"jp2a"|catimg
-      hidden = false,
-      cache_path = "/tmp/tele.media.cache",
-    }
-  }
+  },
 }
 
 return options

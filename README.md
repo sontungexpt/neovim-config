@@ -1,4 +1,5 @@
 # Neovim-config
+
 - The neovim config use lazy plugins manager
 - The config completely wrote in lua
 
@@ -18,3 +19,4 @@
 12. Terminal with toggleterm
 13. Fold with nvim-ufo
 14. Generate comment with comment
+15. Syntax highlight with treesitter, autopairs, nvim-ts-autotag, ts-rainbow
