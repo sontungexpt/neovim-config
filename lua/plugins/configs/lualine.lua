@@ -28,7 +28,7 @@ local diagnostics = {
 
 local branch = {
   "branch",
-  icon = " ",
+  icon = " ",
   color = { fg = colors.pink },
   padding = { left = 2, right = 1 },
 }

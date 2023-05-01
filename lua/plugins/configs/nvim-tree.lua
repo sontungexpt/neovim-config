@@ -166,7 +166,7 @@ M.options = {
     },
   },
   filters = {
-    dotfiles = true,
+    dotfiles = false,
     git_clean = false,
     no_buffer = false,
     custom = {
@@ -177,7 +177,7 @@ M.options = {
       "*.ppt",
       "*.exe",
     },
-    exclude = { ".config", ".prettierrc.js", ".gitignore", ".eslintrc.js" },
+    exclude = {}
   },
   filesystem_watchers = {
     enable = true,
