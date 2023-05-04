@@ -11,6 +11,11 @@ M.has_copilot_auth = function()
 end
 
 M.create_autocmds = function()
+  local status_ok, config = pcall(require, "plugins.configs.copilot")
+  if (not status_ok) or (config.auto_check_auth == false) then
+    return
+  end
+
   if not M.has_copilot() then
     return
   end

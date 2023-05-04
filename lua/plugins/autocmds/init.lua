@@ -29,7 +29,7 @@ if lspconfig_status_ok then
 end
 
 --copilot
--- local copilot_status_ok, copilot = pcall(require, 'plugins.autocmds.copilot')
--- if copilot_status_ok then
---   copilot.create_autocmds()
--- end
+local copilot_status_ok, copilot = pcall(require, 'plugins.autocmds.copilot')
+if copilot_status_ok then
+  copilot.create_autocmds()
+end
