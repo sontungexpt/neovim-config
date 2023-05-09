@@ -20,6 +20,7 @@ local lsp_servers = {
   "jsonls",
   "tailwindcss",
   "tsserver",
+  "emmet_ls",
   -- "vuels",
 
   -- vim

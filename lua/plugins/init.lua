@@ -22,6 +22,7 @@ local default_plugins = {
   {
     "zbirenbaum/copilot.lua",
     build = ":Copilot auth",
+    cmd = "Copilot",
     event = "InsertEnter",
     opts = function()
       return require("plugins.configs.copilot")
@@ -504,6 +505,7 @@ local default_plugins = {
       require("plugins.configs.cmp")
     end,
   },
+
 
   {
     'jose-elias-alvarez/null-ls.nvim',

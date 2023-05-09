@@ -52,10 +52,11 @@ cmp.setup({
   },
   sources = {
     { name = 'path' },
-    { name = 'nvim_lsp', keyword_length = 1 },
-    { name = 'buffer',   keyword_length = 3 },
-    { name = 'luasnip',  keyword_length = 4 },
-    { name = "copilot",  group_index = 2 },
+    { name = 'nvim_lsp',  keyword_length = 1 },
+    { name = 'buffer',    keyword_length = 3 },
+    { name = 'luasnip',   keyword_length = 4 },
+    { name = "copilot",   group_index = 2 },
+    { name = 'emmet_vim', },
   },
   window = {
     documentation = cmp.config.window.bordered(),
