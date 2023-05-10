@@ -12,6 +12,9 @@ cmd("filetype plugin indent on")
 cmd("syntax enable")
 cmd("syntax on")
 
+-- disable nvim intro
+options.shortmess:append "sI"
+
 -- disable netrw for nvimtree
 g.loaded_netrw = 1
 g.loaded_netrwPlugin = 1
@@ -19,16 +22,17 @@ g.loaded_netrwPlugin = 1
 -- fold
 options.foldenable = false
 
--- Ruler
-options.ruler = true
-
 -- Text width
 options.textwidth = 80
 
 --Line number
 options.number = true
+options.numberwidth = 2
 options.relativenumber = false
 options.cmdheight = 1
+
+-- Ruler
+options.ruler = true
 
 --Encoding
 options.encoding = "utf-8"
@@ -56,6 +60,7 @@ options.updatetime = 300 --default 4000ms
 
 --Line wrapping
 options.wrap = false
+options.whichwrap:append "<>[]hl"
 
 --No backup files
 options.swapfile = false
