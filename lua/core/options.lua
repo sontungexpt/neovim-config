@@ -106,19 +106,3 @@ options.wildignore:append {
   "*.min.*",
   "node_modules"
 }
-
---Enable syntax for .json files
-cmd([[
-  augroup EnableSyntax
-    autocmd!
-    autocmd BufRead,BufNewFile *.json set filetype=jsonc
-  augroup END
-]])
-
---Enable syntax for .rasi files
-cmd([[
-  augroup EnableSyntax
-    autocmd!
-    autocmd BufRead,BufNewFile *.rasi set filetype=rasi
-  augroup END
-]])

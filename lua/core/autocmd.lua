@@ -32,3 +32,24 @@ autocmd('ModeChanged', {
   pattern = '',
   command = "if mode() == 'v' | set relativenumber | else | set norelativenumber | endif"
 })
+
+--Enable syntax for .js files
+-- autocmd({ "BufEnter", "BufRead", "BufNewFile" }, {
+--   group = vim.api.nvim_create_augroup('EnableSyntax', {}),
+--   pattern = { "*.js", "*.jsx" },
+--   command = "set filetype=javascriptreact",
+-- })
+
+--Enable syntax for .json files
+autocmd({ "BufEnter", "BufRead", "BufNewFile" }, {
+  group = vim.api.nvim_create_augroup('EnableSyntax', {}),
+  pattern = { "*.json" },
+  command = "set filetype=jsonc",
+})
+
+--Enable syntax for .rasi files
+autocmd({ "BufEnter", "BufRead", "BufNewFile" }, {
+  group = vim.api.nvim_create_augroup('EnableSyntax', {}),
+  pattern = { "*.rasi" },
+  command = "set filetype=rasi",
+})

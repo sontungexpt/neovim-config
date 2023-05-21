@@ -57,6 +57,12 @@ for _, lsp_server in ipairs(lsp_servers) do
   })
 end
 
+lspconfig.emmet_ls.setup({
+  on_attach = on_attach,
+  capabilities = lsp_defaults.capabilities,
+  filetypes = { 'html', 'typescriptreact', 'javascriptreact', 'css', 'sass', 'scss', 'less', 'javascript' },
+})
+
 local function lspSymbol(name, icon)
   local hl = "DiagnosticSign" .. name
   vim.fn.sign_define(hl, {
