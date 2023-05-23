@@ -322,7 +322,8 @@ local default_plugins = {
 
   {
     "kylechui/nvim-surround",
-    version = "*",
+    version = "*", -- Use for stability; omit to use `main` branch for the latest features
+    event = "VeryLazy",
     keys = {
       "ys",
       "ds",
