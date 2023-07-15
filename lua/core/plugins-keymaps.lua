@@ -26,7 +26,8 @@ map("n", "<leader>fp", "<esc>:Telescope project<cr>")
 map("n", "<leader>fc", "<esc>:Telescope neoclip<cr>")
 
 -- Todo-comments
-map("n", "<Leader>ft", ":TodoTelescope<cr>")
+-- map("n", "<Leader>ft", "<esc>:TodoTelescope<cr>")
+map("n", "<Leader>ft", "<esc>:TodoQuickFix<cr>")
 
 map("n", "[t", function()
   local status_ok, todo_comments = pcall(require, "todo-comments")
