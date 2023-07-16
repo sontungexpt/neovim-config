@@ -90,6 +90,11 @@ local default_plugins = {
   },
 
   {
+    'VebbNix/lf-vim',
+    ft = 'lf'
+  },
+
+  {
     "nvim-treesitter/nvim-treesitter",
     dependencies = {
       --'p00f/nvim-ts-rainbow',
