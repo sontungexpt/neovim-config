@@ -132,10 +132,8 @@ M.opts = {
       bg = { attribute = "bg", highlight = "TabLine" },
     },
     modified_selected = {
-      -- fg = { attribute = "fg", highlight = "TabLine" },
       fg = { attribute = "fg", highlight = "Normal" },
       bg = { attribute = "bg", highlight = "Normal" },
-      -- bg = { attribute = "bg", highlight = "TabLine" },
     },
     modified_visible = {
       fg = { attribute = "fg", highlight = "TabLine" },

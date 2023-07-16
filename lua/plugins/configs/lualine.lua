@@ -10,10 +10,10 @@ local diagnostics = {
   "diagnostics",
   sources = { "nvim_diagnostic" },
   symbols = {
-    error = " ",
+    error = " ",
     warn = " ",
-    hint = " ",
-    info = " ",
+    hint = "󰌵 ",
+    info = " ",
   },
   colored = true,
   diagnostics_color = {

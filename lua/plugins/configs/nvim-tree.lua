@@ -48,6 +48,7 @@ M.on_attach = function(bufnr)
   map('n', '?', api.tree.toggle_help, opts('Help'))
   map('n', ' ', api.marks.toggle, opts('Toggle Bookmark'))
 end
+
 M.options = {
   auto_reload_on_write = true,
   disable_netrw = true,
@@ -159,7 +160,7 @@ M.options = {
       max = vim.diagnostic.severity.ERROR,
     },
     icons = {
-      hint = " ",
+      hint = "󰌵 ",
       info = " ",
       warning = " ",
       error = " ",

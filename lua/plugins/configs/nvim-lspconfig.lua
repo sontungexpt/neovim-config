@@ -70,10 +70,10 @@ local function lspSymbol(name, icon)
   })
 end
 
-lspSymbol("Error", "")
-lspSymbol("Info", "")
-lspSymbol("Hint", "")
-lspSymbol("Warn", "")
+lspSymbol("Error", " ")
+lspSymbol("Info", " ")
+lspSymbol("Hint", "󰌵 ")
+lspSymbol("Warn", " ")
 
 vim.diagnostic.config {
   virtual_text = {

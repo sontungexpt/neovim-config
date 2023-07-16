@@ -75,7 +75,7 @@ cmp.setup({
         nvim_lsp = "λ ",
         luasnip = " ",
         buffer = "Ω ",
-        path = "󱘎",
+        path = "󱘎 ",
         nvim_lua = " ",
         copilot = " ",
         Copilot = " ",
