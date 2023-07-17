@@ -53,3 +53,11 @@ autocmd({ "BufEnter", "BufRead", "BufNewFile" }, {
   pattern = { "*.rasi" },
   command = "set filetype=rasi",
 })
+
+autocmd({ "BufEnter", "BufRead", "BufNewFile" }, {
+  group = vim.api.nvim_create_augroup('EnableSyntax', {}),
+  pattern = "*.env",
+  callback = function(args)
+    vim.diagnostic.disable(args.buf)
+  end
+})

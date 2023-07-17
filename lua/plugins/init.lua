@@ -547,6 +547,7 @@ local default_plugins = {
     end,
   },
 
+
   {
     'kevinhwang91/nvim-ufo',
     keys = {

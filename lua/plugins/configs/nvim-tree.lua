@@ -167,18 +167,47 @@ M.options = {
     },
   },
   filters = {
-    dotfiles = false,
+    dotfiles = true,
     git_clean = false,
     no_buffer = false,
     custom = {
+      "zsh_history_fix",
+      "node_modules",
       "dotfiles",
       "yay",
-      "zsh_history_fix",
+      "build",
+      ".husky",
+      ".rbenv",
       "*.pdf",
       "*.ppt",
       "*.exe",
     },
-    exclude = {}
+    exclude = {
+      ".config",
+      ".gitignore",
+      ".gitconfig",
+
+      -- project specific files
+      -- prettier files
+      ".prettierrc",
+      ".prettierrc.json",
+      ".prettierrc.yml",
+      ".prettierrc.yaml",
+      ".prettierrc.json5",
+      ".prettierrc.js",
+      ".prettierrc.cjs",
+      ".prettierrc.toml",
+
+      -- eslint files
+      ".eslintrc",
+
+      -- babel files
+      ".babelrc",
+
+      -- environment variables files
+      ".envrc",
+      ".env",
+    }
   },
   filesystem_watchers = {
     enable = true,
