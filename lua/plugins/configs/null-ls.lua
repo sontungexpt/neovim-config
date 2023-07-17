@@ -44,8 +44,9 @@ null_ls.setup({
     diagnostics.clang_check,
 
     --Code Spell Checker
-    diagnostics.codespell,
+    diagnostics.codespell.with({ args = { "--ignore-words-list=Tung,to,Tongue" } }),
   },
+
   -- Configure format on save
   on_attach = function(client, bufnr)
     if client.supports_method("textDocument/formatting") then
