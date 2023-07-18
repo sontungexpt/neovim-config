@@ -72,7 +72,8 @@ M.opts = {
       bg = { attribute = "bg", highlight = "TabLine" },
     },
     background = {
-      fg = { attribute = "fg", highlight = "TabLine" },
+      fg = M.colors.gray,
+      -- fg = { attribute = "fg", highlight = "TabLine" },
       bg = { attribute = "bg", highlight = "TabLine" },
     },
     buffer_visible = {
