@@ -1,4 +1,5 @@
 local M = {}
+
 M.on_attach = function(bufnr)
   local api = require('nvim-tree.api')
   local map = vim.keymap.set

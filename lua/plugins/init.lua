@@ -587,6 +587,19 @@ local default_plugins = {
     "rcarriga/nvim-dap-ui",
     dependencies = {
       {
+        "folke/neodev.nvim",
+        config = function()
+          local status_ok, neodev = pcall(require, "neodev")
+          if not status_ok then
+            return
+          end
+
+          neodev.setup({
+            library = { plugins = { "nvim-dap-ui" }, types = true },
+          })
+        end
+      },
+      {
         "mfussenegger/nvim-dap",
         dependencies = {
           {
@@ -602,8 +615,8 @@ local default_plugins = {
       }
     },
     keys = {
-      { "<leader>du", function() require("dapui").toggle({}) end,       desc = "Dap UI" },
-      { "<leader>db", function() require 'dap'.toggle_breakpoint() end, desc = "Dap Breakpoint" },
+      { "<leader>du", function() require("dapui").toggle({}) end,        desc = "Dap UI" },
+      { "<leader>db", function() require('dap').toggle_breakpoint() end, desc = "Dap Breakpoint" },
     },
     config = function()
       require("plugins.configs.dap.nvim-dap-ui")

@@ -64,4 +64,35 @@ M.map = function(mode, key, map_to, opts)
   vim.keymap.set(mode, key, map_to, opts)
 end
 
+M.identified_files = {
+  -- rust
+  "Cargo.toml",
+  "Cargo.lock",
+
+  -- git
+  ".git",
+  ".gitignore",
+
+  -- npm
+  "package.json",
+  "yarn.lock",
+
+  -- c/c++
+  "CMakeLists.txt",
+}
+
+M.find_project_root = function()
+  local cwd = vim.fn.getcwd()
+  while cwd ~= '/' do
+    for _, file in ipairs(M.identified_files) do
+      local file_path = vim.fn.findfile(file, cwd)
+      if file_path ~= '' then
+        return cwd
+      end
+    end
+    cwd = vim.fn.fnamemodify(cwd, ':h')
+  end
+  return ""
+end
+
 return M

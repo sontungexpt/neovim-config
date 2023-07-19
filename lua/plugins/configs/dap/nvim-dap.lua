@@ -6,8 +6,8 @@ end
 vim.fn.sign_define("DapBreakpoint", { text = " ", texthl = "DapBreakpointColor", linehl = "", numhl = "" })
 vim.cmd("highlight DapBreakpointColor guifg=#EC5241")
 
-vim.fn.sign_define("DapStopped", { text = "󰝤 ", texthl = "DapStoppedColor", linehl = "", numhl = "" })
-vim.cmd("highlight DapStoppedColor guifg=#EC5241")
+vim.fn.sign_define("DapStopped", { text = "󰜴 ", texthl = "DapStoppedColor", linehl = "", numhl = "" })
+vim.cmd("highlight DapStoppedColor guifg=#98C379")
 
 dap.adapters.codelldb = {
   type = 'server',
@@ -45,8 +45,11 @@ dap.configurations.cpp = {
 
 dap.configurations.c = dap.configurations.cpp
 
+
 local get_rust_debug_filepath = function()
-  local project_dir = vim.fn.getcwd():match("(.*/)")
+  local find_project_root = require('core.utils').find_project_root
+  local project_dir = find_project_root()
+
   -- check if project_dir end with / then remove it
   if string.sub(project_dir, -1) == "/" then
     project_dir = string.sub(project_dir, 1, -2)
@@ -54,19 +57,9 @@ local get_rust_debug_filepath = function()
 
   local project_name = vim.fn.fnamemodify(project_dir, ':t')
 
-  local debug_dir = project_dir .. '/target/debug/deps/'
-
-  local files = vim.fn.glob(debug_dir .. '/*', true, true)
-  for _, file in ipairs(files) do
-    local file_name = vim.fn.fnamemodify(file, ':t')
-    if string.match(file_name, "^" .. project_name .. "%-%x+$") then
-      return debug_dir .. file_name
-    end
-  end
-
-  return vim.fn.input(debug_dir, 'file')
+  local debug_dir = project_dir .. '/target/debug/'
+  return debug_dir .. project_name
 end
-
 
 dap.configurations.rust = {
   {
