@@ -11,6 +11,11 @@ local options = {
     "shfmt",
     "shellcheck",
 
+    -- rust
+    "rust-analyzer",
+    -- "rustfmt",
+    "taplo",
+
     -- c++
     "clangd",
     "clang-format",
@@ -39,7 +44,7 @@ local options = {
 
     -- debugger adapters
     -- "debugpy",
-    -- "codelldb",
+    "codelldb",
     -- "bash-debug-adapter",
 
   },

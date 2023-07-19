@@ -49,7 +49,7 @@ local options = {
     virtual_text = false,
   },
   hover = {
-    max_width = 0.6,
+    max_width = 0.7,
     -- open_link = 'gx',
     -- open_browser = 'microsoft-edge-stable',
   },
@@ -76,9 +76,9 @@ local options = {
   },
   outline = {
     win_position = "right",
-    win_with = "",
-    win_width = 30,
-    preview_width = 0.4,
+    -- win_with = "",
+    win_width = 40,
+    preview_width = 0.5,
     show_detail = true,
     auto_preview = true,
     auto_refresh = true,

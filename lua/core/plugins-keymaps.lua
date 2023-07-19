@@ -160,3 +160,13 @@ autocmd('LspAttach', {
     -- map("n", "<Leader>co", "<cmd>Lspsaga outgoing_calls<CR>")
   end
 })
+
+-- dap
+map("n", "<leader>d", function()
+  require("dapui").toggle()
+end)
+
+map("n", "<leader>b", ":lua require'dap'.toggle_breakpoint()<CR>")
+map("n", "<F11>", ":lua require'dap'.step_into()<CR>")
+map("n", "<F12>", ":lua require'dap'.step_over()<CR>")
+map("n", "<F5>", ":lua require'dap'.continue()<CR>")

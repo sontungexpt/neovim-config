@@ -23,6 +23,9 @@ local lsp_servers = {
   "emmet_ls",
   -- "vuels",
 
+  --rust // uncomment below when you don't use packages rust-tools.nvim
+  "rust_analyzer",
+
   -- vim
   -- "vimls",
 

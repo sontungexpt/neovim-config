@@ -176,6 +176,7 @@ M.options = {
       "dotfiles",
       "yay",
       "build",
+      ".git",
       ".husky",
       ".rbenv",
       "*.pdf",
@@ -186,6 +187,8 @@ M.options = {
       ".config",
       ".gitignore",
       ".gitconfig",
+      -- "target",
+
 
       -- project specific files
       -- prettier files

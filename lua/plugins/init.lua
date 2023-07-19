@@ -440,6 +440,22 @@ local default_plugins = {
     end,
   },
 
+  -- {
+  --   'simrat39/rust-tools.nvim',
+  --   ft = { 'rust' },
+  --   config = function()
+  --     local status_ok, rt = pcall(require, "rust-tools")
+  --     if not status_ok then
+  --       return
+  --     end
+  --     local null_ls = require('null-ls')
+
+  --     rt.setup({
+  --       server = { on_attach = null_ls.on_attach },
+  --     })
+  --   end
+  -- },
+
   {
     "glepnir/lspsaga.nvim",
     event = "LspAttach",
@@ -565,30 +581,39 @@ local default_plugins = {
     end
   },
 
-  -- {
-  --   "mfussenegger/nvim-dap",
-  --   -- event = "DebugAttach",
-  --   dependencies = {
-  --     {
-  --       "rcarriga/nvim-dap-ui",
-  --       -- keys = {
-  --       --   { "<leader>du", function() require("dapui").toggle({}) end, desc = "Dap UI" }
-  --       -- },
-  --       config = function()
-  --         require("plugins.configs.dap.nvim-dap-ui")
-  --       end,
-  --     },
-  --     {
-  --       "theHamsta/nvim-dap-virtual-text",
-  --       config = function()
-  --         require("plugins.configs.dap.nvim-dap-virtual-text")
-  --       end,
-  --     },
-  --   },
-  --   config = function()
-  --     require("plugins.configs.dap.nvim-dap")
-  --   end,
-  -- }
+  {
+    "rcarriga/nvim-dap-ui",
+    dependencies = {
+      {
+        "folke/neodev.nvim",
+        config = function()
+          require("neodev").setup({
+            library = { plugins = { "nvim-dap-ui" }, types = true },
+          })
+        end
+      },
+      {
+        "mfussenegger/nvim-dap",
+        dependencies = {
+          {
+            "theHamsta/nvim-dap-virtual-text",
+            config = function()
+              require("plugins.configs.dap.nvim-dap-virtual-text")
+            end,
+          },
+        },
+        config = function()
+          require("plugins.configs.dap.nvim-dap")
+        end,
+      }
+    },
+    keys = {
+      { "<leader>d", function() require("dapui").toggle({}) end, desc = "Dap UI" },
+    },
+    config = function()
+      require("plugins.configs.dap.nvim-dap-ui")
+    end,
+  },
 
 }
 
