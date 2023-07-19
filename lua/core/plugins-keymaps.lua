@@ -162,11 +162,11 @@ autocmd('LspAttach', {
 })
 
 -- dap
-map("n", "<leader>d", function()
+map("n", "<leader>du", function()
   require("dapui").toggle()
 end)
 
-map("n", "<leader>b", ":lua require'dap'.toggle_breakpoint()<CR>")
-map("n", "<F11>", ":lua require'dap'.step_into()<CR>")
-map("n", "<F12>", ":lua require'dap'.step_over()<CR>")
-map("n", "<F5>", ":lua require'dap'.continue()<CR>")
+map("n", "<leader>db", ":lua require'dap'.toggle_breakpoint()<CR>")
+map("n", "<leader>di", ":lua require'dap'.step_into()<CR>")
+map("n", "<leader>do", ":lua require'dap'.step_over()<CR>")
+map("n", "<leader>dc", ":lua require'dap'.continue()<CR>")

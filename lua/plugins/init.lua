@@ -451,7 +451,9 @@ local default_plugins = {
   --     local null_ls = require('null-ls')
 
   --     rt.setup({
-  --       server = { on_attach = null_ls.on_attach },
+  --       server = {
+  --         -- on_attach = null_ls.on_attach
+  --       },
   --     })
   --   end
   -- },
@@ -585,14 +587,6 @@ local default_plugins = {
     "rcarriga/nvim-dap-ui",
     dependencies = {
       {
-        "folke/neodev.nvim",
-        config = function()
-          require("neodev").setup({
-            library = { plugins = { "nvim-dap-ui" }, types = true },
-          })
-        end
-      },
-      {
         "mfussenegger/nvim-dap",
         dependencies = {
           {
@@ -608,7 +602,8 @@ local default_plugins = {
       }
     },
     keys = {
-      { "<leader>d", function() require("dapui").toggle({}) end, desc = "Dap UI" },
+      { "<leader>du", function() require("dapui").toggle({}) end,       desc = "Dap UI" },
+      { "<leader>db", function() require 'dap'.toggle_breakpoint() end, desc = "Dap Breakpoint" },
     },
     config = function()
       require("plugins.configs.dap.nvim-dap-ui")

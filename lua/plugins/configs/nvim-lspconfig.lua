@@ -55,14 +55,12 @@ lsp_defaults.capabilities = vim.tbl_deep_extend(
 
 for _, lsp_server in ipairs(lsp_servers) do
   lspconfig[lsp_server].setup({
-    on_attach = on_attach,
+    on_attach = lsp_defaults.on_attach,
     capabilities = lsp_defaults.capabilities,
   })
 end
 
 lspconfig.emmet_ls.setup({
-  on_attach = on_attach,
-  capabilities = lsp_defaults.capabilities,
   filetypes = { 'html', 'typescriptreact', 'javascriptreact', 'css', 'sass', 'scss', 'less', 'javascript' },
 })
 

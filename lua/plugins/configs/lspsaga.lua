@@ -42,14 +42,14 @@ local options = {
     },
   },
   lightbulb = {
-    enable = true,
+    enable = false,
     enable_in_insert = true,
     sign = true,
     sign_priority = 40,
     virtual_text = false,
   },
   hover = {
-    max_width = 0.7,
+    max_width = 0.6,
     -- open_link = 'gx',
     -- open_browser = 'microsoft-edge-stable',
   },
@@ -76,9 +76,9 @@ local options = {
   },
   outline = {
     win_position = "right",
-    -- win_with = "",
-    win_width = 40,
-    preview_width = 0.5,
+    win_with = "",
+    win_width = 30,
+    preview_width = 0.7,
     show_detail = true,
     auto_preview = true,
     auto_refresh = true,
@@ -116,7 +116,7 @@ local options = {
     frequency = 7,
   },
   ui = {
-    title = true,
+    title = false,
     border = "single", -- single, double, rounded, solid, shadow
     winblend = 0,
     expand = "",

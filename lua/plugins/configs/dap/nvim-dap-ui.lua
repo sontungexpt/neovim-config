@@ -4,13 +4,6 @@ if not dap_ui_status_ok then
   return
 end
 
-
-vim.fn.sign_define("DapBreakpoint", { text = " ", texthl = "DapBreakpointColor", linehl = "", numhl = "" })
-vim.cmd("highlight DapBreakpointColor guifg=#EC5241")
-
-vim.fn.sign_define("DapStopped", { text = "⭐️", texthl = "DapStoppedColor", linehl = "", numhl = "" })
-vim.cmd("highlight DapStoppedColor guifg=#EC5241")
-
 dapui.setup({
   icons = { expanded = "▾", collapsed = "▸" },
   mappings = {
