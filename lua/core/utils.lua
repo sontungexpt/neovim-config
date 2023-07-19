@@ -95,4 +95,31 @@ M.find_project_root = function()
   return ""
 end
 
+M.continue_debugging = function()
+  vim.schedule(function()
+    local buf_ft = vim.bo.filetype
+    local find_project_root = require('core.utils').find_project_root
+    vim.cmd('cd ' .. find_project_root())
+
+    if buf_ft == 'rust' then
+      local job_id = vim.fn.jobstart('cargo run')
+      local timeout = 2000
+      local start_time = vim.loop.hrtime()
+      while true do
+        local status = vim.fn.jobwait({ job_id }, timeout)[1]
+        if status == 0 then
+          print('cargo run success')
+          require('dap').continue()
+          break
+        end
+        local elapsed_time = vim.loop.hrtime() - start_time
+        if elapsed_time / 1e6 >= timeout then
+          print('cargo run failed')
+          break
+        end
+      end
+    end
+  end)
+end
+
 return M

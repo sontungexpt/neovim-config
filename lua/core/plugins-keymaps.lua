@@ -161,15 +161,19 @@ autocmd('LspAttach', {
   end
 })
 
+local continue_debugging = require('core.utils').continue_debugging
+
 -- dap
 map("n", "<leader>du", function() require("dapui").toggle() end)
 map("n", "<leader>db", ":lua require'dap'.toggle_breakpoint()<CR>")
 map("n", "<leader>di", ":lua require'dap'.step_into()<CR>")
 map("n", "<leader>do", ":lua require'dap'.step_over()<CR>")
-map("n", "<leader>dc", ":lua require'dap'.continue()<CR>")
+map('n', '<leader>dc', function() continue_debugging() end)
+-- map("n", "<leader>dc", ":lua require'dap'.continue()<CR>")
 map("n", "<F11>", ":lua require'dap'.step_into()<CR>")
 map("n", "<F12>", ":lua require'dap'.step_over()<CR>")
-map("n", "<F5>", ":lua require'dap'.continue()<CR>")
+map('n', '<F5>', function() continue_debugging() end)
+
 map('n', '<Leader>dr', ":lua require('dap').repl.open()<CR>")
 map('n', '<Leader>dl', ":lua require('dap').run_last()<CR>")
 map({ 'n', 'v' }, '<Leader>dh', ":lua require('dap.ui.widgets').hover()<CR>")
