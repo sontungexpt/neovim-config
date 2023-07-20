@@ -9,14 +9,14 @@ autocmd("FileType", {
 })
 
 -- Support for command nvimconfig
-autocmd("VimEnter", {
+autocmd({ "VimEnter" }, {
   pattern = { "*.lua", "*.vim" },
   callback = function()
-    local current_path = vim.fn.expand("%:p")
-    local config_path = vim.fn.stdpath "config"
-    if current_path == config_path .. "/init.lua" or
-        current_path == config_path .. "/init.vim" then
-      vim.cmd("cd " .. "%:p:h")
+    vim.cmd("cd" .. "%:p:h")
+    local find_project_root = require('core.utils').find_project_root
+    local project_root = find_project_root()
+    if project_root ~= '' then
+      vim.cmd("cd " .. project_root)
     end
   end,
 })

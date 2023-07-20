@@ -64,7 +64,7 @@ M.map = function(mode, key, map_to, opts)
   vim.keymap.set(mode, key, map_to, opts)
 end
 
-M.identified_files = {
+M.identification_files = {
   -- rust
   "Cargo.toml",
   "Cargo.lock",
@@ -79,12 +79,15 @@ M.identified_files = {
 
   -- c/c++
   "CMakeLists.txt",
+
+  -- nvim config
+  "lazy-lock.json"
 }
 
 M.find_project_root = function()
   local cwd = vim.fn.getcwd()
   while cwd ~= '/' do
-    for _, file in ipairs(M.identified_files) do
+    for _, file in ipairs(M.identification_files) do
       local file_path = vim.fn.findfile(file, cwd)
       if file_path ~= '' then
         return cwd
@@ -97,6 +100,7 @@ end
 
 M.continue_debugging = function()
   vim.schedule(function()
+    vim.cmd("cd " .. "%:p:h")
     local buf_ft = vim.bo.filetype
     local find_project_root = require('core.utils').find_project_root
     vim.cmd('cd ' .. find_project_root())
