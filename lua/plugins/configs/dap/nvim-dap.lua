@@ -43,9 +43,6 @@ dap.configurations.cpp = {
   },
 }
 
-dap.configurations.c = dap.configurations.cpp
-
-
 local get_rust_debug_filepath = function()
   local find_project_root = require('core.utils').find_project_root
   local project_dir = find_project_root()
@@ -67,10 +64,11 @@ dap.configurations.rust = {
     name = 'Debug Rust',
     request = 'launch',
     program = function()
-      local filepath = get_rust_debug_filepath()
-      return filepath
+      return get_rust_debug_filepath()
     end,
     cwd = '${workspaceFolder}',
     stopOnEntry = false,
   }
 }
+
+dap.configurations.c = dap.configurations.cpp

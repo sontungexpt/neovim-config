@@ -448,11 +448,9 @@ local default_plugins = {
   --     if not status_ok then
   --       return
   --     end
-  --     local null_ls = require('null-ls')
 
   --     rt.setup({
   --       server = {
-  --         -- on_attach = null_ls.on_attach
   --       },
   --     })
   --   end

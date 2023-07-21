@@ -43,9 +43,9 @@ local options = {
     "tailwindcss-language-server",
 
     -- debugger adapters
-    -- "debugpy",
     "codelldb",
     -- "bash-debug-adapter",
+    -- "debugpy",
 
   },
   PATH = "skip",
