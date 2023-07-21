@@ -1,7 +1,6 @@
 -- n, v, i, t = mode names
 -- default opts = 1
--- opts = 1 for noremap and silent
--- opts = 2 for not noremap and silent
+-- opts = 1 for noremap and silent opts = 2 for not noremap and silent
 -- opts = 3 for noremap and not silent
 -- opts = 4 for not noremap and not silent
 -- opts = 5 for expr and noremap and silent
@@ -60,24 +59,28 @@ map("n", "gh", "<C-w>t<C-w>K")
 -- Split horizontally
 -- map("n", "<A-s>", ":split<CR>")
 map("n", "<A-s>", function()
-  local status_ok = vim.fn.exists(':FocusSplitDown') ~= 0
-  if not status_ok then
-    vim.cmd("split")
-  else
-    vim.cmd("FocusSplitDown")
-  end
-end)
+    local status_ok = vim.fn.exists(':FocusSplitDown') ~= 0
+    if not status_ok then
+      vim.cmd("split")
+    else
+      vim.cmd("FocusSplitDown")
+    end
+  end,
+  { desc = "Split Down" }
+)
 
 -- Split vertically
 -- map("n", "<A-v>", ":vsplit<CR>")
 map("n", "<A-v>", function()
-  local status_ok = vim.fn.exists(':FocusSplitRight') ~= 0
-  if not status_ok then
-    vim.cmd("vsplit")
-  else
-    vim.cmd("FocusSplitRight")
-  end
-end)
+    local status_ok = vim.fn.exists(':FocusSplitRight') ~= 0
+    if not status_ok then
+      vim.cmd("vsplit")
+    else
+      vim.cmd("FocusSplitRight")
+    end
+  end,
+  { desc = "Split Right" }
+)
 
 --Move between windows
 map("n", "<C-h>", "<C-w>h")
