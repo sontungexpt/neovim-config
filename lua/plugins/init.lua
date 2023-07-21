@@ -41,7 +41,7 @@ local default_plugins = {
   },
 
   {
-    'nvim-focus/focus.nvim',
+    'sontungexpt/focus.nvim',
     version = '*',
     cmd = {
       "FocusDisable",

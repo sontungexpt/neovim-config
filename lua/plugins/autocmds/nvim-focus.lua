@@ -32,16 +32,6 @@ M.create_autocmds = function()
     end,
     desc = 'Disable focus autoresize for FileType',
   })
-
-  vim.api.nvim_create_autocmd({ "BufEnter", "BufRead", "BufNewFile", "WinEnter" }, {
-    group = M.augroup,
-    callback = function(_)
-      if vim.opt.signcolumn:get() == 'auto' then
-        vim.opt.signcolumn = 'yes'
-      end
-    end,
-    desc = 'Always show signcolumn when focus',
-  })
 end
 
 return M

@@ -26,6 +26,7 @@ local options = {
       list = '+1',                    -- Set the comma-saperated list for the colorcolumn
     },
     signcolumn = true,                -- Display signcolumn in the focussed window only
+    signcolumn_focused_value = 'yes',
     winhighlight = false,             -- Auto highlighting for focussed/unfocussed windows
   }
 }
