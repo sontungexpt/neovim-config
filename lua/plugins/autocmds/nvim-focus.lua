@@ -1,7 +1,22 @@
 local M = {}
 
-M.ignore_filetypes = { 'neo-tree', 'NvimTree' }
-M.ignore_buftypes = { 'nofile', 'prompt', 'popup', "NvimTree" }
+M.ignore_filetypes = {
+  'neo-tree',
+  'NvimTree',
+  "help",
+  "startify",
+  "dashboard",
+  "packer",
+}
+
+M.ignore_buftypes = {
+  'nofile',
+  'prompt',
+  'popup',
+  "NvimTree",
+  "acwrite",
+}
+
 M.augroup = vim.api.nvim_create_augroup('FocusDisable', {})
 
 M.is_installed = function()
