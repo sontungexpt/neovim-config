@@ -186,3 +186,10 @@ map('n', '<Leader>ds', function()
   local widgets = require('dap.ui.widgets')
   widgets.centered_float(widgets.scopes)
 end)
+
+-- -- nvim-focus
+-- -- -- Split horizontally
+-- map("n", "<A-s>", ":FocusSplitDown<CR>")
+
+-- -- -- Split vertically
+-- map("n", "<A-v>", ":FocusSplitRight<CR>")

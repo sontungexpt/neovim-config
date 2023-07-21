@@ -6,7 +6,11 @@ local default_plugins = {
       'nvim-tree/nvim-web-devicons',
     },
     version = 'nightly', -- optional, updated every week. (see issue #1193)
-    cmd = { "NvimTreeToggle", "NvimTreeFocus", "NvimTreeOpen" },
+    cmd = {
+      "NvimTreeToggle",
+      "NvimTreeFocus",
+      "NvimTreeOpen"
+    },
     opts = function()
       return require("plugins.configs.nvim-tree").options
     end,
@@ -33,6 +37,32 @@ local default_plugins = {
         return
       end
       copilot.setup(opts)
+    end,
+  },
+
+  {
+    'nvim-focus/focus.nvim',
+    version = '*',
+    cmd = {
+      "FocusDisable",
+      "FocusEnable",
+      "FocusSplitNicely",
+      "FocusSplitCycle",
+      "FocusSplitCycleReverse",
+      "FocusSplitLeft",
+      "FocusSplitDown",
+      "FocusSplitUp",
+      "FocusSplitRight",
+    },
+    opts = function()
+      return require("plugins.configs.nvim-focus")
+    end,
+    config = function(_, opts)
+      local status_ok, focus = pcall(require, "focus")
+      if not status_ok then
+        return
+      end
+      focus.setup(opts)
     end,
   },
 

@@ -58,10 +58,26 @@ map("n", "gv", "<C-w>t<C-w>H")
 map("n", "gh", "<C-w>t<C-w>K")
 
 -- Split horizontally
-map("n", "<A-s>", "<C-w>s")
+-- map("n", "<A-s>", ":split<CR>")
+map("n", "<A-s>", function()
+  local status_ok = vim.fn.exists(':FocusSplitDown') ~= 0
+  if not status_ok then
+    vim.cmd("split")
+  else
+    vim.cmd("FocusSplitDown")
+  end
+end)
 
 -- Split vertically
-map("n", "<A-v>", "<C-w>v")
+-- map("n", "<A-v>", ":vsplit<CR>")
+map("n", "<A-v>", function()
+  local status_ok = vim.fn.exists(':FocusSplitRight') ~= 0
+  if not status_ok then
+    vim.cmd("vsplit")
+  else
+    vim.cmd("FocusSplitRight")
+  end
+end)
 
 --Move between windows
 map("n", "<C-h>", "<C-w>h")

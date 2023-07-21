@@ -2,5 +2,8 @@
   "diagnostics.globals": [
     "vim",
     "on_attach"
-  ]
+  ],
+    "diagnostics.disable": [
+        "undefined-field"
+    ]
 }
