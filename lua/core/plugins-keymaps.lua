@@ -27,8 +27,13 @@ map("n", "<leader>fp", "<esc>:Telescope project<cr>")
 map("n", "<leader>fc", "<esc>:Telescope neoclip<cr>")
 
 -- Todo-comments
--- map("n", "<Leader>ft", "<esc>:TodoTelescope<cr>")
-map("n", "<Leader>ft", "<esc>:TodoQuickFix<cr>")
+map("n", "<Leader>ft", function()
+  if (vim.bo.buftype == "quickfix") then
+    vim.cmd("bd")
+  else
+    vim.cmd("TodoQuickFix")
+  end
+end)
 
 map("n", "[t", function()
   local status_ok, todo_comments = pcall(require, "todo-comments")
@@ -186,10 +191,3 @@ map('n', '<Leader>ds', function()
   local widgets = require('dap.ui.widgets')
   widgets.centered_float(widgets.scopes)
 end)
-
--- -- nvim-focus
--- -- -- Split horizontally
--- map("n", "<A-s>", ":FocusSplitDown<CR>")
-
--- -- -- Split vertically
--- map("n", "<A-v>", ":FocusSplitRight<CR>")

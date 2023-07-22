@@ -19,23 +19,41 @@ dapui.setup({
   layouts = {
     {
       elements = {
-        -- Elements can be strings or table with id and size keys.
-        { id = "scopes", size = 0.25 },
-        "breakpoints",
-        "stacks",
-        "watches",
+        {
+          id = "scopes",
+          size = 0.25
+        },
+        {
+          id = "breakpoints",
+          size = 0.25
+        },
+        {
+          id = "stacks",
+          size = 0.25
+        },
+        {
+          id = "watches",
+          size = 0.25
+        }
       },
-      size = 40, -- 40 columns
       position = "left",
+      size = 40
     },
+
     {
       elements = {
-        "repl",
-        "console",
+        {
+          id = "repl",
+          size = 0.5
+        },
+        {
+          id = "console",
+          size = 0.5
+        }
       },
-      size = 0.25, -- 25% of total lines
       position = "bottom",
-    },
+      size = 10
+    }
   },
   floating = {
     max_height = nil,  -- These can be integers or a float between 0 and 1.
