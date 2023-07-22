@@ -21,9 +21,9 @@ local options = {
       height = 0.9,
       preview_cutoff = 120
     },
-    prompt_prefix = "   ",
-    selection_caret = "  ",
-    entry_prefix = "  ",
+    prompt_prefix = " ",
+    selection_caret = " ",
+    entry_prefix = " ",
     initial_mode = "insert",
     selection_strategy = "reset",
     sorting_strategy = "ascending",
@@ -43,18 +43,29 @@ local options = {
         ["<A-q>"] = require("telescope.actions").close,
         ["<C-j>"] = require("telescope.actions").move_selection_next,
         ["<C-k>"] = require("telescope.actions").move_selection_previous,
+        ["<C-e>"] = require("telescope.actions").results_scrolling_up,
+        ["<C-y>"] = require("telescope.actions").results_scrolling_down,
+        ["<C-u>"] = require("telescope.actions").preview_scrolling_up,
+        ["<C-d>"] = require("telescope.actions").preview_scrolling_down,
       },
       n = {
         ["q"] = require("telescope.actions").close,
         ["<esc>"] = require("telescope.actions").close,
         ["<C-q>"] = require("telescope.actions").close,
         ["<A-q>"] = require("telescope.actions").close,
+        ["<C-e>"] = require("telescope.actions").results_scrolling_up,
+        ["<C-y>"] = require("telescope.actions").results_scrolling_down,
+        ["<C-u>"] = require("telescope.actions").preview_scrolling_up,
+        ["<C-d>"] = require("telescope.actions").preview_scrolling_down,
       },
     },
     file_ignore_patterns = {
       "^.git/",
       "^./.git/",
       "^node_modules/",
+      "^build/",
+      "^dist/",
+      "^target/",
       "^vendor/",
     },
     file_sorter = require 'telescope.sorters'.get_fuzzy_file,
@@ -73,6 +84,9 @@ local options = {
     buffer_previewer_maker = require 'telescope.previewers'.buffer_previewer_maker,
   },
   pickers = {
+    planets = {
+      show_pluto = true,
+    },
     find_files = {
       hidden = true
     }

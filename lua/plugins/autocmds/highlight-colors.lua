@@ -11,7 +11,7 @@ M.create_autocmds = function()
 
   vim.api.nvim_create_autocmd('VimEnter', {
     group = vim.api.nvim_create_augroup('HighlightColorsAutoGroup', {}),
-    pattern = '',
+    pattern = '*',
     command = 'HighlightColorsOn',
   })
 end
