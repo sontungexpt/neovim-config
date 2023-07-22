@@ -35,7 +35,7 @@ if copilot_status_ok then
 end
 
 -- nvim-focus
-local nvim_focus_status_ok, nvim_focus = pcall(require, 'plugins.autocmds.nvim-focus')
-if nvim_focus_status_ok then
-  nvim_focus.create_autocmds()
-end
+-- local nvim_focus_status_ok, nvim_focus = pcall(require, 'plugins.autocmds.nvim-focus')
+-- if nvim_focus_status_ok then
+--   nvim_focus.create_autocmds()
+-- end
