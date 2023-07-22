@@ -63,7 +63,7 @@ null_ls.setup({
     diagnostics.clang_check,
 
     --Code Spell Checker
-    diagnostics.codespell.with({ args = { "--ignore-words-list=Tung,to,Tongue" } }),
+    diagnostics.codespell.with({ args = { "--ignore-words-list=Tung" } }),
   },
 
   -- Configure format on save

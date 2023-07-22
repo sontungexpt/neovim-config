@@ -1,41 +1,16 @@
--- mason
-local mason_status_ok, mason = pcall(require, 'plugins.autocmds.mason')
-if mason_status_ok then
-  mason.create_autocmds()
-end
+local plugin_filenames = {
+  'mason',
+  'treesitter',
+  'git-conflict',
+  'highlight-colors',
+  'lspconfig',
+  'copilot',
+  --'nvim-focus',
+}
 
--- treesitter
-local treesitter_status_ok, treesitter = pcall(require, 'plugins.autocmds.treesitter')
-if treesitter_status_ok then
-  treesitter.create_autocmds()
+for _, plugin_name in ipairs(plugin_filenames) do
+  local plugin_status_ok, plugin = pcall(require, 'plugins.autocmds.' .. plugin_name)
+  if plugin_status_ok then
+    plugin.create_autocmds()
+  end
 end
-
--- git conflict
-local git_conflict_status_ok, git_conflict = pcall(require, 'plugins.autocmds.git-conflict')
-if git_conflict_status_ok then
-  git_conflict.create_autocmds()
-end
-
--- highlight_colors
-local highlight_colors_status_ok, highlight_colors = pcall(require, 'plugins.autocmds.highlight-colors')
-if highlight_colors_status_ok then
-  highlight_colors.create_autocmds()
-end
-
--- lspconfig
-local lspconfig_status_ok, lspconfig = pcall(require, 'plugins.autocmds.lspconfig')
-if lspconfig_status_ok then
-  lspconfig.create_autocmds()
-end
-
---copilot
-local copilot_status_ok, copilot = pcall(require, 'plugins.autocmds.copilot')
-if copilot_status_ok then
-  copilot.create_autocmds()
-end
-
--- nvim-focus
--- local nvim_focus_status_ok, nvim_focus = pcall(require, 'plugins.autocmds.nvim-focus')
--- if nvim_focus_status_ok then
---   nvim_focus.create_autocmds()
--- end

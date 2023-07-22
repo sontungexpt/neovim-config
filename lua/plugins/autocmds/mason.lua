@@ -7,12 +7,12 @@ end
 
 M.print_installed_packages = function()
   local installed_packages = M.get_installed_packages()
-  print("Installed mason packages: " .. table.concat(installed_packages, ", "))
+  print("Installed mason packages:\n" .. '  -  ' .. table.concat(installed_packages, "\n  -  "))
 end
 
 M.print_ensured_packages = function()
   local ensured_packages = require('plugins.configs.mason').ensure_installed
-  print("Ensured mason packages: " .. table.concat(ensured_packages, ", "))
+  print("Ensured mason packages:\n" .. '  -  ' .. table.concat(ensured_packages, "\n  -  "))
 end
 
 M.get_installed_packages = function()
