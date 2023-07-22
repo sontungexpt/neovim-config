@@ -21,9 +21,9 @@ local options = {
       height = 0.9,
       preview_cutoff = 120
     },
-    prompt_prefix = " ",
-    selection_caret = " ",
-    entry_prefix = " ",
+    prompt_prefix = "  ",
+    selection_caret = "  ",
+    entry_prefix = "  ",
     initial_mode = "insert",
     selection_strategy = "reset",
     sorting_strategy = "ascending",
