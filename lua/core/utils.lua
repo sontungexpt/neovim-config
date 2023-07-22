@@ -126,4 +126,47 @@ M.continue_debugging = function()
   end)
 end
 
+M.open_url = function()
+  local url_pattern = "(https?://[%w-_%.%?%.:/%+=&]+%f[^%w])"
+  local cursor_pos = vim.api.nvim_win_get_cursor(0)
+  local cursor_col = cursor_pos[2]
+  local line = vim.api.nvim_get_current_line()
+
+  local url_to_open = nil
+
+  -- get the first url in the line
+  local start_pos, end_pos, url = line:find(url_pattern)
+
+  while url do
+    url_to_open = url
+    -- if the url under cursor, then break
+    if cursor_col >= start_pos and cursor_col <= end_pos then
+      break
+    end
+
+    -- find the next url
+    start_pos, end_pos, url = line:find(url_pattern, end_pos + 1)
+  end
+
+  if url_to_open then
+    local shell_safe_url = vim.fn.shellescape(url_to_open)
+    local result = ""
+    if vim.loop.os_uname().sysname == "Linux" then
+      result = vim.cmd("silent! !xdg-open " .. shell_safe_url)
+    elseif vim.loop.os_uname().sysname == "Darwin" then
+      result = vim.cmd("silent! !open " .. shell_safe_url)
+    elseif vim.loop.os_uname().sysname == "Windows" then
+      result = vim.cmd("silent! !start " .. shell_safe_url)
+    else
+      print("Unknown operating system.")
+    end
+    if result == "" then
+      print("Opening " .. url_to_open .. " successful")
+    else
+      print("Opening " .. url_to_open .. " failed: " .. result)
+    end
+  end
+end
+
+
 return M

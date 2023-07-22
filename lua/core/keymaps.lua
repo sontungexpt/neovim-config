@@ -36,7 +36,15 @@ map({ "n", "v" }, "cd", "<esc>:cd %:p:h<cr>:pwd<cr>", 3)
 map({ "n", "v" }, "Q", "<esc>:bd<cr>")
 
 --Open the link with default browser
-map({ "n", "v" }, "gx", "<esc>:execute 'silent! !xdg-open ' . shellescape(expand('<cWORD>'))<cr>")
+-- map({ "n", "v" }, "gx", "<esc>:execute 'silent! !xdg-open ' . shellescape(expand('<cWORD>'))<cr>")
+map({ "n", "v" }, "gx", function()
+  local status_ok, utils = pcall(require, "core.utils")
+  if status_ok then
+    utils.open_url()
+  else
+    print("Utils not found")
+  end
+end)
 
 --Clean searching
 map({ "n", "v" }, "C", "<esc>:noh<cr>:set ignorecase<cr>")

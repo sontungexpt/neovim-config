@@ -94,7 +94,7 @@ local options = {
   extensions = {
     media_files = {
       filetypes = { "png", "webp", "jpg", "jpeg", "webm", "pdf", "mp4" },
-      find_cmd = "rg", -- find command (defaults to `fd`)
+      find_cmd = "rg",
     },
   },
 }

@@ -9,7 +9,7 @@ local default_plugins = {
     cmd = {
       "NvimTreeToggle",
       "NvimTreeFocus",
-      "NvimTreeOpen"
+      "NvimTreeOpen",
     },
     opts = function()
       return require("plugins.configs.nvim-tree").options
@@ -205,6 +205,10 @@ local default_plugins = {
   {
     "akinsho/toggleterm.nvim",
     version = '*',
+    cmd = {
+      "ToggleTerm",
+      "ToggleTermToggleAll",
+    },
     keys = { "<C-t>" },
     config = function()
       require("plugins.configs.toggleterm")
