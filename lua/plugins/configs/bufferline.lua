@@ -282,7 +282,10 @@ M.opts = {
       bold = true,
       italic = true,
     },
-    error_diagnostic = { fg = M.colors.red, bg = { attribute = "bg", highlight = "TabLine" }, },
+    error_diagnostic = {
+      fg = M.colors.red,
+      bg = { attribute = "bg", highlight = "TabLine" },
+    },
     error_diagnostic_visible = {
       fg = M.colors.red,
       bg = { attribute = "bg", highlight = "TabLine" },

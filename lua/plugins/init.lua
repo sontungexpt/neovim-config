@@ -1,6 +1,23 @@
 -- All plugins have lazy=true by default,to load a plugin on startup just lazy=false
 local default_plugins = {
   {
+    'sontungexpt/buffer-closer',
+    -- dir = '/home/stilux/Data/My-Workspaces/nvim-extensions/buffer-closer',
+    -- dev = false,
+    event = "VeryLazy",
+    opts = function()
+      return require("plugins.configs.buffer-closer")
+    end,
+    config = function(_, opts)
+      local status_ok, buffer_closer = pcall(require, "buffer-closer")
+      if not status_ok then
+        return
+      end
+      buffer_closer.setup(opts)
+    end,
+  },
+
+  {
     "nvim-tree/nvim-tree.lua",
     dependencies = {
       'nvim-tree/nvim-web-devicons',
@@ -127,9 +144,6 @@ local default_plugins = {
   {
     "nvim-treesitter/nvim-treesitter",
     dependencies = {
-      --'p00f/nvim-ts-rainbow',
-
-      -- The new plugins
       'HiPhish/nvim-ts-rainbow2',
     },
     init = function()

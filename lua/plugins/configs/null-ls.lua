@@ -48,7 +48,20 @@ null_ls.setup({
     }),
 
     -- Lua
-    formatting.stylua.with({ extra_args = { "--style", "{IndentWidth: 2}" } }),
+    -- formatting.stylua.with({ extra_args = { "--style", "{IndentWidth: 2}" } }),
+    -- use stylelua.toml instead if it exists
+    formatting.stylua.with({
+      extra_args = function(params)
+        local Path = require("plenary.path")
+        local stylelua_toml = Path:new(params.root .. "/" .. "stylua.toml")
+
+        if stylelua_toml:exists() and stylelua_toml:is_file() then
+          return { "--config-path", stylelua_toml:absolute() }
+        end
+        return { "--style", "{IndentWidth: 2}" }
+      end,
+    }),
+
 
     --Shell
     formatting.shfmt,

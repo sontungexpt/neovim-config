@@ -12,6 +12,11 @@ cmd("filetype plugin indent on")
 cmd("syntax enable")
 cmd("syntax on")
 
+g.vimdoc_filetype_map = {
+  ['lua'] = 'lua',
+  ['vim'] = 'vim'
+}
+
 -- disable nvim intro
 options.shortmess:append "sI"
 

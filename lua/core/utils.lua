@@ -159,6 +159,7 @@ M.open_url = function()
       result = vim.cmd("silent! !start " .. shell_safe_url)
     else
       print("Unknown operating system.")
+      return
     end
     if result == "" then
       print("Opening " .. url_to_open .. " successful")
