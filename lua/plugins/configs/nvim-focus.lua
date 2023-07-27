@@ -45,9 +45,7 @@ local options = {
       "NvimTree",
       "acwrite",
     },
-    bufnames = {},
   },
-
 }
 
 return options
