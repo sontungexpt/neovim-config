@@ -1,6 +1,6 @@
 local options = {
-  min_remaining_buffers = 1,
-  retirement_minutes = 1,        -- can not be less than 1
+  min_remaining_buffers = 2,     -- can not be less than 1
+  retirement_minutes = 3,        -- can not be less than 1
   checking_interval_minutes = 1, -- can not be less than 1
 
   excluded = {

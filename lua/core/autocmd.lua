@@ -61,3 +61,9 @@ autocmd({ "BufEnter", "BufRead", "BufNewFile" }, {
     vim.diagnostic.disable(args.buf)
   end
 })
+
+autocmd({ "BufEnter", "BufRead", "BufNewFile" }, {
+  group = vim.api.nvim_create_augroup('EnableSyntax', {}),
+  pattern = "*.html",
+  command = "set filetype=html",
+})

@@ -3,7 +3,7 @@ local default_plugins = {
   {
     'sontungexpt/buffer-closer',
     -- dir = '/home/stilux/Data/My-Workspaces/nvim-extensions/buffer-closer',
-    -- dev = false,
+    -- dev = true,
     event = "VeryLazy",
     opts = function()
       return require("plugins.configs.buffer-closer")
