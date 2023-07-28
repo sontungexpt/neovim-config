@@ -1,3 +1,8 @@
+local status_ok, dap = pcall(require, 'dap')
+if not status_ok then
+  return
+end
+
 local dap_ui_status_ok, dapui = pcall(require, "dapui")
 
 if not dap_ui_status_ok then
@@ -68,3 +73,7 @@ dapui.setup({
     max_type_length = nil, -- Can be integer or nil.
   },
 })
+
+dap.listeners.after.event_initialized['dapui_config'] = dapui.open
+dap.listeners.before.event_terminated['dapui_config'] = dapui.close
+dap.listeners.before.event_exited['dapui_config'] = dapui.close
