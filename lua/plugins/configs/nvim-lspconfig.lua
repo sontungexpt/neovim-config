@@ -22,9 +22,6 @@ local lsp_servers = {
   {
     name = "cssls",
   },
-  -- {
-  --   name = "denols",
-  -- },
   {
     name = "eslint",
   },
@@ -51,11 +48,8 @@ local lsp_servers = {
       },
     }
   },
-  -- {
-  --   name = "vuels",
-  -- },
 
-  --rust // uncomment below when you don't use packages rust-tools.nvim
+  --rust
   {
     name = "rust_analyzer",
     config = {
@@ -65,30 +59,10 @@ local lsp_servers = {
     }
   },
 
-  -- vim
-  -- {
-  --   name = "vimls",
-  -- },
-
   -- lua
   {
     name = "lua_ls",
   },
-
-  -- go
-  -- {
-  --   name = "golangci_lint_ls",
-  -- },
-
-  -- ruby
-  -- {
-  --   name = "ruby_ls",
-  -- },
-
-  -- java
-  -- {
-  --   name = "jdtls",
-  -- },
 
   -- python
   {
