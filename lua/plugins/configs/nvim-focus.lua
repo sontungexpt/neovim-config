@@ -42,7 +42,6 @@ local options = {
       'nofile',
       'prompt',
       'popup',
-      "NvimTree",
       "acwrite",
     },
   },
