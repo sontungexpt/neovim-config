@@ -3,58 +3,51 @@ local autocmd = vim.api.nvim_create_autocmd
 -- Don't list quickfix buffers
 autocmd("FileType", {
   pattern = "qf",
-  callback = function()
-    vim.opt_local.buflisted = false
-  end,
+  command = "set nobuflisted"
 })
 
--- Support for command nvimconfig
+-- auto change directory to config folder
 autocmd({ "VimEnter" }, {
-  pattern = { "*.lua", "*.vim" },
+  pattern = { "*" },
   callback = function()
-    vim.cmd("cd" .. "%:p:h")
-    local find_project_root = require('core.utils').find_project_root
-    local project_root = find_project_root()
-    if project_root ~= '' then
-      vim.cmd("cd " .. project_root)
+    local file_path = vim.fn.expand('%:p:h')
+    vim.api.nvim_set_current_dir(file_path)
+    local nvim_folder = vim.fn.expand('~/.config/nvim')
+
+    if file_path:match('^' .. nvim_folder) then
+      vim.api.nvim_set_current_dir(nvim_folder)
     end
-  end,
+  end
+
 })
 
 --Remove whitespace on save
 autocmd('BufWritePre', {
-  pattern = '',
+  pattern = '*',
   command = ":%s/\\s\\+$//e"
 })
 
 -- Move to relative line number when in visual mode
 autocmd('ModeChanged', {
-  pattern = '',
+  pattern = '*',
   command = "if mode() == 'v' | set relativenumber | else | set norelativenumber | endif"
 })
 
---Enable syntax for .js files
--- autocmd({ "BufEnter", "BufRead", "BufNewFile" }, {
---   group = vim.api.nvim_create_augroup('EnableSyntax', {}),
---   pattern = { "*.js", "*.jsx" },
---   command = "set filetype=javascriptreact",
--- })
-
 --Enable syntax for .json files
-autocmd({ "BufEnter", "BufRead", "BufNewFile" }, {
+autocmd({ "BufEnter" }, {
   group = vim.api.nvim_create_augroup('EnableSyntax', {}),
   pattern = { "*.json" },
   command = "set filetype=jsonc",
 })
 
 --Enable syntax for .rasi files
-autocmd({ "BufEnter", "BufRead", "BufNewFile" }, {
+autocmd({ "BufEnter" }, {
   group = vim.api.nvim_create_augroup('EnableSyntax', {}),
   pattern = { "*.rasi" },
   command = "set filetype=rasi",
 })
 
-autocmd({ "BufEnter", "BufRead", "BufNewFile" }, {
+autocmd({ "BufEnter" }, {
   group = vim.api.nvim_create_augroup('EnableSyntax', {}),
   pattern = "*.env",
   callback = function(args)
@@ -62,7 +55,7 @@ autocmd({ "BufEnter", "BufRead", "BufNewFile" }, {
   end
 })
 
-autocmd({ "BufEnter", "BufRead", "BufNewFile" }, {
+autocmd({ "BufEnter" }, {
   group = vim.api.nvim_create_augroup('EnableSyntax', {}),
   pattern = "*.html",
   command = "set filetype=html",
