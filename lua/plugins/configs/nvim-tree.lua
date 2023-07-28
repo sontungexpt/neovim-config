@@ -136,7 +136,16 @@ M.options = {
         },
       },
     },
-    special_files = { "Cargo.toml", "Makefile", "README.md", "readme.md" },
+    special_files = {
+      "README.md",
+      "LICENSE",
+      "Cargo.toml",
+      "Makefile",
+      "package.json",
+      "package-lock.json",
+      "go.mod",
+      "go.sum",
+    },
     symlink_destination = true,
   },
   hijack_directories = {
@@ -186,6 +195,8 @@ M.options = {
       "*.exe",
     },
     exclude = {
+      "test.txt",
+
       ".config",
       ".gitignore",
       ".gitconfig",

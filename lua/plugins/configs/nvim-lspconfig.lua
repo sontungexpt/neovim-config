@@ -6,43 +6,94 @@ end
 
 local lsp_servers = {
   -- bash
-  "bashls",
+  {
+    name = "bashls",
+  },
 
   -- cpp
-  "clangd",
-  "cmake",
+  {
+    name = "clangd",
+  },
+  {
+    name = "cmake",
+  },
 
   -- dev
-  "cssls",
-  -- "denols",
-  "eslint",
-  "html",
-  "jsonls",
-  "tailwindcss",
-  "tsserver",
-  "emmet_ls",
-  -- "vuels",
+  {
+    name = "cssls",
+  },
+  -- {
+  --   name = "denols",
+  -- },
+  {
+    name = "eslint",
+  },
+  {
+    name = "html",
+  },
+  {
+    name = "jsonls",
+  },
+  {
+    name = "tailwindcss",
+  },
+  {
+    name = "tsserver",
+  },
+  {
+    name = "emmet_ls",
+    config = {
+      filetypes = {
+        'html', 'typescriptreact',
+        'javascriptreact', 'css', 'sass',
+        'scss', 'less', 'javascript',
+        'typescript', 'vue', 'vue-html', 'jsx', 'tsx'
+      },
+    }
+  },
+  -- {
+  --   name = "vuels",
+  -- },
 
   --rust // uncomment below when you don't use packages rust-tools.nvim
-  "rust_analyzer",
+  {
+    name = "rust_analyzer",
+    config = {
+      cmd = {
+        "rustup", "run", "stable", "rust-analyzer",
+      },
+    }
+  },
 
   -- vim
-  -- "vimls",
+  -- {
+  --   name = "vimls",
+  -- },
 
   -- lua
-  "lua_ls",
+  {
+    name = "lua_ls",
+  },
 
   -- go
-  -- "golangci_lint_ls",
+  -- {
+  --   name = "golangci_lint_ls",
+  -- },
 
   -- ruby
-  -- "ruby_ls",
+  -- {
+  --   name = "ruby_ls",
+  -- },
 
   -- java
-  -- "jdtls",
+  -- {
+  --   name = "jdtls",
+  -- },
 
   -- python
-  "pyright",
+  {
+    name = "pyright",
+  },
 }
 
 local function on_attach(client, bufnr)
@@ -107,16 +158,9 @@ local capabilities = vim.tbl_deep_extend(
 
 capabilities.offsetEncoding = { "utf-8" }
 
-for _, lsp_server in ipairs(lsp_servers) do
-  lspconfig[lsp_server].setup({
-    on_attach = on_attach,
-    capabilities = capabilities,
-  })
+for _, server in ipairs(lsp_servers) do
+  local config = server.config or {}
+  config.on_attach = config.on_attach or on_attach
+  config.capabilities = config.capabilities or capabilities
+  lspconfig[server.name].setup(config)
 end
-
-lspconfig.emmet_ls.setup({
-  on_attach = on_attach,
-  capabilities = capabilities,
-  filetypes = { 'html', 'typescriptreact', 'javascriptreact', 'css', 'sass', 'scss', 'less', 'javascript', 'typescript',
-    'vue', 'vue-html', 'jsx', 'tsx' },
-})
