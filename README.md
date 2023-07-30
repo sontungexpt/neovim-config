@@ -20,3 +20,4 @@
 13. Fold with nvim-ufo
 14. Generate comment with comment
 15. Syntax highlight with treesitter, autopairs, nvim-ts-autotag, ts-rainbow
+16. Debug with dap, dapui
