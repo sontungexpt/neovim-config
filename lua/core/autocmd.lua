@@ -12,7 +12,8 @@ autocmd({ "VimEnter" }, {
   callback = function()
     local file_path = vim.fn.expand('%:p:h')
     vim.api.nvim_set_current_dir(file_path)
-    local nvim_folder = vim.fn.expand('~/.config/nvim')
+
+    local nvim_folder = vim.fn.stdpath("config")
 
     if file_path:match('^' .. nvim_folder) then
       vim.api.nvim_set_current_dir(nvim_folder)
@@ -49,14 +50,14 @@ autocmd({ "BufEnter" }, {
 
 autocmd({ "BufEnter" }, {
   group = vim.api.nvim_create_augroup('EnableSyntax', {}),
-  pattern = "*.env",
-  callback = function(args)
-    vim.diagnostic.disable(args.buf)
-  end
+  pattern = "*.html",
+  command = "set filetype=html",
 })
 
 autocmd({ "BufEnter" }, {
   group = vim.api.nvim_create_augroup('EnableSyntax', {}),
-  pattern = "*.html",
-  command = "set filetype=html",
+  pattern = "*.env",
+  callback = function(args)
+    vim.diagnostic.disable(args.buf)
+  end
 })
