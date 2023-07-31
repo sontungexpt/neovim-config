@@ -580,7 +580,7 @@ local default_plugins = {
   {
     'jose-elias-alvarez/null-ls.nvim',
     dependencies = {
-      { 'nvim-lua/plenary.nvim' },
+      'nvim-lua/plenary.nvim',
     },
     event = "BufWritePre",
     config = function()
