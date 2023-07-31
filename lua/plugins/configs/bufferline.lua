@@ -9,8 +9,7 @@ M.opts = {
     -- | "ordinal" | "buffer_id" | "both" | function({ ordinal, id, lower, raise }): string,
     numbers = "none",
     close_command = "bdelete %d",
-    -- right_mouse_command = "Bdelete! %d",
-    right_mouse_command = nil,
+    right_mouse_command = "vsplit | buffer %d",
     left_mouse_command = "buffer %d",
     middle_mouse_command = "bdelete %d",
     indicator = {
