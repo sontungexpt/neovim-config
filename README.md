@@ -3,6 +3,13 @@
 - The neovim config use lazy plugins manager
 - The config completely wrote in lua
 
+## Previews
+
+![preview1](./docs/readme/preview1.png)
+
+![preview2](./docs/readme/preview2.png)
+
+
 ## Features
 
 1. Plugins manager with lazy
