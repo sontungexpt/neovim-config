@@ -29,21 +29,39 @@ null_ls.setup({
     }),
 
     --rust
+    --
     formatting.rustfmt.with({
       extra_args = function(params)
-        local Path = require("plenary.path")
-        local cargo_toml = Path:new(params.root .. "/" .. "Cargo.toml")
+        -- local Path = require("plenary.path")
+        -- local rustfmt_toml = Path:new(params.root .. "/" .. ".rustfmt.toml")
+        -- if rustfmt_toml:exists() and rustfmt_toml:is_file() then
+        --   return { "--config-path=" .. rustfmt_toml:absolute() }
+        -- end
 
+        -- return { "--edition=2021" }
+        local Path = require("plenary.path")
+
+        local extra_args = { "--edition=2021" }
+
+        -- Check Cargo.toml for edition
+        local cargo_toml = Path:new(params.root .. "/Cargo.toml")
         if cargo_toml:exists() and cargo_toml:is_file() then
           for _, line in ipairs(cargo_toml:readlines()) do
             local edition = line:match([[^edition%s*=%s*%"(%d+)%"]])
             if edition then
-              return { "--edition=" .. edition }
+              table.insert(extra_args, "--edition=" .. edition)
+              break
             end
           end
         end
-        -- default edition when we don't find `Cargo.toml` or the `edition` in it.
-        return { "--edition=2021" }
+
+        -- Check rustfmt.toml for config
+        local rustfmt_toml = Path:new(params.root .. "/" .. ".rustfmt.toml")
+        if rustfmt_toml:exists() and rustfmt_toml:is_file() then
+          table.insert(extra_args, "--config-path=" .. rustfmt_toml:absolute())
+        end
+
+        return extra_args
       end,
     }),
 

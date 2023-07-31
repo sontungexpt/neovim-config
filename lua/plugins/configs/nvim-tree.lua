@@ -187,7 +187,6 @@ M.options = {
       "dotfiles",
       "yay",
       "build",
-      ".git",
       ".husky",
       ".rbenv",
       "*.pdf",
@@ -201,6 +200,9 @@ M.options = {
       ".gitignore",
       ".gitconfig",
       -- "target",
+
+      -- rust files
+      ".rustfmt.toml",
 
 
       -- project specific files
