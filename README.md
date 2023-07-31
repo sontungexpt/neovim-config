@@ -9,7 +9,6 @@
 
 ![preview2](./docs/readme/preview2.png)
 
-
 ## Features
 
 1. Plugins manager with lazy
@@ -28,3 +27,5 @@
 14. Generate comment with comment
 15. Syntax highlight with treesitter, autopairs, nvim-ts-autotag, ts-rainbow
 16. Debug with dap, dapui
+17. Automatically close unused buffers with buffer-closer
+18. Color picker with ccc
