@@ -11,8 +11,6 @@ local options = {
     "shfmt",
     "shellcheck",
 
-    -- rust
-    "rust-analyzer",
     -- "rustfmt",
     "taplo",
 
