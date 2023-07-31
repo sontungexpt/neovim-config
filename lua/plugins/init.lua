@@ -60,6 +60,7 @@ local default_plugins = {
   {
     'sontungexpt/focus.nvim',
     version = '*',
+    event = "BufAdd",
     cmd = {
       "FocusDisable",
       "FocusEnable",

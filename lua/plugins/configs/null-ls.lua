@@ -29,7 +29,6 @@ null_ls.setup({
     }),
 
     --rust
-    --
     formatting.rustfmt.with({
       extra_args = function(params)
         local Path = require("plenary.path")
