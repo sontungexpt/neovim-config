@@ -57,7 +57,8 @@ This is my personal neovim configuration, written completely in Lua. It uses a l
 To use this configuration, you will need to have Neovim 0.5 or higher installed. You can then clone this repository and copy the init.lua file to your ~/.config/nvim/ directory.
 
 ```bash
-git clone https://github.com/sontungexpt/neovim-config.git ~/.config/nvim
+mv ~/.config/nvim ~/.config/nvim.bak && git clone
+https://github.com/sontungexpt/neovim-config.git && mv neovim-config ~/.config/nvim
 ```
 
 You will also need to install the plugins. This configuration uses the lazy.nvim plugin manager to manage plugins. You can install the plugins by opening Neovim and running :Lazy.
