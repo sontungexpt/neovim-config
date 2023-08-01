@@ -19,10 +19,12 @@ local default_plugins = {
 
   {
     "nvim-tree/nvim-tree.lua",
+    version = "*",
+    lazy = false,
     dependencies = {
-      'nvim-tree/nvim-web-devicons',
+      "nvim-tree/nvim-web-devicons",
     },
-    version = 'nightly', -- optional, updated every week. (see issue #1193)
+    -- version = 'nightly', -- optional, updated every week. (see issue #1193)
     cmd = {
       "NvimTreeToggle",
       "NvimTreeFocus",
@@ -339,7 +341,7 @@ local default_plugins = {
     init = function()
       require("core.utils").lazy_load "lualine.nvim"
 
-      local has_lspconfig, lspconfig = pcall(require, "lspconfig")
+      local has_lspconfig, _ = pcall(require, "lspconfig")
 
       if has_lspconfig then
         require("core.utils").lazy_load "nvim-lspconfig"
@@ -352,7 +354,7 @@ local default_plugins = {
 
   {
     'akinsho/bufferline.nvim',
-    version = "v3.*",
+    version = "*",
     dependencies = {
       'nvim-tree/nvim-web-devicons',
     },
@@ -383,7 +385,7 @@ local default_plugins = {
   {
     "kylechui/nvim-surround",
     version = "*", -- Use for stability; omit to use `main` branch for the latest features
-    event = "VeryLazy",
+    -- event = "VeryLazy",
     keys = {
       "ys",
       "ds",
