@@ -64,6 +64,7 @@ end
 
 local my_servers = function()
   local buf_clients = vim.lsp.get_active_clients()
+  local buf_ft = vim.bo.filetype
 
   if not buf_clients or #buf_clients == 0 then
     return "NO LSP  "
@@ -73,7 +74,10 @@ local my_servers = function()
   for _, client in pairs(buf_clients) do
     local client_name = client.name
     if client_name ~= "null-ls" and client_name ~= "copilot" then
-      table.insert(server_names, client_name)
+      local supports_ft = vim.tbl_contains(client.config.filetypes or {}, buf_ft)
+      if supports_ft then
+        table.insert(server_names, client_name)
+      end
     end
   end
 
@@ -88,7 +92,6 @@ local my_servers = function()
     }
 
     local get_null_ls_sources = function(methods, name_only)
-      local buf_ft = vim.bo.filetype
       local sources = require("null-ls.sources")
       local available_sources = sources.get_available(buf_ft)
 
