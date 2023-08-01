@@ -8,6 +8,10 @@ This is my personal neovim configuration, written completely in Lua. It uses a l
 
 ![preview2](./docs/readme/preview2.png)
 
+![preview3](./docs/readme/preview3.png)
+
+![preview4](./docs/readme/preview4.png)
+
 ## Features
 
 - **Lazy Plugin Manager:** The configuration uses a lazy plugin manager to ensure fast startup times, even with a large number of plugins installed.
@@ -45,6 +49,8 @@ This is my personal neovim configuration, written completely in Lua. It uses a l
 - **Automatically Close Unused Buffers with Buffer-closer:** It automatically closes unused buffers with buffer-closer, a plugin that provides a simple and easy-to-use interface for managing buffers.
 
 - **Color Picker with ccc:** It includes a color picker with ccc, a fast and lightweight color picker plugin.
+
+- **Automatically resize Window with focus:** It automatically resizes windows with resize, a plugin that provides a simple and easy-to-use interface for resizing windows.
 
 ## Installation
 
