@@ -20,11 +20,9 @@ local default_plugins = {
   {
     "nvim-tree/nvim-tree.lua",
     version = "*",
-    lazy = false,
     dependencies = {
       "nvim-tree/nvim-web-devicons",
     },
-    -- version = 'nightly', -- optional, updated every week. (see issue #1193)
     cmd = {
       "NvimTreeToggle",
       "NvimTreeFocus",
@@ -235,11 +233,12 @@ local default_plugins = {
   {
     'numToStr/Comment.nvim',
     keys = {
-      "gc",
-      "gb",
-    },
-    event = {
-      "ModeChanged"
+      { "gcc", mode = "n",          desc = "Comment toggle current line" },
+      { "gc",  mode = { "n", "o" }, desc = "Comment toggle linewise" },
+      { "gc",  mode = "x",          desc = "Comment toggle linewise (visual)" },
+      { "gbc", mode = "n",          desc = "Comment toggle current block" },
+      { "gb",  mode = { "n", "o" }, desc = "Comment toggle blockwise" },
+      { "gb",  mode = "x",          desc = "Comment toggle blockwise (visual)" },
     },
     opts = function()
       return require("plugins.configs.comment")
@@ -385,7 +384,6 @@ local default_plugins = {
   {
     "kylechui/nvim-surround",
     version = "*", -- Use for stability; omit to use `main` branch for the latest features
-    -- event = "VeryLazy",
     keys = {
       "ys",
       "ds",
@@ -482,8 +480,6 @@ local default_plugins = {
       mason.setup(opts)
 
       require("plugins.autocmds.mason").create_user_commands()
-
-      vim.g.mason_binaries_list = opts.ensure_installed
     end,
   },
 
