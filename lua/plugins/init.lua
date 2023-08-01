@@ -338,6 +338,12 @@ local default_plugins = {
     },
     init = function()
       require("core.utils").lazy_load "lualine.nvim"
+
+      local has_lspconfig, lspconfig = pcall(require, "lspconfig")
+
+      if has_lspconfig then
+        require("core.utils").lazy_load "nvim-lspconfig"
+      end
     end,
     config = function()
       require("plugins.configs.lualine")
@@ -488,22 +494,6 @@ local default_plugins = {
       require "plugins.configs.nvim-lspconfig"
     end,
   },
-
-  -- {
-  --   'simrat39/rust-tools.nvim',
-  --   ft = { 'rust' },
-  --   config = function()
-  --     local status_ok, rt = pcall(require, "rust-tools")
-  --     if not status_ok then
-  --       return
-  --     end
-
-  --     rt.setup({
-  --       server = {
-  --       },
-  --     })
-  --   end
-  -- },
 
   {
     "glepnir/lspsaga.nvim",
