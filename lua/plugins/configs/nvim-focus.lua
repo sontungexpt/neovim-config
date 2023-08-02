@@ -31,15 +31,12 @@ local options = {
 	},
 	exclude = {
 		filetypes = {
-			"neo-tree",
 			"NvimTree",
-			"help",
 			"startify",
 			"dashboard",
-			"packer",
+			"TelescopePrompt",
 		},
 		buftypes = {
-			"nofile",
 			"prompt",
 			"popup",
 			"acwrite",

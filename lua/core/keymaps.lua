@@ -39,7 +39,7 @@ map({ "n", "v" }, "Q", "<esc>:bd<cr>")
 -- map({ "n", "v" }, "gx", "<esc>:execute 'silent! !xdg-open ' . shellescape(expand('<cWORD>'))<cr>")
 map({ "n", "v" }, "gx", function()
 	require("core.utils").open_url()
-end)
+end, { desc = "Open URL under cursor" })
 
 --Clean searching
 map({ "n", "v" }, "C", "<esc>:noh<cr>:set ignorecase<cr>")
@@ -63,22 +63,14 @@ map("n", "gh", "<C-w>t<C-w>K")
 -- map("n", "<A-s>", ":split<CR>")
 map("n", "<A-s>", function()
 	local status_ok = vim.fn.exists(":FocusSplitDown") ~= 0
-	if not status_ok then
-		vim.api.nvim_command("split")
-	else
-		vim.api.nvim_command("FocusSplitDown")
-	end
+	vim.api.nvim_command(status_ok and "FocusSplitDown" or "split")
 end, { desc = "Split Down" })
 
 -- Split vertically
 -- map("n", "<A-v>", ":vsplit<CR>")
 map("n", "<A-v>", function()
 	local status_ok = vim.fn.exists(":FocusSplitRight") ~= 0
-	if not status_ok then
-		vim.api.nvim_command("vsplit")
-	else
-		vim.api.nvim_command("FocusSplitRight")
-	end
+	vim.api.nvim_command(status_ok and "FocusSplitRight" or "vsplit")
 end, { desc = "Split Right" })
 
 --Move between windows

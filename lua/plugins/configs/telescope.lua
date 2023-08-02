@@ -47,6 +47,8 @@ local options = {
 				["<A-q>"] = require("telescope.actions").close,
 				["<C-j>"] = require("telescope.actions").move_selection_next,
 				["<C-k>"] = require("telescope.actions").move_selection_previous,
+				["<Tab>"] = require("telescope.actions").move_selection_next,
+				["<S-Tab>"] = require("telescope.actions").move_selection_previous,
 				["<C-e>"] = require("telescope.actions").results_scrolling_up,
 				["<C-y>"] = require("telescope.actions").results_scrolling_down,
 				["<C-u>"] = require("telescope.actions").preview_scrolling_up,
@@ -62,7 +64,8 @@ local options = {
 				["<C-y>"] = require("telescope.actions").results_scrolling_down,
 				["<C-u>"] = require("telescope.actions").preview_scrolling_up,
 				["<C-d>"] = require("telescope.actions").preview_scrolling_down,
-				-- ["<C-b>"] = no_actions,
+				["<Tab>"] = require("telescope.actions").move_selection_next,
+				["<S-Tab>"] = require("telescope.actions").move_selection_previous,
 			},
 		},
 		file_ignore_patterns = {

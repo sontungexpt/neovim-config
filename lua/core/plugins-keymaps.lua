@@ -15,30 +15,27 @@ map({ "n", "i", "v", "c" }, "<C-b>", function()
 		return
 	end
 	vim.api.nvim_command("NvimTreeToggle")
-end)
+end, { desc = "Toggle NvimTree" })
 
 -- kill terminal buffer
 map("t", "<C-q>", "<C-\\><C-n>:q!<cr>")
 map("t", "<A-q>", "<C-\\><C-n>:q!<cr>")
 
 --Telescope
-map({ "n", "i", "v" }, "<C-p>", "<esc>:Telescope find_files<cr>")
-map("n", "<leader>fm", "<esc>:Telescope media_files<cr>")
-map("n", "<leader>fg", "<esc>:Telescope live_grep<cr>")
-map("n", "<C-f>", "<esc>:Telescope live_grep<cr>")
-map("n", "<leader>fb", "<esc>:Telescope buffers<cr>")
-map("n", "<leader>fh", "<esc>:Telescope help_tags<cr>")
-map("n", "<leader>fp", "<esc>:Telescope project<cr>")
-map("n", "<leader>fc", "<esc>:Telescope neoclip<cr>")
+map({ "n", "i", "v" }, "<C-p>", "<esc>:Telescope find_files<cr>", { desc = "Find files" })
+map("n", "<leader>fm", "<esc>:Telescope media_files<cr>", { desc = "Find media files" })
+map("n", "<leader>fg", "<esc>:Telescope live_grep<cr>", { desc = "Find word" })
+map("n", "<C-f>", "<esc>:Telescope live_grep<cr>", { desc = "Find word" })
+map("n", "<leader>fb", "<esc>:Telescope buffers<cr>", { desc = "Find buffers" })
+map("n", "<leader>fh", "<esc>:Telescope help_tags<cr>", { desc = "Find help tags" })
+map("n", "<leader>fp", "<esc>:Telescope project<cr>", { desc = "Find project" })
+-- map("n", "<leader>fc", "<esc>:Telescope neoclip<cr>", { desc = "Find clipboard history" })
 
 -- Todo-comments
 map("n", "<Leader>ft", function()
-	if vim.bo.buftype == "quickfix" then
-		vim.cmd("bd")
-	else
-		vim.cmd("TodoQuickFix")
-	end
-end)
+	local buftype = vim.api.nvim_buf_get_option(0, "buftype")
+	vim.api.nvim_command(buftype == "quickfix" and "bd" or "TodoQuickFix")
+end, { desc = "Toggle todo quickfix" })
 
 map("n", "[t", function()
 	local status_ok, todo_comments = pcall(require, "todo-comments")
@@ -176,10 +173,10 @@ local continue_debugging = require("plugins.configs.dap.utils").continue_debuggi
 -- dap
 map("n", "<leader>du", function()
 	require("dapui").toggle()
-end)
-map("n", "<leader>db", ":lua require'dap'.toggle_breakpoint()<CR>")
-map("n", "<leader>di", ":lua require'dap'.step_into()<CR>")
-map("n", "<leader>do", ":lua require'dap'.step_over()<CR>")
+end, { desc = "Toggle DAP UI" })
+map("n", "<leader>db", ":lua require'dap'.toggle_breakpoint()<CR>", { desc = "Toggle breakpoint" })
+map("n", "<leader>di", ":lua require'dap'.step_into()<CR>", { desc = "Step into" })
+map("n", "<leader>do", ":lua require'dap'.step_over()<CR>", { desc = "Step over" })
 map("n", "<leader>dc", function()
 	continue_debugging()
 end, { desc = "Continue or start debugging" })
@@ -190,8 +187,8 @@ map(
 	{ desc = "Disconnect from debugger" }
 )
 -- map("n", "<leader>dc", ":lua require'dap'.continue()<CR>")
-map("n", "<F11>", ":lua require'dap'.step_into()<CR>")
-map("n", "<F12>", ":lua require'dap'.step_over()<CR>")
+map("n", "<F11>", ":lua require'dap'.step_into()<CR>", { desc = "Step into" })
+map("n", "<F12>", ":lua require'dap'.step_over()<CR>", { desc = "Step over" })
 map("n", "<F5>", function()
 	continue_debugging()
 end, { desc = "Continue or start debugging" })
@@ -202,18 +199,18 @@ map(
 	{ desc = "Disconnect from debugger" }
 )
 
-map("n", "<Leader>dr", ":lua require('dap').repl.open()<CR>")
-map("n", "<Leader>dl", ":lua require('dap').run_last()<CR>")
-map({ "n", "v" }, "<Leader>dh", ":lua require('dap.ui.widgets').hover()<CR>")
-map({ "n", "v" }, "<Leader>dp", ":lua require('dap.ui.widgets').preview()<CR>")
+map("n", "<Leader>dr", ":lua require('dap').repl.open()<CR>", { desc = "Open REPL" })
+map("n", "<Leader>dl", ":lua require('dap').run_last()<CR>", { desc = "Run last" })
+map({ "n", "v" }, "<Leader>dh", ":lua require('dap.ui.widgets').hover()<CR>", { desc = "Hover" })
+map({ "n", "v" }, "<Leader>dp", ":lua require('dap.ui.widgets').preview()<CR>", { desc = "Preview" })
 map("n", "<Leader>df", function()
 	local widgets = require("dap.ui.widgets")
 	widgets.centered_float(widgets.frames)
-end)
+end, { desc = "Frames" })
 map("n", "<Leader>ds", function()
 	local widgets = require("dap.ui.widgets")
 	widgets.centered_float(widgets.scopes)
-end)
+end, { desc = "Scopes" })
 
 -- wilder (this is more keymap to use wilder easily)
 -- default keymap is set in plugins.configs.wilder

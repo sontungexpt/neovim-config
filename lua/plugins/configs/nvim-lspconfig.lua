@@ -4,6 +4,8 @@ if not status_ok then
 	return
 end
 
+local lsp = vim.lsp
+
 local lsp_servers = {
 	-- bash
 	{
@@ -124,24 +126,23 @@ local function on_attach(client, bufnr)
 		},
 	}
 
-	vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+	lsp.handlers["textDocument/signatureHelp"] = lsp.with(lsp.handlers.signature_help, {
 		border = "single",
 		focusable = false,
 		relative = "cursor",
 	})
 
-	vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "single" })
+	lsp.handlers["textDocument/hover"] = lsp.with(lsp.handlers.hover, { border = "single" })
 
-	vim.lsp.handlers["textDocument/publishDiagnostics"] =
-		vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-			underline = true,
-			virtual_text = {
-				spacing = 5,
-				severity_limit = "Warning",
-				prefix = "●",
-			},
-			update_in_insert = true,
-		})
+	lsp.handlers["textDocument/publishDiagnostics"] = lsp.with(lsp.diagnostic.on_publish_diagnostics, {
+		underline = true,
+		virtual_text = {
+			spacing = 5,
+			severity_limit = "Warning",
+			prefix = "●",
+		},
+		update_in_insert = true,
+	})
 end
 
 local capabilities = vim.tbl_deep_extend(
