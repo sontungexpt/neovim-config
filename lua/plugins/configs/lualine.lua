@@ -63,27 +63,25 @@ local copilot = function()
 end
 
 local my_servers = function()
-	local buf_clients = vim.lsp.get_active_clients()
-	local buf_ft = vim.bo.filetype
+	local buf_clients = vim.lsp.buf_get_clients()
 
 	if not buf_clients or #buf_clients == 0 then
 		return "NO LSP  "
 	end
+
 	local server_names = {}
 
 	for _, client in pairs(buf_clients) do
 		local client_name = client.name
 		if client_name ~= "null-ls" and client_name ~= "copilot" then
-			local supports_ft = vim.tbl_contains(client.config.filetypes or {}, buf_ft)
-			if supports_ft then
-				table.insert(server_names, client_name)
-			end
+			table.insert(server_names, client_name)
 		end
 	end
 
 	local has_null_ls, null_ls = pcall(require, "null-ls")
 
 	if has_null_ls then
+		local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
 		local null_ls_methods = {
 			null_ls.methods.DIAGNOSTICS,
 			null_ls.methods.DIAGNOSTICS_ON_OPEN,
