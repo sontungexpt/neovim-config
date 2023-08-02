@@ -4,22 +4,23 @@ if not status_ok then
 	return
 end
 
-local merge_tb = vim.tbl_deep_extend
-
 local colors = require("core.default-config").ui.colors
 
 wilder.setup {
 	modes = { ":", "/", "?" },
-	next_key = "<Tab>",
-	previous_key = "<S-Tab>",
-	accept_key = "<M-Tab>",
-	reject_key = "<S-Tab><M-Tab>",
+	next_key = "<C-j>",
+	previous_key = "<C-k>",
 	enable_cmdline_enter = 1,
 }
 
-wilder.set_option("use_python_remote_plugin", 0)
+local set_option = wilder.set_option
+local popupmenu_devicons = wilder.popupmenu_devicons
+local popupmenu_renderer = wilder.popupmenu_renderer
+local popupmenu_palette_theme = wilder.popupmenu_palette_theme
 
-wilder.set_option("pipeline", {
+set_option("use_python_remote_plugin", 0)
+
+set_option("pipeline", {
 	wilder.branch(
 		wilder.cmdline_pipeline {
 			fuzzy = 1,
@@ -40,7 +41,7 @@ local general_style = {
 	prompt_position = "top",
 	-- set to 1 to reverse the order of the list, use in combination with 'prompt_position'
 	reverse = 0,
-	left = { " ", wilder.popupmenu_devicons() },
+	left = { " ", popupmenu_devicons() },
 	highlighter = {
 		wilder.lua_fzy_highlighter(),
 	},
@@ -53,23 +54,21 @@ local general_style = {
 	},
 }
 
-wilder.set_option(
+local create_styles = function(styles)
+	vim.tbl_deep_extend("force", general_style or {}, styles or {})
+end
+
+set_option(
 	"renderer",
 	wilder.renderer_mux {
-		[":"] = wilder.popupmenu_renderer(
-			wilder.popupmenu_palette_theme(merge_tb("force", general_style or {}, {
-				left = { " ", "  ", wilder.popupmenu_devicons() },
-			}))
-		),
-		["/"] = wilder.popupmenu_renderer(
-			wilder.popupmenu_palette_theme(merge_tb("force", general_style or {}, {
-				left = { " ", "  ", wilder.popupmenu_devicons() },
-			}))
-		),
-		["?"] = wilder.popupmenu_renderer(
-			wilder.popupmenu_palette_theme(merge_tb("force", general_style or {}, {
-				left = { " ", "  ", wilder.popupmenu_devicons() },
-			}))
-		),
+		[":"] = popupmenu_renderer(popupmenu_palette_theme(create_styles {
+			left = { " ", "  ", popupmenu_devicons() },
+		})),
+		["/"] = popupmenu_renderer(popupmenu_palette_theme(create_styles {
+			left = { " ", "  ", popupmenu_devicons() },
+		})),
+		["?"] = popupmenu_renderer(popupmenu_palette_theme(create_styles {
+			left = { " ", "  ", popupmenu_devicons() },
+		})),
 	}
 )
