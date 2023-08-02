@@ -1,3 +1,7 @@
+local no_actions = function(prompt_bufnr)
+	print("No actions available!")
+end
+
 local options = {
 	extensions_list = {
 		"media_files",
@@ -47,6 +51,7 @@ local options = {
 				["<C-y>"] = require("telescope.actions").results_scrolling_down,
 				["<C-u>"] = require("telescope.actions").preview_scrolling_up,
 				["<C-d>"] = require("telescope.actions").preview_scrolling_down,
+				["<C-b>"] = no_actions,
 			},
 			n = {
 				["q"] = require("telescope.actions").close,
@@ -57,6 +62,7 @@ local options = {
 				["<C-y>"] = require("telescope.actions").results_scrolling_down,
 				["<C-u>"] = require("telescope.actions").preview_scrolling_up,
 				["<C-d>"] = require("telescope.actions").preview_scrolling_down,
+				["<C-b>"] = no_actions,
 			},
 		},
 		file_ignore_patterns = {

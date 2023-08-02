@@ -28,6 +28,6 @@ M.ui = {
 }
 
 -- config for lazy.nvim startup options
-M.lazy_nvim = require("plugins.configs.lazy_nvim")
+M.lazy_nvim = require("plugins.configs.lazy-nvim")
 
 return M

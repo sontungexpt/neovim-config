@@ -138,7 +138,15 @@ lualine.setup {
 		theme = "tokyonight",
 		component_separators = component_separators,
 		section_separators = section_separators,
-		disabled_filetypes = { "lazy", "floaterm", "NvimTree", "packer", "mason", "toggleterm" },
+		disabled_filetypes = {
+			"lazy",
+			"floaterm",
+			"NvimTree",
+			"mason",
+			"toggleterm",
+			"help",
+			"TelescopePrompt",
+		},
 		always_divide_middle = true,
 	},
 	sections = {

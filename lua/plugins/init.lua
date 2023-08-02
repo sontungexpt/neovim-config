@@ -4,7 +4,6 @@ local default_plugins = {
 		"sontungexpt/buffer-closer",
 		-- dir = '/home/stilux/Data/My-Workspaces/nvim-extensions/buffer-closer',
 		-- dev = true,
-		-- event = "VeryLazy",
 		event = "UIEnter",
 		opts = function()
 			return require("plugins.configs.buffer-closer")
@@ -330,18 +329,42 @@ local default_plugins = {
 	},
 
 	{
+		"neovim/nvim-lspconfig",
+		init = function()
+			require("core.utils").lazy_load("nvim-lspconfig")
+		end,
+		config = function()
+			require("plugins.configs.nvim-lspconfig")
+		end,
+	},
+
+	{
+		"glepnir/lspsaga.nvim",
+		event = "LspAttach",
+		dependencies = {
+			{ "nvim-tree/nvim-web-devicons" },
+			--Please make sure you install markdown and markdown_inline parser
+			{ "nvim-treesitter/nvim-treesitter" },
+		},
+		opts = function()
+			return require("plugins.configs.lspsaga")
+		end,
+		config = function(_, opts)
+			local status_ok, lspsaga = pcall(require, "lspsaga")
+			if not status_ok then
+				return
+			end
+			lspsaga.setup(opts)
+		end,
+	},
+
+	{
 		"nvim-lualine/lualine.nvim",
 		dependencies = {
 			"nvim-tree/nvim-web-devicons",
 		},
 		init = function()
 			require("core.utils").lazy_load("lualine.nvim")
-
-			local has_lspconfig, _ = pcall(require, "lspconfig")
-
-			if has_lspconfig then
-				require("core.utils").lazy_load("nvim-lspconfig")
-			end
 		end,
 		config = function()
 			require("plugins.configs.lualine")
@@ -488,37 +511,6 @@ local default_plugins = {
 	},
 
 	{
-		"neovim/nvim-lspconfig",
-		init = function()
-			require("core.utils").lazy_load("nvim-lspconfig")
-		end,
-		config = function()
-			require("plugins.configs.nvim-lspconfig")
-		end,
-	},
-
-	{
-		"glepnir/lspsaga.nvim",
-		event = "LspAttach",
-		dependencies = {
-			{ "nvim-tree/nvim-web-devicons" },
-			--Please make sure you install markdown and markdown_inline parser
-			{ "nvim-treesitter/nvim-treesitter" },
-		},
-		opts = function()
-			return require("plugins.configs.lspsaga")
-		end,
-		config = function(_, opts)
-			local status_ok, lspsaga = pcall(require, "lspsaga")
-			if not status_ok then
-				return
-			end
-
-			lspsaga.setup(opts)
-		end,
-	},
-
-	{
 		"hrsh7th/nvim-cmp",
 		event = "InsertEnter",
 		dependencies = {
@@ -571,10 +563,11 @@ local default_plugins = {
 
 	{
 		"jose-elias-alvarez/null-ls.nvim",
+
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 		},
-		event = "BufWritePre",
+		event = { "BufWritePre", "LspAttach" },
 		config = function()
 			require("plugins.configs.null-ls")
 		end,
