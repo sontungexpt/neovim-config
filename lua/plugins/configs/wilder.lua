@@ -8,8 +8,8 @@ local colors = require("core.default-config").ui.colors
 
 wilder.setup {
 	modes = { ":", "/", "?" },
-	next_key = "<C-j>",
-	previous_key = "<C-k>",
+	next_key = "<Tab>",
+	previous_key = "<S-Tab>",
 	enable_cmdline_enter = 1,
 }
 
@@ -55,7 +55,7 @@ local general_style = {
 }
 
 local create_styles = function(styles)
-	vim.tbl_deep_extend("force", general_style or {}, styles or {})
+	return vim.tbl_deep_extend("force", general_style or {}, styles or {})
 end
 
 set_option(

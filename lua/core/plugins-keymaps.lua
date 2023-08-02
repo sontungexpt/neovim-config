@@ -214,3 +214,8 @@ map("n", "<Leader>ds", function()
 	local widgets = require("dap.ui.widgets")
 	widgets.centered_float(widgets.scopes)
 end)
+
+-- wilder (this is more keymap to use wilder easily)
+-- default keymap is set in plugins.configs.wilder
+map("c", "<C-j>", "wilder#in_context() ? wilder#next() : '<Tab>'", 5)
+map("c", "<C-k>", "wilder#in_context() ? wilder#previous() : '<S-Tab>'", 5)
