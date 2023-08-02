@@ -9,7 +9,11 @@ M.opts = {
 		-- | "ordinal" | "buffer_id" | "both" | function({ ordinal, id, lower, raise }): string,
 		numbers = "none",
 		close_command = "bdelete %d",
-		right_mouse_command = "vsplit | buffer %d",
+		right_mouse_command = function(bufnr)
+			local status_ok = vim.fn.exists(":FocusSplitRight") ~= 0
+			vim.api.nvim_command(status_ok and "FocusSplitRight" or "vsplit")
+			vim.api.nvim_command("buffer " .. bufnr)
+		end,
 		left_mouse_command = "buffer %d",
 		middle_mouse_command = "bdelete %d",
 		indicator = {
