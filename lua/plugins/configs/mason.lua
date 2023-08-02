@@ -1,76 +1,75 @@
 local options = {
-  -- auto sync the installed packages with ensure_installed when open nvim
-  auto_sync = true,
-  ensure_installed = {
-    -- lua
-    "lua-language-server",
-    "stylua",
+	-- auto sync the installed packages with ensure_installed when open nvim
+	auto_sync = true,
+	ensure_installed = {
+		-- lua
+		"lua-language-server",
+		"stylua",
 
-    -- bash
-    "bash-language-server",
-    "shfmt",
-    "shellcheck",
+		-- bash
+		"bash-language-server",
+		"shfmt",
+		"shellcheck",
 
-    -- "rustfmt",
-    "taplo",
+		-- "rustfmt",
+		"taplo",
 
-    -- c++
-    "clangd",
-    "clang-format",
-    "cmake-language-server",
-    "cmakelang",
+		-- c++
+		"clangd",
+		"clang-format",
+		"cmake-language-server",
+		"cmakelang",
 
-    -- python
-    "pyright",
-    "autopep8",
-    "flake8",
-    -- "blade-formatter",
+		-- python
+		"pyright",
+		"autopep8",
+		"flake8",
+		-- "blade-formatter",
 
-    -- others
-    "codespell",
+		-- others
+		"codespell",
 
-    -- web-developments
-    "prettier",
-    "eslint-lsp",
-    "css-lsp",
-    "html-lsp",
-    "typescript-language-server",
-    -- "deno",
-    "emmet-ls",
-    "json-lsp",
-    "tailwindcss-language-server",
+		-- web-developments
+		"prettier",
+		"eslint-lsp",
+		"css-lsp",
+		"html-lsp",
+		"typescript-language-server",
+		-- "deno",
+		"emmet-ls",
+		"json-lsp",
+		"tailwindcss-language-server",
 
-    -- debugger adapters
-    "codelldb",
-    -- "bash-debug-adapter",
-    -- "debugpy",
-
-  },
-  PATH = "skip",
-  ui = {
-    check_outdated_packages_on_open = true,
-    -- Accepts same border values as |nvim_open_win()|.
-    border = "single",
-    width = 0.8,
-    height = 0.9,
-    icons = {
-      package_pending = " ",
-      package_installed = " ",
-      package_uninstalled = " ",
-    },
-    keymaps = {
-      toggle_server_expand = "<CR>",
-      install_server = "i",
-      update_server = "u",
-      check_server_version = "c",
-      update_all_servers = "U",
-      check_outdated_servers = "C",
-      uninstall_server = "X",
-      cancel_installation = "<C-c>",
-      apply_language_filter = "<C-f>",
-    },
-  },
-  max_concurrent_installers = 10,
+		-- debugger adapters
+		"codelldb",
+		-- "bash-debug-adapter",
+		-- "debugpy",
+	},
+	PATH = "skip",
+	ui = {
+		check_outdated_packages_on_open = true,
+		-- Accepts same border values as |nvim_open_win()|.
+		border = "single",
+		width = 0.8,
+		height = 0.9,
+		icons = {
+			package_pending = " ",
+			package_installed = " ",
+			package_uninstalled = " ",
+		},
+		keymaps = {
+			toggle_server_expand = "<CR>",
+			install_server = "i",
+			update_server = "u",
+			check_server_version = "c",
+			update_all_servers = "U",
+			check_outdated_servers = "C",
+			uninstall_server = "X",
+			cancel_installation = "<C-c>",
+			apply_language_filter = "<C-f>",
+		},
+	},
+	max_concurrent_installers = 10,
 }
 
 return options

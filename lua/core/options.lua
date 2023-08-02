@@ -13,12 +13,12 @@ cmd("syntax enable")
 cmd("syntax on")
 
 g.vimdoc_filetype_map = {
-  ['lua'] = 'lua',
-  ['vim'] = 'vim'
+	["lua"] = "lua",
+	["vim"] = "vim",
 }
 
 -- disable nvim intro
-options.shortmess:append "sI"
+options.shortmess:append("sI")
 
 -- disable netrw for nvimtree
 g.loaded_netrw = 1
@@ -65,7 +65,7 @@ options.updatetime = 300 --default 4000ms
 
 --Line wrapping
 options.wrap = false
-options.whichwrap:append "<>[]hl"
+options.whichwrap:append("<>[]hl")
 
 --No backup files
 options.swapfile = false
@@ -82,32 +82,31 @@ options.cursorcolumn = true
 
 --Appearance
 options.termguicolors = true
-cmd [[set t_Co=256]]
+cmd([[set t_Co=256]])
 options.background = "dark"
 options.signcolumn = "yes"
 
 --List
 options.list = true
-cmd [[set listchars=tab:▸\ ,trail:·]]
+cmd([[set listchars=tab:▸\ ,trail:·]])
 
 --Clipboard
 options.clipboard:append { "unnamedplus" }
-cmd [[set go+=a]]
+cmd([[set go+=a]])
 
 --Split window
 options.splitbelow = true
 options.splitright = true
 
-
 options.wildignore:append {
-  "*.pyc",
-  "*.o",
-  "*.obj",
-  "*.svn",
-  "*.swp",
-  "*.class",
-  "*.hg",
-  "*.DS_Store",
-  "*.min.*",
-  "node_modules"
+	"*.pyc",
+	"*.o",
+	"*.obj",
+	"*.svn",
+	"*.swp",
+	"*.class",
+	"*.hg",
+	"*.DS_Store",
+	"*.min.*",
+	"node_modules",
 }

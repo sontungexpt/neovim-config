@@ -38,12 +38,12 @@ map({ "n", "v" }, "Q", "<esc>:bd<cr>")
 --Open the link with default browser
 -- map({ "n", "v" }, "gx", "<esc>:execute 'silent! !xdg-open ' . shellescape(expand('<cWORD>'))<cr>")
 map({ "n", "v" }, "gx", function()
-  local status_ok, utils = pcall(require, "core.utils")
-  if status_ok then
-    utils.open_url()
-  else
-    print("Utils not found")
-  end
+	local status_ok, utils = pcall(require, "core.utils")
+	if status_ok then
+		utils.open_url()
+	else
+		print("Utils not found")
+	end
 end)
 
 --Clean searching
@@ -67,28 +67,24 @@ map("n", "gh", "<C-w>t<C-w>K")
 -- Split horizontally
 -- map("n", "<A-s>", ":split<CR>")
 map("n", "<A-s>", function()
-    local status_ok = vim.fn.exists(':FocusSplitDown') ~= 0
-    if not status_ok then
-      vim.cmd("split")
-    else
-      vim.cmd("FocusSplitDown")
-    end
-  end,
-  { desc = "Split Down" }
-)
+	local status_ok = vim.fn.exists(":FocusSplitDown") ~= 0
+	if not status_ok then
+		vim.cmd("split")
+	else
+		vim.cmd("FocusSplitDown")
+	end
+end, { desc = "Split Down" })
 
 -- Split vertically
 -- map("n", "<A-v>", ":vsplit<CR>")
 map("n", "<A-v>", function()
-    local status_ok = vim.fn.exists(':FocusSplitRight') ~= 0
-    if not status_ok then
-      vim.cmd("vsplit")
-    else
-      vim.cmd("FocusSplitRight")
-    end
-  end,
-  { desc = "Split Right" }
-)
+	local status_ok = vim.fn.exists(":FocusSplitRight") ~= 0
+	if not status_ok then
+		vim.cmd("vsplit")
+	else
+		vim.cmd("FocusSplitRight")
+	end
+end, { desc = "Split Right" })
 
 --Move between windows
 map("n", "<C-h>", "<C-w>h")

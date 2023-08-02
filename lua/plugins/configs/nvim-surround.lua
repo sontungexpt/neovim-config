@@ -1,5 +1,5 @@
 local options = {
-  -- Your favorite settings
+	-- Your favorite settings
 }
 
 return options
