@@ -1,3 +1,6 @@
+local api = vim.api
+local fn = vim.fn
+
 local M = {}
 
 M.load_config = function()
@@ -6,14 +9,14 @@ M.load_config = function()
 end
 
 M.lazy_load = function(plugin)
-	vim.api.nvim_create_autocmd({ "BufRead", "BufWinEnter", "BufNewFile" }, {
-		group = vim.api.nvim_create_augroup("BeLazyOnFileOpen" .. plugin, {}),
+	api.nvim_create_autocmd({ "BufRead", "BufWinEnter", "BufNewFile" }, {
+		group = api.nvim_create_augroup("BeLazyOnFileOpen" .. plugin, {}),
 		callback = function()
 			local file = vim.fn.expand("%")
 			local condition = file ~= "NvimTree_1" and file ~= "[lazy]" and file ~= ""
 
 			if condition then
-				vim.api.nvim_del_augroup_by_name("BeLazyOnFileOpen" .. plugin)
+				api.nvim_del_augroup_by_name("BeLazyOnFileOpen" .. plugin)
 
 				-- dont defer for treesitter as it will show slow highlighting
 				-- This deferring only happens only when we do "nvim filename"
@@ -22,7 +25,7 @@ M.lazy_load = function(plugin)
 						require("lazy").load { plugins = plugin }
 
 						if plugin == "nvim-lspconfig" then
-							vim.cmd("silent! do FileType")
+							api.nvim_command("silent! do FileType")
 						end
 					end, 0)
 				else
@@ -32,9 +35,7 @@ M.lazy_load = function(plugin)
 		end,
 	})
 end
-
--- default opts = 1
--- opts = 1 for noremap and silent
+-- default opts = 1 opts = 1 for noremap and silent
 -- opts = 2 for not noremap and silent
 -- opts = 3 for noremap and not silent
 -- opts = 4 for not noremap and not silent
@@ -84,53 +85,25 @@ M.identification_files = {
 	"lazy-lock.json",
 }
 
-M.find_project_root = function()
-	local cwd = vim.fn.getcwd()
-	while cwd ~= "/" do
+M.find_project_root = function(current_path)
+	current_path = current_path or fn.expand("%:p:h")
+	while current_path ~= "/" do
 		for _, file in ipairs(M.identification_files) do
-			local file_path = vim.fn.findfile(file, cwd)
+			local file_path = fn.findfile(file, current_path)
 			if file_path ~= "" then
-				return cwd
+				return current_path
 			end
 		end
-		cwd = vim.fn.fnamemodify(cwd, ":h")
+		current_path = fn.fnamemodify(current_path, ":h")
 	end
 	return ""
 end
 
-M.continue_debugging = function()
-	vim.schedule(function()
-		vim.cmd("cd " .. "%:p:h")
-		local buf_ft = vim.bo.filetype
-		local find_project_root = require("core.utils").find_project_root
-		vim.cmd("cd " .. find_project_root())
-
-		if buf_ft == "rust" then
-			local job_id = vim.fn.jobstart("cargo run")
-			local timeout = 2000
-			local start_time = vim.loop.hrtime()
-			while true do
-				local status = vim.fn.jobwait({ job_id }, timeout)[1]
-				if status == 0 then
-					print("cargo run success")
-					require("dap").continue()
-					break
-				end
-				local elapsed_time = vim.loop.hrtime() - start_time
-				if elapsed_time / 1e6 >= timeout then
-					print("cargo run failed")
-					break
-				end
-			end
-		end
-	end)
-end
-
 M.open_url = function()
 	local url_pattern = "(https?://[%w-_%.%?%.:/%+=&]+%f[^%w])"
-	local cursor_pos = vim.api.nvim_win_get_cursor(0)
+	local cursor_pos = api.nvim_win_get_cursor(0)
 	local cursor_col = cursor_pos[2]
-	local line = vim.api.nvim_get_current_line()
+	local line = api.nvim_get_current_line()
 
 	local url_to_open = nil
 
@@ -152,11 +125,11 @@ M.open_url = function()
 		local shell_safe_url = vim.fn.shellescape(url_to_open)
 		local result = ""
 		if vim.loop.os_uname().sysname == "Linux" then
-			result = vim.cmd("silent! !xdg-open " .. shell_safe_url)
+			result = api.nvim_command("silent! !xdg-open " .. shell_safe_url)
 		elseif vim.loop.os_uname().sysname == "Darwin" then
-			result = vim.cmd("silent! !open " .. shell_safe_url)
+			result = api.nvim_command("silent! !open " .. shell_safe_url)
 		elseif vim.loop.os_uname().sysname == "Windows" then
-			result = vim.cmd("silent! !start " .. shell_safe_url)
+			result = api.nvim_command("silent! !start " .. shell_safe_url)
 		else
 			print("Unknown operating system.")
 			return

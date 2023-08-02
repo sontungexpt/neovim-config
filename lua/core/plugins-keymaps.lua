@@ -166,7 +166,7 @@ autocmd("LspAttach", {
 	end,
 })
 
-local continue_debugging = require("core.utils").continue_debugging
+local continue_debugging = require("plugins.configs.dap.utils").continue_debugging
 
 -- dap
 map("n", "<leader>du", function()
@@ -178,12 +178,24 @@ map("n", "<leader>do", ":lua require'dap'.step_over()<CR>")
 map("n", "<leader>dc", function()
 	continue_debugging()
 end, { desc = "Continue or start debugging" })
+map(
+	"n",
+	"<leader>dd",
+	":lua require 'dap'.disconnect()<CR>:lua require'dap'.close()<CR>",
+	{ desc = "Disconnect from debugger" }
+)
 -- map("n", "<leader>dc", ":lua require'dap'.continue()<CR>")
 map("n", "<F11>", ":lua require'dap'.step_into()<CR>")
 map("n", "<F12>", ":lua require'dap'.step_over()<CR>")
 map("n", "<F5>", function()
 	continue_debugging()
-end)
+end, { desc = "Continue or start debugging" })
+map(
+	"n",
+	"<F4>",
+	":lua require 'dap'.disconnect()<CR>:lua require'dap'.close()<CR>",
+	{ desc = "Disconnect from debugger" }
+)
 
 map("n", "<Leader>dr", ":lua require('dap').repl.open()<CR>")
 map("n", "<Leader>dl", ":lua require('dap').run_last()<CR>")

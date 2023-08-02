@@ -38,12 +38,7 @@ map({ "n", "v" }, "Q", "<esc>:bd<cr>")
 --Open the link with default browser
 -- map({ "n", "v" }, "gx", "<esc>:execute 'silent! !xdg-open ' . shellescape(expand('<cWORD>'))<cr>")
 map({ "n", "v" }, "gx", function()
-	local status_ok, utils = pcall(require, "core.utils")
-	if status_ok then
-		utils.open_url()
-	else
-		print("Utils not found")
-	end
+	require("core.utils").open_url()
 end)
 
 --Clean searching
@@ -69,9 +64,9 @@ map("n", "gh", "<C-w>t<C-w>K")
 map("n", "<A-s>", function()
 	local status_ok = vim.fn.exists(":FocusSplitDown") ~= 0
 	if not status_ok then
-		vim.cmd("split")
+		vim.api.nvim_command("split")
 	else
-		vim.cmd("FocusSplitDown")
+		vim.api.nvim_command("FocusSplitDown")
 	end
 end, { desc = "Split Down" })
 
@@ -80,9 +75,9 @@ end, { desc = "Split Down" })
 map("n", "<A-v>", function()
 	local status_ok = vim.fn.exists(":FocusSplitRight") ~= 0
 	if not status_ok then
-		vim.cmd("vsplit")
+		vim.api.nvim_command("vsplit")
 	else
-		vim.cmd("FocusSplitRight")
+		vim.api.nvim_command("FocusSplitRight")
 	end
 end, { desc = "Split Right" })
 

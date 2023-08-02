@@ -1,5 +1,5 @@
 local options = vim.opt
-local cmd = vim.cmd
+local cmd = vim.api.nvim_command
 local g = vim.g
 
 --leader key

@@ -1,4 +1,5 @@
 local autocmd = vim.api.nvim_create_autocmd
+local create_augroup = vim.api.nvim_create_augroup
 
 -- Don't list quickfix buffers
 autocmd("FileType", {
@@ -35,26 +36,26 @@ autocmd("ModeChanged", {
 
 --Enable syntax for .json files
 autocmd({ "BufEnter" }, {
-	group = vim.api.nvim_create_augroup("EnableSyntax", {}),
+	group = create_augroup("EnableSyntax", {}),
 	pattern = { "*.json" },
 	command = "set filetype=jsonc",
 })
 
 --Enable syntax for .rasi files
 autocmd({ "BufEnter" }, {
-	group = vim.api.nvim_create_augroup("EnableSyntax", {}),
+	group = create_augroup("EnableSyntax", {}),
 	pattern = { "*.rasi" },
 	command = "set filetype=rasi",
 })
 
 autocmd({ "BufEnter" }, {
-	group = vim.api.nvim_create_augroup("EnableSyntax", {}),
+	group = create_augroup("EnableSyntax", {}),
 	pattern = "*.html",
 	command = "set filetype=html",
 })
 
 autocmd({ "BufEnter" }, {
-	group = vim.api.nvim_create_augroup("EnableSyntax", {}),
+	group = create_augroup("EnableSyntax", {}),
 	pattern = "*.env",
 	callback = function(args)
 		vim.diagnostic.disable(args.buf)
