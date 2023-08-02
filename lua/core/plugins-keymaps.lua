@@ -10,7 +10,12 @@ local autocmd = vim.api.nvim_create_autocmd
 local map = require("core.utils").map
 
 --NvimTree
-map({ "n", "i", "v", "c" }, "<C-b>", "<esc>:NvimTreeToggle<cr>")
+map({ "n", "i", "v", "c" }, "<C-b>", function()
+	if vim.bo.filetype == "TelescopePrompt" then
+		return
+	end
+	vim.api.nvim_command("NvimTreeToggle")
+end)
 
 -- kill terminal buffer
 map("t", "<C-q>", "<C-\\><C-n>:q!<cr>")
