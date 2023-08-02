@@ -54,21 +54,26 @@ local general_style = {
 	},
 }
 
-local create_styles = function(styles)
-	return vim.tbl_deep_extend("force", general_style or {}, styles or {})
+-- local create_styles = function(styles)
+-- 	return vim.tbl_deep_extend("force", general_style or {}, styles or {})
+-- end
+
+local change_left_icons = function(styles, left)
+	styles.left = left
+	return styles
 end
 
 set_option(
 	"renderer",
 	wilder.renderer_mux {
-		[":"] = popupmenu_renderer(popupmenu_palette_theme(create_styles {
-			left = { " ", "  ", popupmenu_devicons() },
-		})),
-		["/"] = popupmenu_renderer(popupmenu_palette_theme(create_styles {
-			left = { " ", "  ", popupmenu_devicons() },
-		})),
-		["?"] = popupmenu_renderer(popupmenu_palette_theme(create_styles {
-			left = { " ", "  ", popupmenu_devicons() },
-		})),
+		[":"] = popupmenu_renderer(
+			popupmenu_palette_theme(change_left_icons(general_style, { " ", "  ", popupmenu_devicons() }))
+		),
+		["/"] = popupmenu_renderer(
+			popupmenu_palette_theme(change_left_icons(general_style, { " ", "  ", popupmenu_devicons() }))
+		),
+		["?"] = popupmenu_renderer(
+			popupmenu_palette_theme(change_left_icons(general_style, { " ", "  ", popupmenu_devicons() }))
+		),
 	}
 )
