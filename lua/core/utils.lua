@@ -70,6 +70,9 @@ M.identification_files = {
 	"Cargo.toml",
 	"Cargo.lock",
 
+	-- lua
+	"stylua.toml",
+
 	-- git
 	".git",
 	".gitignore",

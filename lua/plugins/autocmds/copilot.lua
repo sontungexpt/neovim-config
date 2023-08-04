@@ -1,7 +1,7 @@
 local M = {}
 
 M.has_copilot = function()
-	return vim.fn.exists(":Copilot") == 2
+	return vim.fn.isdirectory(vim.fn.stdpath("data") .. "/lazy/copilot.lua")
 end
 
 M.has_copilot_auth = function()
@@ -21,7 +21,7 @@ M.create_autocmds = function()
 	end
 
 	vim.api.nvim_create_autocmd("VimEnter", {
-		pattern = "",
+		pattern = "*",
 		group = vim.api.nvim_create_augroup("CopilotAutoGroup", {}),
 		callback = function()
 			if not M.has_copilot_auth() then

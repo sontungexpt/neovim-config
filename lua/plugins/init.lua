@@ -1,9 +1,26 @@
 -- All plugins have lazy=true by default,to load a plugin on startup just lazy=false
 local default_plugins = {
+	-- {
+	-- 	dir = "/home/stilux/Data/My-Workspaces/nvim-extensions/resizer.nvim",
+	-- 	dev = true,
+	-- 	"sontungexpt/resizer.nvim",
+	-- 	event = "UIEnter",
+	-- 	opts = function()
+	-- 		-- return require("plugins.configs.resizer")
+	-- 	end,
+	-- 	config = function(_, opts)
+	-- 		local status_ok, resizer = pcall(require, "resizer")
+	-- 		if not status_ok then
+	-- 			return
+	-- 		end
+	-- 		resizer.setup {}
+	-- 	end,
+	-- },
+
 	{
-		"sontungexpt/buffer-closer",
-		-- dir = '/home/stilux/Data/My-Workspaces/nvim-extensions/buffer-closer',
+		-- dir = "/home/stilux/Data/My-Workspaces/nvim-extensions/buffer-closer",
 		-- dev = true,
+		"sontungexpt/buffer-closer",
 		event = "UIEnter",
 		opts = function()
 			return require("plugins.configs.buffer-closer")

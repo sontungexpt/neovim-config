@@ -18,8 +18,12 @@ null_ls.setup {
 		-- deno
 		-- formatting.deno_fmt.with({ extra_args = { "--style", "{IndentWidth: 2}" } }),
 
-		-- prettier
-		formatting.prettier,
+		-- -- prettier
+		-- formatting.prettier,
+		formatting.prettierd,
+
+		-- toml
+		formatting.taplo,
 
 		-- eslint
 		diagnostics.eslint_d.with {

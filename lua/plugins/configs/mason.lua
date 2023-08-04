@@ -11,7 +11,7 @@ local options = {
 		"shfmt",
 		"shellcheck",
 
-		-- "rustfmt",
+		-- toml
 		"taplo",
 
 		-- c++
@@ -30,7 +30,8 @@ local options = {
 		"codespell",
 
 		-- web-developments
-		"prettier",
+		-- "prettier",
+		"prettierd",
 		"eslint-lsp",
 		"css-lsp",
 		"html-lsp",

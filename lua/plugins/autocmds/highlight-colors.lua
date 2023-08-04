@@ -1,7 +1,7 @@
 local M = {}
 
 M.has_highlight_colors = function()
-	return vim.fn.exists(":HighlightColorsOn") == 2
+	return vim.fn.isdirectory(vim.fn.stdpath("data") .. "/lazy/nvim-highlight-colors")
 end
 
 M.create_autocmds = function()

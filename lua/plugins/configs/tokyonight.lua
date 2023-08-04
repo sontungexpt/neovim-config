@@ -15,7 +15,7 @@ local options = {
 	sidebars = { "qf", "help" },
 	day_brightness = 0.3,
 	hide_inactive_statusline = false,
-	dim_inactive = true, -- dims inactive windows
+	dim_inactive = false, -- dims inactive windows
 	lualine_bold = false, -- When `true`, section headers in the lualine theme will be bold
 	-- on_colors = function(colors)
 	-- end,

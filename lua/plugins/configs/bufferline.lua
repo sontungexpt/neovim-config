@@ -10,7 +10,9 @@ M.opts = {
 		numbers = "none",
 		close_command = "bdelete %d",
 		right_mouse_command = function(bufnr)
-			local status_ok = vim.fn.exists(":FocusSplitRight") ~= 0
+			local status_ok = vim.fn.isdirectory(vim.fn.stdpath("data") .. "/lazy/focus.nvim")
+				and vim.fn.exists("FocusSplitRight") ~= 0
+
 			vim.api.nvim_command(status_ok and "FocusSplitRight" or "vsplit")
 			vim.api.nvim_command("buffer " .. bufnr)
 		end,
@@ -110,8 +112,8 @@ M.opts = {
 			bg = { attribute = "bg", highlight = "Normal" },
 		},
 		tab_selected = {
-			fg = { attribute = "fg", highlight = "Normal" },
-			bg = { attribute = "bg", highlight = "Normal" },
+			fg = { attribute = "fg", highlight = "TabLine" },
+			bg = { attribute = "bg", highlight = "TabLine" },
 		},
 		duplicate_selected = {
 			fg = { attribute = "fg", highlight = "TabLine" },
@@ -167,6 +169,7 @@ M.opts = {
 			fg = { attribute = "fg", highlight = "TabLine" },
 			bg = { attribute = "bg", highlight = "TabLine" },
 		},
+
 		numbers_selected = {
 			fg = { attribute = "fg", highlight = "Normal" },
 			bg = { attribute = "bg", highlight = "Normal" },

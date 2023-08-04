@@ -29,14 +29,16 @@ local options = {
 		signcolumn_focused_value = "yes",
 		winhighlight = false, -- Auto highlighting for focussed/unfocussed windows
 	},
-	exclude = {
+	excluded = {
 		filetypes = {
 			"NvimTree",
 			"startify",
 			"dashboard",
 			"TelescopePrompt",
+			"lazy",
 		},
 		buftypes = {
+			"nofile",
 			"prompt",
 			"popup",
 			"acwrite",

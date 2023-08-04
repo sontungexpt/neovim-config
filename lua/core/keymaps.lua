@@ -62,14 +62,16 @@ map("n", "gh", "<C-w>t<C-w>K")
 -- Split horizontally
 -- map("n", "<A-s>", ":split<CR>")
 map("n", "<A-s>", function()
-	local status_ok = vim.fn.exists(":FocusSplitDown") ~= 0
+	local status_ok = vim.fn.isdirectory(vim.fn.stdpath("data") .. "/lazy/focus.nvim")
+		and vim.fn.exists("FocusSplitDown") ~= 0
 	vim.api.nvim_command(status_ok and "FocusSplitDown" or "split")
 end, { desc = "Split Down" })
 
 -- Split vertically
 -- map("n", "<A-v>", ":vsplit<CR>")
 map("n", "<A-v>", function()
-	local status_ok = vim.fn.exists(":FocusSplitRight") ~= 0
+	local status_ok = vim.fn.isdirectory(vim.fn.stdpath("data") .. "/lazy/focus.nvim")
+		and vim.fn.exists("FocusSplitRight") ~= 0
 	vim.api.nvim_command(status_ok and "FocusSplitRight" or "vsplit")
 end, { desc = "Split Right" })
 
