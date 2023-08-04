@@ -217,8 +217,8 @@ local default_plugins = {
 			end
 			tokyonight.setup(opts)
 
-			vim.cmd([[colorscheme tokyonight]])
-			vim.cmd([[let g:lightline = {'colorscheme': 'tokyonight'}]])
+			vim.api.nvim_command([[colorscheme tokyonight]])
+			vim.api.nvim_command([[let g:lightline = {'colorscheme': 'tokyonight'}]])
 		end,
 	},
 
@@ -624,13 +624,12 @@ local default_plugins = {
 	{
 		"kevinhwang91/nvim-ufo",
 		keys = {
-			"zc",
-			"zo",
-			"za",
-			"zA",
-			"zr",
-			"zm",
-			"zR",
+			{ "zc", mode = "n", desc = "Fold current line" },
+			{ "zo", mode = "n", desc = "Unfold current line" },
+			{ "za", mode = "n", desc = "Toggle fold current line" },
+			{ "zA", mode = "n", desc = "Toggle fold all lines" },
+			{ "zr", mode = "n", desc = "Unfold all lines" },
+			{ "zR", mode = "n", desc = "Fold all lines" },
 		},
 		dependencies = "kevinhwang91/promise-async",
 		config = function()
