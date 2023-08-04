@@ -3,6 +3,9 @@ if not status_ok then
 	return
 end
 
+local api = vim.api
+local map = vim.keymap.set
+
 toggleterm.setup {
 	-- size can be a number or function which is passed the current terminal
 	size = function(term)
@@ -15,6 +18,9 @@ toggleterm.setup {
 	open_mapping = [[<C-t>]],
 	---@diagnostic disable-next-line: unused-local
 	on_open = function(term)
+		api.nvim_command("startinsert!")
+		api.nvim_buf_set_keymap(term.bufnr, "n", "q", "<cmd>close<CR>", { noremap = true, silent = true })
+
 		local status_shade_ok, shade = pcall(require, "shade")
 		if status_shade_ok then
 			shade.toggle()
@@ -22,6 +28,7 @@ toggleterm.setup {
 	end,
 	---@diagnostic disable-next-line: unused-local
 	on_close = function(term)
+		api.nvim_command("startinsert!")
 		local status_shade_ok, shade = pcall(require, "shade")
 		if status_shade_ok then
 			shade.toggle()
@@ -44,7 +51,7 @@ toggleterm.setup {
 		},
 	},
 	-- hide the number column in toggleterm buffers
-	hide_numbers = false,
+	hide_numbers = true,
 	-- when neovim changes it current directory
 	-- the terminal will change it's own when next it's opened
 	autochdir = true,
@@ -56,9 +63,10 @@ toggleterm.setup {
 	start_in_insert = true,
 	insert_mappings = true, -- whether or not the open mapping applies in insert mode
 	persist_size = true,
-	direction = "horizontal", -- | 'horizontal' | 'window' | 'float',
+	direction = "horizontal", -- | 'horizontal' | 'horizontal' | 'tab' | 'float',,
 	close_on_exit = true, -- close the terminal window when the process exits
 	shell = vim.o.shell, -- change the default shell
+	auto_scroll = true,
 	-- This field is only relevant if direction is set to 'float'
 	float_opts = {
 		border = "single", -- single/double/shadow/curved
@@ -68,7 +76,7 @@ toggleterm.setup {
 	},
 	winbar = {
 		enabled = true,
-		name_formatter = function(term)
+		name_formatter = function(term) --  term: Terminal
 			return ""
 		end,
 	},
@@ -76,13 +84,13 @@ toggleterm.setup {
 
 function _G.set_terminal_keymaps()
 	local opts = { buffer = 0 }
-	vim.keymap.set("t", "<esc>", [[<C-\><C-n>]], opts)
-	vim.keymap.set("t", "jj", [[<C-\><C-n>]], opts)
-	vim.keymap.set("t", "<C-h>", [[<Cmd>wincmd h<CR>]], opts)
-	vim.keymap.set("t", "<C-j>", [[<Cmd>wincmd j<CR>]], opts)
-	vim.keymap.set("t", "<C-k>", [[<Cmd>wincmd k<CR>]], opts)
-	vim.keymap.set("t", "<C-l>", [[<Cmd>wincmd l<CR>]], opts)
-	vim.keymap.set("t", "<C-w>", [[<C-\><C-n><C-w>]], opts)
+	map("t", "<esc>", [[<C-\><C-n>]], opts)
+	map("t", "jj", [[<C-\><C-n>]], opts)
+	map("t", "<C-h>", [[<Cmd>wincmd h<CR>]], opts)
+	map("t", "<C-j>", [[<Cmd>wincmd j<CR>]], opts)
+	map("t", "<C-k>", [[<Cmd>wincmd k<CR>]], opts)
+	map("t", "<C-l>", [[<Cmd>wincmd l<CR>]], opts)
+	map("t", "<C-w>", [[<C-\><C-n><C-w>]], opts)
 end
 
 -- if you only want these mappings for toggle term use term://*toggleterm#* instead
@@ -90,7 +98,6 @@ vim.cmd([[
   augroup Terminal
     autocmd!
     autocmd TermOpen term://* lua set_terminal_keymaps()
-    autocmd TermOpen term://* set nonumber norelativenumber
     autocmd TermEnter term://*toggleterm#* tnoremap <silent><c-t> <Cmd>exe v:count1 . "ToggleTerm"<CR>
   augroup END
 ]])
