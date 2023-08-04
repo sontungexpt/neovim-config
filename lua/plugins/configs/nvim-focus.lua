@@ -20,7 +20,7 @@ local options = {
 		absolutenumber_unfocussed = false, -- Preserve absolute numbers in the unfocussed windows
 
 		cursorline = true, -- Display a cursorline in the focussed window only
-		cursorcolumn = false, -- Display cursorcolumn in the focussed window only
+		cursorcolumn = true, -- Display cursorcolumn in the focussed window only
 		colorcolumn = {
 			enable = false, -- Display colorcolumn in the foccused window only
 			list = "+1", -- Set the comma-saperated list for the colorcolumn

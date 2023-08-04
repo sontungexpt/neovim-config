@@ -1,8 +1,5 @@
 local M = {}
-
-M.has_copilot = function()
-	return vim.fn.isdirectory(vim.fn.stdpath("data") .. "/lazy/copilot.lua")
-end
+local utils = require("core.utils")
 
 M.has_copilot_auth = function()
 	local config_path = vim.fn.stdpath("config")
@@ -16,7 +13,7 @@ M.create_autocmds = function()
 		return
 	end
 
-	if not M.has_copilot() then
+	if not utils.is_plugin_installed("copilot.lua") then
 		return
 	end
 

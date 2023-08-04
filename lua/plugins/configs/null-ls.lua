@@ -15,9 +15,6 @@ null_ls.setup {
 		--git sign
 		code_actions.gitsigns,
 
-		-- deno
-		-- formatting.deno_fmt.with({ extra_args = { "--style", "{IndentWidth: 2}" } }),
-
 		-- -- prettier
 		-- formatting.prettier,
 		formatting.prettierd,

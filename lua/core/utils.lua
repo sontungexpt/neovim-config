@@ -8,6 +8,10 @@ M.load_config = function()
 	return config
 end
 
+M.is_plugin_installed = function(plugin_name)
+	return vim.fn.isdirectory(vim.fn.stdpath("data") .. "/lazy/" .. plugin_name) == 1
+end
+
 M.lazy_load = function(plugin)
 	api.nvim_create_autocmd({ "BufRead", "BufWinEnter", "BufNewFile" }, {
 		group = api.nvim_create_augroup("BeLazyOnFileOpen" .. plugin, {}),

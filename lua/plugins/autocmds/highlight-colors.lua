@@ -1,11 +1,9 @@
 local M = {}
 
-M.has_highlight_colors = function()
-	return vim.fn.isdirectory(vim.fn.stdpath("data") .. "/lazy/nvim-highlight-colors")
-end
+local utils = require("core.utils")
 
 M.create_autocmds = function()
-	if not M.has_highlight_colors() then
+	if not utils.is_plugin_installed("nvim-highlight-colors") then
 		return
 	end
 

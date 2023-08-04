@@ -1,6 +1,7 @@
 local M = {}
 
 local colors = require("core.default-config").ui.colors
+local utils = require("core.utils")
 
 M.opts = {
 	options = {
@@ -10,8 +11,7 @@ M.opts = {
 		numbers = "none",
 		close_command = "bdelete %d",
 		right_mouse_command = function(bufnr)
-			local status_ok = vim.fn.isdirectory(vim.fn.stdpath("data") .. "/lazy/focus.nvim")
-				and vim.fn.exists("FocusSplitRight") ~= 0
+			local status_ok = utils.is_plugin_installed("focus.nvim") and vim.fn.exists("FocusSplitRight") ~= 0
 
 			vim.api.nvim_command(status_ok and "FocusSplitRight" or "vsplit")
 			vim.api.nvim_command("buffer " .. bufnr)
@@ -51,8 +51,9 @@ M.opts = {
 			{
 				filetype = "NvimTree",
 				text = "File Explorer",
+				text_align = "center", --"left" | "center" | "right",
 				padding = 1,
-				highlight = "TabLine",
+				highlight = "Normal",
 				separator = false,
 			},
 		},
@@ -323,8 +324,9 @@ M.opts = {
 			italic = true,
 		},
 		trunc_marker = {
-			fg = { attribute = "fg", highlight = "Normal" },
+			fg = colors.violet,
 			bg = { attribute = "bg", highlight = "Normal" },
+			bold = true,
 		},
 	},
 }

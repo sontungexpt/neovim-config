@@ -18,7 +18,7 @@ local options = {
 
 	excluded = {
 		filetypes = { "lazy", "NvimTree" },
-		buftypes = { "terminal", "nofile", "quickfix", "prompt", "help" },
+		buftypes = { "terminal", "nofile", "quickfix", "prompt", "help", "acwrite" },
 		filenames = {},
 	},
 

@@ -5,7 +5,8 @@
 -- opts = 4 for not noremap and not silent
 -- opts = 5 for expr and noremap and silent
 
-local map = require("core.utils").map
+local utils = require("core.utils")
+local map = utils.map
 
 --Back to normal mode
 map({ "i", "c" }, "jj", "<esc>", 2)
@@ -62,16 +63,14 @@ map("n", "gh", "<C-w>t<C-w>K")
 -- Split horizontally
 -- map("n", "<A-s>", ":split<CR>")
 map("n", "<A-s>", function()
-	local status_ok = vim.fn.isdirectory(vim.fn.stdpath("data") .. "/lazy/focus.nvim")
-		and vim.fn.exists("FocusSplitDown") ~= 0
+	local status_ok = utils.is_plugin_installed("focus.nvim") and vim.fn.exists("FocusSplitDown") ~= 0
 	vim.api.nvim_command(status_ok and "FocusSplitDown" or "split")
 end, { desc = "Split Down" })
 
 -- Split vertically
 -- map("n", "<A-v>", ":vsplit<CR>")
 map("n", "<A-v>", function()
-	local status_ok = vim.fn.isdirectory(vim.fn.stdpath("data") .. "/lazy/focus.nvim")
-		and vim.fn.exists("FocusSplitRight") ~= 0
+	local status_ok = utils.is_plugin_installed("focus.nvim") and vim.fn.exists("FocusSplitRight") ~= 0
 	vim.api.nvim_command(status_ok and "FocusSplitRight" or "vsplit")
 end, { desc = "Split Right" })
 
