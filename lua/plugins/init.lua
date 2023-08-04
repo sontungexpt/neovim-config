@@ -77,7 +77,7 @@ local default_plugins = {
 	{
 		"sontungexpt/focus.nvim",
 		version = "*",
-		event = "BufAdd",
+		event = "WinNew",
 		cmd = {
 			"FocusDisable",
 			"FocusEnable",
