@@ -9,14 +9,14 @@ M.load_config = function()
 end
 
 M.is_plugin_installed = function(plugin_name)
-	return vim.fn.isdirectory(vim.fn.stdpath("data") .. "/lazy/" .. plugin_name) == 1
+	return fn.isdirectory(fn.stdpath("data") .. "/lazy/" .. plugin_name) == 1
 end
 
 M.lazy_load = function(plugin)
 	api.nvim_create_autocmd({ "BufRead", "BufWinEnter", "BufNewFile" }, {
 		group = api.nvim_create_augroup("BeLazyOnFileOpen" .. plugin, {}),
 		callback = function()
-			local file = vim.fn.expand("%")
+			local file = fn.expand("%")
 			local condition = file ~= "NvimTree_1" and file ~= "[lazy]" and file ~= ""
 
 			if condition then
@@ -108,9 +108,9 @@ end
 
 M.open_url = function()
 	local url_pattern = "(https?://[%w-_%.%?%.:/%+=&]+%f[^%w])"
-	local cursor_pos = api.nvim_win_get_cursor(0)
+	local cursor_pos = vim.api.nvim_win_get_cursor(0)
 	local cursor_col = cursor_pos[2]
-	local line = api.nvim_get_current_line()
+	local line = vim.api.nvim_get_current_line()
 
 	local url_to_open = nil
 
@@ -129,22 +129,23 @@ M.open_url = function()
 	end
 
 	if url_to_open then
-		local shell_safe_url = vim.fn.shellescape(url_to_open)
-		local result = ""
+		local shell_safe_url = fn.shellescape(url_to_open)
+		local command = ""
 		if vim.loop.os_uname().sysname == "Linux" then
-			result = api.nvim_command("silent! !xdg-open " .. shell_safe_url)
+			command = "silent! !xdg-open " .. shell_safe_url
 		elseif vim.loop.os_uname().sysname == "Darwin" then
-			result = api.nvim_command("silent! !open " .. shell_safe_url)
+			command = "silent! !open " .. shell_safe_url
 		elseif vim.loop.os_uname().sysname == "Windows" then
-			result = api.nvim_command("silent! !start " .. shell_safe_url)
+			command = "silent! !start " .. shell_safe_url
 		else
 			print("Unknown operating system.")
 			return
 		end
-		if result == "" then
-			print("Opening " .. url_to_open .. " successful")
+		local success, error_message = pcall(api.nvim_command, command)
+		if success then
+			print("Opening " .. url_to_open .. " successfully.")
 		else
-			print("Opening " .. url_to_open .. " failed: " .. result)
+			print("Opening " .. url_to_open .. " failed: " .. error_message)
 		end
 	end
 end
