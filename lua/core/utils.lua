@@ -8,6 +8,23 @@ M.load_config = function()
 	return config
 end
 
+M.call_cmd = function(command, msg)
+	local success, error_message = pcall(api.nvim_command, command)
+	if success then
+		if msg and msg.success then
+			print(msg.success)
+		else
+			print("Success")
+		end
+	else
+		if msg and msg.error then
+			print(msg.error .. ": " .. error_message)
+		else
+			print("Error")
+		end
+	end
+end
+
 M.is_plugin_installed = function(plugin_name)
 	return fn.isdirectory(fn.stdpath("data") .. "/lazy/" .. plugin_name) == 1
 end
@@ -141,12 +158,10 @@ M.open_url = function()
 			print("Unknown operating system.")
 			return
 		end
-		local success, error_message = pcall(api.nvim_command, command)
-		if success then
-			print("Opening " .. url_to_open .. " successfully.")
-		else
-			print("Opening " .. url_to_open .. " failed: " .. error_message)
-		end
+		M.call_cmd(command, {
+			success = "Opening " .. url_to_open .. " successfully.",
+			error = "Opening " .. url_to_open .. " failed.",
+		})
 	end
 end
 

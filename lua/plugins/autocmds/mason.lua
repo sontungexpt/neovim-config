@@ -1,4 +1,8 @@
 local M = {}
+local api = vim.api
+local cmd = api.nvim_command
+local call_cmd = require("core.utils").call_cmd
+
 
 M.is_mason_installed = function()
 	local mason_path = vim.fn.stdpath("data") .. "/mason"
@@ -85,12 +89,20 @@ M.sync_packages = function()
 
 	vim.schedule(function()
 		if #packages_to_remove > 0 then
-			vim.cmd("MasonUninstall " .. table.concat(packages_to_remove, " "))
+			local command = "MasonUninstall " .. table.concat(packages_to_remove, " ")
+      call_cmd(command, {
+        success = "MasonUninstall success",
+        error = "MasonUninstall error"
+      })
 		end
 	end)
 	vim.schedule(function()
 		if #packages_to_install > 0 then
-			vim.cmd("MasonInstall " .. table.concat(packages_to_install, " "))
+			local command = "MasonInstall " .. table.concat(packages_to_install, " ")
+      call_cmd(command, {
+        success = "MasonInstall success",
+        error = "MasonInstall error"
+      })
 		end
 	end)
 end
@@ -101,15 +113,21 @@ M.create_user_commands = function()
 		return
 	end
 
-	vim.api.nvim_create_user_command("MasonInstallAll", function()
-		vim.cmd("MasonInstall " .. table.concat(require("plugins.configs.mason").ensure_installed, " "))
+	api.nvim_create_user_command("MasonInstallAll", function()
+		local command = "MasonInstall "
+			.. table.concat(require("plugins.configs.mason").ensure_installed, " ")
+      call_cmd(command, {
+        success = "MasonInstallAll success",
+        error = "MasonInstallAll error"
+      })
+
 	end, {})
 
-	vim.api.nvim_create_user_command("MasonShowInstalledPackages", function()
+	api.nvim_create_user_command("MasonShowInstalledPackages", function()
 		M.print_installed_packages()
 	end, {})
 
-	vim.api.nvim_create_user_command("MasonShowEnsuredPackages", function()
+	api.nvim_create_user_command("MasonShowEnsuredPackages", function()
 		M.print_ensured_packages()
 	end, {})
 end
@@ -124,8 +142,8 @@ M.create_autocmds = function()
 		return
 	end
 
-	vim.api.nvim_create_autocmd("VimEnter", {
-		group = vim.api.nvim_create_augroup("MasonAutoGroup", {}),
+	api.nvim_create_autocmd("UIEnter", {
+		group = api.nvim_create_augroup("MasonAutoGroup", {}),
 		pattern = "",
 		callback = function()
 			vim.schedule(function()

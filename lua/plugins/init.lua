@@ -502,7 +502,10 @@ local default_plugins = {
 	--Lsp + cmp
 	{
 		"williamboman/mason.nvim",
-		build = ":MasonUpdate",
+    build=":MasonUpdate",
+		init = function()
+			require("plugins.autocmds.mason").create_user_commands()
+		end,
 		cmd = {
 			"Mason",
 			"MasonShowInstalledPackages",
@@ -522,8 +525,6 @@ local default_plugins = {
 				return
 			end
 			mason.setup(opts)
-
-			require("plugins.autocmds.mason").create_user_commands()
 		end,
 	},
 
