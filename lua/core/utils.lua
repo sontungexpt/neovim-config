@@ -20,7 +20,7 @@ M.call_cmd = function(command, msg)
 		if msg and msg.error then
 			print(msg.error .. ": " .. error_message)
 		else
-			print("Error")
+			print(error_message)
 		end
 	end
 end
