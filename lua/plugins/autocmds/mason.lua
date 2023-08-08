@@ -3,7 +3,6 @@ local api = vim.api
 local cmd = api.nvim_command
 local call_cmd = require("core.utils").call_cmd
 
-
 M.is_mason_installed = function()
 	local mason_path = vim.fn.stdpath("data") .. "/mason"
 	return vim.fn.isdirectory(mason_path) == 1
@@ -90,19 +89,19 @@ M.sync_packages = function()
 	vim.schedule(function()
 		if #packages_to_remove > 0 then
 			local command = "MasonUninstall " .. table.concat(packages_to_remove, " ")
-      call_cmd(command, {
-        success = "MasonUninstall success",
-        error = "MasonUninstall error"
-      })
+			call_cmd(command, {
+				success = "Removed unneeded mason packages",
+				error = "MasonUninstall error",
+			})
 		end
 	end)
 	vim.schedule(function()
 		if #packages_to_install > 0 then
 			local command = "MasonInstall " .. table.concat(packages_to_install, " ")
-      call_cmd(command, {
-        success = "MasonInstall success",
-        error = "MasonInstall error"
-      })
+			call_cmd(command, {
+				success = "Installed missing mason packages",
+				error = "MasonInstall error",
+			})
 		end
 	end)
 end
@@ -113,22 +112,16 @@ M.create_user_commands = function()
 		return
 	end
 
-	api.nvim_create_user_command("MasonInstallAll", function()
-		local command = "MasonInstall "
-			.. table.concat(require("plugins.configs.mason").ensure_installed, " ")
-      call_cmd(command, {
-        success = "MasonInstallAll success",
-        error = "MasonInstallAll error"
-      })
-
-	end, {})
-
 	api.nvim_create_user_command("MasonShowInstalledPackages", function()
-		M.print_installed_packages()
+		vim.schedule(function()
+			M.print_installed_packages()
+		end)
 	end, {})
 
 	api.nvim_create_user_command("MasonShowEnsuredPackages", function()
-		M.print_ensured_packages()
+		vim.schedule(function()
+			M.print_ensured_packages()
+		end)
 	end, {})
 end
 
