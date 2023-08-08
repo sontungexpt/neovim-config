@@ -29,7 +29,6 @@ map("n", "<C-f>", "<esc>:Telescope live_grep<cr>", { desc = "Find word" })
 map("n", "<leader>fb", "<esc>:Telescope buffers<cr>", { desc = "Find buffers" })
 map("n", "<leader>fh", "<esc>:Telescope help_tags<cr>", { desc = "Find help tags" })
 map("n", "<leader>fp", "<esc>:Telescope project<cr>", { desc = "Find project" })
--- map("n", "<leader>fc", "<esc>:Telescope neoclip<cr>", { desc = "Find clipboard history" })
 
 -- Todo-comments
 map("n", "<Leader>ft", function()

@@ -43,8 +43,6 @@ local options = {
 
 		-- debugger adapters
 		"codelldb",
-		-- "bash-debug-adapter",
-		-- "debugpy",
 	},
 	PATH = "skip",
 	ui = {
