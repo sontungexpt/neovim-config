@@ -50,7 +50,7 @@ This is my personal neovim configuration, written completely in Lua. It uses a l
 
 - **Color Picker with ccc:** It includes a color picker with ccc, a fast and lightweight color picker plugin.
 
-- **Automatically resize Window with focus:** It automatically resizes windows with resize, a plugin that provides a simple and easy-to-use interface for resizing windows.
+- **Automatically resize Window with focus:** It automatically resizes windows with focus, a plugin that provides a simple and easy-to-use interface for resizing windows.
 
 ## Installation
 
