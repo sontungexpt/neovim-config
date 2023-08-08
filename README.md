@@ -66,6 +66,10 @@ You will also need to install the plugins. This configuration uses the lazy.nvim
 :Lazy
 ```
 
+## Inspiration
+
+- [NvChad](https://github.com/NvChad/NvChad)
+
 ## Configuration
 
 This configuration is highly customizable and easy to configure. You can customize the configuration by modifying the init.lua file.
