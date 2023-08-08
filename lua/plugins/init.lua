@@ -502,7 +502,15 @@ local default_plugins = {
 	--Lsp + cmp
 	{
 		"williamboman/mason.nvim",
-    build=":MasonUpdate",
+		build = function()
+			local call_cmd = require("core.utils").call_cmd
+			local command = "MasonInstall "
+				.. table.concat(require("plugins.configs.mason").ensure_installed, " ")
+			call_cmd(command, {
+				success = "mason build successful",
+				error = "mason build failed",
+			})
+		end,
 		init = function()
 			require("plugins.autocmds.mason").create_user_commands()
 		end,
@@ -511,7 +519,6 @@ local default_plugins = {
 			"MasonShowInstalledPackages",
 			"MasonShowEnsuredPackages",
 			"MasonInstall",
-			"MasonInstallAll",
 			"MasonUninstall",
 			"MasonUninstallAll",
 			"MasonLog",
