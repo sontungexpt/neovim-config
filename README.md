@@ -14,43 +14,43 @@ This is my personal neovim configuration, written completely in Lua. It uses a l
 
 ## Features
 
-- **Lazy Plugin Manager:** The configuration uses a lazy plugin manager to ensure fast startup times, even with a large number of plugins installed.
+- **lazy:** Uses a lazy plugin manager to ensure fast startup times.
 
-- **Support for Copilot:** You can use OpenAI's Copilot with this configuration.
+- **copilot:** Enables support for OpenAI's Copilot.
 
-- **Autocomplete with nvim-cmp:** It supports autocomplete with nvim-cmp, a fast and lightweight completion plugin.
+- **nvim-cmp:** Provides autocomplete functionality using nvim-cmp, a lightweight completion plugin.
 
-- **LSP with nvim-lspconfig:** It supports Language Server Protocol (LSP) with nvim-lspconfig, which provides a simple and easy-to-use interface for configuring language servers.
+- **nvim-lspconfig:** Implements Language Server Protocol (LSP) support using nvim-lspconfig, a simple interface for configuring language servers.
 
-- **Autoformat with null-ls:** It supports autoformatting with null-ls, a plugin that allows you to use any external formatter as a Neovim plugin.
+- **null-ls:** Enables automatic formatting with null-ls, a plugin that allows using external formatters as Neovim plugins.
 
-- **Auto Install LSP Server, Formatter, Linter, Debug Adapter with Mason:** It automatically installs LSP servers, formatters, linters, and debug adapters using Mason, a plugin manager for Neovim.
+- **mason:** Automatically installs LSP servers, formatters, linters, and debug adapters using Mason, a Neovim plugin manager.
 
-- **File Explorer with nvim-tree:** It includes a file explorer with nvim-tree, a fast and lightweight file explorer plugin.
+- **nvim-tree:** Includes a file explorer using nvim-tree, a fast and lightweight file explorer plugin.
 
-- **Git with gitsigns, git-conflict:** It includes Git integration with gitsigns and git-conflict, two plugins that provide easy-to-use Git functionality.
+- **gitsigns, git-conflict:** ntegrates Git functionality with gitsigns and git-conflict plugins for a seamless Git experience.
 
-- **Finder with telescope:** It includes a file finder with telescope, a plugin that provides a fuzzy finder for files, buffers, and more.
+- **telescope:** Provides a file finder using telescope, a fuzzy finder plugin for files, buffers, and more.
 
-- **Bufferline with bufferline:** It includes a bufferline with bufferline, a plugin that provides a simple and configurable interface for managing buffers.
+- **bufferline:** Manages buffers with bufferline, a simple and configurable interface for buffer management.
 
-- **Statusline with lualine:** It includes a statusline with lualine, a fast and lightweight statusline plugin that provides a wide range of customization options.
+- **lualine:** Displays a statusline using lualine, a fast and lightweight statusline plugin with customizable options.
 
-- **Terminal with toggleterm:** It includes a terminal with toggleterm, a plugin that provides a simple and easy-to-use interface for managing terminals.
+- **toggleterm:** Includes a terminal using toggleterm, a plugin for managing terminals within Neovim.
 
-- **Fold with nvim-ufo:** It supports folding with nvim-ufo, a plugin that provides fast and lightweight folding functionality.
+- **nvim-ufo:** Supports folding functionality with nvim-ufo, a lightweight folding plugin.
 
-- **Generate comment with comment:** It includes a plugin that provides easy-to-use commenting functionality.
+- **comment:** Includes a plugin for easily generating comments.
 
-- **Syntax Highlight with Treesitter, Autopairs, Nvim-ts-autotag, Ts-rainbow:** It includes syntax highlighting with Treesitter, Autopairs, Nvim-ts-autotag, and Ts-rainbow, four plugins that provide fast and lightweight syntax highlighting functionality.
+- **treesitter, autopairs, nvim-ts-autotag, ts-rainbow:** Provides syntax highlighting using Treesitter, Autopairs, Nvim-ts-autotag, and Ts-rainbow plugins.
 
-- **Debug with dap, dapui:** It includes debugging support with dap and dapui, two plugins that provide a wide range of debugging functionality.
+- **dap, dapui:** Offers debugging capabilities with dap and dapui plugins.
 
-- **Automatically Close Unused Buffers with Buffer-closer:** It automatically closes unused buffers with buffer-closer, a plugin that provides a simple and easy-to-use interface for managing buffers.
+- **buffer-closer:** Automatically closes unused buffers using buffer-closer, a plugin for managing buffers.
 
-- **Color Picker with ccc:** It includes a color picker with ccc, a fast and lightweight color picker plugin.
+- **ccc:** Includes a color picker using ccc, a fast and lightweight color picker plugin
 
-- **Automatically resize Window with focus:** It automatically resizes windows with focus, a plugin that provides a simple and easy-to-use interface for resizing windows.
+- **focus:** Automatically resizes windows based on focus using a dedicated plugin.
 
 ## Installation
 
