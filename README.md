@@ -28,7 +28,7 @@ This is my personal neovim configuration, written completely in Lua. It uses a l
 
 - **nvim-tree:** Includes a file explorer using nvim-tree, a fast and lightweight file explorer plugin.
 
-- **gitsigns, git-conflict:** ntegrates Git functionality with gitsigns and git-conflict plugins for a seamless Git experience.
+- **gitsigns, git-conflict:** Integrates Git functionality with gitsigns and git-conflict plugins for a seamless Git experience.
 
 - **telescope:** Provides a file finder using telescope, a fuzzy finder plugin for files, buffers, and more.
 
