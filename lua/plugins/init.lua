@@ -161,7 +161,8 @@ local default_plugins = {
 	{
 		"nvim-treesitter/nvim-treesitter",
 		dependencies = {
-			"HiPhish/nvim-ts-rainbow2",
+			"HiPhish/rainbow-delimiters.nvim",
+			-- "HiPhish/nvim-ts-rainbow2",
 		},
 		init = function()
 			require("core.utils").lazy_load("nvim-treesitter")
@@ -654,6 +655,19 @@ local default_plugins = {
 				},
 				config = function()
 					require("plugins.configs.dap.nvim-dap")
+				end,
+			},
+			{
+				"folke/neodev.nvim",
+				config = function()
+					local status_ok, neodev = pcall(require, "neodev")
+					if not status_ok then
+						return
+					end
+
+					neodev.setup {
+						library = { plugins = { "nvim-dap-ui" }, types = true },
+					}
 				end,
 			},
 		},

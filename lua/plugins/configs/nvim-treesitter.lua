@@ -25,14 +25,6 @@ local options = {
 	autopairs = {
 		enable = true,
 	},
-	rainbow = {
-		enable = true,
-		disable = {
-			"html",
-		},
-		query = "rainbow-parens",
-		strategy = require("ts-rainbow").strategy.global,
-	},
 }
 
 return options

@@ -24,7 +24,6 @@ local options = {
 		"pyright",
 		"autopep8",
 		"flake8",
-		-- "blade-formatter",
 
 		-- others
 		"codespell",
