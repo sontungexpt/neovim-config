@@ -427,7 +427,6 @@ local default_plugins = {
 
 	{
 		"kylechui/nvim-surround",
-		version = "*", -- Use for stability; omit to use `main` branch for the latest features
 		keys = {
 			"ys",
 			"ds",
@@ -648,19 +647,6 @@ local default_plugins = {
 	{
 		"rcarriga/nvim-dap-ui",
 		dependencies = {
-			{
-				"folke/neodev.nvim",
-				config = function()
-					local status_ok, neodev = pcall(require, "neodev")
-					if not status_ok then
-						return
-					end
-
-					neodev.setup {
-						library = { plugins = { "nvim-dap-ui" }, types = true },
-					}
-				end,
-			},
 			{
 				"mfussenegger/nvim-dap",
 				dependencies = {
