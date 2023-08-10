@@ -6,7 +6,8 @@
 -- opts = 4 for not noremap and not silent
 -- opts = 5 for expr and noremap and silent
 --
-local autocmd = vim.api.nvim_create_autocmd
+local api = vim.api
+local autocmd = api.nvim_create_autocmd
 local map = require("core.utils").map
 
 --NvimTree
@@ -14,7 +15,7 @@ map({ "n", "i", "v", "c" }, "<C-b>", function()
 	if vim.bo.filetype == "TelescopePrompt" then
 		return
 	end
-	vim.api.nvim_command("NvimTreeToggle")
+	api.nvim_command("NvimTreeToggle")
 end, { desc = "Toggle NvimTree" })
 
 -- kill terminal buffer
@@ -32,9 +33,14 @@ map("n", "<leader>fp", "<esc>:Telescope project<cr>", { desc = "Find project" })
 
 -- Todo-comments
 map("n", "<Leader>ft", function()
-	local buftype = vim.api.nvim_buf_get_option(0, "buftype")
-	vim.api.nvim_command(buftype == "quickfix" and "bd" or "TodoQuickFix")
+	local buftype = api.nvim_buf_get_option(0, "buftype")
+	api.nvim_command(buftype == "quickfix" and "bd" or "TodoQuickFix")
 end, { desc = "Toggle todo quickfix" })
+
+map("n", "<Leader>fc", function()
+	local buftype = api.nvim_buf_get_option(0, "buftype")
+	api.nvim_command(buftype == "quickfix" and "bd" or "GitConflictListQf")
+end, { desc = "Toggle git conflict quickfix" })
 
 map("n", "[t", function()
 	local status_ok, todo_comments = pcall(require, "todo-comments")
