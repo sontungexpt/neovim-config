@@ -165,4 +165,47 @@ M.open_url = function()
 	end
 end
 
+M.is_same_array = function(table1, table2) -- O(n)
+	if #table1 ~= #table2 then
+		return false
+	end
+
+	local t1_counts = {}
+
+	for _, v1 in ipairs(table1) do
+		t1_counts[v1] = (t1_counts[v1] or 0) + 1
+	end
+
+	for _, v2 in ipairs(table2) do
+		local count = t1_counts[v2] or 0
+		if count == 0 then
+			return false
+		end
+		t1_counts[v2] = count - 1
+	end
+	return true
+end
+
+M.find_unique_items = function(table1, table2)
+	if #table2 == 0 then
+		return table1
+	end
+
+	local not_exists = {}
+	local t2_counts = {}
+
+	for _, v2 in ipairs(table2) do
+		t2_counts[v2] = (t2_counts[v2] or 0) + 1
+	end
+
+	for _, v1 in ipairs(table1) do
+		local count = t2_counts[v1] or 0
+		if count == 0 then
+			table.insert(not_exists, v1)
+		end
+	end
+
+	return not_exists
+end
+
 return M
