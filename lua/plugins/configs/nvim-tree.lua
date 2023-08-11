@@ -150,52 +150,52 @@ M.options = {
 		},
 	},
 	filters = {
-		dotfiles = true,
+		dotfiles = false,
 		git_clean = false,
 		no_buffer = false,
 		custom = {
-			"zsh_history_fix",
-			"node_modules",
-			"dotfiles",
-			"yay",
-			"build",
-			".husky",
-			".rbenv",
-			"*.pdf",
-			"*.ppt",
-			"*.exe",
+			-- "zsh_history_fix",
+			-- "node_modules",
+			-- "dotfiles",
+			-- "yay",
+			-- "build",
+			-- ".husky",
+			-- ".rbenv",
+			-- "*.pdf",
+			-- "*.ppt",
+			-- "*.exe",
 		},
 		exclude = {
-			"test.txt",
+			-- "test.txt",
 
-			".config",
-			".gitignore",
-			".gitconfig",
-			-- "target",
+			-- ".config",
+			-- ".gitignore",
+			-- ".gitconfig",
+			-- -- "target",
 
-			-- rust files
-			".rustfmt.toml",
+			-- -- rust files
+			-- ".rustfmt.toml",
 
-			-- project specific files
-			-- prettier files
-			".prettierrc",
-			".prettierrc.json",
-			".prettierrc.yml",
-			".prettierrc.yaml",
-			".prettierrc.json5",
-			".prettierrc.js",
-			".prettierrc.cjs",
-			".prettierrc.toml",
+			-- -- project specific files
+			-- -- prettier files
+			-- ".prettierrc",
+			-- ".prettierrc.json",
+			-- ".prettierrc.yml",
+			-- ".prettierrc.yaml",
+			-- ".prettierrc.json5",
+			-- ".prettierrc.js",
+			-- ".prettierrc.cjs",
+			-- ".prettierrc.toml",
 
-			-- eslint files
-			".eslintrc",
+			-- -- eslint files
+			-- ".eslintrc",
 
-			-- babel files
-			".babelrc",
+			-- -- babel files
+			-- ".babelrc",
 
-			-- environment variables files
-			".envrc",
-			".env",
+			-- -- environment variables files
+			-- ".envrc",
+			-- ".env",
 		},
 	},
 	filesystem_watchers = {
