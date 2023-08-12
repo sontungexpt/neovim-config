@@ -23,6 +23,7 @@ autocmd({ "VimEnter" }, {
 	end,
 })
 
+-- generate build file for scripts in scripts/stilux/systems
 autocmd({ "BufWritePost" }, {
 	pattern = { "*.sh" },
 	callback = function()
@@ -54,14 +55,13 @@ autocmd({ "BufWritePost" }, {
 		end
 
 		local curr_dir = vim.fn.expand("%:p:h")
-		local file_path = vim.fn.expand("%:p")
-		local file_name = vim.fn.expand("%:t")
-
 		local home_path = string.sub(vim.fn.stdpath("config"), 1, -13)
 		local sys_scripts_dir = home_path .. "scripts/stilux/systems"
-		local sys_build_dir = home_path .. "scripts/stilux/systems-build"
 
 		if curr_dir:match("^" .. sys_scripts_dir) then
+			local file_path = vim.fn.expand("%:p")
+			local file_name = vim.fn.expand("%:t")
+			local sys_build_dir = home_path .. "scripts/stilux/systems-build"
 			local copy_file_path = sys_build_dir .. "/" .. file_name
 
 			local command = string.format(
@@ -80,7 +80,7 @@ autocmd({ "BufWritePost" }, {
 							check_and_insert_lines(copy_file_path)
 						end)
 					else
-						print("Lỗi khi chạy lệnh hệ thống")
+						print("Error: " .. exit_code)
 					end
 				end,
 			})
