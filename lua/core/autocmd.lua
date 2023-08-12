@@ -65,7 +65,7 @@ autocmd({ "BufWritePost" }, {
 			local copy_file_path = sys_build_dir .. "/" .. file_name
 
 			local command = string.format(
-				"mkdir -p %s && cp %s %s && sed -i -e 's/\\(sudo \\)\\?yay -S \\(\\S.*\\)/eval \"$YAY \\2\"/g' %s && sed -i -e 's/\\(sudo \\)\\?pacman -S \\(\\S.*\\)/eval \"$PACMAN \\2\"/g' %s",
+				"mkdir -p %s && cp %s %s && sed -i -e 's/\\(sudo \\)\\?yay -S\\( --needed\\)\\? \\(\\S.*\\)/eval \"$YAY \\3\"/g' %s && sed -i -e 's/\\(sudo \\)\\?pacman -S\\( --needed\\)\\? \\(\\S.*\\)/eval \"$PACMAN \\3\"/g' %s",
 				sys_build_dir,
 				file_path,
 				copy_file_path,

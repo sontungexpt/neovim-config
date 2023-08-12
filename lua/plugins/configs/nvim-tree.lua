@@ -156,16 +156,16 @@ M.options = {
 		custom = {
 			"zsh_history_fix",
 			"node_modules",
-			"dotfiles",
-			"yay",
-			"build",
 			".husky",
-			".rbenv",
 			"*.pdf",
 			"*.ppt",
 			"*.exe",
+			".rbenv",
+			"yay",
 		},
-		exclude = {},
+		exclude = {
+			-- "systems-build",
+		},
 	},
 	filesystem_watchers = {
 		enable = true,
