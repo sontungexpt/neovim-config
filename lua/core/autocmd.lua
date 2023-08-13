@@ -10,17 +10,8 @@ autocmd("FileType", {
 
 -- auto change directory to config folder
 autocmd({ "VimEnter" }, {
-	pattern = { "*" },
-	callback = function()
-		local file_path = vim.fn.expand("%:p:h")
-		api.nvim_set_current_dir(file_path)
-
-		local nvim_folder = vim.fn.stdpath("config")
-
-		if file_path:match("^" .. nvim_folder) then
-			api.nvim_set_current_dir(nvim_folder)
-		end
-	end,
+	pattern = vim.fn.stdpath("config") .. "/**",
+	command = "cd " .. vim.fn.stdpath("config"),
 })
 
 -- generate build file for scripts in scripts/stilux/systems
@@ -100,28 +91,23 @@ autocmd("ModeChanged", {
 	command = "if mode() == 'v' | set relativenumber | else | set norelativenumber | endif",
 })
 
---Enable syntax for .json files
+-- Enable syntax for .json files
 autocmd({ "BufEnter" }, {
-	group = create_augroup("EnableSyntax", {}),
-	pattern = { "*.json" },
+	pattern = "*.json",
 	command = "set filetype=jsonc",
 })
 
---Enable syntax for .rasi files
 autocmd({ "BufEnter" }, {
-	group = create_augroup("EnableSyntax", {}),
 	pattern = { "*.rasi" },
 	command = "set filetype=rasi",
 })
 
 autocmd({ "BufEnter" }, {
-	group = create_augroup("EnableSyntax", {}),
 	pattern = "*.html",
 	command = "set filetype=html",
 })
 
 autocmd({ "BufEnter" }, {
-	group = create_augroup("EnableSyntax", {}),
 	pattern = "*.env",
 	callback = function(args)
 		vim.diagnostic.disable(args.buf)
