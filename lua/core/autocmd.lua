@@ -1,14 +1,15 @@
 local api = vim.api
+local fn = vim.fn
 local autocmd = api.nvim_create_autocmd
 local augroup = api.nvim_create_augroup
 
 -- Highlight on yank
-autocmd("TextYankPost", {
-	group = augroup("YankHighlight", { clear = true }),
-	callback = function()
-		vim.highlight.on_yank { higroup = "IncSearch", timeout = "50" }
-	end,
-})
+-- autocmd("TextYankPost", {
+-- 	group = augroup("YankHighlight", { clear = true }),
+-- 	callback = function()
+-- 		vim.highlight.on_yank { higroup = "IncSearch", timeout = "120" }
+-- 	end,
+-- })
 
 -- Don't list quickfix buffers
 autocmd("FileType", {
@@ -18,8 +19,8 @@ autocmd("FileType", {
 
 -- auto change directory to config folder
 autocmd({ "VimEnter" }, {
-	pattern = vim.fn.stdpath("config") .. "/**",
-	command = "cd " .. vim.fn.stdpath("config"),
+	pattern = fn.stdpath("config") .. "/**",
+	command = "cd " .. fn.stdpath("config"),
 })
 
 -- generate build file for scripts in scripts/stilux/systems
@@ -53,13 +54,13 @@ autocmd({ "BufWritePost" }, {
 			end
 		end
 
-		local curr_dir = vim.fn.expand("%:p:h")
-		local sys_scripts_dir = vim.fn.expand("$HOME") .. "/scripts/stilux/systems"
+		local curr_dir = fn.expand("%:p:h")
+		local sys_scripts_dir = fn.expand("$HOME") .. "/scripts/stilux/systems"
 
 		if curr_dir:match("^" .. sys_scripts_dir) then
-			local file_path = vim.fn.expand("%:p")
-			local file_name = vim.fn.expand("%:t")
-			local sys_build_dir = vim.fn.expand("$HOME") .. "/scripts/stilux/systems-build"
+			local file_path = fn.expand("%:p")
+			local file_name = fn.expand("%:t")
+			local sys_build_dir = fn.expand("$HOME") .. "/scripts/stilux/systems-build"
 			local copy_file_path = sys_build_dir .. "/" .. file_name
 
 			local command = string.format(
@@ -71,7 +72,7 @@ autocmd({ "BufWritePost" }, {
 				copy_file_path
 			)
 
-			vim.fn.jobstart(command, {
+			fn.jobstart(command, {
 				on_exit = function(_, exit_code, _)
 					if exit_code == 0 then
 						vim.schedule(function()

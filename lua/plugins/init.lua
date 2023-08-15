@@ -144,11 +144,11 @@ local default_plugins = {
 		ft = {
 			"html",
 			"javascript",
+			"typescript",
 			"javascriptreact",
 			"typescriptreact",
 			"svelte",
 			"vue",
-			"typescript",
 			"tsx",
 			"jsx",
 		},
