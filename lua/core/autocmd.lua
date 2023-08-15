@@ -1,6 +1,14 @@
 local api = vim.api
 local autocmd = api.nvim_create_autocmd
-local create_augroup = api.nvim_create_augroup
+local augroup = api.nvim_create_augroup
+
+-- Highlight on yank
+autocmd("TextYankPost", {
+	group = augroup("YankHighlight", { clear = true }),
+	callback = function()
+		vim.highlight.on_yank { higroup = "IncSearch", timeout = "50" }
+	end,
+})
 
 -- Don't list quickfix buffers
 autocmd("FileType", {
@@ -46,13 +54,12 @@ autocmd({ "BufWritePost" }, {
 		end
 
 		local curr_dir = vim.fn.expand("%:p:h")
-		local home_path = string.sub(vim.fn.stdpath("config"), 1, -13)
-		local sys_scripts_dir = home_path .. "scripts/stilux/systems"
+		local sys_scripts_dir = vim.fn.expand("$HOME") .. "/scripts/stilux/systems"
 
 		if curr_dir:match("^" .. sys_scripts_dir) then
 			local file_path = vim.fn.expand("%:p")
 			local file_name = vim.fn.expand("%:t")
-			local sys_build_dir = home_path .. "scripts/stilux/systems-build"
+			local sys_build_dir = vim.fn.expand("$HOME") .. "/scripts/stilux/systems-build"
 			local copy_file_path = sys_build_dir .. "/" .. file_name
 
 			local command = string.format(

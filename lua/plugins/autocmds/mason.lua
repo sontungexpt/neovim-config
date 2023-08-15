@@ -3,6 +3,7 @@ local api = vim.api
 local fn = vim.fn
 local utils = require("core.utils")
 local call_cmd = utils.call_cmd
+local schedule = vim.schedule
 
 M.is_mason_installed = function()
 	local mason_path = fn.stdpath("data") .. "/mason"
@@ -44,7 +45,7 @@ M.sync_packages = function()
 	local packages_to_remove = utils.find_unique_items(installed_packages, ensured_packages)
 	local packages_to_install = utils.find_unique_items(ensured_packages, installed_packages)
 
-	vim.schedule(function()
+	schedule(function()
 		if #packages_to_remove > 0 then
 			local command = "MasonUninstall " .. table.concat(packages_to_remove, " ")
 			call_cmd(command, {
@@ -53,7 +54,7 @@ M.sync_packages = function()
 			})
 		end
 	end)
-	vim.schedule(function()
+	schedule(function()
 		if #packages_to_install > 0 then
 			local command = "MasonInstall " .. table.concat(packages_to_install, " ")
 			call_cmd(command, {
@@ -62,7 +63,7 @@ M.sync_packages = function()
 			})
 		end
 	end)
-	vim.schedule(function()
+	schedule(function()
 		if #packages_to_install > 0 or #packages_to_remove > 0 then
 			call_cmd("MasonUpdate", {
 				success = "Mason packages updated",
@@ -79,13 +80,13 @@ M.create_user_commands = function()
 	end
 
 	api.nvim_create_user_command("MasonShowInstalledPackages", function()
-		vim.schedule(function()
+		schedule(function()
 			M.print_installed_packages()
 		end)
 	end, {})
 
 	api.nvim_create_user_command("MasonShowEnsuredPackages", function()
-		vim.schedule(function()
+		schedule(function()
 			M.print_ensured_packages()
 		end)
 	end, {})
@@ -103,9 +104,9 @@ M.create_autocmds = function()
 
 	api.nvim_create_autocmd("UIEnter", {
 		group = api.nvim_create_augroup("MasonAutoGroup", {}),
-		pattern = "",
+		pattern = "*",
 		callback = function()
-			vim.schedule(function()
+			schedule(function()
 				if M.had_changed() then
 					M.sync_packages()
 				end

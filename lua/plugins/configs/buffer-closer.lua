@@ -1,6 +1,6 @@
 local options = {
 	min_remaining_buffers = 2, -- can not be less than 1
-	retirement_minutes = 3, -- can not be less than 1
+	retirement_minutes = 5, -- can not be less than 1
 
 	-- feature options
 

@@ -56,6 +56,7 @@ M.lazy_load = function(plugin)
 		end,
 	})
 end
+
 -- default opts = 1 opts = 1 for noremap and silent
 -- opts = 2 for not noremap and silent
 -- opts = 3 for noremap and not silent
@@ -125,9 +126,9 @@ end
 
 M.open_url = function()
 	local url_pattern = "(https?://[%w-_%.%?%.:/%+=&]+%f[^%w])"
-	local cursor_pos = vim.api.nvim_win_get_cursor(0)
+	local cursor_pos = api.nvim_win_get_cursor(0)
 	local cursor_col = cursor_pos[2]
-	local line = vim.api.nvim_get_current_line()
+	local line = api.nvim_get_current_line()
 
 	local url_to_open = nil
 

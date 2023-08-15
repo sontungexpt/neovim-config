@@ -79,7 +79,7 @@ map("n", "]T", function()
 end, { desc = "Next error/ warning comment" })
 
 --ccc (Color-picker)
-map({ "n", "i", "v" }, "<A-c>", "<esc>:CccPick<cr>")
+map({ "n", "i", "v" }, "<A-c>", "<esc>:CccPick<cr>", { desc = "Pick color" })
 
 -- Bufferline
 autocmd("VimEnter", {
@@ -88,7 +88,7 @@ autocmd("VimEnter", {
 })
 
 -- Markdown
-map("n", "<Leader>p", "<Cmd>MarkdownPreviewToggle<CR>")
+map("n", "<Leader>p", "<Cmd>MarkdownPreviewToggle<CR>", { desc = "Toggle markdown preview" })
 
 -- LSP-saga
 -- Only create keymap for lsp-saga if lsp is attached
