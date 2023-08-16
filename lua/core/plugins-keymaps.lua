@@ -219,5 +219,5 @@ end, { desc = "Scopes" })
 
 -- wilder (this is more keymap to use wilder easily)
 -- default keymap is set in plugins.configs.wilder
-map("c", "<C-j>", "wilder#in_context() ? wilder#next() : '<Tab>'", 5)
-map("c", "<C-k>", "wilder#in_context() ? wilder#previous() : '<S-Tab>'", 5)
+map("c", "<C-j>", "wilder#in_context() ? wilder#next() : '<C-j>'", 5)
+map("c", "<C-k>", "wilder#in_context() ? wilder#previous() : '<C-k>'", 5)

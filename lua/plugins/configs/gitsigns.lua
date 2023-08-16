@@ -46,35 +46,47 @@ gitsigns.setup {
 		enable = false,
 	},
 	on_attach = function(bufnr)
-		-- local function map(mode, lhs, rhs, opts)
-		-- 	opts = vim.tbl_extend("force", { noremap = true, silent = true }, opts or {})
-		-- 	vim.api.nvim_buf_set_keymap(bufnr, mode, lhs, rhs, opts)
-		-- end
+		local gs = package.loaded.gitsigns
+		local function map(mode, key, map_to, opts)
+			opts.buffer = bufnr
+			require("core.utils").map(mode, key, map_to, opts)
+		end
 
-		local map = require("core.utils").map
 		-- Navigation
-		map("n", "]g", "&diff ? ']c' : '<cmd>Gitsigns next_hunk<CR>'", { expr = true, desc = "Next hunk" })
-		map("n", "[g", "&diff ? '[c' : '<cmd>Gitsigns prev_hunk<CR>'", { expr = true, desc = "Prev hunk" })
-		map("n", "<leader>gs", ":Gitsigns stage_hunk<CR>", { desc = "Stage hunk" })
-		map("v", "<leader>gs", "<cmd>Gitsigns stage_buffer<CR>", { desc = "Stage buffer" })
-		map("n", "<leader>gr", "<cmd>Gitsigns reset_hunk<CR>", { desc = "Reset hunk" })
-		map("v", "<leader>gr", "<cmd>Gitsigns reset_hunk<CR>", { desc = "Reset hunk" })
-		map("n", "<leader>gu", "<cmd>Gitsigns undo_stage_hunk<CR>", { desc = "Undo stage hunk" })
-		map("n", "<leader>gR", "<cmd>Gitsigns reset_buffer<CR>", { desc = "Reset buffer" })
-		map("n", "<leader>gp", "<cmd>Gitsigns preview_hunk<CR>", { desc = "Preview hunk" })
-		map(
-			"n",
-			"<leader>gb",
-			'<cmd>lua require"gitsigns".blame_line{full=true}<CR>',
-			{ desc = "Blame line" }
-		)
-		map("n", "<leader>gd", "<cmd>Gitsigns diffthis<CR>", { desc = "Diff this" })
-		map("n", "<leader>gD", '<cmd>lua require"gitsigns".diffthis("~")<CR>', { desc = "Diff this" })
-		map("n", "<leader>gd", "<cmd>Gitsigns toggle_deleted<CR>", { desc = "Toggle deleted" })
-
-		-- Text object
-		-- map('o', 'ih', ':<C-U>Gitsigns select_hunk<CR>')
-		-- map('x', 'ih', ':<C-U>Gitsigns select_hunk<CR>')
+		map("n", "]g", function()
+			if vim.wo.diff then
+				return "]g"
+			end
+			vim.schedule(function()
+				gs.next_hunk()
+			end)
+			return "<Ignore>"
+		end, { expr = true, desc = "Next hunk" })
+		map("n", "[g", function()
+			if vim.wo.diff then
+				return "[g"
+			end
+			vim.schedule(function()
+				gs.prev_hunk()
+			end)
+			return "<Ignore>"
+		end, { expr = true, desc = "Prev hunk" })
+		map("n", "<leader>gs", gs.stage_hunk, { desc = "Stage hunk" })
+		map("v", "<leader>gs", function()
+			gs.stage_hunk { vim.fn.line("."), vim.fn.line("v") }
+		end, { desc = "Stage hunk" })
+		map("n", "<leader>gr", gs.reset_hunk, { desc = "Reset hunk" })
+		map("v", "<leader>gr", function()
+			gs.reset_hunk { vim.fn.line("."), vim.fn.line("v") }
+		end, { desc = "Reset hunk" })
+		map("n", "<leader>gu", gs.undo_stage_hunk, { desc = "Undo stage hunk" })
+		map("n", "<leader>gR", gs.reset_buffer, { desc = "Reset buffer" })
+		map("n", "<leader>gp", gs.preview_hunk, { desc = "Preview hunk" })
+		map("n", "<leader>gb", gs.toggle_current_line_blame, { desc = "Blame line" })
+		map("n", "<leader>gd", gs.diffthis, { desc = "Diff this" })
+		map("n", "<leader>gD", function()
+			gs.diffthis("~")
+		end, { desc = "Diff this" })
 	end,
 }
 
