@@ -1,6 +1,6 @@
 local options = {
 	cursorline = {
-		enable = true,
+		enable = false,
 		timeout = 400,
 		number = false,
 	},

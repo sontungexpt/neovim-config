@@ -1,4 +1,4 @@
--- n, v, i, t = mode names
+-- n, v, i, t, x = mode names
 -- default opts = 1
 -- opts = 1 for noremap and silent opts = 2 for not noremap and silent
 -- opts = 3 for noremap and not silent
@@ -7,6 +7,12 @@
 
 local utils = require("core.utils")
 local map = utils.map
+
+-- Remap for dealing with word wrap
+map({ "n", "x" }, "k", 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', 5)
+map({ "n", "x" }, "j", 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', 5)
+map({ "n", "v" }, "<Up>", 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', 5)
+map({ "n", "v" }, "<Down>", 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', 5)
 
 --Back to normal mode
 map({ "i", "c" }, "jj", "<esc>", 2)
@@ -37,7 +43,6 @@ map({ "n", "v" }, "cd", "<esc>:cd %:p:h<cr>:pwd<cr>", 3)
 map({ "n", "v" }, "Q", "<esc>:bd<cr>")
 
 --Open the link with default browser
--- map({ "n", "v" }, "gx", "<esc>:execute 'silent! !xdg-open ' . shellescape(expand('<cWORD>'))<cr>")
 map({ "n", "v" }, "gx", function()
 	require("core.utils").open_url()
 end, { desc = "Open URL under cursor" })
@@ -61,14 +66,12 @@ map("n", "gv", "<C-w>t<C-w>H")
 map("n", "gh", "<C-w>t<C-w>K")
 
 -- Split horizontally
--- map("n", "<A-s>", ":split<CR>")
 map("n", "<A-s>", function()
 	local status_ok = utils.is_plugin_installed("focus.nvim") and vim.fn.exists("FocusSplitDown") ~= 0
 	vim.api.nvim_command(status_ok and "FocusSplitDown" or "split")
 end, { desc = "Split Down" })
 
 -- Split vertically
--- map("n", "<A-v>", ":vsplit<CR>")
 map("n", "<A-v>", function()
 	local status_ok = utils.is_plugin_installed("focus.nvim") and vim.fn.exists("FocusSplitRight") ~= 0
 	vim.api.nvim_command(status_ok and "FocusSplitRight" or "vsplit")
