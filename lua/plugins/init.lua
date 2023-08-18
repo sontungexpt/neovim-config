@@ -447,7 +447,7 @@ local default_plugins = {
 
 	{
 		"lewis6991/gitsigns.nvim",
-		ft = "gitcommit",
+		ft = { "gitcommit" },
 		init = function()
 			-- load gitsigns only when a git file is opened
 			vim.api.nvim_create_autocmd({ "BufRead" }, {
@@ -471,7 +471,7 @@ local default_plugins = {
 	{
 		"akinsho/git-conflict.nvim",
 		version = "*",
-		ft = "gitcommit",
+		ft = { "gitcommit" },
 		init = function()
 			-- load git-conflict only when a git file is opened
 			vim.api.nvim_create_autocmd({ "BufRead" }, {
