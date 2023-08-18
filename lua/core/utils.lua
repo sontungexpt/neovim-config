@@ -134,10 +134,10 @@ M.find_url = function(text, start_pos)
 	start_pos = start_pos or 0
 
 	for pattern, prefix in pairs(patterns) do
-		local start_result, end_result, url = text:find(pattern, start_pos)
+		local start_pos_result, end_pos_result, url = text:find(pattern, start_pos)
 		if url then
 			url = prefix .. url
-			return start_result, end_result, url
+			return start_pos_result, end_pos_result, url
 		end
 	end
 
@@ -184,48 +184,6 @@ M.open_url = function()
 		})
 	end
 end
-
--- M.open_url = function()
--- 	local url_pattern = "(https?://[%w-_%.%?%.:/%+=&]+%f[^%w])"
--- 	local cursor_pos = api.nvim_win_get_cursor(0)
--- 	local cursor_col = cursor_pos[2]
--- 	local line = api.nvim_get_current_line()
-
--- 	local url_to_open = nil
-
--- 	-- get the first url in the line
--- 	local start_pos, end_pos, url = line:find(url_pattern)
-
--- 	while url do
--- 		url_to_open = url
--- 		-- if the url under cursor, then break
--- 		if cursor_col >= start_pos and cursor_col <= end_pos then
--- 			break
--- 		end
-
--- 		-- find the next url
--- 		start_pos, end_pos, url = line:find(url_pattern, end_pos + 1)
--- 	end
-
--- 	if url_to_open then
--- 		local shell_safe_url = fn.shellescape(url_to_open)
--- 		local command = ""
--- 		if vim.loop.os_uname().sysname == "Linux" then
--- 			command = "silent! !xdg-open " .. shell_safe_url
--- 		elseif vim.loop.os_uname().sysname == "Darwin" then
--- 			command = "silent! !open " .. shell_safe_url
--- 		elseif vim.loop.os_uname().sysname == "Windows" then
--- 			command = "silent! !start " .. shell_safe_url
--- 		else
--- 			print("Unknown operating system.")
--- 			return
--- 		end
--- 		M.call_cmd(command, {
--- 			success = "Opening " .. url_to_open .. " successfully.",
--- 			error = "Opening " .. url_to_open .. " failed.",
--- 		})
--- 	end
--- end
 
 M.is_same_array = function(table1, table2) -- O(n)
 	if #table1 ~= #table2 then
