@@ -59,7 +59,12 @@ local default_plugins = {
 
 	{
 		"zbirenbaum/copilot.lua",
-		build = ":Copilot auth",
+		build = function()
+			vim.schedule(function()
+				vim.api.nvim_command("Copilot auth")
+			end)
+		end,
+		-- build = ":Copilot auth",
 		cmd = "Copilot",
 		event = "InsertEnter",
 		opts = function()
@@ -88,6 +93,7 @@ local default_plugins = {
 			"FocusSplitDown",
 			"FocusSplitUp",
 			"FocusSplitRight",
+			"NvimTreeToggle",
 		},
 		opts = function()
 			return require("plugins.configs.nvim-focus")

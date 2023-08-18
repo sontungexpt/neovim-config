@@ -16,12 +16,14 @@ M.create_autocmds = function()
 		return
 	end
 
-	vim.api.nvim_create_autocmd({ "VimEnter" }, {
+	vim.api.nvim_create_autocmd({ "UIEnter" }, {
 		pattern = "*",
 		group = vim.api.nvim_create_augroup("CopilotAutoGroup", {}),
 		callback = function()
 			if not M.has_copilot_auth() then
-				vim.cmd("Copilot auth")
+				vim.schedule(function()
+					vim.api.nvim_command("Copilot auth")
+				end)
 			end
 		end,
 	})

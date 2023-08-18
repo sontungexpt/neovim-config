@@ -19,6 +19,9 @@ options.shortmess:append("sI")
 g.loaded_netrw = 1
 g.loaded_netrwPlugin = 1
 
+-- Hide mode
+options.showmode = false -- Dont show mode since we have a statusline
+
 -- fold
 options.foldenable = false
 

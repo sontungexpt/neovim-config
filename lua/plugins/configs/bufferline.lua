@@ -50,10 +50,12 @@ M.opts = {
 		offsets = {
 			{
 				filetype = "NvimTree",
-				text = "File Explorer",
+				-- text = "File Explorer",
+				text = "",
 				text_align = "center", --"left" | "center" | "right",
 				padding = 1,
-				highlight = "Normal",
+				-- highlight = "Normal",
+				highlight = "TabLine",
 				separator = false,
 			},
 		},
