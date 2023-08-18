@@ -57,7 +57,9 @@ M.lazy_load = function(plugin)
 	})
 end
 
--- default opts = 1 opts = 1 for noremap and silent
+---
+-- default opts = 1
+-- opts = 1 for noremap and silent
 -- opts = 2 for not noremap and silent
 -- opts = 3 for noremap and not silent
 -- opts = 4 for not noremap and not silent
