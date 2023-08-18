@@ -129,7 +129,6 @@ M.find_url = function(text, start_pos)
 		["(https?://[%w-_%.%?%.:/%+=&]+%f[^%w])"] = "", --url
 		['["]([^%s]*)["]:'] = "https://www.npmjs.com/package/", --npm package
 		["[\"']([^%s~/]*/[^%s~/]*)[\"']"] = "https://github.com/", --plugin name git
-		["([a-zA-Z0-9_/%-%.~@\\+#]+%.[a-zA-Z0-9_/%-%.~@\\+#%=?&:]+)"] = "https://", --url without http(s)
 	}
 	start_pos = start_pos or 0
 
