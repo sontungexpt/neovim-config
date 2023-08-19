@@ -45,7 +45,7 @@ map({ "n", "v" }, "Q", "<esc>:bd<cr>")
 
 --Open the link with default browser
 map({ "n", "v" }, "gx", function()
-	require("core.utils").open_url()
+	require("core.url-helpers").open_url()
 end, { desc = "Open URL under cursor" })
 
 --Clean searching
