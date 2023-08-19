@@ -61,10 +61,7 @@ M.sync_packages = function()
 				success = "Installed missing mason packages",
 				error = "MasonInstall error",
 			})
-		end
-	end)
-	schedule(function()
-		if #packages_to_install > 0 or #packages_to_remove > 0 then
+
 			call_cmd("MasonUpdate", {
 				success = "Mason packages updated",
 				error = "MasonUpdate error",

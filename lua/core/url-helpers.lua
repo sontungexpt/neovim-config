@@ -3,10 +3,16 @@ local fn = vim.fn
 
 local M = {}
 
+M.DEEP_PATTERN =
+	"\\v\\c%(%(h?ttps?|ftp|file|ssh|git)://|[a-z]+[@][a-z]+[.][a-z]+:)%([&:#*@~%_\\-=?!+;/0-9a-z]+%(%([.;/?]|[.][.]+)[&:#*@~%_\\-=?!+/0-9a-z]+|:\\d+|,%(%(%(h?ttps?|ftp|file|ssh|git)://|[a-z]+[@][a-z]+[.][a-z]+:)@![0-9a-z]+))*|\\([&:#*@~%_\\-=?!+;/.0-9a-z]*\\)|\\[[&:#*@~%_\\-=?!+;/.0-9a-z]*\\]|\\{%([&:#*@~%_\\-=?!+;/.0-9a-z]*|\\{[&:#*@~%_\\-=?!+;/.0-9a-z]*\\})\\})+"
+
 M.PATTERNS = {
-	["(https?://[%w-_%.%?%.:/%+=&]+%f[^%w])"] = "", --url
+	["(https?://[%w-_%.%?%.:/%+=&]+%f[^%w])"] = "", --url http(s)
 	['["]([^%s]*)["]:'] = "https://www.npmjs.com/package/", --npm package
 	["[\"']([^%s~/]*/[^%s~/]*)[\"']"] = "https://github.com/", --plugin name git
+	["%[.*%]%((https?://[a-zA-Z0-9_/%-%.~@\\+#=?&]+)%)"] = "", --markdown link
+	['brew ["]([^%s]*)["]'] = "https://formulae.brew.sh/formula/", --brew formula
+	['cask ["]([^%s]*)["]'] = "https://formulae.brew.sh/cask/", -- cask formula
 }
 
 M.find_url = function(text, start_pos)
@@ -20,7 +26,15 @@ M.find_url = function(text, start_pos)
 		end
 	end
 
-	return nil, nil, nil
+	-- fallback to deep pattern
+	-- TODO: enable this when create a plugin for url support
+	-- local results = fn.matchstrpos(text, M.DEEP_PATTERN, start_pos)
+	-- -- result[1] is url, result[2] is start_pos, result[3] is end_pos
+	-- if results[1] ~= "" then
+	-- 	return results[2], results[3], results[1]
+	-- end
+
+	return nil, nil, nil -- no url found
 end
 
 M.open_url = function()
