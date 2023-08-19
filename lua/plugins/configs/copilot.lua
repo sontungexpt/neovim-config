@@ -29,7 +29,7 @@ local options = {
 			accept_line = false,
 			next = "<M-]>",
 			prev = "<M-[>",
-			dismiss = "<S-Tab><M-Tab>",
+			dismiss = "<C-Tab><M-Tab>",
 		},
 	},
 	filetypes = {

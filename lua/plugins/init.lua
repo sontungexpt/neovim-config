@@ -93,7 +93,6 @@ local default_plugins = {
 			"FocusSplitDown",
 			"FocusSplitUp",
 			"FocusSplitRight",
-			"NvimTreeToggle",
 		},
 		opts = function()
 			return require("plugins.configs.nvim-focus")
@@ -255,6 +254,10 @@ local default_plugins = {
 
 	{
 		"numToStr/Comment.nvim",
+		dependencies = {
+			"JoosepAlviste/nvim-ts-context-commentstring",
+			"nvim-treesitter/nvim-treesitter",
+		},
 		keys = {
 			{ "gcc", mode = "n", desc = "Comment toggle current line" },
 			{ "gc", mode = { "n", "o" }, desc = "Comment toggle linewise" },
