@@ -1,6 +1,8 @@
 local api = vim.api
 local fn = vim.fn
 
+local logger = require("core.logger")
+
 local M = {}
 
 M.load_config = function()
@@ -11,39 +13,21 @@ end
 ---
 -- @tparam string command: The command to execute
 -- @tparam table msg: The message to print on success or error
--- M.call_cmd = function(command, msg)
--- 	local success, error_message = pcall(api.nvim_command, command)
--- 	if success then
--- 		if msg and msg.success then
--- 			print(msg.success)
--- 		else
--- 			print("Success")
--- 		end
--- 	else
--- 		if msg and msg.error then
--- 			print(msg.error .. ": " .. error_message)
--- 		else
--- 			print(error_message)
--- 		end
--- 	end
--- end
 M.call_cmd = function(command, msg)
 	local success, error_message = pcall(api.nvim_command, command)
-	vim.schedule(function()
-		if success then
-			if msg and msg.success then
-				vim.notify(msg.success, vim.log.levels.INFO, { title = "URL Handler" })
-			else
-				vim.notify("Success", vim.log.levels.INFO, { title = "URL Handler" })
-			end
+	if success then
+		if msg and msg.success then
+			logger.info(msg.success)
 		else
-			if msg and msg.error then
-				vim.notify(msg.error .. ": " .. error_message, vim.log.levels.ERROR, { title = "URL Handler" })
-			else
-				vim.notify(error_message, vim.log.levels.ERROR, { title = "URL Handler" })
-			end
+			logger.info("Success")
 		end
-	end)
+	else
+		if msg and msg.error then
+			logger.error(msg.error .. ": " .. error_message)
+		else
+			logger.error("Error: " .. error_message)
+		end
+	end
 end
 
 M.is_plugin_installed = function(plugin_name)

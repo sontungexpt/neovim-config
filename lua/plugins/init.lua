@@ -1,5 +1,6 @@
--- All plugins have lazy=true by default,to load a plugin on startup just lazy=false
+-- All plugins have lazy=true by default,to load a plugin on startup just lazy=falseinit
 local default_plugins = {
+
 	{
 		-- dir = "/home/stilux/Data/My-Workspaces/nvim-extensions/url-open/",
 		-- dev = true,
@@ -360,6 +361,21 @@ local default_plugins = {
 
 	{
 		"neovim/nvim-lspconfig",
+		dependencies = {
+			-- {
+			-- 	"folke/neodev.nvim",
+			-- 	opts = function()
+			-- 		return require("plugins.configs.neodev")
+			-- 	end,
+			-- 	config = function(_, opts)
+			-- 		local status_ok, neodev = pcall(require, "neodev")
+			-- 		if not status_ok then
+			-- 			return
+			-- 		end
+			-- 		neodev.setup(opts)
+			-- 	end,
+			-- },
+		},
 		init = function()
 			require("core.utils").lazy_load("nvim-lspconfig")
 		end,
@@ -666,19 +682,6 @@ local default_plugins = {
 				},
 				config = function()
 					require("plugins.configs.dap.nvim-dap")
-				end,
-			},
-			{
-				"folke/neodev.nvim",
-				config = function()
-					local status_ok, neodev = pcall(require, "neodev")
-					if not status_ok then
-						return
-					end
-
-					neodev.setup {
-						library = { plugins = { "nvim-dap-ui" }, types = true },
-					}
 				end,
 			},
 		},
