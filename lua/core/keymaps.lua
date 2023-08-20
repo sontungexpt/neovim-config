@@ -44,9 +44,7 @@ map({ "n", "v" }, "cd", "<esc>:cd %:p:h<cr>:pwd<cr>", 3)
 map({ "n", "v" }, "Q", "<esc>:bd<cr>")
 
 --Open the link with default browser
-map({ "n", "v" }, "gx", function()
-	require("core.url-helpers").open_url()
-end, { desc = "Open URL under cursor" })
+map({ "n", "v" }, "gx", "<esc>:OpenUrlUnderCursor<cr>", { desc = "Open URL under cursor" })
 
 --Clean searching
 map({ "n", "v" }, "C", "<esc>:noh<cr>:set ignorecase<cr>")

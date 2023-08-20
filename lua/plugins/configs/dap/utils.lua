@@ -17,16 +17,12 @@ M.continue_debugging = function()
 	vim.schedule(function()
 		local lang = M.lang[vim.bo.filetype]
 		if not lang then
-			print(
-				"No language config found for "
-					.. vim.bo.filetype
-					.. ". Config for language in lua/plugins/configs/dap/utils.lua"
-			)
 			vim.notify(
 				"No language config found for "
 					.. vim.bo.filetype
 					.. ". Config for language in lua/plugins/configs/dap/utils.lua",
-				"error"
+				vim.log.levels.ERROR,
+				{ title = "Dap continue error" }
 			)
 			return
 		end
@@ -47,14 +43,12 @@ M.continue_debugging = function()
 			elseif status == -1 then
 				-- Job was stopped (e.g. user cancelled the debugging session)
 				fn.jobstop(job_id)
-				print("job stopped suddenly")
-				vim.notify("job stopped suddenly", "error")
+				vim.notify("job stopped suddenly", vim.log.levels.ERROR, { title = "Dap continue error" })
 				break
 			else
 				-- Job failed to start or encountered an error
 				fn.jobstop(job_id)
-				print(lang.msg.failed)
-				vim.notify(lang.msg.failed or "job failed", "error")
+				vim.notify(lang.msg.failed, vim.log.levels.ERROR, { title = "Dap continue error" })
 				break
 			end
 
@@ -62,8 +56,7 @@ M.continue_debugging = function()
 			if elapsed_time / 1e6 >= timeout then
 				-- Job timed out
 				fn.jobstop(job_id)
-				print(lang.msg.timed_out)
-				vim.notify(lang.msg.timed_out or "time out", "warning")
+				vim.notify(lang.msg.timed_out, vim.log.levels.WARN, { title = "Dap continue error" })
 				break
 			end
 		end

@@ -11,22 +11,39 @@ end
 ---
 -- @tparam string command: The command to execute
 -- @tparam table msg: The message to print on success or error
--- @usage call_cmd("echo 'Hello World'", { success = "Hello World", error = "Failed to print Hello World" })
+-- M.call_cmd = function(command, msg)
+-- 	local success, error_message = pcall(api.nvim_command, command)
+-- 	if success then
+-- 		if msg and msg.success then
+-- 			print(msg.success)
+-- 		else
+-- 			print("Success")
+-- 		end
+-- 	else
+-- 		if msg and msg.error then
+-- 			print(msg.error .. ": " .. error_message)
+-- 		else
+-- 			print(error_message)
+-- 		end
+-- 	end
+-- end
 M.call_cmd = function(command, msg)
 	local success, error_message = pcall(api.nvim_command, command)
-	if success then
-		if msg and msg.success then
-			print(msg.success)
+	vim.schedule(function()
+		if success then
+			if msg and msg.success then
+				vim.notify(msg.success, vim.log.levels.INFO, { title = "URL Handler" })
+			else
+				vim.notify("Success", vim.log.levels.INFO, { title = "URL Handler" })
+			end
 		else
-			print("Success")
+			if msg and msg.error then
+				vim.notify(msg.error .. ": " .. error_message, vim.log.levels.ERROR, { title = "URL Handler" })
+			else
+				vim.notify(error_message, vim.log.levels.ERROR, { title = "URL Handler" })
+			end
 		end
-	else
-		if msg and msg.error then
-			print(msg.error .. ": " .. error_message)
-		else
-			print(error_message)
-		end
-	end
+	end)
 end
 
 M.is_plugin_installed = function(plugin_name)
