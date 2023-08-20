@@ -1,9 +1,10 @@
 -- All plugins have lazy=true by default,to load a plugin on startup just lazy=false
 local default_plugins = {
 	{
-		-- dir = "/home/stilux/Data/My-Workspaces/nvim-extensions/url-open",
+		-- dir = "/home/stilux/Data/My-Workspaces/nvim-extensions/url-open/",
 		-- dev = true,
 		"sontungexpt/url-open",
+		branch = "mini",
 		cmd = "OpenUrlUnderCursor",
 		opts = function()
 			return require("plugins.configs.url-open")
@@ -283,7 +284,9 @@ local default_plugins = {
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 		},
-		event = "UIEnter",
+		init = function()
+			require("core.utils").lazy_load("todo-comments.nvim")
+		end,
 		opts = function()
 			return require("plugins.configs.todo-comments")
 		end,
