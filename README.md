@@ -18,39 +18,61 @@ This is my personal neovim configuration, written completely in Lua. It uses a l
 
 - **[copilot](https://github.com/zbirenbaum/copilot.lua):** Enables support for OpenAI's Copilot.
 
-- **[nvim-cmp](https://github.com/hrsh7th/nvim-cmp):** Provides autocomplete functionality using nvim-cmp, a lightweight completion plugin.
+- **[nvim-cmp](https://github.com/hrsh7th/nvim-cmp):** Provides autocomplete functionality using nvim-cmp,
+  a lightweight completion plugin.
 
-- **[nvim-lspconfig](https://github.com/neovim/nvim-lspconfig):** Implements Language Server Protocol (LSP) support using nvim-lspconfig, a simple interface for configuring language servers.
+- **[nvim-lspconfig](https://github.com/neovim/nvim-lspconfig):** Implements Language Server Protocol (LSP)
+  support using nvim-lspconfig, a simple interface for configuring language servers.
 
-- **[null-ls](https://github.com/jose-elias-alvarez/null-ls.nvim):** Enables automatic formatting with null-ls, a plugin that allows using external formatters as Neovim plugins.
+- **[null-ls](https://github.com/jose-elias-alvarez/null-ls.nvim):** Enables automatic formatting with null-ls,
+  a plugin that allows using external formatters as Neovim plugins.
 
-- **[mason](https://github.com/williamboman/mason.nvim):** Automatically installs LSP servers, formatters, linters, and debug adapters using Mason, a Neovim plugin manager.
+- **[mason](https://github.com/williamboman/mason.nvim):** Automatically installs LSP servers,
+  formatters, linters, and debug adapters using Mason, a Neovim plugin manager.
 
-- **[nvim-tree](https://github.com/nvim-tree/nvim-tree.lua):** Includes a file explorer using nvim-tree, a fast and lightweight file explorer plugin.
+- **[nvim-tree](https://github.com/nvim-tree/nvim-tree.lua):** Includes a file explorer using nvim-tree,
+  a fast and lightweight file explorer plugin.
 
-- **[gitsigns](https://github.com/lewis6991/gitsigns.nvim), [git-conflict](https://github.com/akinsho/git-conflict.nvim):** Integrates Git functionality with gitsigns and git-conflict plugins for a seamless Git experience.
+- **[gitsigns](https://github.com/lewis6991/gitsigns.nvim),
+  [git-conflict](https://github.com/akinsho/git-conflict.nvim):** Integrates Git functionality
+  with gitsigns and git-conflict plugins for a seamless Git experience.
 
-- **[telescope](https://github.com/nvim-telescope/telescope.nvim):** Provides a file finder using telescope, a fuzzy finder plugin for files, buffers, and more.
+- **[telescope](https://github.com/nvim-telescope/telescope.nvim):** Provides a file finder using telescope,
+  a fuzzy finder plugin for files, buffers, and more.
 
-- **[bufferline](https://github.com/akinsho/bufferline.nvim):** Manages buffers with bufferline, a simple and configurable interface for buffer management.
+- **[bufferline](https://github.com/akinsho/bufferline.nvim):** Manages buffers with bufferline,
+  a simple and configurable interface for buffer management.
 
-- **[lualine](https://github.com/nvim-lualine/lualine.nvim):** Displays a statusline using lualine, a fast and lightweight statusline plugin with customizable options.
+- **[lualine](https://github.com/nvim-lualine/lualine.nvim):** Displays a statusline using lualine,
+  a fast and lightweight statusline plugin with customizable options.
 
-- **[toggleterm](https://github.com/akinsho/toggleterm.nvim):** Includes a terminal using toggleterm, a plugin for managing terminals within Neovim.
+- **[toggleterm](https://github.com/akinsho/toggleterm.nvim):** Includes a terminal using toggleterm,
+  a plugin for managing terminals within Neovim.
 
-- **[nvim-ufo](https://github.com/kevinhwang91/nvim-ufo):** Supports folding functionality with nvim-ufo, a lightweight folding plugin.
+- **[nvim-ufo](https://github.com/kevinhwang91/nvim-ufo):** Supports folding functionality with nvim-ufo,
+  a lightweight folding plugin.
 
 - **[comment](https://github.com/numToStr/Comment.nvim):** Includes a plugin for easily generating comments.
 
-- **[treesitter](https://github.com/nvim-treesitter/nvim-treesitter), [autopairs](https://github.com/windwp/nvim-autopairs), [nvim-ts-autotag](https://github.com/windwp/nvim-ts-autotag), [rainbow-delimiters](https://github.com/HiPhish/rainbow-delimiters.nvim)** Provides syntax highlighting using Treesitter, Autopairs, Nvim-ts-autotag, and Ts-rainbow plugins.
+- **[treesitter](https://github.com/nvim-treesitter/nvim-treesitter),
+  [autopairs](https://github.com/windwp/nvim-autopairs),
+  [nvim-ts-autotag](https://github.com/windwp/nvim-ts-autotag),
+  [rainbow-delimiters](https://github.com/HiPhish/rainbow-delimiters.nvim)** Provides syntax
+  highlighting using Treesitter, Autopairs, Nvim-ts-autotag, and Ts-rainbow plugins.
 
-- **[dap](https://github.com/mfussenegger/nvim-dap), [dapui](https://github.com/rcarriga/nvim-dap-ui):** Offers debugging capabilities with dap and dapui plugins.
+- **[dap](https://github.com/mfussenegger/nvim-dap), [dapui](https://github.com/rcarriga/nvim-dap-ui):**
+  Offers debugging capabilities with dap and dapui plugins.
 
-- **[buffer-closer](https://github.com/sontungexpt/buffer-closer):** Automatically closes unused buffers using buffer-closer, a plugin for managing buffers.
+- **[buffer-closer](https://github.com/sontungexpt/buffer-closer):** Automatically closes
+  unused buffers using buffer-closer, a plugin for managing buffers.
 
-- **[ccc](https://github.com/uga-rosa/ccc.nvim):** Includes a color picker using ccc, a fast and lightweight color picker plugin
+- **[ccc](https://github.com/uga-rosa/ccc.nvim):** Includes a color picker using ccc,
+  a fast and lightweight color picker plugin
 
-- **[focus](https://github.com/sontungexpt/focus.nvim):** Automatically resizes windows based on focus using a dedicated plugin.
+- **[focus](https://github.com/sontungexpt/focus.nvim):** Automatically resizes windows
+  based on focus using a dedicated plugin.
+
+- **[url-open](https://github.com/sontungexpt/url-open):** Open the url under cursor.
 
 - And more... dependencies are listed in the plugins/init.lua file.
 
