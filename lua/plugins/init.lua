@@ -160,6 +160,7 @@ local default_plugins = {
 			"jsx",
 		},
 	},
+
 	{
 		"VebbNix/lf-vim",
 		ft = "lf",
@@ -176,6 +177,7 @@ local default_plugins = {
 		end,
 		cmd = {
 			"TSInstall",
+			"TSInstallFromGrammar",
 			"TSBufEnable",
 			"TSBufDisable",
 			"TSModuleInfo",
@@ -258,7 +260,7 @@ local default_plugins = {
 		"numToStr/Comment.nvim",
 		dependencies = {
 			"JoosepAlviste/nvim-ts-context-commentstring",
-			-- "nvim-treesitter/nvim-treesitter",
+			"nvim-treesitter/nvim-treesitter",
 		},
 		keys = {
 			{ "gcc", mode = "n", desc = "Comment toggle current line" },
@@ -361,21 +363,21 @@ local default_plugins = {
 
 	{
 		"neovim/nvim-lspconfig",
-		dependencies = {
-			-- {
-			-- 	"folke/neodev.nvim",
-			-- 	opts = function()
-			-- 		return require("plugins.configs.neodev")
-			-- 	end,
-			-- 	config = function(_, opts)
-			-- 		local status_ok, neodev = pcall(require, "neodev")
-			-- 		if not status_ok then
-			-- 			return
-			-- 		end
-			-- 		neodev.setup(opts)
-			-- 	end,
-			-- },
-		},
+		-- dependencies = {
+		-- 	-- {
+		-- 	-- 	"folke/neodev.nvim",
+		-- 	-- 	opts = function()
+		-- 	-- 		return require("plugins.configs.neodev")
+		-- 	-- 	end,
+		-- 	-- 	config = function(_, opts)
+		-- 	-- 		local status_ok, neodev = pcall(require, "neodev")
+		-- 	-- 		if not status_ok then
+		-- 	-- 			return
+		-- 	-- 		end
+		-- 	-- 		neodev.setup(opts)
+		-- 	-- 	end,
+		-- 	-- },
+		-- },
 		init = function()
 			require("core.utils").lazy_load("nvim-lspconfig")
 		end,
