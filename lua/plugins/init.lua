@@ -1,8 +1,8 @@
--- All plugins have lazy=true by default,to load a plugin on startup just lazy=falseinit
+-- All plugins have lazy=true by default,to load a plugin on startup just lazy=false
 local default_plugins = {
 
 	{
-		-- dir = "/home/stilux/Data/My-Workspaces/nvim-extensions/url-open/",
+		-- dir = "/home/stilux/Data/My-Workspaces/nvim-extensions/url-open",
 		-- dev = true,
 		"sontungexpt/url-open",
 		branch = "mini",
@@ -258,7 +258,7 @@ local default_plugins = {
 		"numToStr/Comment.nvim",
 		dependencies = {
 			"JoosepAlviste/nvim-ts-context-commentstring",
-			"nvim-treesitter/nvim-treesitter",
+			-- "nvim-treesitter/nvim-treesitter",
 		},
 		keys = {
 			{ "gcc", mode = "n", desc = "Comment toggle current line" },

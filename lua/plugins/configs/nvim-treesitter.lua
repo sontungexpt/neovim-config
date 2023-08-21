@@ -1,5 +1,29 @@
 local options = {
-	ensure_installed = "all",
+	-- ensure_installed = "all",
+	ensure_installed = {
+		-- c/c++/cmake
+		"cpp",
+		"c",
+		"cmake",
+
+		"bash",
+		"lua",
+		"python",
+		"rust",
+		"toml",
+
+		"dockerfile",
+		"markdown",
+		"markdown_inline",
+
+		-- web dev
+		"css",
+		"html",
+		"javascript",
+		"json",
+		"typescript",
+		"yaml",
+	},
 	ignore_install = {},
 	highlight = {
 		enable = true,
