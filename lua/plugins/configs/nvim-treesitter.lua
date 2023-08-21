@@ -1,28 +1,44 @@
 local options = {
 	-- ensure_installed = "all",
 	ensure_installed = {
-		-- c/c++/cmake
+		-- popular langs
 		"cpp",
 		"c",
 		"cmake",
-
+		"c_sharp",
 		"bash",
 		"lua",
 		"python",
+		"go",
+		"java",
 		"rust",
-		"toml",
 
 		"dockerfile",
 		"markdown",
 		"markdown_inline",
+		"sql",
+		"rasi",
+		"toml",
+
+		-- git
+		"gitignore",
+		"git_rebase",
+		"git_config",
+		"gitattributes",
+		"gitcommit",
 
 		-- web dev
 		"css",
 		"html",
 		"javascript",
-		"json",
 		"typescript",
+		"json",
+		"tsx",
 		"yaml",
+		"xml",
+		"vue",
+		"svelte",
+		"scss",
 	},
 	ignore_install = {},
 	highlight = {
