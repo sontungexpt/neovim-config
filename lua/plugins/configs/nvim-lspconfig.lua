@@ -142,6 +142,7 @@ local function on_attach(client, bufnr)
 	lsp.handlers["textDocument/hover"] = lsp.with(lsp.handlers.hover, { border = "single" })
 
 	lsp.handlers["textDocument/publishDiagnostics"] = lsp.with(lsp.diagnostic.on_publish_diagnostics, {
+		signs = true,
 		underline = true,
 		virtual_text = {
 			spacing = 5,
