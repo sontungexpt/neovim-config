@@ -532,9 +532,9 @@ local default_plugins = {
 	--Lsp + cmp
 	{
 		"williamboman/mason.nvim",
-		-- build = function()
-		-- 	require("plugins.autocmds.mason").sync_packages()
-		-- end,
+		build = function()
+			require("plugins.autocmds.mason").sync_packages()
+		end,
 		init = function()
 			require("plugins.autocmds.mason").create_user_commands()
 		end,
@@ -616,7 +616,7 @@ local default_plugins = {
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 		},
-		event = { "BufWritePre", "LspAttach" },
+		event = { "BufWritePre" },
 		config = function()
 			require("plugins.configs.null-ls")
 		end,
