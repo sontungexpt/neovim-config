@@ -1,49 +1,5 @@
 local options = {
-	-- ensure_installed = "all",
-	ensure_installed = {
-		-- popular langs
-		"cpp",
-		"c",
-		"cmake",
-		"c_sharp",
-		"bash",
-		"lua",
-		"python",
-		"go",
-		"java",
-		"rust",
-		"zig",
-
-		"dockerfile",
-		"regex",
-		"markdown",
-		"markdown_inline",
-		"sql",
-		"rasi",
-		"toml",
-
-		-- git
-		"gitignore",
-		"git_rebase",
-		"git_config",
-		"gitattributes",
-		"gitcommit",
-
-		-- web dev
-		"css",
-		"html",
-		"javascript",
-		"typescript",
-		"json",
-		"json5",
-		"jsonc",
-		"tsx",
-		"yaml",
-		"xml",
-		"vue",
-		"svelte",
-		"scss",
-	},
+	ensure_installed = "all",
 	ignore_install = {},
 	highlight = {
 		enable = true,
