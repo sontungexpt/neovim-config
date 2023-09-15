@@ -1,3 +1,4 @@
+require("core.user_command")
 require("core.providers")
 require("core.options")
 require("core.autocmd")

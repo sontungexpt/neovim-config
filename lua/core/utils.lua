@@ -151,4 +151,40 @@ M.find_unique_items = function(table1, table2)
 	return not_exists
 end
 
+M.reload_config = function(quiet)
+	-- Reload options, mappings and plugins (this is managed automatically by lazy).
+	-- Never reload autocmds to avoid issues.
+	local was_modifiable = vim.opt.modifiable:get()
+	if not was_modifiable then
+		vim.opt.modifiable = true
+	end
+	local core_modules = { "core.options", "core.keymaps", "core.plugins-keymaps" }
+	local modules = vim.tbl_filter(function(module)
+		return module:find("^user%.")
+	end, vim.tbl_keys(package.loaded))
+
+	vim.tbl_map(require("plenary.reload").reload_module, vim.list_extend(modules, core_modules))
+	local success = true
+	for _, module in ipairs(core_modules) do
+		local status_ok, fault = pcall(require, module)
+		if not status_ok then
+			vim.api.nvim_err_writeln("Failed to load " .. module .. "\n\n" .. fault)
+			success = false
+		end
+	end
+	if not was_modifiable then
+		vim.opt.modifiable = false
+	end
+	if not quiet then -- if not quiet, then notify of result.
+		if success then
+			logger.info("Nvim successfully reloaded")
+		else
+			logger.error("Error reloading Nvim...")
+		end
+	end
+	vim.cmd.doautocmd("ColorScheme") -- sFor heirline.
+
+	return success
+end
+
 return M

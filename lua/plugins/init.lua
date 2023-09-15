@@ -6,6 +6,7 @@ local default_plugins = {
 		-- dev = true,
 		"sontungexpt/url-open",
 		branch = "mini",
+		event = "VeryLazy",
 		cmd = "OpenUrlUnderCursor",
 		opts = function()
 			return require("plugins.configs.url-open")

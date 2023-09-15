@@ -4,27 +4,29 @@ local autocmd = api.nvim_create_autocmd
 local augroup = api.nvim_create_augroup
 
 -- Highlight on yank
--- autocmd("TextYankPost", {
--- 	group = augroup("YankHighlight", { clear = true }),
--- 	callback = function()
--- 		vim.highlight.on_yank { higroup = "IncSearch", timeout = "120" }
--- 	end,
--- })
+autocmd("TextYankPost", {
+	group = augroup("YankHighlight", { clear = true }),
+	callback = function()
+		vim.highlight.on_yank { higroup = "IncSearch", timeout = "120" }
+	end,
+})
 
--- Don't list quickfix buffers
 autocmd("FileType", {
 	pattern = "qf",
 	command = "set nobuflisted",
+	desc = "Don't list quickfix buffers",
 })
 
--- auto change directory to config folder
 autocmd({ "VimEnter" }, {
+	group = augroup("AutocdConfigFolder", { clear = true }),
 	pattern = fn.stdpath("config") .. "/**",
 	command = "cd " .. fn.stdpath("config"),
+	desc = "Auto change directory to config folder",
 })
 
 -- generate build file for scripts in scripts/stilux/systems
 autocmd({ "BufWritePost" }, {
+	group = augroup("ScriptBuilder", { clear = true }),
 	pattern = { "*.sh" },
 	callback = function()
 		local function check_and_insert_lines(file_name)
@@ -87,32 +89,34 @@ autocmd({ "BufWritePost" }, {
 	end,
 })
 
---Remove whitespace on save
 autocmd("BufWritePre", {
 	pattern = "*",
 	command = ":%s/\\s\\+$//e",
+	desc = "Remove whitespace on save",
 })
 
--- Move to relative line number when in visual mode
 autocmd("ModeChanged", {
 	pattern = "*",
 	command = "if mode() == 'v' | set relativenumber | else | set norelativenumber | endif",
+	desc = "Move to relative line number when in visual mode",
 })
 
--- Enable syntax for .json files
 autocmd({ "BufEnter" }, {
 	pattern = "*.json",
 	command = "set filetype=jsonc",
+	desc = "Enable syntax for .json files",
 })
 
 autocmd({ "BufEnter" }, {
 	pattern = { "*.rasi" },
 	command = "set filetype=rasi",
+	desc = "Enable syntax for .rasi files",
 })
 
 autocmd({ "BufEnter" }, {
 	pattern = "*.html",
 	command = "set filetype=html",
+	desc = "Enable syntax for .html files",
 })
 
 autocmd({ "BufEnter" }, {
@@ -120,11 +124,11 @@ autocmd({ "BufEnter" }, {
 	callback = function(args)
 		vim.diagnostic.disable(args.buf)
 	end,
+	desc = "Disable diagnostic for .env files",
 })
 
---  Customize right click contextual menu.
 autocmd("VimEnter", {
-	desc = "Disable right contextual menu warning message",
+	desc = "Customize right click contextual menu.",
 	group = augroup("contextual_menu", { clear = true }),
 	callback = function()
 		-- Disable right click message
@@ -135,4 +139,11 @@ autocmd("VimEnter", {
 		)
 		vim.api.nvim_command([[menu PopUp.Start\ \Debugger <cmd>:DapContinue<CR>]])
 	end,
+})
+
+autocmd({ "BufWritePost" }, {
+	desc = "When writing a buffer, :NvimReload if the buffer is a config file.",
+	group = augroup("reload_if_buffer_is_config_file", { clear = true }),
+	pattern = fn.stdpath("config") .. "/**",
+	command = "NvimReload",
 })
