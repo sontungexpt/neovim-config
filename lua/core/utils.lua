@@ -183,8 +183,11 @@ M.reload_config = function(quiet)
 			logger.error("Error reloading Nvim...")
 		end
 	end
+
 	api.nvim_command([[colorscheme tokyonight]])
 	api.nvim_command([[let g:lightline = {'colorscheme': 'tokyonight'}]])
+	api.nvim_command("HighlightColorsOn") -- For highlight colors.
+
 	vim.cmd.doautocmd("ColorScheme") -- sFor heirline.
 
 	return success

@@ -2,10 +2,10 @@
 local default_plugins = {
 
 	{
-		-- dir = "/home/stilux/Data/My-Workspaces/nvim-extensions/url-open",
-		-- dev = true,
-		"sontungexpt/url-open",
-		branch = "mini",
+		dir = "/home/stilux/Data/My-Workspaces/nvim-extensions/url-open",
+		dev = true,
+		-- "sontungexpt/url-open",
+		-- branch = "mini",
 		event = "VeryLazy",
 		cmd = "OpenUrlUnderCursor",
 		opts = function()
