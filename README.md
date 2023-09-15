@@ -1,6 +1,6 @@
 ## Neovim Config
 
-This is my personal neovim configuration, written completely in Lua. It uses a lazy plugin manager to ensure fast startup times, even with a large number of plugins installed.
+This is my personal neovim configuration, written completely in Lua.It uses a lazy plugin manager to ensure fast startup times, even with a large number of plugins installed.
 
 ## Preview
 
