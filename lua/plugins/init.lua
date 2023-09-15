@@ -250,6 +250,7 @@ local default_plugins = {
 		cmd = {
 			"ToggleTerm",
 			"ToggleTermToggleAll",
+			"TermExec",
 		},
 		keys = { "<C-t>" },
 		config = function()
@@ -364,21 +365,22 @@ local default_plugins = {
 
 	{
 		"neovim/nvim-lspconfig",
-		-- dependencies = {
-		-- 	-- {
-		-- 	-- 	"folke/neodev.nvim",
-		-- 	-- 	opts = function()
-		-- 	-- 		return require("plugins.configs.neodev")
-		-- 	-- 	end,
-		-- 	-- 	config = function(_, opts)
-		-- 	-- 		local status_ok, neodev = pcall(require, "neodev")
-		-- 	-- 		if not status_ok then
-		-- 	-- 			return
-		-- 	-- 		end
-		-- 	-- 		neodev.setup(opts)
-		-- 	-- 	end,
-		-- 	-- },
-		-- },
+		dependencies = {
+			"lukas-reineke/lsp-format.nvim",
+			-- {
+			-- 	"folke/neodev.nvim",
+			-- 	opts = function()
+			-- 		return require("plugins.configs.neodev")
+			-- 	end,
+			-- 	config = function(_, opts)
+			-- 		local status_ok, neodev = pcall(require, "neodev")
+			-- 		if not status_ok then
+			-- 			return
+			-- 		end
+			-- 		neodev.setup(opts)
+			-- 	end,
+			-- },
+		},
 		init = function()
 			require("core.utils").lazy_load("nvim-lspconfig")
 		end,

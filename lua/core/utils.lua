@@ -158,6 +158,7 @@ M.reload_config = function(quiet)
 	if not was_modifiable then
 		vim.opt.modifiable = true
 	end
+
 	local core_modules = { "core.options", "core.keymaps", "core.plugins-keymaps" }
 	local modules = vim.tbl_filter(function(module)
 		return module:find("^user%.")
@@ -168,7 +169,7 @@ M.reload_config = function(quiet)
 	for _, module in ipairs(core_modules) do
 		local status_ok, fault = pcall(require, module)
 		if not status_ok then
-			vim.api.nvim_err_writeln("Failed to load " .. module .. "\n\n" .. fault)
+			api.nvim_err_writeln("Failed to load " .. module .. "\n\n" .. fault)
 			success = false
 		end
 	end
@@ -182,6 +183,8 @@ M.reload_config = function(quiet)
 			logger.error("Error reloading Nvim...")
 		end
 	end
+	api.nvim_command([[colorscheme tokyonight]])
+	api.nvim_command([[let g:lightline = {'colorscheme': 'tokyonight'}]])
 	vim.cmd.doautocmd("ColorScheme") -- sFor heirline.
 
 	return success

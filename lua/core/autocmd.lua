@@ -144,6 +144,6 @@ autocmd("VimEnter", {
 autocmd({ "BufWritePost" }, {
 	desc = "When writing a buffer, :NvimReload if the buffer is a config file.",
 	group = augroup("reload_if_buffer_is_config_file", { clear = true }),
-	pattern = fn.stdpath("config") .. "/**",
+	pattern = fn.stdpath("config") .. "/*.lua",
 	command = "NvimReload",
 })
