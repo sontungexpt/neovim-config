@@ -121,3 +121,18 @@ autocmd({ "BufEnter" }, {
 		vim.diagnostic.disable(args.buf)
 	end,
 })
+
+--  Customize right click contextual menu.
+autocmd("VimEnter", {
+	desc = "Disable right contextual menu warning message",
+	group = augroup("contextual_menu", { clear = true }),
+	callback = function()
+		-- Disable right click message
+		vim.api.nvim_command([[aunmenu PopUp.How-to\ disable\ mouse]])
+		-- vim.api.nvim_command [[aunmenu PopUp.-1-]] -- You can remode a separator like this.
+		vim.api.nvim_command(
+			[[menu PopUp.Toggle\ \Breakpoint <cmd>:lua require('dap').toggle_breakpoint()<CR>]]
+		)
+		vim.api.nvim_command([[menu PopUp.Start\ \Debugger <cmd>:DapContinue<CR>]])
+	end,
+})

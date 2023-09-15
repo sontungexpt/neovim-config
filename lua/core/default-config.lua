@@ -27,6 +27,30 @@ M.ui = {
 	},
 }
 
+-- File to identify project root
+M.root_files = {
+	-- rust
+	"Cargo.toml",
+	"Cargo.lock",
+
+	-- lua
+	"stylua.toml",
+
+	-- git
+	".git",
+	".gitignore",
+
+	-- npm
+	"package.json",
+	"yarn.lock",
+
+	-- c/c++
+	"CMakeLists.txt",
+
+	-- nvim config
+	"lazy-lock.json",
+}
+
 -- config for lazy.nvim startup options
 M.lazy_nvim = require("plugins.configs.lazy-nvim")
 

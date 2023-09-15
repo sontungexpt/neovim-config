@@ -2,12 +2,12 @@ local api = vim.api
 local fn = vim.fn
 
 local logger = require("core.logger")
+local default_config = require("core.default-config")
 
 local M = {}
 
 M.load_config = function()
-	local config = require("core.default-config")
-	return config
+	return default_config
 end
 
 ---
@@ -94,33 +94,10 @@ M.map = function(mode, key, map_to, opts)
 	vim.keymap.set(mode, key, map_to, opts)
 end
 
-M.identification_files = {
-	-- rust
-	"Cargo.toml",
-	"Cargo.lock",
-
-	-- lua
-	"stylua.toml",
-
-	-- git
-	".git",
-	".gitignore",
-
-	-- npm
-	"package.json",
-	"yarn.lock",
-
-	-- c/c++
-	"CMakeLists.txt",
-
-	-- nvim config
-	"lazy-lock.json",
-}
-
 M.find_project_root = function(current_path)
 	current_path = current_path or fn.expand("%:p:h")
 	while current_path ~= "/" do
-		for _, file in ipairs(M.identification_files) do
+		for _, file in ipairs(default_config.root_files) do
 			local file_path = fn.findfile(file, current_path)
 			if file_path ~= "" then
 				return current_path
