@@ -1,4 +1,5 @@
 local options = {
+	open_app = "default",
 	open_only_when_cursor_on_url = false,
 	highlight_url = {
 		enabled = true,
