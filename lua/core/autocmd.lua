@@ -1,5 +1,6 @@
 local api = vim.api
 local fn = vim.fn
+local cmd = api.nvim_command
 local autocmd = api.nvim_create_autocmd
 local augroup = api.nvim_create_augroup
 
@@ -7,7 +8,7 @@ local augroup = api.nvim_create_augroup
 autocmd("TextYankPost", {
 	group = augroup("YankHighlight", { clear = true }),
 	callback = function()
-		vim.highlight.on_yank { higroup = "IncSearch", timeout = "120" }
+		vim.highlight.on_yank { higroup = "IncSearch", timeout = "150" }
 	end,
 })
 
@@ -129,21 +130,19 @@ autocmd({ "BufEnter" }, {
 
 autocmd("VimEnter", {
 	desc = "Customize right click contextual menu.",
-	group = augroup("contextual_menu", { clear = true }),
+	group = augroup("ContextualMenu", { clear = true }),
 	callback = function()
 		-- Disable right click message
-		vim.api.nvim_command([[aunmenu PopUp.How-to\ disable\ mouse]])
-		-- vim.api.nvim_command [[aunmenu PopUp.-1-]] -- You can remode a separator like this.
-		vim.api.nvim_command(
-			[[menu PopUp.Toggle\ \Breakpoint <cmd>:lua require('dap').toggle_breakpoint()<CR>]]
-		)
-		vim.api.nvim_command([[menu PopUp.Start\ \Debugger <cmd>:DapContinue<CR>]])
+		cmd([[aunmenu PopUp.How-to\ disable\ mouse]])
+		-- cmd [[aunmenu PopUp.-1-]] -- You can remode a separator like this.
+		cmd([[menu PopUp.Toggle\ \Breakpoint <cmd>:lua require('dap').toggle_breakpoint()<CR>]])
+		cmd([[menu PopUp.Start\ \Debugger <cmd>:DapContinue<CR>]])
 	end,
 })
 
 autocmd({ "BufWritePost" }, {
 	desc = "When writing a buffer, :NvimReload if the buffer is a config file.",
-	group = augroup("reload_if_buffer_is_config_file", { clear = true }),
+	group = augroup("ReloadConfigFile", { clear = true }),
 	pattern = fn.stdpath("config") .. "/*.lua",
 	command = "NvimReload",
 })

@@ -3,10 +3,7 @@ if not status_ok then
 	return
 end
 
-vim.o.foldcolumn = "0"
-vim.o.foldlevel = 999
-vim.o.foldlevelstart = 999
-vim.o.foldenable = true
+vim.o.foldenable = true -- enable folding when plugin is loaded
 
 local handler = function(virtText, lnum, endLnum, width, truncate)
 	local newVirtText = {}
@@ -65,7 +62,3 @@ require("ufo").setup {
 	end,
 	fold_virt_text_handler = handler,
 }
-
-vim.keymap.set("n", "zR", require("ufo").openAllFolds)
-vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
-vim.keymap.set("n", "zm", require("ufo").closeFoldsWith) -- closeAllFolds == closeFoldsWith(0)

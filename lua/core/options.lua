@@ -20,10 +20,13 @@ g.loaded_netrw = 1
 g.loaded_netrwPlugin = 1
 
 -- Hide mode
-options.showmode = false -- Dont show mode since we have a statusline
+options.showmode = false -- Don't show mode since we have a statusline
 
 -- fold
-options.foldenable = false
+options.foldenable = false -- Don't fold by default
+options.foldcolumn = "0"
+options.foldlevel = 999
+options.foldlevelstart = 999
 
 -- Text width
 options.textwidth = 80
@@ -39,7 +42,7 @@ options.ruler = true
 
 --Encoding
 options.encoding = "utf-8"
-options.mouse = "a"
+options.mouse = vim.fn.isdirectory("/system") == 1 and "v" or "a" -- Enable mouse support on android system
 options.mousemoveevent = true
 
 options.incsearch = true
@@ -54,12 +57,14 @@ options.autoindent = true
 options.smartindent = true
 options.smarttab = true
 options.backspace = "indent,eol,start"
+options.copyindent = true
 
 --Undo file
 options.undofile = true
 
 --Update time
 options.updatetime = 300 --default 4000ms
+options.timeoutlen = 500 --default 1000ms (Shorten key timeout length a little bit for which-key)
 
 --Line wrapping
 options.wrap = false
@@ -86,7 +91,10 @@ options.signcolumn = "yes"
 
 --List
 options.list = true
-cmd([[set listchars=tab:▸\ ,trail:·]])
+options.listchars:append {
+	-- tab = "▸ ",
+	trail = "·",
+}
 
 --Clipboard
 options.clipboard:append { "unnamedplus" }

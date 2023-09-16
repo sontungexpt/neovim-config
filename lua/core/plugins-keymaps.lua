@@ -18,9 +18,7 @@ map({ "n", "i", "v", "c" }, "<C-b>", function()
 	api.nvim_command("NvimTreeToggle")
 end, { desc = "Toggle NvimTree" })
 
--- kill terminal buffer
-map("t", "<C-q>", "<C-\\><C-n>:q!<cr>")
-map("t", "<A-q>", "<C-\\><C-n>:q!<cr>")
+-- kill terminal buffer map("t", "<C-q>", "<C-\\><C-n>:q!<cr>") map("t", "<A-q>", "<C-\\><C-n>:q!<cr>")
 
 --Telescope
 map({ "n", "i", "v" }, "<C-p>", "<esc>:Telescope find_files<cr>", { desc = "Find files" })
@@ -221,3 +219,14 @@ end, { desc = "Scopes" })
 -- default keymap is set in plugins.configs.wilder
 map("c", "<C-j>", "wilder#in_context() ? wilder#next() : '<C-j>'", 5)
 map("c", "<C-k>", "wilder#in_context() ? wilder#previous() : '<C-k>'", 5)
+
+-- ufo
+map("n", "zR", function()
+	require("ufo").openAllFolds()
+end)
+map("n", "zM", function()
+	require("ufo").closeAllFolds()
+end)
+map("n", "zm", function()
+	require("ufo").closeFoldsWith()
+end) -- closeAllFolds == closeFoldsWith(0)

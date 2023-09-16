@@ -10,7 +10,7 @@
   "cmp-path": { "branch": "main", "commit": "91ff86cd9c29299a64f968ebb45846c485725f23" },
   "cmp_luasnip": { "branch": "master", "commit": "18095520391186d634a0045dacaa346291096566" },
   "copilot.lua": { "branch": "master", "commit": "2c942f33ba5c621c906e625e00a1bb504b65e2f0" },
-  "focus.nvim": { "branch": "master", "commit": "1b1120af775086bfcc2dcc591f9d522d2860a0f1" },
+  "focus.nvim": { "branch": "master", "commit": "d035779fb5d16af4655ed95f29ef38607d568495" },
   "friendly-snippets": { "branch": "main", "commit": "ebf6d6e83494cdd88a54a429340256f4dbb6a052" },
   "fzy-lua-native": { "branch": "master", "commit": "820f745b7c442176bcc243e8f38ef4b985febfaf" },
   "git-conflict.nvim": { "branch": "main", "commit": "ffac553944634a20dc787f220ad53b0a71fe16e0" },
@@ -47,10 +47,11 @@
   "telescope-media-files.nvim": { "branch": "master", "commit": "0826c7a730bc4d36068f7c85cf4c5b3fd9fb570a" },
   "telescope-project.nvim": { "branch": "master", "commit": "7c64b181dd4e72deddcf6f319e3bf1e95b2a2f30" },
   "telescope-zoxide": { "branch": "main", "commit": "68966349aa1b8e9ade403e18479ecf79447389a7" },
-  "telescope.nvim": { "branch": "master", "commit": "59812c26d826e8c717e29406267ea1260f71e103" },
+  "telescope.nvim": { "branch": "master", "commit": "b543aaa2c9cf8123ed2fe7dbb6c211a9cd415124" },
   "todo-comments.nvim": { "branch": "main", "commit": "3094ead8edfa9040de2421deddec55d3762f64d1" },
   "toggleterm.nvim": { "branch": "main", "commit": "b90a1381e9b5b8596f49070ee86c71db267ac868" },
   "tokyonight.nvim": { "branch": "main", "commit": "9a01eada39558dc3243278e6805d90e8dff45dc0" },
+  "url-open": { "branch": "mini", "commit": "70129fc9944eb50c931d9a07d919687f9d40790f" },
   "which-key.nvim": { "branch": "main", "commit": "7ccf476ebe0445a741b64e36c78a682c1c6118b7" },
   "wilder.nvim": { "branch": "master", "commit": "679f348dc90d80ff9ba0e7c470c40a4d038dcecf" }
 }
