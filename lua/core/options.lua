@@ -93,6 +93,7 @@ options.signcolumn = "yes"
 options.list = true
 options.listchars:append {
 	-- tab = "▸ ",
+	tab = "  ",
 	trail = "·",
 }
 

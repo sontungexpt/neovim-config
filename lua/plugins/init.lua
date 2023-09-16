@@ -667,8 +667,17 @@ local default_plugins = {
 			{ "zR", mode = "n", desc = "Fold all lines" },
 		},
 		dependencies = "kevinhwang91/promise-async",
-		config = function()
-			require("plugins.configs.nvim-ufo")
+		opts = function()
+			return require("plugins.configs.nvim-ufo")
+		end,
+		config = function(_, opts)
+			local status_ok, ufo = pcall(require, "ufo")
+			if not status_ok then
+				return
+			end
+
+			vim.o.foldenable = true -- enable folding when plugin is loaded
+			ufo.setup(opts)
 		end,
 	},
 

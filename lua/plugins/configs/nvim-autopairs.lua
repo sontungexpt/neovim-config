@@ -5,7 +5,7 @@ local options = {
 		javascript = { "string", "template_string" },
 		java = false,
 	},
-	disable_filetype = { "TelescopePrompt", "NvimTree", "spectre_panel" },
+	disable_filetype = { "TelescopePrompt", "NvimTree", "spectre_panel", "dashboard" },
 	fast_wrap = {
 		map = "<M-e>",
 		chars = { "{", "[", "(", '"', "'" },

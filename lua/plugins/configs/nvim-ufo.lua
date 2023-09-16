@@ -1,10 +1,3 @@
-local status_ok, ufo = pcall(require, "ufo")
-if not status_ok then
-	return
-end
-
-vim.o.foldenable = true -- enable folding when plugin is loaded
-
 local handler = function(virtText, lnum, endLnum, width, truncate)
 	local newVirtText = {}
 	local suffix = ("  %d "):format(endLnum - lnum)
@@ -39,7 +32,7 @@ local ftMap = {
 	git = "",
 }
 
-require("ufo").setup {
+local options = {
 	open_fold_hl_timeout = 100,
 	close_fold_kinds = { "imports", "comment" },
 	preview = {
@@ -62,3 +55,5 @@ require("ufo").setup {
 	end,
 	fold_virt_text_handler = handler,
 }
+
+return options
