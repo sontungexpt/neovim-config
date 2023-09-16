@@ -76,6 +76,15 @@ This is my personal neovim configuration, written completely in Lua.It uses a la
 
 - And more... dependencies are listed in the plugins/init.lua file.
 
+## Requirements
+
+- xclip (for clipboard support)
+- fd (for telescope)
+
+```bash
+sudo pacman -S xclip fd
+```
+
 ## Installation
 
 To use this configuration, you will need to have Neovim 0.5 or higher installed. You can then clone this repository and copy the init.lua file to your ~/.config/nvim/ directory.
