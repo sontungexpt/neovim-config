@@ -235,6 +235,7 @@ local default_plugins = {
 
 	{
 		"gelguy/wilder.nvim",
+		build = ":UpdateRemotePlugins",
 		event = "CmdlineEnter",
 		dependencies = {
 			"romgrk/fzy-lua-native",
