@@ -81,6 +81,8 @@ This is my personal neovim configuration, written completely in Lua.It uses a la
 - xclip (for clipboard support)
 - fd (for telescope)
 
+Arch Linux:
+
 ```bash
 sudo pacman -S xclip fd
 ```
