@@ -52,7 +52,7 @@ local options = {
 		height = 0.9,
 		icons = {
 			package_pending = " ",
-			package_installed = " ",
+			package_installed = " ",
 			package_uninstalled = " ",
 		},
 		keymaps = {

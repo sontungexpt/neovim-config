@@ -83,6 +83,8 @@ local default_plugins = {
 	},
 
 	{
+		-- dir = "/home/stilux/Data/My-Workspaces/nvim-extensions/focus.nvim",
+		-- dev = true,
 		"sontungexpt/focus.nvim",
 		version = "*",
 		event = "WinNew",
