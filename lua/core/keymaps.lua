@@ -15,6 +15,10 @@ map({ "n", "x" }, "j", 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', 5)
 map({ "n", "v" }, "<Up>", 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', 5)
 map({ "n", "v" }, "<Down>", 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', 5)
 
+-- Indent lines with tab in visual mode
+map("v", "<Tab>", ">gv")
+map("v", "<S-Tab>", "<gv")
+
 --Back to normal mode
 map({ "i", "c" }, "jj", "<esc>", 2)
 
