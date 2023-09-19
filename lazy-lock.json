@@ -43,6 +43,7 @@
   "popup.nvim": { "branch": "master", "commit": "b7404d35d5d3548a82149238289fa71f7f6de4ac" },
   "promise-async": { "branch": "main", "commit": "e94f35161b8c5d4a4ca3b6ff93dd073eb9214c0e" },
   "rainbow-delimiters.nvim": { "branch": "master", "commit": "9cbd3dc409af1f5531778ccd1ea6bce668241f39" },
+  "stickybuf.nvim": { "branch": "master", "commit": "e3db41f2c1bb2df3ee6ff964ee74fe991f6f9566" },
   "telescope-fzy-native.nvim": { "branch": "master", "commit": "282f069504515eec762ab6d6c89903377252bf5b" },
   "telescope-media-files.nvim": { "branch": "master", "commit": "0826c7a730bc4d36068f7c85cf4c5b3fd9fb570a" },
   "telescope-project.nvim": { "branch": "master", "commit": "7c64b181dd4e72deddcf6f319e3bf1e95b2a2f30" },

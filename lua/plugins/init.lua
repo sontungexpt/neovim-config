@@ -38,6 +38,12 @@ local default_plugins = {
 	},
 
 	{
+		"stevearc/stickybuf.nvim",
+		event = "WinNew",
+		config = true,
+	},
+
+	{
 		"nvim-tree/nvim-tree.lua",
 		version = "*",
 		dependencies = {
