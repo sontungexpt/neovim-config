@@ -18,7 +18,9 @@ map({ "n", "i", "v", "c" }, "<C-b>", function()
 	api.nvim_command("NvimTreeToggle")
 end, { desc = "Toggle NvimTree" })
 
--- kill terminal buffer map("t", "<C-q>", "<C-\\><C-n>:q!<cr>") map("t", "<A-q>", "<C-\\><C-n>:q!<cr>")
+-- kill terminal buffer
+map("t", "<C-q>", "<C-\\><C-n>:q!<cr>")
+map("t", "<A-q>", "<C-\\><C-n>:q!<cr>")
 
 --Telescope
 map({ "n", "i", "v" }, "<C-p>", "<esc>:Telescope find_files<cr>", { desc = "Find files" })
@@ -27,7 +29,7 @@ map("n", "<leader>fg", "<esc>:Telescope live_grep<cr>", { desc = "Find word" })
 map("n", "<C-f>", "<esc>:Telescope live_grep<cr>", { desc = "Find word" })
 map("n", "<leader>fb", "<esc>:Telescope buffers<cr>", { desc = "Find buffers" })
 map("n", "<leader>fh", "<esc>:Telescope help_tags<cr>", { desc = "Find help tags" })
-map("n", "<leader>fp", "<esc>:Telescope project<cr>", { desc = "Find project" })
+map("n", "<leader>fp", "<esc>:Telescope projects<cr>", { desc = "Find recent projects" })
 
 -- Todo-comments
 map("n", "<Leader>ft", function()

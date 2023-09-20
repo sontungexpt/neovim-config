@@ -1,5 +1,6 @@
 -- All plugins have lazy=true by default,to load a plugin on startup just lazy=false
 local default_plugins = {
+	-- lazy.nvim
 
 	{
 		-- dir = "/home/stilux/Data/My-Workspaces/nvim-extensions/url-open",
@@ -125,11 +126,23 @@ local default_plugins = {
 		},
 		dependencies = {
 			"nvim-lua/plenary.nvim",
-			"nvim-lua/popup.nvim",
-			"jvgrootveld/telescope-zoxide",
 			"nvim-telescope/telescope-fzy-native.nvim",
-			"nvim-telescope/telescope-project.nvim",
 			"nvim-telescope/telescope-media-files.nvim",
+			{
+				"ahmedkhalf/project.nvim",
+				opts = function()
+					return require("plugins.configs.telescope.extensions.project-nvim")
+				end,
+				config = function(_, opts)
+					local status_ok, project_nvim = pcall(require, "project_nvim")
+					if not status_ok then
+						return
+					end
+					project_nvim.setup(opts)
+				end,
+			},
+			-- "nvim-lua/popup.nvim",
+			-- "jvgrootveld/telescope-zoxide",
 			-- 'dharmx/telescope-media.nvim',
 			-- 'BurntSushi/ripgrep',
 			-- 'sharkdp/fd'
