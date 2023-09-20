@@ -113,12 +113,10 @@ local options = {
 		},
 	},
 	extensions = {
-		-- fzf = {
-		-- 	fuzzy = true,
-		-- 	override_generic_sorter = true,
-		-- 	override_file_sorter = true,
-		-- 	case_mode = "smart_case",
-		-- },
+		fzy_native = {
+			override_generic_sorter = true,
+			override_file_sorter = true,
+		},
 		media_files = {
 			filetypes = { "png", "webp", "jpg", "jpeg", "webm", "pdf", "mp4" },
 			find_cmd = "rg",

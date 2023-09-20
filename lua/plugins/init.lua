@@ -125,9 +125,10 @@ local default_plugins = {
 			"TodoTelescope",
 		},
 		dependencies = {
+			"nvim-tree/nvim-web-devicons",
 			"nvim-lua/plenary.nvim",
-			"nvim-telescope/telescope-fzy-native.nvim",
 			"nvim-telescope/telescope-media-files.nvim",
+			"nvim-telescope/telescope-fzy-native.nvim",
 			{
 				"ahmedkhalf/project.nvim",
 				opts = function()
@@ -141,8 +142,8 @@ local default_plugins = {
 					project_nvim.setup(opts)
 				end,
 			},
-			-- "nvim-lua/popup.nvim",
 			-- "jvgrootveld/telescope-zoxide",
+			-- "nvim-lua/popup.nvim",
 			-- 'dharmx/telescope-media.nvim',
 			-- 'BurntSushi/ripgrep',
 			-- 'sharkdp/fd'
