@@ -69,6 +69,7 @@ end
 -- opts = 3 for noremap and not silent
 -- opts = 4 for not noremap and not silent
 -- opts = 5 for expr and noremap and silent
+-- opts = 6 for noremap and silent and nowait
 M.map = function(mode, key, map_to, opts)
 	local opts1 = { noremap = true, silent = true }
 	opts = opts or 1
@@ -88,6 +89,8 @@ M.map = function(mode, key, map_to, opts)
 		opts = { noremap = false, silent = false }
 	elseif opts == 5 then
 		opts = { expr = true, replace_keycodes = true, noremap = true, silent = true }
+	elseif opts == 6 then
+		opts = { noremap = true, silent = true, nowait = true }
 	else
 		opts = opts1
 	end
