@@ -14,10 +14,9 @@ local default_plugins = {
 		end,
 		config = function(_, opts)
 			local status_ok, url_open = pcall(require, "url-open")
-			if not status_ok then
-				return
+			if status_ok then
+				url_open.setup(opts)
 			end
-			url_open.setup(opts)
 		end,
 	},
 
@@ -31,10 +30,9 @@ local default_plugins = {
 		end,
 		config = function(_, opts)
 			local status_ok, buffer_closer = pcall(require, "buffer-closer")
-			if not status_ok then
-				return
+			if status_ok then
+				buffer_closer.setup(opts)
 			end
-			buffer_closer.setup(opts)
 		end,
 	},
 
@@ -60,10 +58,9 @@ local default_plugins = {
 		end,
 		config = function(_, opts)
 			local status_ok, nvim_tree = pcall(require, "nvim-tree")
-			if not status_ok then
-				return
+			if status_ok then
+				nvim_tree.setup(opts)
 			end
-			nvim_tree.setup(opts)
 		end,
 	},
 
@@ -82,10 +79,9 @@ local default_plugins = {
 		end,
 		config = function(_, opts)
 			local status_ok, copilot = pcall(require, "copilot")
-			if not status_ok then
-				return
+			if status_ok then
+				copilot.setup(opts)
 			end
-			copilot.setup(opts)
 		end,
 	},
 
@@ -111,10 +107,9 @@ local default_plugins = {
 		end,
 		config = function(_, opts)
 			local status_ok, focus = pcall(require, "focus")
-			if not status_ok then
-				return
+			if status_ok then
+				focus.setup(opts)
 			end
-			focus.setup(opts)
 		end,
 	},
 
@@ -136,10 +131,9 @@ local default_plugins = {
 				end,
 				config = function(_, opts)
 					local status_ok, project_nvim = pcall(require, "project_nvim")
-					if not status_ok then
-						return
+					if status_ok then
+						project_nvim.setup(opts)
 					end
-					project_nvim.setup(opts)
 				end,
 			},
 			-- "jvgrootveld/telescope-zoxide",
@@ -153,16 +147,14 @@ local default_plugins = {
 		end,
 		config = function(_, opts)
 			local status_ok, telescope = pcall(require, "telescope")
-			if not status_ok then
-				return
-			end
+			if status_ok then
+				-- load telescope extensions
+				for _, ext in ipairs(opts.extensions_list) do
+					telescope.load_extension(ext)
+				end
 
-			-- load telescope extensions
-			for _, ext in ipairs(opts.extensions_list) do
-				telescope.load_extension(ext)
+				telescope.setup(opts)
 			end
-
-			telescope.setup(opts)
 		end,
 	},
 
@@ -211,11 +203,9 @@ local default_plugins = {
 		end,
 		config = function(_, opts)
 			local status_ok, nvim_treesitter = pcall(require, "nvim-treesitter.configs")
-			if not status_ok then
-				return
+			if status_ok then
+				nvim_treesitter.setup(opts)
 			end
-
-			nvim_treesitter.setup(opts)
 		end,
 	},
 
@@ -229,10 +219,9 @@ local default_plugins = {
 		end,
 		config = function(_, opts)
 			local status_ok, highlight_colors = pcall(require, "nvim-highlight-colors")
-			if not status_ok then
-				return
+			if status_ok then
+				highlight_colors.setup(opts)
 			end
-			highlight_colors.setup(opts)
 		end,
 	},
 
@@ -245,13 +234,12 @@ local default_plugins = {
 		end,
 		config = function(_, opts)
 			local status_ok, tokyonight = pcall(require, "tokyonight")
-			if not status_ok then
-				return
-			end
-			tokyonight.setup(opts)
+			if status_ok then
+				tokyonight.setup(opts)
 
-			vim.api.nvim_command([[colorscheme tokyonight]])
-			vim.api.nvim_command([[let g:lightline = {'colorscheme': 'tokyonight'}]])
+				vim.api.nvim_command([[colorscheme tokyonight]])
+				vim.api.nvim_command([[let g:lightline = {'colorscheme': 'tokyonight'}]])
+			end
 		end,
 	},
 
@@ -300,10 +288,9 @@ local default_plugins = {
 		end,
 		config = function(_, opts)
 			local status_ok, comment = pcall(require, "Comment")
-			if not status_ok then
-				return
+			if status_ok then
+				comment.setup(opts)
 			end
-			comment.setup(opts)
 		end,
 	},
 
@@ -320,10 +307,9 @@ local default_plugins = {
 		end,
 		config = function(_, opts)
 			local status_ok, todo_comments = pcall(require, "todo-comments")
-			if not status_ok then
-				return
+			if status_ok then
+				todo_comments.setup(opts)
 			end
-			todo_comments.setup(opts)
 		end,
 	},
 
@@ -336,23 +322,15 @@ local default_plugins = {
 		config = function(_, opts)
 			local status_ok, autopairs = pcall(require, "nvim-autopairs")
 
-			if not status_ok then
-				return
+			if status_ok then
+				autopairs.setup(opts)
 			end
-
-			autopairs.setup(opts)
 
 			local cmp_status_ok, cmp = pcall(require, "cmp")
-			if not cmp_status_ok then
-				return
-			end
-
 			local cmp_autopairs_status_ok, cmp_autopairs = pcall(require, "nvim-autopairs.completion.cmp")
-			if not cmp_autopairs_status_ok then
-				return
+			if cmp_status_ok and cmp_autopairs_status_ok then
+				cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done { map_char = { tex = "" } })
 			end
-
-			cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done { map_char = { tex = "" } })
 		end,
 	},
 
@@ -364,10 +342,9 @@ local default_plugins = {
 		end,
 		config = function(_, opts)
 			local status_ok, nvim_cursorline = pcall(require, "nvim-cursorline")
-			if not status_ok then
-				return
+			if status_ok then
+				nvim_cursorline.setup(opts)
 			end
-			nvim_cursorline.setup(opts)
 		end,
 	},
 
@@ -379,10 +356,9 @@ local default_plugins = {
 		end,
 		config = function(_, opts)
 			local status_ok, ccc = pcall(require, "ccc")
-			if not status_ok then
-				return
+			if status_ok then
+				ccc.setup(opts)
 			end
-			ccc.setup(opts)
 		end,
 	},
 
@@ -425,10 +401,9 @@ local default_plugins = {
 		end,
 		config = function(_, opts)
 			local status_ok, lspsaga = pcall(require, "lspsaga")
-			if not status_ok then
-				return
+			if status_ok then
+				lspsaga.setup(opts)
 			end
-			lspsaga.setup(opts)
 		end,
 	},
 
@@ -457,10 +432,9 @@ local default_plugins = {
 		end,
 		config = function(_, opts)
 			local status_ok, bufferline = pcall(require, "bufferline")
-			if not status_ok then
-				return
+			if status_ok then
+				bufferline.setup(opts)
 			end
-			bufferline.setup(opts)
 		end,
 	},
 
@@ -473,12 +447,11 @@ local default_plugins = {
 			return require("plugins.configs.indent-blankline")
 		end,
 		config = function(opts)
-			vim.wo.colorcolumn = "99999"
 			local status_ok, indent_blankline = pcall(require, "indent_blankline")
-			if not status_ok then
-				return
+			if status_ok then
+				vim.wo.colorcolumn = "99999"
+				indent_blankline.setup(opts)
 			end
-			indent_blankline.setup(opts)
 		end,
 	},
 
@@ -492,12 +465,11 @@ local default_plugins = {
 		opts = function()
 			return require("plugins.configs.nvim-surround")
 		end,
-		config = function()
+		config = function(_, opts)
 			local status_ok, nvim_surround = pcall(require, "nvim-surround")
-			if not status_ok then
-				return
+			if status_ok then
+				nvim_surround.setup(opts)
 			end
-			nvim_surround.setup {}
 		end,
 	},
 
@@ -547,11 +519,10 @@ local default_plugins = {
 			return require("plugins.configs.git-conflict")
 		end,
 		config = function(_, opts)
-			local present, conflict = pcall(require, "git-conflict")
-			if not present then
-				return
+			local status_ok, conflict = pcall(require, "git-conflict")
+			if status_ok then
+				conflict.setup(opts)
 			end
-			conflict.setup(opts)
 		end,
 	},
 
@@ -579,10 +550,9 @@ local default_plugins = {
 		end,
 		config = function(_, opts)
 			local status_ok, mason = pcall(require, "mason")
-			if not status_ok then
-				return
+			if status_ok then
+				mason.setup(opts)
 			end
-			mason.setup(opts)
 		end,
 	},
 
@@ -675,7 +645,10 @@ local default_plugins = {
 			return require("plugins.configs.whichkey")
 		end,
 		config = function(_, opts)
-			require("which-key").setup(opts)
+			local status_ok, which_key = pcall(require, "which-key")
+			if status_ok then
+				which_key.setup(opts)
+			end
 		end,
 	},
 
@@ -695,12 +668,10 @@ local default_plugins = {
 		end,
 		config = function(_, opts)
 			local status_ok, ufo = pcall(require, "ufo")
-			if not status_ok then
-				return
+			if status_ok then
+				vim.o.foldenable = true -- enable folding when plugin is loaded
+				ufo.setup(opts)
 			end
-
-			vim.o.foldenable = true -- enable folding when plugin is loaded
-			ufo.setup(opts)
 		end,
 	},
 
