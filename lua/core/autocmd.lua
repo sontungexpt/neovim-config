@@ -5,6 +5,18 @@ local autocmd = api.nvim_create_autocmd
 local augroup = api.nvim_create_augroup
 local map = require("core.utils").map
 
+autocmd({ "VimEnter", "VimLeave" }, {
+	pattern = "*",
+	command = "runtime! plugin/rplugin.vim",
+	desc = "Update remote plugins",
+})
+
+autocmd({ "VimEnter", "VimLeave" }, {
+	pattern = "*",
+	command = "silent! UpdateRemotePlugins",
+	desc = "Update remote plugins",
+})
+
 -- Highlight on yank
 autocmd("TextYankPost", {
 	group = augroup("YankHighlight", { clear = true }),
