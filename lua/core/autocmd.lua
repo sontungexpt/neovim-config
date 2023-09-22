@@ -17,9 +17,9 @@ autocmd({ "VimEnter", "VimLeave" }, {
 	desc = "Update remote plugins",
 })
 
--- Highlight on yank
 autocmd("TextYankPost", {
 	group = augroup("YankHighlight", { clear = true }),
+	desc = "Highlight on yank",
 	callback = function()
 		vim.highlight.on_yank { higroup = "IncSearch", timeout = "150" }
 	end,
