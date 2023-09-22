@@ -162,3 +162,14 @@ autocmd("CmdwinEnter", {
 	desc = "Make q close command history (q: and q?)",
 	command = "nnoremap <silent><buffer><nowait> q :close<CR>",
 })
+
+-- Toggle search highlighting on insert mode
+autocmd({ "InsertEnter", "TermEnter" }, {
+	desc = "Set no search highlighting when entering insert mode, or terminal",
+	command = "set nohlsearch",
+})
+
+autocmd({ "InsertLeave", "TermLeave" }, {
+	desc = "Set search highlighting when leaving insert mode, or terminal",
+	command = "set hlsearch",
+})
