@@ -12,7 +12,8 @@ local map = require("core.utils").map
 
 --NvimTree
 map({ "n", "i", "v", "c" }, "<C-b>", function()
-	if vim.bo.filetype == "TelescopePrompt" then
+	local filetype = api.nvim_get_option_value("filetype", { buf = 0 })
+	if vim.tbl_contains({ "TelescopePrompt", "lazy", "mason" }, filetype) then
 		return
 	end
 	api.nvim_command("NvimTreeToggle")
