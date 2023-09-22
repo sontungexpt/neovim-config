@@ -3,9 +3,9 @@ local default_plugins = {
 	-- lazy.nvim
 
 	{
-		dir = "/home/stilux/Data/My-Workspaces/nvim-extensions/url-open",
-		dev = true,
-		-- "sontungexpt/url-open",
+		-- dir = "/home/stilux/Data/My-Workspaces/nvim-extensions/url-open",
+		-- dev = true,
+		"sontungexpt/url-open",
 		branch = "mini",
 		event = "VeryLazy",
 		cmd = "OpenUrlUnderCursor",

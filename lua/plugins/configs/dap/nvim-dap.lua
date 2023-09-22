@@ -9,10 +9,9 @@ vim.fn.sign_define(
 	"DapBreakpoint",
 	{ text = " ", texthl = "DapBreakpointColor", linehl = "", numhl = "" }
 )
-vim.api.nvim_command("highlight DapBreakpointColor guifg=#EC5241")
-
-vim.fn.sign_define("DapStopped", { text = "󰜴 ", texthl = "DapStoppedColor", linehl = "", numhl = "" })
-vim.api.nvim_command("highlight DapStoppedColor guifg=#98C379")
+vim.api.nvim_set_hl(0, "DapBreakpointColor", { fg = "#ee2c4a" })
+vim.fn.sign_define("DapStopped", { text = "󱞪 ", texthl = "DapStoppedColor", linehl = "", numhl = "" })
+vim.api.nvim_set_hl(0, "DapStoppedColor", { fg = "#67bf70" })
 
 dap.adapters.codelldb = {
 	type = "server",
