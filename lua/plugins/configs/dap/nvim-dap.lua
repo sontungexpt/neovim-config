@@ -17,15 +17,10 @@ dap.adapters.codelldb = {
 	type = "server",
 	host = "127.0.0.1",
 	port = 13000,
-}
-
-dap.adapters.codelldb = {
-	type = "server",
-	port = "${port}",
 	executable = {
 		-- CHANGE THIS to your path!
 		command = path_helpers.get_adapter_mason_path("codelldb"),
-		args = { "--port", "${port}" },
+		args = { "--port", 13000 },
 	},
 }
 

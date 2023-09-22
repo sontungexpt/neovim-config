@@ -1,10 +1,9 @@
 local copilot = function()
-	for _, client in pairs(vim.lsp.get_active_clients()) do
-		if client.name == "copilot" then
-			return "   "
-		end
+	local copilot_client = vim.lsp.get_active_clients({ name = "copilot" })[1]
+	if copilot_client == nil then
+		return ""
 	end
-	return ""
+	return "   "
 end
 
 return copilot
