@@ -3,15 +3,16 @@ local options = {
 	open_only_when_cursor_on_url = false,
 	highlight_url = {
 		all_urls = {
-			enabled = false,
-			fg = "#2dd5ff", -- nil will use default color
-			bg = nil, -- transparent
+			enabled = true,
+			fg = "#19ddff", -- "text" or "#rrggbb"
+			-- fg = "text", -- "text" or "#rrggbb"
+			bg = nil, -- nil or "#rrggbb"
 			underline = true,
 		},
 		cursor_move = {
 			enabled = true,
-			fg = "#199eff", -- nil will use default color
-			bg = nil, -- transparent
+			fg = "#199eff", -- "text" or "#rrggbb"
+			bg = nil, -- nil or "#rrggbb"
 			underline = true,
 		},
 	},
