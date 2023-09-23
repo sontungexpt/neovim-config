@@ -83,8 +83,16 @@ yay -S ttf-hack-nerd
 
 Clone this repository into your Neovim configuration directory.
 
+Linux and MacOS:
+
 ```bash
 [ -d ~/.config/nvim ] && mv ~/.config/nvim ~/.config/nvim.bak ; git clone https://github.com/sontungexpt/neovim-config.git ~/.config/nvim
+```
+
+Windows (git bash)
+
+```bash
+[ -d %USERPROFILE%/Local/nvim ] && mv %USERPROFILE%\AppData\Local\nvim %USERPROFILE%\AppData\Local\nvim.bak ; git clone https://github.com/sontungexpt/neovim-config.git %USERPROFILE%\AppData\Local\nvim
 ```
 
 You will also need to install the plugins. This configuration uses the lazy.nvim plugin manager to manage plugins. You can install the plugins by opening Neovim and running `:Lazy sync`
