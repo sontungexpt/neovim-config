@@ -164,7 +164,7 @@ M.options = {
 			"yay",
 		},
 		exclude = {
-			-- "systems-build",
+			"test.txt",
 		},
 	},
 	filesystem_watchers = {

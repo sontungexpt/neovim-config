@@ -18,11 +18,8 @@ autocmd({ "VimEnter", "VimLeave" }, {
 })
 
 autocmd("TextYankPost", {
+	command = "silent! lua vim.highlight.on_yank({higroup='IncSearch', timeout=120})",
 	group = augroup("YankHighlight", { clear = true }),
-	desc = "Highlight on yank",
-	callback = function()
-		vim.highlight.on_yank { higroup = "IncSearch", timeout = "120" }
-	end,
 })
 
 autocmd("FileType", {
@@ -184,4 +181,9 @@ autocmd({ "InsertEnter", "TermEnter" }, {
 autocmd({ "InsertLeave", "TermLeave" }, {
 	desc = "Set search highlighting when leaving insert mode, or terminal",
 	command = "set hlsearch",
+})
+
+autocmd({ "FocusGained", "BufEnter" }, {
+	command = [[silent! if mode() != 'c' && !bufexists("[Command Line]") | checktime | endif]],
+	desc = "Reload file if changed outside of nvim",
 })
