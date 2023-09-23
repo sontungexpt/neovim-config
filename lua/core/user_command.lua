@@ -1,8 +1,7 @@
-local create_user_command = vim.api.nvim_create_user_command
-local schedule = vim.schedule
+local new_cmd = vim.api.nvim_create_user_command
 
 local utils = require("core.utils")
 
-create_user_command("NvimReload", function()
+new_cmd("NvimReload", function()
 	utils.reload_config()
-end, {})
+end, { nargs = 0 })
