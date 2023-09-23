@@ -19,6 +19,7 @@ autocmd({ "VimEnter", "VimLeave" }, {
 
 autocmd("TextYankPost", {
 	command = "silent! lua vim.highlight.on_yank({higroup='IncSearch', timeout=120})",
+	desc = "Highlight yanked text",
 	group = augroup("YankHighlight", { clear = true }),
 })
 
@@ -183,7 +184,13 @@ autocmd({ "InsertLeave", "TermLeave" }, {
 	command = "set hlsearch",
 })
 
-autocmd({ "FocusGained", "BufEnter" }, {
+autocmd({ "FocusGained", "BufEnter", "TermResponse" }, {
 	command = [[silent! if mode() != 'c' && !bufexists("[Command Line]") | checktime | endif]],
 	desc = "Reload file if changed outside of nvim",
+})
+
+autocmd("FileType", {
+	pattern = { "markdown" },
+	desc = "Wrap text in markdown files",
+	command = "setlocal wrap",
 })

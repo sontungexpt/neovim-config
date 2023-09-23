@@ -28,7 +28,10 @@ options.foldcolumn = "0"
 options.foldlevel = 999
 options.foldlevelstart = 999
 
--- Text width
+-- Text width and wrap
+options.wrap = false
+options.whichwrap:append("<>[]hl")
+options.linebreak = true
 options.textwidth = 80
 
 --Line number
@@ -65,10 +68,6 @@ options.undofile = true
 --Update time
 options.updatetime = 300 --default 4000ms
 options.timeoutlen = 500 --default 1000ms (Shorten key timeout length a little bit for which-key)
-
---Line wrapping
-options.wrap = false
-options.whichwrap:append("<>[]hl")
 
 --No backup files
 options.swapfile = false
