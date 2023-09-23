@@ -7,8 +7,10 @@ local default_plugins = {
 		-- dev = true,
 		"sontungexpt/url-open",
 		branch = "mini",
-		event = "VeryLazy",
-		cmd = "OpenUrlUnderCursor",
+		cmd = "URLOpenUnderCursor",
+		init = function()
+			require("core.utils").lazy_load("url-open")
+		end,
 		opts = function()
 			return require("plugins.configs.url-open")
 		end,
@@ -24,7 +26,10 @@ local default_plugins = {
 		-- dir = "/home/stilux/Data/My-Workspaces/nvim-extensions/buffer-closer",
 		-- dev = true,
 		"sontungexpt/buffer-closer",
-		event = "UIEnter",
+		cmd = "CloseRetiredBuffers",
+		init = function()
+			require("core.utils").lazy_load("buffer-closer")
+		end,
 		opts = function()
 			return require("plugins.configs.buffer-closer")
 		end,

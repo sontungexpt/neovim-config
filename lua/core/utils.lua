@@ -16,17 +16,9 @@ end
 M.call_cmd = function(command, msg)
 	local success, error_message = pcall(api.nvim_command, command)
 	if success then
-		if msg and msg.success then
-			logger.info(msg.success)
-		else
-			logger.info("Success")
-		end
+		logger.info(msg and msg.success or command .. "execute success")
 	else
-		if msg and msg.error then
-			logger.error(msg.error .. ": " .. error_message)
-		else
-			logger.error("Error: " .. error_message)
-		end
+		logger.error((msg and msg.error or "Error") .. ": " .. error_message)
 	end
 end
 
