@@ -99,7 +99,7 @@ To use this configuration, you will need to have Neovim 0.5 or higher installed.
 You will also need to install the plugins. This configuration uses the lazy.nvim plugin manager to manage plugins. You can install the plugins by opening Neovim and running :Lazy.
 
 ```vim
-:Lazy
+:Lazy sync
 ```
 
 ## Inspiration
