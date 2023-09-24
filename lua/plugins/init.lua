@@ -1,6 +1,23 @@
 -- All plugins have lazy=true by default,to load a plugin on startup just lazy=false
 local default_plugins = {
 	-- lazy.nvim
+	{
+		-- dir = "/home/stilux/Data/My-Workspaces/nvim-extensions/cursorword",
+		-- dev = true,
+		"sontungexpt/stcursorword",
+		init = function()
+			require("core.utils").lazy_load("stcursorword")
+		end,
+		opts = function()
+			return require("plugins.configs.stcursorword")
+		end,
+		config = function(_, opts)
+			local status_ok, cursorword = pcall(require, "cursorword")
+			if status_ok then
+				cursorword.setup(opts)
+			end
+		end,
+	},
 
 	{
 		-- dir = "/home/stilux/Data/My-Workspaces/nvim-extensions/url-open",
@@ -336,20 +353,6 @@ local default_plugins = {
 			local cmp_autopairs_status_ok, cmp_autopairs = pcall(require, "nvim-autopairs.completion.cmp")
 			if cmp_status_ok and cmp_autopairs_status_ok then
 				cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done { map_char = { tex = "" } })
-			end
-		end,
-	},
-
-	{
-		"yamatsum/nvim-cursorline",
-		event = { "ColorScheme" },
-		opts = function()
-			return require("plugins.configs.nvim-cursorline")
-		end,
-		config = function(_, opts)
-			local status_ok, nvim_cursorline = pcall(require, "nvim-cursorline")
-			if status_ok then
-				nvim_cursorline.setup(opts)
 			end
 		end,
 	},

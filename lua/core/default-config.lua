@@ -51,6 +51,17 @@ M.root_files = {
 	"lazy-lock.json",
 }
 
+M.binary_file_patterns = {
+	"%.png$",
+	"%.jpg$",
+	"%.jpeg$",
+	"%.pdf$",
+	"%.zip$",
+	"%.tar$",
+	"%.mp3$",
+	"%.mp4$",
+}
+
 -- config for lazy.nvim startup options
 M.lazy_nvim = require("plugins.configs.lazy-nvim")
 
