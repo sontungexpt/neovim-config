@@ -154,7 +154,11 @@ autocmd("VimEnter", {
 autocmd({ "BufWritePost" }, {
 	desc = "When writing a buffer, :NvimReload if the buffer is a config file.",
 	group = augroup("ReloadConfigFile", { clear = true }),
-	pattern = fn.stdpath("config") .. "/*.lua",
+	pattern = {
+		fn.stdpath("config") .. "/lua/core/options.lua",
+		fn.stdpath("config") .. "/lua/core/keymaps.lua",
+		fn.stdpath("config") .. "/lua/core/plugins-keymaps.lua",
+	},
 	command = "NvimReload",
 })
 

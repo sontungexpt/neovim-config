@@ -30,7 +30,13 @@ local options = {
 
 	-- Don't calculate root dir on specific directories
 	-- Ex: { "~/.cargo/*", ... }
-	exclude_dirs = {},
+	exclude_dirs = {
+		"~/",
+	},
+	exclude_filetype_chdir = { "", "OverseerList", "alpha" },
+
+	-- Don't auto-chdir for specific buftypes.
+	exclude_buftype_chdir = { "nofile", "terminal" },
 
 	-- Show hidden files in telescope
 	show_hidden = false,

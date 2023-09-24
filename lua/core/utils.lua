@@ -11,15 +11,18 @@ M.load_config = function()
 end
 
 ---
--- @tparam string command: The command to execute
--- @tparam table msg: The message to print on success or error
-M.call_cmd = function(command, msg)
+--- @tparam string command: The command to execute
+--- @tparam table msg: The message to print on success or error
+M.call_cmd = function(command, msg, quiet)
 	local success, error_message = pcall(api.nvim_command, command)
-	if success then
-		logger.info(msg and msg.success or command .. "execute success")
-	else
-		logger.error((msg and msg.error or "Error") .. ": " .. error_message)
+	if not quiet then
+		if success then
+			logger.info(msg and msg.success or command .. " execute success")
+		else
+			logger.error((msg and msg.error or "Error") .. ": " .. error_message)
+		end
 	end
+	return success
 end
 
 M.is_plugin_installed = function(plugin_name)
@@ -147,45 +150,27 @@ M.find_unique_items = function(table1, table2)
 end
 
 M.reload_config = function(quiet)
-	-- Reload options, mappings and plugins (this is managed automatically by lazy).
-	-- Never reload autocmds to avoid issues.
-	local was_modifiable = vim.opt.modifiable:get()
-	if not was_modifiable then
-		vim.opt.modifiable = true
-	end
-
+	-- Reload options, mappings
 	local core_modules = { "core.options", "core.keymaps", "core.plugins-keymaps" }
-	local modules = vim.tbl_filter(function(module)
-		return module:find("^user%.")
-	end, vim.tbl_keys(package.loaded))
 
-	vim.tbl_map(require("plenary.reload").reload_module, vim.list_extend(modules, core_modules))
-	local success = true
+	local failed_modules = {}
 	for _, module in ipairs(core_modules) do
-		local status_ok, fault = pcall(require, module)
+		package.loaded[module] = nil
+		local status_ok, m = pcall(require, module)
 		if not status_ok then
-			api.nvim_err_writeln("Failed to load " .. module .. "\n\n" .. fault)
-			success = false
+			table.insert(failed_modules, m)
 		end
 	end
-	if not was_modifiable then
-		vim.opt.modifiable = false
-	end
+
+	vim.cmd.doautocmd("ColorScheme")
+
 	if not quiet then -- if not quiet, then notify of result.
-		if success then
-			logger.info("Nvim successfully reloaded")
+		if #failed_modules == 0 then
+			logger.info("Reloaded options and keymaps successfully")
 		else
-			logger.error("Error reloading Nvim...")
+			logger.error("Error while reloading core modules: " .. table.concat(failed_modules, "\n"))
 		end
 	end
-
-	api.nvim_command([[colorscheme tokyonight]])
-	api.nvim_command([[let g:lightline = {'colorscheme': 'tokyonight'}]])
-	api.nvim_command("HighlightColorsOn") -- For highlight colors.
-
-	vim.cmd.doautocmd("ColorScheme") -- sFor heirline.
-
-	return success
 end
 
 return M

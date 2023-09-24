@@ -134,6 +134,7 @@ local default_plugins = {
 				opts = function()
 					return require("plugins.configs.telescope.extensions.project-nvim")
 				end,
+				cmd = "ProjectRoot",
 				config = function(_, opts)
 					local status_ok, project_nvim = pcall(require, "project_nvim")
 					if status_ok then
@@ -341,7 +342,7 @@ local default_plugins = {
 
 	{
 		"yamatsum/nvim-cursorline",
-		lazy = false,
+		event = { "ColorScheme" },
 		opts = function()
 			return require("plugins.configs.nvim-cursorline")
 		end,
