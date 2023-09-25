@@ -59,6 +59,8 @@ This is my personal neovim configuration, written completely in Lua. It uses a l
 
 - **[url-open](https://github.com/sontungexpt/url-open):** Opens URLs in the default browser using url-open, and highlights URLs in the buffer.
 
+- **[stcursorword](https://github.com/sontungexpt/stcursorword):** Minimal and fast cursor word highlighting.
+
 - And more... dependencies are listed in the plugins/init.lua file.
 
 ## Requirements
