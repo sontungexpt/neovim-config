@@ -2,14 +2,15 @@
 local default_plugins = {
 	-- lazy.nvim
 	{
-		-- dir = "/home/stilux/Data/My-Workspaces/nvim-extensions/cursorword",
+		-- dir = "/home/stilux/Data/My-Workspaces/nvim-extensions/stcursorword",
 		-- dev = true,
 		"sontungexpt/stcursorword",
 		init = function()
 			require("core.utils").lazy_load("stcursorword")
 		end,
 		opts = function()
-			return require("plugins.configs.stcursorword")
+			return {} -- faster load if no have custom config
+			-- return require("plugins.configs.stcursorword")
 		end,
 		config = function(_, opts)
 			local status_ok, cursorword = pcall(require, "cursorword")
@@ -29,7 +30,8 @@ local default_plugins = {
 			require("core.utils").lazy_load("url-open")
 		end,
 		opts = function()
-			return require("plugins.configs.url-open")
+			return {} -- faster load if no have custom config
+			-- return require("plugins.configs.url-open")
 		end,
 		config = function(_, opts)
 			local status_ok, url_open = pcall(require, "url-open")
@@ -48,7 +50,8 @@ local default_plugins = {
 			require("core.utils").lazy_load("buffer-closer")
 		end,
 		opts = function()
-			return require("plugins.configs.buffer-closer")
+			return {} -- faster load if no have custom config
+			-- return require("plugins.configs.buffer-closer")
 		end,
 		config = function(_, opts)
 			local status_ok, buffer_closer = pcall(require, "buffer-closer")
