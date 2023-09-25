@@ -1,36 +1,43 @@
 local handler = function(virtText, lnum, endLnum, width, truncate)
-	local newVirtText = {}
+	-- Avoid calling vim.fn.strdisplaywidth() multiple times for the same string.
 	local suffix = ("  %d "):format(endLnum - lnum)
 	local sufWidth = vim.fn.strdisplaywidth(suffix)
 	local targetWidth = width - sufWidth
+
+	-- Create a table to store the truncated text.
+	local newVirtText = {}
+
+	-- Iterate over the virtText table, truncating each chunk as needed.
 	local curWidth = 0
 	for _, chunk in ipairs(virtText) do
 		local chunkText = chunk[1]
 		local chunkWidth = vim.fn.strdisplaywidth(chunkText)
+
 		if targetWidth > curWidth + chunkWidth then
+			-- The chunk fits within the target width, so add it to the new table.
 			table.insert(newVirtText, chunk)
+			curWidth = curWidth + chunkWidth
 		else
+			-- The chunk does not fit within the target width, so truncate it and add
+			-- it to the new table.
 			chunkText = truncate(chunkText, targetWidth - curWidth)
-			local hlGroup = chunk[2]
-			table.insert(newVirtText, { chunkText, hlGroup })
-			chunkWidth = vim.fn.strdisplaywidth(chunkText)
-			-- str width returned from truncate() may less than 2nd argument, need padding
-			if curWidth + chunkWidth < targetWidth then
-				suffix = suffix .. (" "):rep(targetWidth - curWidth - chunkWidth)
+			table.insert(newVirtText, { chunkText, chunk[2] })
+			curWidth = curWidth + vim.fn.strdisplaywidth(chunkText)
+
+			-- If the truncated chunk is not the last chunk, add padding to the
+			-- suffix.
+			if curWidth < targetWidth then
+				string.insert(suffix, " ", suffix:len() + 1)
 			end
 			break
 		end
-		curWidth = curWidth + chunkWidth
 	end
+
+	-- Add the suffix to the new table.
 	table.insert(newVirtText, { suffix, "MoreMsg" })
+
 	return newVirtText
 end
-
-local ftMap = {
-	vim = "indent",
-	python = { "indent" },
-	git = "",
-}
 
 local options = {
 	open_fold_hl_timeout = 100,
@@ -48,11 +55,6 @@ local options = {
 			jumpBot = "]",
 		},
 	},
-	-- provider_selector = function(bufnr, filetype, buftype)
-	-- 	-- if you prefer treesitter provider rather than lsp,
-	-- 	-- return ftMap[filetype] or {'treesitter', 'indent'}
-	-- 	return { "treesitter", "indent" }
-	-- end,
 	provider_selector = function(_, filetype, buftype)
 		local function handleFallbackException(bufnr, err, providerName)
 			if type(err) == "string" and err:match("UfoFallbackException") then

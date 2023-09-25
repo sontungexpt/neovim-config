@@ -13,9 +13,9 @@ local default_plugins = {
 			-- return require("plugins.configs.stcursorword")
 		end,
 		config = function(_, opts)
-			local status_ok, cursorword = pcall(require, "cursorword")
+			local status_ok, stcursorword = pcall(require, "stcursorword")
 			if status_ok then
-				cursorword.setup(opts)
+				stcursorword.setup(opts)
 			end
 		end,
 	},
@@ -489,22 +489,18 @@ local default_plugins = {
 		"lewis6991/gitsigns.nvim",
 		ft = { "gitcommit" },
 		init = function()
-			-- load gitsigns only when a git file is opened
-			vim.api.nvim_create_autocmd({ "BufRead" }, {
-				group = vim.api.nvim_create_augroup("GitSignsLazyLoad", { clear = true }),
-				callback = function()
-					vim.fn.system("git -C " .. '"' .. vim.fn.expand("%:p:h") .. '"' .. " rev-parse")
-					if vim.v.shell_error == 0 then
-						vim.api.nvim_del_augroup_by_name("GitSignsLazyLoad")
-						vim.schedule(function()
-							require("lazy").load { plugins = { "gitsigns.nvim" } }
-						end)
-					end
-				end,
-			})
+			require("core.utils").lazy_load_git_plugin("gitsigns.nvim")
 		end,
-		config = function()
-			require("plugins.configs.gitsigns")
+		opts = function()
+			return require("plugins.configs.gitsigns")
+		end,
+		config = function(_, opts)
+			local status_ok, gitsigns = pcall(require, "gitsigns")
+			if status_ok then
+				gitsigns.setup(opts)
+			end
+
+			vim.api.nvim_command([[set statusline+=%{get(b:,'gitsigns_status','')}]])
 		end,
 	},
 
@@ -513,19 +509,7 @@ local default_plugins = {
 		version = "*",
 		ft = { "gitcommit" },
 		init = function()
-			-- load git-conflict only when a git file is opened
-			vim.api.nvim_create_autocmd({ "BufRead" }, {
-				group = vim.api.nvim_create_augroup("GitConflictLazyLoad", { clear = true }),
-				callback = function()
-					vim.fn.system("git -C " .. '"' .. vim.fn.expand("%:p:h") .. '"' .. " rev-parse")
-					if vim.v.shell_error == 0 then
-						vim.api.nvim_del_augroup_by_name("GitConflictLazyLoad")
-						vim.schedule(function()
-							require("lazy").load { plugins = { "git-conflict.nvim" } }
-						end)
-					end
-				end,
-			})
+			require("core.utils").lazy_load_git_plugin("git-conflict.nvim")
 		end,
 		opts = function()
 			return require("plugins.configs.git-conflict")

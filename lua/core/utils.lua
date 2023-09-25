@@ -57,6 +57,21 @@ M.lazy_load = function(plugin)
 	})
 end
 
+M.lazy_load_git_plugin = function(plugin)
+	api.nvim_create_autocmd({ "BufRead" }, {
+		group = api.nvim_create_augroup("LazyLoad" .. plugin, { clear = true }),
+		callback = function()
+			fn.system("git -C " .. '"' .. vim.fn.expand("%:p:h") .. '"' .. " rev-parse")
+			if vim.v.shell_error == 0 then
+				api.nvim_del_augroup_by_name("LazyLoad" .. plugin)
+				vim.schedule(function()
+					require("lazy").load { plugins = plugin }
+				end)
+			end
+		end,
+	})
+end
+
 ---
 -- default opts = 1
 -- opts = 1 for noremap and silent

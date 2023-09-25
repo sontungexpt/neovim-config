@@ -1,10 +1,4 @@
-local status_ok, gitsigns = pcall(require, "gitsigns")
-
-if not status_ok then
-	return
-end
-
-gitsigns.setup {
+local options = {
 	signs = {
 		add = { text = "+" },
 		change = { text = "│" },
@@ -90,4 +84,4 @@ gitsigns.setup {
 	end,
 }
 
-vim.api.nvim_command([[set statusline+=%{get(b:,'gitsigns_status','')}]])
+return options
