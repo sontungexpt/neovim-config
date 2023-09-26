@@ -44,7 +44,7 @@ local options = {
 	close_fold_kinds = { "imports", "comment" },
 	preview = {
 		win_config = {
-			border = { "", "─", "", "", "", "─", "", "" },
+			border = "single",
 			winhighlight = "Normal:Folded",
 			winblend = 0,
 		},

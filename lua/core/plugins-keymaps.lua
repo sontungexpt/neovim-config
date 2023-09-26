@@ -123,7 +123,14 @@ autocmd("LspAttach", {
 		-- Go to type definition
 		-- map("n", "gt", "<cmd>Lspsaga goto_type_definition<CR>")
 
-		map("n", "K", "<cmd>Lspsaga hover_doc<CR>")
+		map("n", "K", function()
+			local status_ok, ufo = pcall(require, "ufo")
+			local winid = status_ok and ufo.peekFoldedLinesUnderCursor() or nil
+			if not winid then
+				api.nvim_command("Lspsaga hover_doc")
+			end
+		end)
+		-- map("n", "K", "<cmd>Lspsaga hover_doc<CR>")
 		-- To disable it just use ":Lspsaga hover_doc ++quiet"
 		-- If you want to keep the hover window in the top right hand corner,
 		-- you can pass the ++keep argument
@@ -227,6 +234,9 @@ map("c", "<C-k>", "wilder#in_context() ? wilder#previous() : '<C-k>'", 5)
 -- ufo
 map("n", "zR", function()
 	require("ufo").openAllFolds()
+end)
+map("n", "zr", function()
+	require("ufo").openFoldsExceptKinds()
 end)
 map("n", "zM", function()
 	require("ufo").closeAllFolds()
