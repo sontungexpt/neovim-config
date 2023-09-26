@@ -161,6 +161,12 @@ local capabilities = vim.tbl_deep_extend(
 
 capabilities.offsetEncoding = { "utf-8" }
 
+-- for nvim-ufo
+capabilities.textDocument.foldingRange = {
+	dynamicRegistration = false,
+	lineFoldingOnly = true,
+}
+
 for _, server in ipairs(lsp_servers) do
 	local config = server.config or {}
 	config.on_attach = config.on_attach or on_attach

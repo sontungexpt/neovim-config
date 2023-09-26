@@ -25,8 +25,8 @@ options.showmode = false -- Don't show mode since we have a statusline
 -- fold
 options.foldenable = false -- Don't fold by default
 options.foldcolumn = "1"
-options.foldlevel = 999
-options.foldlevelstart = 999
+options.foldlevel = 99
+options.foldlevelstart = 99
 options.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
 
 -- Text width and wrap
