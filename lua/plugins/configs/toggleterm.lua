@@ -18,7 +18,7 @@ toggleterm.setup {
 	open_mapping = [[<C-t>]],
 	---@diagnostic disable-next-line: unused-local
 	on_open = function(term)
-		api.nvim_command("startinsert!")
+		api.nvim_command("startinsert")
 		api.nvim_buf_set_keymap(term.bufnr, "n", "q", "<cmd>close<CR>", { noremap = true, silent = true })
 
 		local status_shade_ok, shade = pcall(require, "shade")
@@ -28,7 +28,7 @@ toggleterm.setup {
 	end,
 	---@diagnostic disable-next-line: unused-local
 	on_close = function(term)
-		api.nvim_command("startinsert!")
+		api.nvim_command("stopinsert")
 		local status_shade_ok, shade = pcall(require, "shade")
 		if status_shade_ok then
 			shade.toggle()
@@ -75,7 +75,7 @@ toggleterm.setup {
 		winblend = 3,
 	},
 	winbar = {
-		enabled = true,
+		enabled = false,
 		name_formatter = function(term) --  term: Terminal
 			return ""
 		end,
