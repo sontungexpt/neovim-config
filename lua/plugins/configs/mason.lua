@@ -2,6 +2,12 @@ local options = {
 	-- auto sync the installed packages with ensure_installed when open nvim
 	auto_sync = true,
 	ensure_installed = {
+		-- java
+		"jdtls",
+		"google-java-format",
+		"checkstyle",
+		"java-debug-adapter",
+
 		-- lua
 		"lua-language-server",
 		"stylua",
@@ -19,6 +25,7 @@ local options = {
 		"clang-format",
 		"cmake-language-server",
 		"cmakelang",
+		"codelldb",
 
 		-- python
 		"pyright",
@@ -39,9 +46,6 @@ local options = {
 		"emmet-ls",
 		"json-lsp",
 		"tailwindcss-language-server",
-
-		-- debugger adapters
-		"codelldb",
 	},
 	PATH = "skip",
 	ui = {

@@ -117,4 +117,4 @@ If you find any issues with this configuration or would like to contribute, plea
 
 ## License
 
-This configuration is released under the MIT License.
+This configuration is licensed under the MIT license - see the [LICENSE](LICENSE) file for details.

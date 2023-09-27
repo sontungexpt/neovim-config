@@ -1,7 +1,7 @@
 local M = {}
 
 M.get_adapter_mason_path = function(adapter_name)
-	return vim.fn.stdpath("data") .. "/mason/packages/" .. adapter_name .. "/" .. adapter_name
+	return require("mason-registry").get_package(adapter_name):get_install_path() .. "/" .. adapter_name
 end
 
 M.get_rust_debug_filepath = function()

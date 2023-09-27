@@ -103,6 +103,10 @@ local lsp_servers = {
 	{
 		name = "pyright",
 	},
+
+	{
+		name = "jdtls",
+	},
 }
 
 local function on_attach(client, bufnr)
@@ -160,6 +164,23 @@ local capabilities = vim.tbl_deep_extend(
 )
 
 capabilities.offsetEncoding = { "utf-8" }
+capabilities.textDocument.completion.completionItem = {
+	documentationFormat = { "markdown", "plaintext" },
+	snippetSupport = true,
+	preselectSupport = true,
+	insertReplaceSupport = true,
+	labelDetailsSupport = true,
+	deprecatedSupport = true,
+	commitCharactersSupport = true,
+	tagSupport = { valueSet = { 1 } },
+	resolveSupport = {
+		properties = {
+			"documentation",
+			"detail",
+			"additionalTextEdits",
+		},
+	},
+}
 
 -- for nvim-ufo
 capabilities.textDocument.foldingRange = {

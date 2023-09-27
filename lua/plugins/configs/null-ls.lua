@@ -12,7 +12,13 @@ local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 null_ls.setup {
 	debug = true,
 	sources = {
-		--git sign
+		-- java
+		formatting.google_java_format,
+		diagnostics.checkstyle.with {
+			extra_args = { "-c", "/google_checks.xml" }, -- or "/sun_checks.xml" or path to self written rules
+		},
+
+		-- gitsigns
 		code_actions.gitsigns,
 
 		-- -- prettier

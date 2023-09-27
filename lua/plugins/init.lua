@@ -91,12 +91,7 @@ local default_plugins = {
 
 	{
 		"zbirenbaum/copilot.lua",
-		build = function()
-			vim.schedule(function()
-				vim.api.nvim_command("Copilot auth")
-			end)
-		end,
-		-- build = ":Copilot auth",
+		build = ":Copilot auth",
 		cmd = "Copilot",
 		event = "InsertEnter",
 		opts = function()
