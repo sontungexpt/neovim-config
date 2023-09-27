@@ -1,7 +1,9 @@
 local M = {}
 
-M.get_adapter_mason_path = function(adapter_name)
-	return require("mason-registry").get_package(adapter_name):get_install_path() .. "/" .. adapter_name
+M.get_adapter_mason_path = function(adapter_name, custom_path)
+	return require("mason-registry").get_package(adapter_name):get_install_path()
+		.. "/"
+		.. (custom_path or adapter_name)
 end
 
 M.get_rust_debug_filepath = function()
