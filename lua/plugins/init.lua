@@ -321,13 +321,13 @@ local default_plugins = {
 		end,
 		event = "InsertEnter",
 		config = function(_, opts)
-			setup_plugin("nvim-autopairs", opts)
-
-			local cmp_status_ok, cmp = pcall(require, "cmp")
-			local cmp_autopairs_status_ok, cmp_autopairs = pcall(require, "nvim-autopairs.completion.cmp")
-			if cmp_status_ok and cmp_autopairs_status_ok then
-				cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done { map_char = { tex = "" } })
-			end
+			setup_plugin("nvim-autopairs", opts, function(nvim_autopairs)
+				local cmp_status_ok, cmp = pcall(require, "cmp")
+				local cmp_autopairs_status_ok, cmp_autopairs = pcall(require, "nvim-autopairs.completion.cmp")
+				if cmp_status_ok and cmp_autopairs_status_ok then
+					cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done { map_char = { tex = "" } })
+				end
+			end)
 		end,
 	},
 
