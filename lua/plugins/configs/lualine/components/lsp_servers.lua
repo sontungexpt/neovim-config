@@ -1,68 +1,71 @@
 local lsp_servers = function()
-	local buf_clients = vim.lsp.buf_get_clients()
+	if vim.api.nvim_get_option("columns") > 70 then
+		local buf_clients = vim.lsp.buf_get_clients()
 
-	if not buf_clients or #buf_clients == 0 then
-		return "NO LSP  "
-	end
-
-	local server_names = {}
-
-	for _, client in pairs(buf_clients) do
-		local client_name = client.name
-		if client_name ~= "null-ls" and client_name ~= "copilot" then
-			table.insert(server_names, client_name)
+		if not buf_clients or #buf_clients == 0 then
+			return "NO LSP  "
 		end
-	end
 
-	local has_null_ls, null_ls = pcall(require, "null-ls")
+		local server_names = {}
 
-	if has_null_ls then
-		local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
-		local null_ls_methods = {
-			null_ls.methods.DIAGNOSTICS,
-			null_ls.methods.DIAGNOSTICS_ON_OPEN,
-			null_ls.methods.DIAGNOSTICS_ON_SAVE,
-			null_ls.methods.FORMATTING,
-		}
-
-		local get_null_ls_sources = function(methods, name_only)
-			local sources = require("null-ls.sources")
-			local available_sources = sources.get_available(buf_ft)
-
-			methods = type(methods) == "table" and methods or { methods }
-
-			-- methods = nil or {}
-			if #methods == 0 then
-				if name_only then
-					return vim.tbl_map(function(source)
-						return source.name
-					end, available_sources)
-				end
-				return available_sources
+		for _, client in pairs(buf_clients) do
+			local client_name = client.name
+			if client_name ~= "null-ls" and client_name ~= "copilot" then
+				table.insert(server_names, client_name)
 			end
+		end
 
-			local source_results = {}
+		local has_null_ls, null_ls = pcall(require, "null-ls")
 
-			for _, source in ipairs(available_sources) do
-				for _, method in ipairs(methods) do
-					if source.methods[method] then
-						if name_only then
-							table.insert(source_results, source.name)
-						else
-							table.insert(source_results, source)
+		if has_null_ls then
+			local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
+			local null_ls_methods = {
+				null_ls.methods.DIAGNOSTICS,
+				null_ls.methods.DIAGNOSTICS_ON_OPEN,
+				null_ls.methods.DIAGNOSTICS_ON_SAVE,
+				null_ls.methods.FORMATTING,
+			}
+
+			local get_null_ls_sources = function(methods, name_only)
+				local sources = require("null-ls.sources")
+				local available_sources = sources.get_available(buf_ft)
+
+				methods = type(methods) == "table" and methods or { methods }
+
+				-- methods = nil or {}
+				if #methods == 0 then
+					if name_only then
+						return vim.tbl_map(function(source)
+							return source.name
+						end, available_sources)
+					end
+					return available_sources
+				end
+
+				local source_results = {}
+
+				for _, source in ipairs(available_sources) do
+					for _, method in ipairs(methods) do
+						if source.methods[method] then
+							if name_only then
+								table.insert(source_results, source.name)
+							else
+								table.insert(source_results, source)
+							end
+							break
 						end
-						break
 					end
 				end
+
+				return source_results
 			end
 
-			return source_results
+			local null_ls_builtins = get_null_ls_sources(null_ls_methods, true)
+			vim.list_extend(server_names, null_ls_builtins)
 		end
-
-		local null_ls_builtins = get_null_ls_sources(null_ls_methods, true)
-		vim.list_extend(server_names, null_ls_builtins)
+		return table.concat(server_names, ", ")
 	end
-	return table.concat(server_names, ", ")
+	return ""
 end
 
 return lsp_servers

@@ -3,7 +3,8 @@ local fn = vim.fn
 local cmd = api.nvim_command
 local autocmd = api.nvim_create_autocmd
 local augroup = api.nvim_create_augroup
-local map = require("core.utils").map
+local utils = require("core.utils")
+local map = utils.map
 
 autocmd({ "VimEnter", "VimLeave" }, {
 	pattern = "*",
@@ -199,4 +200,27 @@ autocmd("FileType", {
 	pattern = { "markdown" },
 	desc = "Wrap text in markdown files",
 	command = "setlocal wrap",
+})
+
+autocmd({ "VimEnter", "FocusGained" }, {
+	desc = "Switch to English when entering nvim in alacritty",
+	callback = function()
+		if utils.is_terminal("alacritty") then
+			utils.switch_language_engine("xkb:us::eng")
+		end
+	end,
+})
+
+autocmd({ "VimLeave", "FocusLost" }, {
+	desc = "Switch to Vietnamese when leaving nvim in alacritty",
+	callback = function()
+		if utils.is_terminal("alacritty") then
+			utils.switch_language_engine("Bamboo")
+		end
+	end,
+})
+
+autocmd({ "VimEnter", "VimResized" }, {
+	desc = "Lualine support: Set noshowmode on resize if window width is greater than 70",
+	command = "if &columns > 70 | set noshowmode | else | set showmode | endif",
 })

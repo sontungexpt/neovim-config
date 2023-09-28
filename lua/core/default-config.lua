@@ -17,6 +17,8 @@ M.ui = {
 		red = "#ec5f67",
 		gray = "#6c776e",
 		pink = "#eb7fdc",
+		lualine_bg = "#1e2030",
+		trans = "#00000000",
 	},
 	lualine = {
 		options = {

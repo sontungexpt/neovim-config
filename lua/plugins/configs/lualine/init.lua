@@ -10,6 +10,8 @@ local component_separators = require("core.default-config").ui.lualine.options.c
 local indent = require("plugins.configs.lualine.components.indent")
 local copilot = require("plugins.configs.lualine.components.copilot")
 local lsp_servers = require("plugins.configs.lualine.components.lsp_servers")
+local progress_pos = require("plugins.configs.lualine.components.progress_pos")
+local encoding = require("plugins.configs.lualine.components.encoding")
 
 lualine.setup {
 	options = {
@@ -39,6 +41,10 @@ lualine.setup {
 			{
 				"mode",
 				separator = section_separators,
+				icons_enabled = true,
+				cond = function()
+					return vim.api.nvim_get_option("columns") > 70
+				end,
 			},
 		},
 		lualine_b = {
@@ -46,14 +52,14 @@ lualine.setup {
 				"filetype",
 				icon_only = true,
 				colored = true,
-				padding = 1,
-				color = { bg = "#2c2740" },
+				padding = { left = 2, right = 1 },
+				color = { bg = colors.lualine_bg },
 			},
 			{
 				"filename",
-				padding = { right = 1 },
+				padding = { right = 2 },
 				separator = section_separators,
-				color = { bg = "#2c2740", fg = colors.fg, gui = "bold" },
+				color = { bg = colors.lualine_bg, fg = colors.orange, gui = "bold" },
 				file_status = true,
 				newfile_status = false,
 				path = 0,
@@ -70,11 +76,16 @@ lualine.setup {
 				"branch",
 				icon = " ",
 				color = { fg = colors.pink },
-				padding = { left = 2, right = 1 },
+				padding = { left = 1, right = 1 },
 			},
 			{
 				"diff",
-				colored = false,
+				colored = true,
+				diff_color = {
+					added = "DiagnosticSignInfo", -- Changes the diff's added color
+					modified = "DiagnosticSignWarn", -- Changes the diff's modified color
+					removed = "DiagnosticSignError", -- Changes the diff's removed color you
+				},
 				symbols = { added = " ", modified = " ", removed = " " },
 			},
 		},
@@ -108,8 +119,12 @@ lualine.setup {
 			},
 			{
 				function()
-					return "Indent"
+					if vim.api.nvim_get_option("columns") > 70 then
+						return "Tab" .. ""
+					end
+					return ""
 				end,
+				padding = 1,
 				separator = section_separators,
 				color = { bg = colors.blue, fg = colors.black },
 			},
@@ -117,7 +132,7 @@ lualine.setup {
 				indent,
 			},
 			{
-				"encoding",
+				encoding,
 				separator = section_separators,
 				padding = 1,
 				color = { bg = colors.yellow, fg = colors.black },
@@ -130,11 +145,9 @@ lualine.setup {
 			},
 
 			{
-				function()
-					return ""
-				end,
-				separator = section_separators,
-				color = { bg = colors.orange, fg = colors.black },
+				progress_pos,
+				padding = 0,
+				color = { bg = colors.lualine_bg, fg = colors.orange },
 			},
 		},
 		lualine_y = {},

@@ -399,13 +399,12 @@ local default_plugins = {
 
 	{
 		"akinsho/bufferline.nvim",
-		version = "*",
 		dependencies = {
 			"nvim-tree/nvim-web-devicons",
 		},
 		lazy = false,
 		opts = function()
-			return require("plugins.configs.bufferline").opts
+			return require("plugins.configs.bufferline")
 		end,
 		config = function(_, opts)
 			setup_plugin("bufferline", opts)
@@ -414,6 +413,7 @@ local default_plugins = {
 
 	{
 		"lukas-reineke/indent-blankline.nvim",
+		version = "2.20.8",
 		init = function()
 			require("core.utils").lazy_load("indent-blankline.nvim")
 		end,
@@ -421,9 +421,9 @@ local default_plugins = {
 			return require("plugins.configs.indent-blankline")
 		end,
 		config = function(opts)
-			setup_plugin("indent_blankline", opts, function(indent_blankline)
+			setup_plugin("indent_blankline", opts, function(ibl)
 				vim.wo.colorcolumn = "99999"
-			end)
+			end, true)
 		end,
 	},
 

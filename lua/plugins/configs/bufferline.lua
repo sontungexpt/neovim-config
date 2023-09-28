@@ -1,9 +1,7 @@
-local M = {}
-
 local colors = require("core.default-config").ui.colors
 local utils = require("core.utils")
 
-M.opts = {
+local options = {
 	options = {
 		-- set to "tabs" to only show tabpages instead
 		mode = "buffers",
@@ -332,4 +330,5 @@ M.opts = {
 		},
 	},
 }
-return M
+
+return options
