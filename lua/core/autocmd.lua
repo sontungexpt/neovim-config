@@ -221,6 +221,14 @@ autocmd({ "VimLeave", "FocusLost" }, {
 })
 
 autocmd({ "VimEnter", "VimResized" }, {
-	desc = "Lualine support: Set noshowmode on resize if window width is greater than 70",
-	command = "if &columns > 70 | set noshowmode | else | set showmode | endif",
+	desc = "Enable the 'noshowmode' option when resizing the window width exceeds 70.",
+	callback = function()
+		if utils.is_plugin_installed("lualine.nvim") then
+			if api.nvim_get_option("columns") > 70 then
+				vim.opt.showmode = false
+			else
+				vim.opt.showmode = true
+			end
+		end
+	end,
 })

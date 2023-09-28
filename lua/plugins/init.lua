@@ -69,11 +69,11 @@ local default_plugins = {
 		end,
 	},
 
-	{
-		"stevearc/stickybuf.nvim",
-		event = "WinNew",
-		config = true,
-	},
+	-- {
+	-- 	"stevearc/stickybuf.nvim",
+	-- 	event = "WinNew",
+	-- 	config = true,
+	-- },
 
 	{
 		"nvim-tree/nvim-tree.lua",

@@ -54,8 +54,8 @@ M.options = {
 	auto_reload_on_write = true,
 	disable_netrw = true,
 	hijack_netrw = true,
-	hijack_cursor = true,
-	hijack_unnamed_buffer_when_opening = false,
+	hijack_cursor = false, -- Keeps the cursor on the first letter of the filename when moving in the tree.
+	hijack_unnamed_buffer_when_opening = true,
 	sort_by = "name",
 	root_dirs = {},
 	prefer_startup_root = false,
@@ -129,10 +129,6 @@ M.options = {
 		update_root = true,
 		ignore_list = {},
 	},
-	system_open = {
-		cmd = "",
-		args = {},
-	},
 	diagnostics = {
 		enable = false,
 		show_on_dirs = false,
@@ -163,9 +159,7 @@ M.options = {
 			".rbenv",
 			"yay",
 		},
-		exclude = {
-			"test.txt",
-		},
+		exclude = {},
 	},
 	filesystem_watchers = {
 		enable = true,
@@ -174,7 +168,7 @@ M.options = {
 	},
 	git = {
 		enable = true,
-		ignore = true,
+		ignore = false,
 		show_on_dirs = true,
 		show_on_open_dirs = true,
 		timeout = 400,

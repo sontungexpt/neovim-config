@@ -3,7 +3,9 @@ local options = {
 	min_word_length = 2, -- if cursorword length < min_word_length then not highlight
 	excluded = {
 		filetypes = {},
-		buftypes = {},
+		buftypes = {
+			"terminal",
+		},
 		file_patterns = {},
 	},
 	highlight = {
