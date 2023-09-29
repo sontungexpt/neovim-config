@@ -90,7 +90,7 @@ autocmd("VimEnter", {
 })
 
 -- Markdown
-map("n", "<Leader>p", "<Cmd>MarkdownPreviewToggle<CR>", { desc = "Toggle markdown preview" })
+map("n", "<Leader>pm", "<Cmd>MarkdownPreviewToggle<CR>", { desc = "Toggle markdown preview" })
 
 -- LSP-saga
 -- Only create keymap for lsp-saga if lsp is attached

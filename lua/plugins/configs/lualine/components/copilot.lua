@@ -1,9 +1,13 @@
-local copilot = function()
-	local copilot_client = vim.lsp.get_active_clients({ name = "copilot" })[1]
-	if copilot_client == nil then
-		return ""
-	end
-	return "   "
-end
+local colors = require("core.default-config").ui.colors
+local section_separators = require("core.default-config").ui.lualine.options.section_separators
 
-return copilot
+return {
+	function()
+		return package.loaded["copilot_status"] and require("copilot_status").status_string() or ""
+	end,
+	cnd = function()
+		return package.loaded["copilot_status"] and require("copilot_status").enabled()
+	end,
+	separator = section_separators,
+	color = { bg = colors.lualine_bg, fg = colors.fg },
+}

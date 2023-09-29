@@ -57,9 +57,7 @@ local default_plugins = {
 		-- dev = true,
 		"sontungexpt/buffer-closer",
 		cmd = "CloseRetiredBuffers",
-		init = function()
-			require("core.utils").lazy_load("buffer-closer")
-		end,
+		event = { "BufAdd", "FocusLost", "FocusGained" },
 		opts = function()
 			return {} -- faster load if no have custom config
 			-- return require("plugins.configs.buffer-closer")
@@ -103,6 +101,18 @@ local default_plugins = {
 		end,
 		config = function(_, opts)
 			setup_plugin("copilot", opts)
+		end,
+	},
+
+	{
+		"jonahgoldwastaken/copilot-status.nvim",
+		dependencies = { "zbirenbaum/copilot.lua" },
+		event = "InsertEnter",
+		opts = function()
+			return require("plugins.configs.copilot-status")
+		end,
+		config = function(_, opts)
+			setup_plugin("copilot_status", opts)
 		end,
 	},
 
@@ -392,8 +402,11 @@ local default_plugins = {
 		init = function()
 			require("core.utils").lazy_load("lualine.nvim")
 		end,
-		config = function()
-			require("plugins.configs.lualine")
+		opts = function()
+			return require("plugins.configs.lualine")
+		end,
+		config = function(_, opts)
+			setup_plugin("lualine", opts)
 		end,
 	},
 

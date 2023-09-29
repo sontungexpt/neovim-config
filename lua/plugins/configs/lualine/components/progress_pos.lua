@@ -1,3 +1,5 @@
+local colors = require("core.default-config").ui.colors
+
 local progress = function()
 	local current_line = vim.fn.line(".")
 	local total_lines = vim.fn.line("$")
@@ -7,4 +9,8 @@ local progress = function()
 	return chars[index]
 end
 
-return progress
+return {
+	progress,
+	padding = 0,
+	color = { bg = colors.lualine_bg, fg = colors.orange },
+}

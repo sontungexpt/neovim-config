@@ -153,7 +153,6 @@ M.options = {
 			"zsh_history_fix",
 			"node_modules",
 			".husky",
-			"*.pdf",
 			"*.ppt",
 			"*.exe",
 			".rbenv",

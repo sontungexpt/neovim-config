@@ -1,19 +1,20 @@
-local status_ok, lualine = pcall(require, "lualine")
-if not status_ok then
-	return
-end
 local colors = require("core.default-config").ui.colors
 local section_separators = require("core.default-config").ui.lualine.options.section_separators
 local component_separators = require("core.default-config").ui.lualine.options.component_separators
 
 -- Components
+local file = require("plugins.configs.lualine.components.file")
+local mode = require("plugins.configs.lualine.components.mode")
 local indent = require("plugins.configs.lualine.components.indent")
 local copilot = require("plugins.configs.lualine.components.copilot")
+local location = require("plugins.configs.lualine.components.location")
 local lsp_servers = require("plugins.configs.lualine.components.lsp_servers")
 local progress_pos = require("plugins.configs.lualine.components.progress_pos")
 local encoding = require("plugins.configs.lualine.components.encoding")
+local diagnostics = require("plugins.configs.lualine.components.diagnostics")
+local git = require("plugins.configs.lualine.components.git")
 
-lualine.setup {
+local options = {
 	options = {
 		theme = "tokyonight",
 		globalstatus = true,
@@ -37,113 +38,29 @@ lualine.setup {
 	},
 	sections = {
 		lualine_a = {
-			{
-				"mode",
-				separator = section_separators,
-				icons_enabled = true,
-				cond = function()
-					return vim.o.columns > 70
-				end,
-			},
+			mode,
 		},
 		lualine_b = {
-			{
-				"filetype",
-				icon_only = true,
-				colored = true,
-				padding = { left = 2, right = 1 },
-				color = { bg = colors.lualine_bg },
-			},
-			{
-				"filename",
-				padding = { right = 2 },
-				separator = section_separators,
-				color = { bg = colors.lualine_bg, fg = colors.orange, gui = "bold" },
-				file_status = true,
-				newfile_status = false,
-				path = 0,
-				symbols = {
-					modified = "●",
-					readonly = " ",
-					unnamed = "",
-					newfile = " [New]",
-				},
-			},
+			file.type,
+			file.name,
 		},
 		lualine_c = {
-			{
-				"branch",
-				icon = " ",
-				color = { fg = colors.pink },
-				padding = { left = 1, right = 1 },
-			},
-			{
-				"diff",
-				colored = true,
-				diff_color = {
-					added = "DiagnosticSignInfo", -- Changes the diff's added color
-					modified = "DiagnosticSignWarn", -- Changes the diff's modified color
-					removed = "DiagnosticSignError", -- Changes the diff's removed color you
-				},
-				symbols = { added = " ", modified = " ", removed = " " },
-			},
+			git.branch,
+			git.diff,
 		},
 		lualine_x = {
-			{
-				"diagnostics",
-				sources = { "nvim_diagnostic" },
-				symbols = {
-					error = " ",
-					warn = " ",
-					hint = "󰌵 ",
-					info = " ",
-				},
-				colored = true,
-				diagnostics_color = {
-					color_error = { fg = colors.red },
-					color_warn = { fg = colors.yellow },
-					color_info = { fg = colors.blue },
-					color_hint = { fg = colors.green },
-				},
-				always_visible = false,
-				update_in_insert = true,
-			},
-			{
-				lsp_servers,
-				color = { fg = colors.magenta },
-			},
-			{
-				copilot,
-				color = { fg = colors.white },
-			},
-			{
-				indent.icon,
-				padding = 1,
-				separator = section_separators,
-				color = { bg = colors.blue, fg = colors.black },
-			},
-			{
-				indent.value,
-			},
-			{
-				encoding,
-				separator = section_separators,
-				padding = 1,
-				color = { bg = colors.yellow, fg = colors.black },
-			},
-			{
-				"location",
-				padding = 1,
-				separator = section_separators,
-			},
-
-			{
-				progress_pos,
-				padding = 0,
-				color = { bg = colors.lualine_bg, fg = colors.orange },
-			},
+			diagnostics,
+			lsp_servers,
+			copilot,
+			indent.icon,
+			indent.value,
+			encoding,
+			location,
+			progress_pos,
 		},
 		lualine_y = {},
 		lualine_z = {},
 	},
 }
+
+return options

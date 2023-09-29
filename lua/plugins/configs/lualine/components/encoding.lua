@@ -1,3 +1,6 @@
+local colors = require("core.default-config").ui.colors
+local section_separators = require("core.default-config").ui.lualine.options.section_separators
+
 local encoding = function()
 	-- get encoding and replace
 	-- utf8 with  (U+F75E)
@@ -25,4 +28,9 @@ local encoding = function()
 	end
 end
 
-return encoding
+return {
+	encoding,
+	separator = section_separators,
+	padding = 1,
+	color = { bg = colors.yellow, fg = colors.black },
+}
