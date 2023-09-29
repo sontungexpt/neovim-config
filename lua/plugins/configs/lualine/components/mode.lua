@@ -1,9 +1,9 @@
 local colors = require("core.default-config").ui.colors
-local section_separators = require("core.default-config").ui.lualine.options.section_separators
+local no_seps = require("core.default-config").ui.lualine.no_seps
 
 return {
 	"mode",
-	separator = section_separators,
+	separator = no_seps,
 	icons_enabled = true,
 	cond = function()
 		return vim.o.columns > 70

@@ -1,7 +1,24 @@
-local section_separators = require("core.default-config").ui.lualine.options.section_separators
+local no_seps = require("core.default-config").ui.lualine.no_seps
+local colors = require("core.default-config").ui.colors
 
-return {
+local M = {}
+M.value = {
 	"location",
 	padding = 1,
-	separator = section_separators,
+	separator = no_seps,
 }
+
+M.progress = {
+	function()
+		local current_line = vim.fn.line(".")
+		local total_lines = vim.fn.line("$")
+		local chars = { "_", "▁", "▂", "▃", "▄", "▅", "▆", "▇", "█" }
+		local line_ratio = current_line / total_lines
+		local index = math.ceil(line_ratio * #chars)
+		return chars[index]
+	end,
+	padding = 0,
+	color = { bg = colors.lualine_bg, fg = colors.orange },
+}
+
+return M

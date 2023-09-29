@@ -1,5 +1,5 @@
 local colors = require("core.default-config").ui.colors
-local section_separators = require("core.default-config").ui.lualine.options.section_separators
+local no_seps = require("core.default-config").ui.lualine.no_seps
 local M = {}
 
 M.type = {
@@ -13,7 +13,7 @@ M.type = {
 M.name = {
 	"filename",
 	padding = { right = 2 },
-	separator = section_separators,
+	separator = no_seps,
 	color = { bg = colors.lualine_bg, fg = colors.orange, gui = "bold" },
 	file_status = true,
 	newfile_status = false,

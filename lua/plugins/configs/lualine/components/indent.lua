@@ -1,5 +1,5 @@
 local colors = require("core.default-config").ui.colors
-local section_separators = require("core.default-config").ui.lualine.options.section_separators
+local no_seps = require("core.default-config").ui.lualine.no_seps
 
 local M = {}
 
@@ -11,8 +11,8 @@ M.value = {
 		return ""
 	end,
 	padding = 1,
-	separator = section_separators,
-	color = { bg = colors.lualine_bg, fg = colors.magenta },
+	separator = no_seps,
+	color = { bg = colors.lualine_bg, fg = colors.fg },
 }
 
 M.icon = {
@@ -24,7 +24,7 @@ M.icon = {
 	end,
 
 	padding = 1,
-	separator = section_separators,
+	separator = no_seps,
 	color = { bg = colors.blue, fg = colors.black },
 }
 

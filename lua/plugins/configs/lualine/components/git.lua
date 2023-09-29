@@ -1,4 +1,5 @@
 local colors = require("core.default-config").ui.colors
+
 local M = {}
 
 M.branch = {
