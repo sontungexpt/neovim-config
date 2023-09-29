@@ -22,7 +22,6 @@ lualine.setup {
 		section_separators = section_separators,
 		disabled_filetypes = {
 			"lazy",
-			"floaterm",
 			"NvimTree",
 			"mason",
 			"toggleterm",
@@ -43,7 +42,7 @@ lualine.setup {
 				separator = section_separators,
 				icons_enabled = true,
 				cond = function()
-					return vim.api.nvim_get_option("columns") > 70
+					return vim.o.columns > 70
 				end,
 			},
 		},
@@ -118,18 +117,13 @@ lualine.setup {
 				color = { fg = colors.white },
 			},
 			{
-				function()
-					if vim.api.nvim_get_option("columns") > 70 then
-						return "Tab" .. ""
-					end
-					return ""
-				end,
+				indent.icon,
 				padding = 1,
 				separator = section_separators,
 				color = { bg = colors.blue, fg = colors.black },
 			},
 			{
-				indent,
+				indent.value,
 			},
 			{
 				encoding,
@@ -137,7 +131,6 @@ lualine.setup {
 				padding = 1,
 				color = { bg = colors.yellow, fg = colors.black },
 			},
-
 			{
 				"location",
 				padding = 1,

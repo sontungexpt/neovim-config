@@ -59,9 +59,20 @@ M.binary_file_patterns = {
 	"%.jpeg$",
 	"%.pdf$",
 	"%.zip$",
+	"%.tar%.gz$",
 	"%.tar$",
 	"%.mp3$",
 	"%.mp4$",
+	"%.wav$",
+	"%.ogg$",
+	"%.mkv$",
+	"%.avi$",
+	"%.webm$",
+	"%.iso$",
+	"%.exe$",
+	"%.dll$",
+	"%.so$",
+	"%.dylib$",
 }
 
 -- config for lazy.nvim startup options

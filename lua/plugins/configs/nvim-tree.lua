@@ -240,7 +240,7 @@ M.options = {
 		},
 	},
 	log = {
-		enable = false,
+		enable = true,
 		truncate = false,
 		types = {
 			all = false,

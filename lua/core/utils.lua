@@ -108,17 +108,7 @@ M.map = function(mode, key, map_to, opts)
 end
 
 M.find_project_root = function(current_path)
-	current_path = current_path or fn.expand("%:p:h")
-	while current_path ~= "/" do
-		for _, file in ipairs(default_config.root_files) do
-			local file_path = fn.findfile(file, current_path)
-			if file_path ~= "" then
-				return current_path
-			end
-		end
-		current_path = fn.fnamemodify(current_path, ":h")
-	end
-	return ""
+	return vim.fs.dirname(vim.fs.find(default_config.root_files, { upward = true })[1])
 end
 
 M.is_same_array = function(table1, table2) -- O(n)

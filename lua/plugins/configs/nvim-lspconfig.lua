@@ -163,7 +163,7 @@ local capabilities = vim.tbl_deep_extend(
 	require("cmp_nvim_lsp").default_capabilities()
 )
 
-capabilities.offsetEncoding = { "utf-8" }
+capabilities.offsetEncoding = { "utf-8", "utf-16" }
 capabilities.textDocument.completion.completionItem = {
 	documentationFormat = { "markdown", "plaintext" },
 	snippetSupport = true,

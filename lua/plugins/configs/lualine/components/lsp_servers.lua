@@ -1,5 +1,5 @@
 local lsp_servers = function()
-	if vim.api.nvim_get_option("columns") > 70 then
+	if vim.o.columns > 70 then
 		local buf_clients = vim.lsp.buf_get_clients()
 
 		if not buf_clients or #buf_clients == 0 then
