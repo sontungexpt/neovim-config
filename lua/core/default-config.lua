@@ -30,24 +30,18 @@ M.ui = {
 }
 
 -- File to identify project root
-M.root_files = {
+M.root_markers = {
 	-- rust
 	"Cargo.toml",
-	"Cargo.lock",
 
 	-- lua
 	"stylua.toml",
 
 	-- git
 	".git",
-	".gitignore",
 
 	-- npm
 	"package.json",
-	"yarn.lock",
-
-	-- c/c++
-	"CMakeLists.txt",
 
 	-- nvim config
 	"lazy-lock.json",

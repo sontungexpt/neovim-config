@@ -108,7 +108,7 @@ M.map = function(mode, key, map_to, opts)
 end
 
 M.find_project_root = function(current_path)
-	return vim.fs.dirname(vim.fs.find(default_config.root_files, { upward = true })[1])
+	return vim.fs.dirname(vim.fs.find(default_config.root_markers, { upward = true })[1])
 end
 
 M.is_same_array = function(table1, table2) -- O(n)
