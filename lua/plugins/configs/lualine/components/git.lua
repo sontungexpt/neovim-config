@@ -5,7 +5,7 @@ local M = {}
 M.branch = {
 	"branch",
 	icon = " ",
-	color = { fg = colors.pink },
+	color = { fg = colors.pink, bg = colors.lualine_bg },
 	padding = { left = 1, right = 1 },
 }
 
@@ -18,6 +18,7 @@ M.diff = {
 		removed = "DiagnosticSignError", -- Changes the diff's removed color you
 	},
 	symbols = { added = " ", modified = " ", removed = " " },
+	color = { bg = colors.lualine_bg },
 }
 
 return M

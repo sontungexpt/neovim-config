@@ -6,6 +6,7 @@ M.value = {
 	"location",
 	padding = 1,
 	separator = no_seps,
+	color = { bg = colors.lualine_bg, fg = colors.fg },
 }
 
 M.progress = {

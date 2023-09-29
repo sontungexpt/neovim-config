@@ -232,3 +232,20 @@ autocmd({ "VimEnter", "VimResized" }, {
 		end
 	end,
 })
+
+autocmd("BufHidden", {
+	desc = "Delete [No Name] buffer when it's hidden",
+	callback = function(event)
+		if event.file == "" and vim.bo[event.buf].buftype == "" and not vim.bo[event.buf].modified then
+			vim.schedule(function()
+				pcall(vim.api.nvim_buf_delete, event.buf, {})
+			end)
+		end
+	end,
+})
+
+autocmd("FileType", {
+	pattern = { "help" },
+	desc = "Open help in vertical split",
+	command = "wincmd L",
+})

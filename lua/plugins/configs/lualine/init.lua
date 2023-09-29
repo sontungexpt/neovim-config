@@ -27,12 +27,6 @@ local configs = {
 			"TelescopePrompt",
 		},
 		always_divide_middle = true,
-		-- ms
-		refresh = {
-			statusline = 1000,
-			tabline = 1000,
-			winbar = 1000,
-		},
 	},
 	sections = {
 		lualine_a = {
@@ -52,12 +46,14 @@ local configs = {
 			copilot,
 			indent.icon,
 			indent.value,
+		},
+		lualine_y = {
 			encoding,
+		},
+		lualine_z = {
 			location.value,
 			location.progress,
 		},
-		lualine_y = {},
-		lualine_z = {},
 	},
 }
 
