@@ -1,5 +1,5 @@
-local colors = require("core.default-config").ui.colors
 local utils = require("core.utils")
+local colors = utils.load_config().ui.colors
 
 local options = {
 	options = {

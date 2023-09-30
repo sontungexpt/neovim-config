@@ -67,12 +67,6 @@ local default_plugins = {
 		end,
 	},
 
-	-- {
-	-- 	"stevearc/stickybuf.nvim",
-	-- 	event = "WinNew",
-	-- 	config = true,
-	-- },
-
 	{
 		"nvim-tree/nvim-tree.lua",
 		dependencies = {
@@ -167,7 +161,6 @@ local default_plugins = {
 			},
 			-- "jvgrootveld/telescope-zoxide",
 			-- "nvim-lua/popup.nvim",
-			-- 'dharmx/telescope-media.nvim',
 			-- 'BurntSushi/ripgrep',
 			-- 'sharkdp/fd'
 		},
@@ -281,8 +274,11 @@ local default_plugins = {
 			"TermExec",
 		},
 		keys = { "<C-t>" },
-		config = function()
-			require("plugins.configs.toggleterm")
+		opts = function()
+			return require("plugins.configs.toggleterm")
+		end,
+		config = function(_, opts)
+			setup_plugin("toggleterm", opts)
 		end,
 	},
 
@@ -353,6 +349,11 @@ local default_plugins = {
 	},
 
 	{
+		"mfussenegger/nvim-jdtls",
+		ft = "java",
+	},
+
+	{
 		"neovim/nvim-lspconfig",
 		dependencies = {
 			"lukas-reineke/lsp-format.nvim",
@@ -374,7 +375,7 @@ local default_plugins = {
 			require("core.utils").lazy_load("nvim-lspconfig")
 		end,
 		config = function()
-			require("plugins.configs.nvim-lspconfig")
+			require("plugins.configs.lsp.nvim-lspconfig")
 		end,
 	},
 
@@ -387,7 +388,7 @@ local default_plugins = {
 			{ "nvim-treesitter/nvim-treesitter" },
 		},
 		opts = function()
-			return require("plugins.configs.lspsaga")
+			return require("plugins.configs.lsp.lspsaga")
 		end,
 		config = function(_, opts)
 			setup_plugin("lspsaga", opts)
@@ -415,7 +416,9 @@ local default_plugins = {
 		dependencies = {
 			"nvim-tree/nvim-web-devicons",
 		},
-		lazy = false,
+		init = function()
+			require("core.utils").lazy_load("bufferline.nvim")
+		end,
 		opts = function()
 			return require("plugins.configs.bufferline")
 		end,
@@ -571,7 +574,7 @@ local default_plugins = {
 		},
 		event = { "BufWritePre" },
 		config = function()
-			require("plugins.configs.null-ls")
+			require("plugins.configs.lsp.null-ls")
 		end,
 	},
 

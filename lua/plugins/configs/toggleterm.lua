@@ -1,12 +1,7 @@
-local status_ok, toggleterm = pcall(require, "toggleterm")
-if not status_ok then
-	return
-end
-
 local api = vim.api
-local map = vim.keymap.set
+local map = require("core.utils").map
 
-toggleterm.setup {
+local options = {
 	-- size can be a number or function which is passed the current terminal
 	size = function(term)
 		if term.direction == "horizontal" then
@@ -16,23 +11,23 @@ toggleterm.setup {
 		end
 	end,
 	open_mapping = [[<C-t>]],
-	---@diagnostic disable-next-line: unused-local
 	on_open = function(term)
-		api.nvim_command("startinsert")
-		api.nvim_buf_set_keymap(term.bufnr, "n", "q", "<cmd>close<CR>", { noremap = true, silent = true })
+		-- mappings
+		local bufnr = term.bufnr
+		map("n", "q", "<cmd>close<CR>", { buffer = bufnr })
+		map("t", "<esc>", [[<C-\><C-n>]], { buffer = bufnr })
+		map("t", "jj", [[<C-\><C-n>]], { buffer = bufnr })
+		map("t", "<C-h>", [[<Cmd>wincmd h<CR>]], { buffer = bufnr })
+		map("t", "<C-j>", [[<Cmd>wincmd j<CR>]], { buffer = bufnr })
+		map("t", "<C-k>", [[<Cmd>wincmd k<CR>]], { buffer = bufnr })
+		map("t", "<C-l>", [[<Cmd>wincmd l<CR>]], { buffer = bufnr })
+		map("t", "<C-w>", [[<C-\><C-n><C-w>]], { buffer = bufnr })
+		map("t", "<C-t>", [[<Cmd>exe v:count1 . "ToggleTerm"<CR>]], { buffer = bufnr })
 
-		local status_shade_ok, shade = pcall(require, "shade")
-		if status_shade_ok then
-			shade.toggle()
-		end
+		api.nvim_command("startinsert")
 	end,
-	---@diagnostic disable-next-line: unused-local
 	on_close = function(term)
 		api.nvim_command("stopinsert")
-		local status_shade_ok, shade = pcall(require, "shade")
-		if status_shade_ok then
-			shade.toggle()
-		end
 	end,
 	highlights = {
 		-- highlights which map to a highlight group name and a table of it's values
@@ -82,22 +77,4 @@ toggleterm.setup {
 	},
 }
 
-function _G.set_terminal_keymaps()
-	local opts = { buffer = 0 }
-	map("t", "<esc>", [[<C-\><C-n>]], opts)
-	map("t", "jj", [[<C-\><C-n>]], opts)
-	map("t", "<C-h>", [[<Cmd>wincmd h<CR>]], opts)
-	map("t", "<C-j>", [[<Cmd>wincmd j<CR>]], opts)
-	map("t", "<C-k>", [[<Cmd>wincmd k<CR>]], opts)
-	map("t", "<C-l>", [[<Cmd>wincmd l<CR>]], opts)
-	map("t", "<C-w>", [[<C-\><C-n><C-w>]], opts)
-end
-
--- if you only want these mappings for toggle term use term://*toggleterm#* instead
-vim.cmd([[
-  augroup Terminal
-    autocmd!
-    autocmd TermOpen term://* lua set_terminal_keymaps()
-    autocmd TermEnter term://*toggleterm#* tnoremap <silent><c-t> <Cmd>exe v:count1 . "ToggleTerm"<CR>
-  augroup END
-]])
+return options

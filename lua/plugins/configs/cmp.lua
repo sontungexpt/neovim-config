@@ -54,8 +54,9 @@ cmp.setup {
 		{ name = "nvim_lsp", keyword_length = 1 },
 		{ name = "buffer", keyword_length = 3 },
 		{ name = "luasnip", keyword_length = 4 },
-		{ name = "copilot", group_index = 2 },
-		{ name = "emmet_vim" },
+		{ name = "nvim_lua", keyword_length = 2 },
+		{ name = "copilot", keyword_length = 3 },
+		{ name = "emoji", keyword_length = 2 },
 	},
 	window = {
 		documentation = cmp.config.window.bordered(),
@@ -101,10 +102,11 @@ cmp.setup {
 		["<Tab>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				cmp.select_next_item()
-			elseif luasnip.expandable() then
-				luasnip.expand()
 			elseif luasnip.expand_or_jumpable() then
-				luasnip.expand_or_jump()
+				vim.fn.feedkeys(
+					vim.api.nvim_replace_termcodes("<Plug>luasnip-expand-or-jump", true, true, true),
+					""
+				)
 			elseif check_backspace() then
 				fallback()
 			else
@@ -115,7 +117,7 @@ cmp.setup {
 			if cmp.visible() then
 				cmp.select_prev_item()
 			elseif luasnip.jumpable(-1) then
-				luasnip.jump(-1)
+				vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-jump-prev", true, true, true), "")
 			else
 				fallback()
 			end

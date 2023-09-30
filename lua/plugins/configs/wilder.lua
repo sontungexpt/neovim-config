@@ -4,7 +4,7 @@ if not status_ok then
 	return
 end
 
-local colors = require("core.default-config").ui.colors
+local colors = require("core.global-configs").ui.colors
 
 wilder.setup {
 	modes = { ":", "/", "?" },

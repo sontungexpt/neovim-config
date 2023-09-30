@@ -1,4 +1,4 @@
-local colors = require("core.default-config").ui.colors
+local colors = require("core.global-configs").ui.colors
 
 local lsp_servers = function()
 	if vim.o.columns > 70 then

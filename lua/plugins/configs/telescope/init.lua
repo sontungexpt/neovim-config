@@ -8,7 +8,6 @@ local options = {
 		"projects",
 		"fzy_native",
 		-- "zoxide",
-		-- "media",
 		-- "neoclip",
 	},
 	defaults = {

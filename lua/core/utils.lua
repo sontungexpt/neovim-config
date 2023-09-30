@@ -2,12 +2,12 @@ local api = vim.api
 local fn = vim.fn
 
 local logger = require("core.logger")
-local default_config = require("core.default-config")
+local global_configs = require("core.global-configs")
 
 local M = {}
 
 M.load_config = function()
-	return default_config
+	return global_configs
 end
 
 ---
@@ -80,7 +80,7 @@ end
 -- opts = 4 for not noremap and not silent
 -- opts = 5 for expr and noremap and silent
 -- opts = 6 for noremap and silent and nowait
-M.map = function(mode, key, map_to, opts)
+M.map = function(mode, key, map_to, opts, more_opts)
 	local opts1 = { noremap = true, silent = true }
 	opts = opts or 1
 	if type(opts) == "table" then
@@ -108,7 +108,7 @@ M.map = function(mode, key, map_to, opts)
 end
 
 M.find_project_root = function(current_path)
-	return vim.fs.dirname(vim.fs.find(default_config.root_markers, { upward = true })[1])
+	return vim.fs.dirname(vim.fs.find(global_configs.root_markers, { upward = true })[1])
 end
 
 M.is_same_array = function(table1, table2) -- O(n)

@@ -1,5 +1,5 @@
-local no_seps = require("core.default-config").ui.lualine.no_seps
-local colors = require("core.default-config").ui.colors
+local no_seps = require("core.global-configs").ui.lualine.no_seps
+local colors = require("core.global-configs").ui.colors
 
 local M = {}
 M.value = {

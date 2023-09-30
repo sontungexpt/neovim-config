@@ -1,4 +1,4 @@
-local colors = require("core.default-config").ui.colors
+local colors = require("core.global-configs").ui.colors
 
 return {
 	"diagnostics",

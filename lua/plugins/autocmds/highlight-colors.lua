@@ -1,7 +1,7 @@
 local M = {}
 
 local utils = require("core.utils")
-local config = require("core.default-config")
+local config = utils.load_config()
 local api = vim.api
 
 M.create_autocmds = function()
