@@ -16,7 +16,7 @@ M.create_autocmds = function()
 		return
 	end
 
-	vim.api.nvim_create_autocmd({ "UIEnter" }, {
+	vim.api.nvim_create_autocmd({ "InsertEnter" }, {
 		pattern = "*",
 		group = vim.api.nvim_create_augroup("CopilotAutoGroup", {}),
 		callback = function()
