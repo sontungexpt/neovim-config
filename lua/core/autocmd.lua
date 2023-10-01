@@ -121,6 +121,12 @@ autocmd({ "BufEnter" }, {
 })
 
 autocmd({ "BufEnter" }, {
+	pattern = "*.java",
+	command = "set filetype=java",
+	desc = "Enable syntax for .java files",
+})
+
+autocmd({ "BufEnter" }, {
 	pattern = { "*.rasi" },
 	command = "set filetype=rasi",
 	desc = "Enable syntax for .rasi files",
@@ -235,4 +241,9 @@ autocmd("FileType", {
 	pattern = { "help" },
 	desc = "Open help in vertical split",
 	command = "wincmd L",
+})
+
+autocmd("VimResized", {
+	desc = "Resize windows on VimResized",
+	command = "wincmd =",
 })

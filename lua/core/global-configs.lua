@@ -47,6 +47,10 @@ M.root_markers = {
 
 	-- nvim config
 	"lazy-lock.json",
+
+	-- java
+	"gradlew",
+	"mvnw",
 }
 
 M.binary_file_patterns = {

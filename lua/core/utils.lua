@@ -107,7 +107,7 @@ M.map = function(mode, key, map_to, opts, more_opts)
 	vim.keymap.set(mode, key, map_to, opts)
 end
 
-M.find_project_root = function(current_path)
+M.find_project_root = function()
 	return vim.fs.dirname(vim.fs.find(global_configs.root_markers, { upward = true })[1])
 end
 

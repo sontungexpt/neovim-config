@@ -348,28 +348,16 @@ local default_plugins = {
 		end,
 	},
 
-	-- {
-	-- 	"mfussenegger/nvim-jdtls",
-	-- 	ft = "java",
-	-- },
+	{
+		"mfussenegger/nvim-jdtls",
+		ft = "java",
+		-- conifg is in ftplugin/java.lua
+	},
 
 	{
 		"neovim/nvim-lspconfig",
 		dependencies = {
 			"lukas-reineke/lsp-format.nvim",
-			-- {
-			-- 	"folke/neodev.nvim",
-			-- 	opts = function()
-			-- 		return require("plugins.configs.neodev")
-			-- 	end,
-			-- 	config = function(_, opts)
-			-- 		local status_ok, neodev = pcall(require, "neodev")
-			-- 		if not status_ok then
-			-- 			return
-			-- 		end
-			-- 		neodev.setup(opts)
-			-- 	end,
-			-- },
 		},
 		init = function()
 			require("core.utils").lazy_load("nvim-lspconfig")
@@ -436,7 +424,7 @@ local default_plugins = {
 		opts = function()
 			return require("plugins.configs.indent-blankline")
 		end,
-		config = function(opts)
+		config = function(_, opts)
 			setup_plugin("indent_blankline", opts, function(ibl)
 				vim.wo.colorcolumn = "99999"
 			end, true)

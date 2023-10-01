@@ -4,7 +4,8 @@ if not status_ok then
 	return
 end
 
-local lsp = vim.lsp
+local capabilities = require("plugins.configs.lsp.general-configs").capabilities
+local on_attach = require("plugins.configs.lsp.general-configs").on_attach
 
 local lsp_servers = {
 	-- bash
@@ -103,94 +104,11 @@ local lsp_servers = {
 	{
 		name = "pyright",
 	},
-
-	{
-		name = "jdtls",
-	},
-}
-
-local function on_attach(client, bufnr)
-	local function lspSymbol(name, icon)
-		local hl = "DiagnosticSign" .. name
-		vim.fn.sign_define(hl, {
-			text = icon,
-			numhl = hl,
-			texthl = hl,
-		})
-	end
-
-	lspSymbol("Error", " ")
-	lspSymbol("Info", " ")
-	lspSymbol("Hint", "󰌵 ")
-	lspSymbol("Warn", " ")
-
-	vim.diagnostic.config {
-		virtual_text = {
-			prefix = "●",
-		},
-		signs = true,
-		underline = true,
-		severity_sort = true,
-		update_in_insert = false,
-		float = {
-			source = "always",
-		},
-	}
-
-	lsp.handlers["textDocument/signatureHelp"] = lsp.with(lsp.handlers.signature_help, {
-		border = "single",
-		focusable = false,
-		relative = "cursor",
-	})
-
-	lsp.handlers["textDocument/hover"] = lsp.with(lsp.handlers.hover, { border = "single" })
-
-	lsp.handlers["textDocument/publishDiagnostics"] = lsp.with(lsp.diagnostic.on_publish_diagnostics, {
-		signs = true,
-		underline = true,
-		virtual_text = {
-			spacing = 5,
-			severity_limit = "Warning",
-			prefix = "●",
-		},
-		update_in_insert = true,
-	})
-end
-
-local capabilities = vim.tbl_deep_extend(
-	"force",
-	lspconfig.util.default_config.capabilities or {},
-	require("cmp_nvim_lsp").default_capabilities()
-)
-
-capabilities.offsetEncoding = { "utf-8", "utf-16" }
-capabilities.textDocument.completion.completionItem = {
-	documentationFormat = { "markdown", "plaintext" },
-	snippetSupport = true,
-	preselectSupport = true,
-	insertReplaceSupport = true,
-	labelDetailsSupport = true,
-	deprecatedSupport = true,
-	commitCharactersSupport = true,
-	tagSupport = { valueSet = { 1 } },
-	resolveSupport = {
-		properties = {
-			"documentation",
-			"detail",
-			"additionalTextEdits",
-		},
-	},
-}
-
--- for nvim-ufo
-capabilities.textDocument.foldingRange = {
-	dynamicRegistration = false,
-	lineFoldingOnly = true,
 }
 
 for _, server in ipairs(lsp_servers) do
 	local config = server.config or {}
 	config.on_attach = config.on_attach or on_attach
-	config.capabilities = config.capabilities or capabilities
+	config.capabilities = config.capabilities or capabilities()
 	lspconfig[server.name].setup(config)
 end
