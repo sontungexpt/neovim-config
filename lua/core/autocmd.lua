@@ -220,19 +220,6 @@ autocmd({ "VimLeave", "FocusLost" }, {
 	end,
 })
 
-autocmd({ "VimEnter", "VimResized" }, {
-	desc = "Enable the 'noshowmode' option when resizing the window width exceeds 70 if lualine is installed",
-	callback = function()
-		if utils.is_plugin_installed("lualine.nvim") then
-			if vim.o.columns > 70 then
-				vim.opt.showmode = false
-			else
-				vim.opt.showmode = true
-			end
-		end
-	end,
-})
-
 autocmd("BufHidden", {
 	desc = "Delete [No Name] buffer when it's hidden",
 	callback = function(event)

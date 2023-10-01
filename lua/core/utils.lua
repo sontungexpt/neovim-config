@@ -195,4 +195,55 @@ M.switch_language_engine = function(engine)
 	end
 end
 
+M.create_plugin_autocmd_file = function()
+	local filename = fn.input("Enter the filename: ", "", "file")
+
+	if filename == "" then
+		logger.warn("No filename given")
+		return
+	end
+
+	if not filename:match("%.lua$") then
+		filename = fn.fnamemodify(filename, ":r") .. ".lua"
+	end
+
+	local storage = fn.stdpath("config") .. "/lua/plugins/autocmds/"
+
+	if fn.filereadable(storage .. filename) == 1 then
+		logger.warn("File already exists: " .. filename)
+		return
+	end
+
+	local file_content = [[
+local utils = require("core.utils")
+local api = vim.api
+
+local M = {}
+
+M.create_autocmds = function()
+    if not utils.is_plugin_installed("") then
+        return
+    end
+
+    api.nvim_create_autocmd({""}, {
+        pattern = "",
+        desc = "",
+        callback = function()
+        end,
+    })
+end
+
+return M
+]]
+
+	local file = io.open(storage .. filename, "w")
+	if file then
+		file:write(file_content)
+		file:close()
+		logger.info("Created file: " .. filename)
+	else
+		logger.error("Unable to create file: " .. filename)
+	end
+end
+
 return M
