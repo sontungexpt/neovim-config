@@ -6,6 +6,6 @@ new_cmd("NvimReload", function()
 	utils.reload_config()
 end, { nargs = 0 })
 
-new_cmd("NvimCreatePluginAutocmdFile", function()
+new_cmd("NvimTouchPlugAutocmd", function()
 	utils.create_plugin_autocmd_file()
-end, {})
+end, { nargs = 0 })
