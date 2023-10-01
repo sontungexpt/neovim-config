@@ -156,7 +156,7 @@ end
 
 M.reload_config = function(quiet)
 	-- Reload options, mappings
-	local core_modules = { "core.options", "core.keymaps", "core.plugins-keymaps" }
+	local core_modules = { "core.options", "core.keymaps", "core.plugin-keymaps" }
 
 	local failed_modules = {}
 	for _, module in ipairs(core_modules) do

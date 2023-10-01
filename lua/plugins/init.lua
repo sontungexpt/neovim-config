@@ -348,10 +348,10 @@ local default_plugins = {
 		end,
 	},
 
-	{
-		"mfussenegger/nvim-jdtls",
-		ft = "java",
-	},
+	-- {
+	-- 	"mfussenegger/nvim-jdtls",
+	-- 	ft = "java",
+	-- },
 
 	{
 		"neovim/nvim-lspconfig",
@@ -568,7 +568,8 @@ local default_plugins = {
 	},
 
 	{
-		"jose-elias-alvarez/null-ls.nvim",
+		-- "jose-elias-alvarez/null-ls.nvim",
+		"nvimtools/none-ls.nvim",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 		},

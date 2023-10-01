@@ -12,6 +12,9 @@ cmd("filetype plugin indent on")
 cmd("syntax enable")
 cmd("syntax on")
 
+-- cmp
+options.completeopt = { "menu", "menuone", "noselect" }
+
 -- disable nvim intro
 options.shortmess:append("sI")
 
