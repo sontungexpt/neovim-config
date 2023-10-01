@@ -18,7 +18,6 @@ elseif os == "Windows" then
 	os = "win"
 end
 
--- return the server config
 local config = {
 	cmd = {
 		"/usr/lib/jvm/java-17-openjdk/bin/java", -- or '/path/to/java17_or_newer/bin/java'
@@ -34,7 +33,7 @@ local config = {
 		"--add-opens",
 		"java.base/java.lang=ALL-UNNAMED",
 		"-jar",
-		install_path .. "/plugins/org.eclipse.equinox.launcher_1.6.500.v20230717-2134.jar",
+		vim.fn.glob(install_path .. "/plugins/org.eclipse.equinox.launcher_*.jar", true, true)[1],
 		"-configuration",
 		install_path .. "/config_" .. os,
 		"-data",
