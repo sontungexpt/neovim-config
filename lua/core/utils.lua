@@ -25,8 +25,12 @@ M.call_cmd = function(command, msg, quiet)
 	return success
 end
 
-M.is_plugin_installed = function(plugin_name)
-	return fn.isdirectory(fn.stdpath("data") .. "/lazy/" .. plugin_name) == 1
+M.is_plugin_installed = function(plugin_name, dir)
+	dir = dir or "/lazy/"
+	dir = vim.startswith(dir, "/") and dir or ("/" .. dir)
+	dir = vim.endswith(dir, "/") and dir or (dir .. "/")
+
+	return fn.isdirectory(fn.stdpath("data") .. dir .. plugin_name) == 1
 end
 
 M.lazy_load = function(plugin)

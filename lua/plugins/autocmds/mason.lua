@@ -2,35 +2,22 @@ local M = {}
 local api = vim.api
 local fn = vim.fn
 local utils = require("core.utils")
+local logger = require("core.logger")
 local call_cmd = utils.call_cmd
 local schedule = vim.schedule
 
-M.is_mason_installed = function()
-	local mason_path = fn.stdpath("data") .. "/mason"
-	return fn.isdirectory(mason_path) == 1
+M.get_installed_packages = function()
+	return require("mason-registry").get_installed_package_names() or {}
 end
 
 M.print_installed_packages = function()
 	local installed_packages = M.get_installed_packages()
-	print("Installed mason packages:\n" .. "  -  " .. table.concat(installed_packages, "\n  -  "))
+	logger.info("Installed mason packages:\n" .. "  -  " .. table.concat(installed_packages, "\n  -  "))
 end
 
 M.print_ensured_packages = function()
 	local ensured_packages = require("plugins.configs.mason").ensure_installed
-	print("Ensured mason packages:\n" .. "  -  " .. table.concat(ensured_packages, "\n  -  "))
-end
-
-M.get_installed_packages = function()
-	local installed_packages = {}
-	local package_path = fn.stdpath("data") .. "/mason/packages/"
-	if fn.isdirectory(package_path) == 1 then
-		local package_dirs = fn.glob(package_path .. "/*", true, true)
-		for _, package_dir in ipairs(package_dirs) do
-			local package_name = fn.fnamemodify(package_dir, ":t")
-			table.insert(installed_packages, package_name)
-		end
-	end
-	return installed_packages
+	logger.info("Ensured mason packages:\n" .. "  -  " .. table.concat(ensured_packages, "\n  -  "))
 end
 
 M.had_changed = function()
@@ -72,44 +59,36 @@ end
 
 -- Custom cmd to ensure install all mason binaries listed
 M.create_user_commands = function()
-	if not M.is_mason_installed() then
-		return
+	if utils.is_plugin_installed("mason", "/") then
+		api.nvim_create_user_command("MasonShowInstalledPackages", function()
+			schedule(function()
+				M.print_installed_packages()
+			end)
+		end, { nargs = 0 })
+
+		api.nvim_create_user_command("MasonShowEnsuredPackages", function()
+			schedule(function()
+				M.print_ensured_packages()
+			end)
+		end, { nargs = 0 })
 	end
-
-	api.nvim_create_user_command("MasonShowInstalledPackages", function()
-		schedule(function()
-			M.print_installed_packages()
-		end)
-	end, {})
-
-	api.nvim_create_user_command("MasonShowEnsuredPackages", function()
-		schedule(function()
-			M.print_ensured_packages()
-		end)
-	end, {})
 end
 
 -------------------- Auto commands --------------------
 M.create_autocmds = function()
-	if not M.is_mason_installed() then
-		return
+	if utils.is_plugin_installed("mason", "/") and require("plugins.configs.mason").auto_sync then
+		api.nvim_create_autocmd("VimEnter", {
+			group = api.nvim_create_augroup("MasonAutoGroup", {}),
+			pattern = "*",
+			callback = function()
+				schedule(function()
+					if M.had_changed() then
+						M.sync_packages()
+					end
+				end)
+			end,
+		})
 	end
-	local enabled = require("plugins.configs.mason").auto_sync
-	if not enabled then
-		return
-	end
-
-	api.nvim_create_autocmd("UIEnter", {
-		group = api.nvim_create_augroup("MasonAutoGroup", {}),
-		pattern = "*",
-		callback = function()
-			schedule(function()
-				if M.had_changed() then
-					M.sync_packages()
-				end
-			end)
-		end,
-	})
 end
 
 return M
