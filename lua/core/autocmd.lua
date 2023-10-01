@@ -121,12 +121,6 @@ autocmd({ "BufEnter" }, {
 })
 
 autocmd({ "BufEnter" }, {
-	pattern = "*.java",
-	command = "set filetype=java",
-	desc = "Enable syntax for .java files",
-})
-
-autocmd({ "BufEnter" }, {
 	pattern = { "*.rasi" },
 	command = "set filetype=rasi",
 	desc = "Enable syntax for .rasi files",
