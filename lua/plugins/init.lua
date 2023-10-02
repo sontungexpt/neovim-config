@@ -56,7 +56,7 @@ local default_plugins = {
 		-- dir = "/home/stilux/Data/My-Workspaces/nvim-extensions/buffer-closer",
 		-- dev = true,
 		"sontungexpt/buffer-closer",
-		cmd = "CloseRetiredBuffers",
+		cmd = "BufferCloserRetire",
 		event = { "BufAdd", "FocusLost", "FocusGained" },
 		opts = function()
 			return {} -- faster load if no have custom config
