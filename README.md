@@ -99,6 +99,19 @@ Windows (git bash)
 
 You will also need to install the plugins. This configuration uses the lazy.nvim plugin manager to manage plugins. You can install the plugins by opening Neovim and running `:Lazy sync`
 
+Install providers:
+
+```bash
+npm install -g neovim
+
+gem install neovim
+
+python3 -m venv .venv
+source .venv/bin/activate
+pip install --upgrade pip
+pip install neovim
+```
+
 ```vim
 :Lazy sync
 ```
