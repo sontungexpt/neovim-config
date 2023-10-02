@@ -7,7 +7,16 @@ local call_cmd = utils.call_cmd
 local schedule = vim.schedule
 
 M.get_installed_packages = function()
-	return require("mason-registry").get_installed_package_names() or {}
+	local installed_packages = {}
+	local package_path = fn.stdpath("data") .. "/mason/packages/"
+	if fn.isdirectory(package_path) == 1 then
+		local package_dirs = fn.glob(package_path .. "/*", true, true)
+		for _, package_dir in ipairs(package_dirs) do
+			local package_name = fn.fnamemodify(package_dir, ":t")
+			table.insert(installed_packages, package_name)
+		end
+	end
+	return installed_packages
 end
 
 M.print_installed_packages = function()

@@ -479,9 +479,6 @@ local default_plugins = {
 	--Lsp + cmp
 	{
 		"williamboman/mason.nvim",
-		build = function()
-			require("plugins.autocmds.mason").sync_packages()
-		end,
 		init = function()
 			require("plugins.autocmds.mason").create_user_commands()
 		end,
