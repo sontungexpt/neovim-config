@@ -158,10 +158,6 @@ local default_plugins = {
 					setup_plugin("project_nvim", opts)
 				end,
 			},
-			-- "jvgrootveld/telescope-zoxide",
-			-- "nvim-lua/popup.nvim",
-			-- 'BurntSushi/ripgrep',
-			-- 'sharkdp/fd'
 		},
 		opts = function()
 			return require("plugins.configs.telescope")
@@ -203,7 +199,6 @@ local default_plugins = {
 		"nvim-treesitter/nvim-treesitter",
 		dependencies = {
 			"HiPhish/rainbow-delimiters.nvim",
-			-- "HiPhish/nvim-ts-rainbow2",
 		},
 		init = function()
 			require("core.utils").lazy_load("nvim-treesitter")

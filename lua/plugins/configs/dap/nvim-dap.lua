@@ -4,14 +4,12 @@ if not status_ok then
 end
 
 local path_helpers = require("plugins.configs.dap.paths")
+local colors = require("core.global-configs").ui.colors
 
-vim.fn.sign_define(
-	"DapBreakpoint",
-	{ text = " ", texthl = "DapBreakpointColor", linehl = "", numhl = "" }
-)
-vim.api.nvim_set_hl(0, "DapBreakpointColor", { fg = "#ee2c4a" })
-vim.fn.sign_define("DapStopped", { text = "󱞪 ", texthl = "DapStoppedColor", linehl = "", numhl = "" })
-vim.api.nvim_set_hl(0, "DapStoppedColor", { fg = "#67bf70" })
+vim.fn.sign_define("DapBreakpoint", { text = " ", texthl = "DapBreakpoint" })
+vim.api.nvim_set_hl(0, "DapBreakpoint", { fg = colors.red })
+vim.fn.sign_define("DapStopped", { text = "󱞪 ", texthl = "DapStopped" })
+vim.api.nvim_set_hl(0, "DapStopped", { fg = colors.green })
 
 dap.adapters.codelldb = {
 	type = "server",
