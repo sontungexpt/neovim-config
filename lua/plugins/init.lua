@@ -109,34 +109,6 @@ local default_plugins = {
 		end,
 	},
 
-	-- {
-	-- 	-- dir = "/home/stilux/Data/My-Workspaces/nvim-extensions/focus.nvim",
-	-- 	-- dev = true,
-	-- 	"sontungexpt/focus.nvim",
-	-- 	version = "*",
-	-- 	event = "WinNew",
-	-- 	cmd = {
-	-- 		"FocusDisable",
-	-- 		"FocusEnable",
-	-- 		"FocusSplitNicely",
-	-- 		"FocusSplitCycle",
-	-- 		"FocusSplitCycleReverse",
-	-- 		"FocusSplitLeft",
-	-- 		"FocusSplitDown",
-	-- 		"FocusSplitUp",
-	-- 		"FocusSplitRight",
-	-- 	},
-	-- 	opts = function()
-	-- 		return require("plugins.configs.nvim-focus")
-	-- 	end,
-	-- 	config = function(_, opts)
-	-- 		local status_ok, focus = pcall(require, "focus")
-	-- 		if status_ok then
-	-- 			focus.setup(opts)
-	-- 		end
-	-- 	end,
-	-- },
-
 	{
 		"nvim-telescope/telescope.nvim",
 		cmd = {

@@ -241,3 +241,13 @@ autocmd("VimResized", {
 	desc = "Resize windows on VimResized",
 	command = "wincmd =",
 })
+
+autocmd("WinLeave", {
+	desc = "Disable cursorline, cursorcolumn when leaving window",
+	command = "setlocal nocursorline nocursorcolumn",
+})
+
+autocmd("WinEnter", {
+	desc = "Enable cursorline, cursorcolumn when entering window and buffer is listed in buffer list",
+	command = "if &buflisted | setlocal cursorline cursorcolumn | else | setlocal cursorline | endif",
+})

@@ -1,5 +1,6 @@
 local M = {}
 local utils = require("core.utils")
+local api = vim.api
 
 M.has_copilot_auth = function()
 	local copilot_path = vim.fn.expand("$HOME") .. "/.config/github-copilot"
@@ -7,22 +8,22 @@ M.has_copilot_auth = function()
 end
 
 M.create_autocmds = function()
+	if not utils.is_plugin_installed("copilot.lua") then
+		return
+	end
+
 	local status_ok, config = pcall(require, "plugins.configs.copilot")
 	if (not status_ok) or (config.auto_check_auth == false) then
 		return
 	end
 
-	if not utils.is_plugin_installed("copilot.lua") then
-		return
-	end
-
-	vim.api.nvim_create_autocmd({ "InsertEnter" }, {
+	api.nvim_create_autocmd({ "InsertEnter" }, {
 		pattern = "*",
-		group = vim.api.nvim_create_augroup("CopilotAutoGroup", {}),
+		group = api.nvim_create_augroup("CopilotAutoGroup", {}),
 		callback = function()
 			if not M.has_copilot_auth() then
 				vim.schedule(function()
-					vim.api.nvim_command("Copilot auth")
+					api.nvim_command("Copilot auth")
 				end)
 			end
 		end,
