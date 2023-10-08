@@ -158,24 +158,9 @@ autocmd({ "BufWritePost" }, {
 	pattern = {
 		fn.stdpath("config") .. "/lua/core/options.lua",
 		fn.stdpath("config") .. "/lua/core/keymaps.lua",
-		fn.stdpath("config") .. "/lua/core/plugins-keymaps.lua",
+		fn.stdpath("config") .. "/lua/core/plugmaps.lua",
 	},
 	command = "NvimReload",
-})
-
-autocmd("BufWinEnter", {
-	desc = "Make q close help, man, quickfix, dap floats",
-	callback = function(args)
-		local buftype = api.nvim_get_option_value("buftype", { buf = args.buf })
-		if vim.tbl_contains({ "help", "nofile", "quickfix" }, buftype) then
-			map("n", "q", "<cmd>close<cr>", { buffer = args.buf, nowait = true })
-		end
-	end,
-})
-
-autocmd("CmdwinEnter", {
-	desc = "Make q close command history (q: and q?)",
-	command = "nnoremap <silent><buffer><nowait> q :close<CR>",
 })
 
 -- Toggle search highlighting on insert mode

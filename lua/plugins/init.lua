@@ -87,6 +87,7 @@ local default_plugins = {
 
 	{
 		"zbirenbaum/copilot.lua",
+		build = ":Copilot",
 		cmd = "Copilot",
 		event = "InsertEnter",
 		opts = function()
@@ -449,6 +450,7 @@ local default_plugins = {
 		init = function()
 			require("plugins.autocmds.mason").create_user_commands()
 		end,
+		build = ":MasonUpdate",
 		cmd = {
 			"Mason",
 			"MasonShowInstalledPackages",

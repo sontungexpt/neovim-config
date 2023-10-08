@@ -3,8 +3,8 @@ local utils = require("core.utils")
 local api = vim.api
 
 M.has_copilot_auth = function()
-	local copilot_path = vim.fn.expand("$HOME") .. "/.config/github-copilot"
-	return vim.fn.isdirectory(copilot_path) == 1
+	local copilot_path = vim.fn.expand("$HOME") .. "/.config/github-copilot/hosts.json"
+	return vim.fn.filereadable(copilot_path) == 1
 end
 
 M.create_autocmds = function()

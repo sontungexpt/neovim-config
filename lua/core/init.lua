@@ -3,7 +3,7 @@ require("core.providers")
 require("core.options")
 require("core.autocmd")
 require("core.keymaps")
-require("core.plugin-keymaps")
+require("core.plugmaps")
 
 -- add binaries installed by mason.nvim to path
 local is_windows = vim.loop.os_uname().sysname == "Windows_NT"

@@ -84,6 +84,7 @@ end
 -- opts = 4 for not noremap and not silent
 -- opts = 5 for expr and noremap and silent
 -- opts = 6 for noremap and silent and nowait
+-- opts = 7 for noremap and silent and nowait and expr
 M.map = function(mode, key, map_to, opts, more_opts)
 	local opts1 = { noremap = true, silent = true }
 	opts = opts or 1
@@ -105,6 +106,8 @@ M.map = function(mode, key, map_to, opts, more_opts)
 		opts = { expr = true, replace_keycodes = true, noremap = true, silent = true }
 	elseif opts == 6 then
 		opts = { noremap = true, silent = true, nowait = true }
+	elseif opts == 7 then
+		opts = { expr = true, replace_keycodes = true, noremap = true, silent = true, nowait = true }
 	else
 		opts = opts1
 	end
@@ -160,7 +163,7 @@ end
 
 M.reload_config = function(quiet)
 	-- Reload options, mappings
-	local core_modules = { "core.options", "core.keymaps", "core.plugin-keymaps" }
+	local core_modules = { "core.options", "core.keymaps", "core.plugmaps" }
 
 	local failed_modules = {}
 	for _, module in ipairs(core_modules) do
